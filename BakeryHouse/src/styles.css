@@ -1,0 +1,328 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+
+
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+    height: 100%;
+}
+
+body, html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body, html {
+    height: 100%;
+    color: rgba(0,0,0,.87);
+    background: #fff;
+    position: relative;
+}
+
+body {
+    line-height: 1;
+}
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.mat-sidenav-container {
+	position: relative;
+	transform: translate3d(0, 0, 0);
+	box-sizing: border-box;
+	-webkit-overflow-scrolling: touch;
+	display: block;
+	overflow: hidden;
+	height: 100%;
+}
+
+.mat-toolbar {
+	display: flex;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0 5px;
+	flex-direction: column;
+}
+
+.mat-sidenav {
+	width: 200px;
+}
+
+.mat-icon svg {
+	height: 24px;
+	width: 24px;
+}
+
+
+input {
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    user-select: text;
+    cursor: auto;
+    padding: 1px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+}
+
+input, textarea, select, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em;
+    font: 13.3333px Arial;
+}
+
+input, textarea, select, button, meter, progress {
+    -webkit-writing-mode: horizontal-tb;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+input {
+    line-height: normal;
+
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    cursor: auto;
+    padding: 1px;
+    border-width: 0px;
+    border-style: inset;
+    border-color: initial;
+    -o-border-image: initial;
+    border-image: initial;
+}
+
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+}
+
+button, input, select, textarea {
+    font-size: 100%;
+}
+
+button, html, input, select, textarea {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+button, input, select, textarea {
+    vertical-align: baseline;
+}
+
+input, select {
+    vertical-align: middle;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+input:not([type]), input[type="email" ], input[type="number" ], input[type="password" ], input[type="tel" ], input[type="url" ], input[type="text" ] {
+    padding: 1px 0px;
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: rgb(250, 255, 189);
+    background-image: none;
+    color: rgb(0, 0, 0);
+}
+
+
+input[type="password" ] {
+    -webkit-text-security: disc;
+}
+
+
+
+.btn.Ccm-Button-Primary, .btn.Ccm-Button-Primary:hover {
+	color: white;
+	border: 1px solid #9C9C9C
+}
+
+.Ccm-Button-Primary .fa {
+	color: #fff
+}
+
+.ccm-side-list-new .CcmSideListFilterText .Ccm-Button-Primary {
+		min-width: 34px;
+		float: right;
+		padding: 9px 0;
+		line-height: 1
+	}
+
+.Ccm-Page-Create-Invoice .Ccm-PageHeader-InvoiceEdit .BtnOpenSaveAndClose,
+	.Ccm-Page-Create-Invoice .Ccm-PageHeader-InvoiceEdit .Ccm-Button-Primary
+	{
+	display: inline-block;
+	float: right;
+	vertical-align: middle;
+	-webkit-transform: none;
+	-moz-transform: none;
+	-o-transform: none;
+	-ms-transform: none;
+	transform: none;
+	margin: 10px 10px 10px 0;
+	position: static
+}
+
+.Ccm-Page-Invoice-Edit .Ccm-Button-Primary:not(.Ccm-Button-SaveInvoice){
+		padding: 5px 0;
+		width: 35px;
+		height: 35px;
+		min-width: 35px
+	}
+.Ccm-Page-Invoice-Edit .Ccm-Button-Primary:not(.Ccm-Button-SaveInvoice) .button-text-small:before {
+		margin-right: 0.1em
+	}
+
+
+
+  .span-fill-remaining {
+    flex: 1 1 auto;
+  }
+
+
+
+
+
+	.btn.Ccm-Button-Primary, .btn.Ccm-Button-Primary:hover {
+    color: white;
+    border: 1px solid #9C9C9C;
+}
+
+.btn.btn-default {
+    border-radius: 5px;
+    min-width: 60px;
+    border: 1px solid #C9C9C9;
+    background-image: linear-gradient(#F9F9F9, #E9E9E9);
+}
+
+.BrandedBackgroundGradientImage, .BrandedBackgroundGradientImageHover:hover {
+    background-image: linear-gradient(#b7cbb0, #7fa372) !important;
+}
+
+.LoginButton, .RequestAccessButton, .ProceedButton, .LoginHelpProceedButton {
+    width: 100%;
+}
+
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+a, a:active, a:hover {
+    outline: none;
+}
+
+a {
+    color: inherit;
+}
+
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+a {
+    background-color: transparent;
+}
+
+a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}

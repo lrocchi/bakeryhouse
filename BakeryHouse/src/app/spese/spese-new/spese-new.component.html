@@ -1,0 +1,63 @@
+<!-- <
+div class="Ccm-MainContentView ng-scope">
+<h4>Nuova Spesa</h4>
+<div class="Ccm-FormContainer">
+<form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
+  <div class="form-group"	[ngClass]="{ 'has-error': !descrizione.valid }">
+    <div class="Ccm-DescrContainer">
+      <md-icon><i class="material-icons">shopping_cart</i></md-icon>
+      <input class="Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" [(ngModel)]="descrizione" placeholder="Spesa" autocomplete="on" #descrizione="ngModel" name="descrizione" required>
+      <div *ngIf="!descrizione.valid" class="help-block">Descrizione &eacute; obbligatoria</div>
+    </div>
+  </div>
+
+  <div class="form-group"	[ngClass]="{ 'has-error': !valore.valid }">
+    <div class="Ccm-DescrContainer">
+      <md-icon><i class="material-icons">euro_symbol</i></md-icon>
+      <input class="Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" [(ngModel)]="valore" placeholder="(€)" autocomplete="off" #valore="ngModel" name="valore" required>
+      <div *ngIf="!valore.valid" class="help-block">Costo &eacute; obbligatorio</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="ProceedContainer ng-scope">
+      <button [disabled]="loading" class="btn btn-primary Ccm-Button-Primary btn btn-default BrandedBackgroundGradientImage OkButton ng-binding">Aggiungi</button>
+    </div>
+    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	</div>
+</form>
+</div>
+</div>
+ -->
+<h1 md-dialog-title>Nuova Spesa</h1>
+<form name="form" (ngSubmit)="newSpesaForm.form.valid && create()" #newSpesaForm="ngForm" novalidate>
+  <div class="Ccm-FormContainer">
+    <div md-dialog-content>
+          <div class="form-group" 	[ngClass]="{ 'has-error': !descrizione.valid }">
+              <div class="Ccm-DescrContainer">
+                  <md-icon><i class="material-icons">shopping_cart</i></md-icon>
+                  <input class="Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" [(ngModel)]="spesa.descrizione" placeholder="Spesa" autocomplete="on" #descrizione="ngModel" name="descrizione" required>
+                  <div *ngIf="!descrizione.valid" class="help-block">Descrizione &eacute; obbligatoria</div>
+                </div>
+          </div>
+
+          <div class="form-group"	[ngClass]="{ 'has-error': !valore.valid }">
+              <div class="Ccm-DescrContainer">
+                  <md-icon><i class="material-icons">euro_symbol</i></md-icon>
+                  <input class="Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" [(ngModel)]="spesa.valore" placeholder="(€)" autocomplete="off" #valore="ngModel" name="valore" required>
+                  <div *ngIf="!valore.valid" class="help-block">Costo &eacute; obbligatorio</div>
+                </div>
+          </div>
+
+    </div>
+    <div md-dialog-actions>
+        <div class="ProceedContainer ng-scope">
+            <button md-dialog-close="cancel" class="btn btn-primary Ccm-Button-Primary btn BrandedBackgroundGradientImage  ng-binding">Annulla</button>
+        </div>
+        <span class="span-fill-remaining"></span>
+          <div class="ProceedContainer ng-scope">
+              <button  [disabled]="loading" class="btn btn-primary Ccm-Button-Primary btn btn-default BrandedBackgroundGradientImage OkButton ng-binding">Aggiungi</button>
+          </div>
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </div>
+  </div>
+</form>

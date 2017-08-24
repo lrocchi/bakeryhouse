@@ -1,0 +1,16 @@
+<md-toolbar  class ="BrandedBackgroundGradientImage" style="text-align: center" >
+
+	<!--The whole content below can be removed with the new code.-->
+
+  <div md-card-avatar class="example-header-image"></div>
+	<h3 style="color: white">{{title}}</h3>
+
+	<span class="span-fill-remaining"></span>
+	<button md-button [mdMenuTriggerFor]="menu" style="color: white" >{{user.name}} {{user.surname}} <md-icon>more_vert</md-icon></button>
+</md-toolbar> <!-- main app container -->
+<md-menu #menu="mdMenu" yPosition="above" xPosition="before">
+  <button md-menu-item (click)="logout()">
+    <md-icon class="md-18|md-24|md-36|md-48">exit_to_app</md-icon>
+    Esci
+  </button>
+</md-menu>

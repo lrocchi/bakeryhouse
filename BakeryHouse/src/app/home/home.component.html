@@ -1,0 +1,26 @@
+<div fxLayout="column" style="height:100%">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <header>
+            <app-header></app-header>
+        </header>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center" style="height:100%">
+        <span></span>
+        <div class="Ccm-MainContentView ng-scope">
+            <md-tab-group>
+                  <md-tab label="Spese">
+                    <app-spese></app-spese>
+                  </md-tab>
+                  <md-tab label="Chiusure">
+                    <h1>Some more tab content</h1>
+                    <p>...</p>
+                  </md-tab>
+                </md-tab-group>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <footer>
+        <router-outlet name="footer"></router-outlet>
+        </footer>
+    </div>
+</div>

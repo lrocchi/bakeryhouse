@@ -1,0 +1,346 @@
+
+
+
+.Ccm-LoginContainer {
+	position: relative;
+	width: 290px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	margin: auto;
+	text-align: center;
+	margin-top: 150px;
+	color: #5F5F5F
+}
+
+.Ccm-LoginContainer.Ccm-LoginContainer-Wide {
+	width: auto;
+	max-width: 800px;
+	min-width: 290px;
+	height: 100%;
+	max-height: calc(100% - 204px)
+}
+
+.Ccm-LoginContainer.upgrade-process {
+	margin-top: 75px
+}
+
+.Ccm-LoginContainer .ProceedContainer {
+	padding: 15px
+}
+
+
+
+.Ccm-LoginContainer {
+    position: relative;
+    width: 290px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+    margin-top: 150px;
+    color: #5F5F5F;
+
+
+
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+
+.Ccm-MainContent .Ccm-MainContentView {
+    height: 100%;
+    min-height: 100%;
+    overflow: auto;
+     margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    box-sizing: border-box;
+    line-height: 1.42857143;
+    color: #333;
+}
+.Ccm-LoginMainContent {
+	top: 0;
+	left: 0;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	transition: all 0.0s
+}
+
+
+
+.Ccm-MainContent:not (.Ccm-LoginMainContent ) .CoreViewContainer {
+	height: calc(100% - 56px);
+	overflow: auto
+}
+
+.LoginHelpContainer {
+	margin-top: 70px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 15px;
+	color: #5F5F5F;
+	position: relative
+}
+
+.LoginHelpContainer:before {
+	content: '';
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	background-image: linear-gradient(#fff, #E9E9E9);
+	border-bottom: 1px solid #C1C1C1
+}
+
+.Ccm-LoginImage {
+	width: 150px;
+	height: 175px;
+	position: absolute;
+	left: calc(50% - 75px);
+	top: -88px;
+	padding: 1px
+}
+
+.Ccm-LoginImage>img {
+	max-height: 100%;
+	max-width: 100%;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 20px;
+	margin-left: auto;
+	margin-right: auto
+}
+
+.Ccm-Login-UserNameContainer, .Ccm-Login-PasswordContainer,
+	.Ccm-ForgotPassword-Container, .Ccm-LoginHelpOther-Container {
+	display: inline-block;
+	width: 100%;
+	padding: 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	line-height: 32px;
+	background-color: white;
+	color: #9C9C9C;
+	white-space: nowrap
+}
+
+.Ccm-Login-PasswordContainer {
+	margin-top: 15px
+}
+
+.Ccm-LoginHelpOther-Container {
+	padding: 0px
+}
+
+.Ccm-Login-UserNameContainer>span, .Ccm-Login-PasswordContainer>span,
+	.Ccm-ForgotPassword-Container>span {
+	border-right: 1px solid #ccc
+}
+
+.Ccm-Login-UserNameContainer .Ccm-SearchField,
+	.Ccm-Login-PasswordContainer .Ccm-SearchField {
+	width: 220px
+}
+
+.RequestAccessButton {
+	margin-top: 15px
+}
+
+
+
+.LoginButton, .RequestAccessButton, .ProceedButton,
+	.LoginHelpProceedButton {
+	width: 100%
+}
+
+.Ccm-LoginContainer-Bottom {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-moz-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-box-pack: space-between;
+	-moz-box-pack: space-between;
+	-ms-flex-pack: space-between;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 10px;
+	color: #9C9C9C
+}
+
+.Ccm-LoginContainer-Bottom.StayLoggedIn {
+	margin-top: 0
+}
+
+.Ccm-LoginContainer-Bottom a, .Ccm-LoginContainer-Bottom a:hover {
+	text-decoration: none
+}
+
+.Ccm-LoginContainer-Bottom input {
+	margin-right: 5px
+}
+
+.Ccm-LoginContainer-Bottom>md-checkbox {
+	flex: 1;
+	text-align: left;
+	display: inline;
+	vertical-align: middle
+}
+
+.Ccm-LoginContainer-Bottom>a {
+	flex: 1;
+	text-align: right;
+	display: inline;
+	vertical-align: middle
+}
+
+.Ccm-LoginContainer-Bottom .icon-question-mark {
+	margin-left: 0
+}
+
+.Ccm-Login-HelpHeader {
+	font-weight: bold
+}
+
+.Ccm-Login-HelpHeader, .Ccm-Login-HelpChoice {
+	display: block;
+	text-align: left
+}
+
+.Ccm-Login-HelpChoice>label {
+	font-weight: normal
+}
+
+.Ccm-Login-HelpChoice>input[type=radio] {
+	margin: 0px
+}
+
+.Ccm-Login-HelpChoice.HelpOther {
+	margin-top: 10px
+}
+
+.Ccm-Login-Footer {
+	margin: 10px auto;
+	width: 290px;
+	text-align: center;
+	color: #9C9C9C;
+	font-size: 12px
+}
+
+.Ccm-Login-Footer>p {
+	margin: 0px
+}
+
+.Ccm-ForgotPassword-Container {
+	margin-top: 10px;
+	width: 100%
+}
+
+.ForgotPasswordText {
+	text-align: left;
+	font-size: 12px
+}
+
+.Ccm-Login-HelpOtherInputContainer {
+	margin-bottom: 20px
+}
+
+.Ccm-Login-HelpOtherInformation {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-flex-grow: 2;
+	flex-grow: 2
+}
+
+.Ccm-Login-HelpOtherInformation>span {
+	width: 50%;
+	text-align: left
+}
+
+.Ccm-Login-HelpOtherInformation>span:nth-child(odd) {
+	font-size: 12px;
+	color: #9C9C9C
+}
+
+.Ccm-LoginHelpOther-Container {
+	margin-top: 10px;
+	width: 100%;
+	overflow: hidden
+}
+
+.Ccm-LoginHelpOther-Container>input, .Ccm-LoginHelpOther-Container>textarea
+	{
+	padding: 0 10px;
+	width: 100%
+}
+
+.Ccm-LoginHelpOther-Container>textarea {
+	padding: 10px
+}
+
+.login-page-upgrade-message {
+	width: 100%;
+	padding: 5px;
+	color: #bbb
+}
+
+.login-page-upgrade-message .upcoming-upgrade-message {
+	margin-top: 20px
+}
+
+@media all and (max-width: 450px) {
+	.login-page-upgrade-message .upcoming-upgrade-message {
+		margin-top: 0
+	}
+}
+
+.login-agreement-content {
+	margin-top: 70px;
+	height: 100%;
+	overflow: auto;
+	max-height: calc(100% - 70px)
+}
+
+.userCcmIcon:before {
+	content: '\e806'
+}
+
+.lockCcmIcon:before {
+	content: '\e808'
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

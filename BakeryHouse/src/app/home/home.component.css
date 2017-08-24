@@ -1,0 +1,12 @@
+
+div.Ccm-MainContentView {
+    height: 100%;
+    min-height: 100%;
+}
+
+.Ccm-MainContent .Ccm-MainContentView {
+    height: 100%;
+    min-height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}

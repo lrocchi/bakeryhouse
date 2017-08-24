@@ -1,0 +1,133 @@
+
+.Ccm-FormContainer {
+	position: relative;
+	width: 290px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	margin: auto;
+	text-align: center;
+	margin-top: 150px;
+  color: #5F5F5F;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+.Ccm-FormContainer .Ccm-FormContainer-Wide {
+	width: auto;
+	max-width: 800px;
+	min-width: 290px;
+	height: 100%;
+	max-height: calc(100% - 204px)
+}
+
+.Ccm-FormContainer .upgrade-process {
+	margin-top: 75px
+}
+
+.Ccm-FormContainer .ProceedContainer {
+	padding: 15px
+}
+
+
+
+.Ccm-FormContainer {
+    position: relative;
+    width: 290px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: auto;
+    text-align: center;
+    margin-top: 30px;
+    color: #5F5F5F;
+
+
+
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+
+.Ccm-FormContainer-Bottom {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-moz-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-box-pack: space-between;
+	-moz-box-pack: space-between;
+	-ms-flex-pack: space-between;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 10px;
+	color: #9C9C9C
+}
+
+.Ccm-FormContainer-Bottom.StayLoggedIn {
+	margin-top: 0
+}
+
+.Ccm-FormContainer-Bottom a, .Ccm-FormContainer-Bottom a:hover {
+	text-decoration: none
+}
+
+.Ccm-FormContainer-Bottom input {
+	margin-right: 5px
+}
+
+.Ccm-FormContainer-Bottom>md-checkbox {
+	flex: 1;
+	text-align: left;
+	display: inline;
+	vertical-align: middle
+}
+
+.Ccm-FormContainer-Bottom>a {
+	flex: 1;
+	text-align: right;
+	display: inline;
+	vertical-align: middle
+}
+
+.Ccm-FormContainer-Bottom .icon-question-mark {
+	margin-left: 0
+}
+
+
+
+
+.Ccm-DescrContainer{
+	display: inline-block;
+	width: 100%;
+	padding: 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	line-height: 32px;
+	background-color: white;
+	color: #9C9C9C;
+	white-space: nowrap
+}
+
+.Ccm-Login-PasswordContainer {
+	margin-top: 15px
+}
+
+.Ccm-LoginHelpOther-Container {
+	padding: 0px
+}
+
+.Ccm-DescrContainer>span{
+	border-right: 1px solid #ccc
+}
+
+.Ccm-DescrContainer .Ccm-SearchField {
+	width: 220px
+}
