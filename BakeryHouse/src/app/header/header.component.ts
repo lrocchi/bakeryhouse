@@ -16,7 +16,7 @@ import { AuthService } from 'app/_services/auth.service';
 
 export class HeaderComponent implements OnInit {
   public user: User;
-  title = 'BakeryHouse';
+  title = 'BakeryHouse!';
   private jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(private route: ActivatedRoute,
