@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageService } from 'ng2-webstorage';
 
-import { User } from '../user';
+
 import { JwtHelper } from 'angular2-jwt/angular2-jwt';
 import { AuthService } from 'app/_services/auth.service';
+import { User, Ruolo } from "app/entity/user";
 
 @Component({
 

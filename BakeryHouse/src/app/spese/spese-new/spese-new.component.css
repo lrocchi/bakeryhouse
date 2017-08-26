@@ -1,17 +1,22 @@
 
 .Ccm-FormContainer {
 	position: relative;
-	width: 290px;
+	width: 260px;
 	border: 1px solid #ccc;
 	border-radius: 10px;
 	margin: auto;
 	text-align: center;
-	margin-top: 150px;
+	margin-top: 30px;
   color: #5F5F5F;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 10px;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
 }
+
 
 .Ccm-FormContainer .Ccm-FormContainer-Wide {
 	width: auto;
@@ -28,27 +33,6 @@
 .Ccm-FormContainer .ProceedContainer {
 	padding: 15px
 }
-
-
-
-.Ccm-FormContainer {
-    position: relative;
-    width: 290px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin: auto;
-    text-align: center;
-    margin-top: 30px;
-    color: #5F5F5F;
-
-
-
-    outline: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: transparent;
-}
-
 
 .Ccm-FormContainer-Bottom {
 	display: -webkit-box;
@@ -129,5 +113,8 @@
 }
 
 .Ccm-DescrContainer .Ccm-SearchField {
-	width: 220px
+	width: 200px
 }
+
+
+

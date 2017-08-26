@@ -9,6 +9,11 @@
 	<button md-button [mdMenuTriggerFor]="menu" style="color: white" >{{user.name}} {{user.surname}} <md-icon>more_vert</md-icon></button>
 </md-toolbar> <!-- main app container -->
 <md-menu #menu="mdMenu" yPosition="above" xPosition="before">
+
+  <button md-menu-item (click)="logout()">
+    <md-icon class="md-18|md-24|md-36|md-48">format_list_bulleted</md-icon>
+    Gestione Spese
+  </button>
   <button md-menu-item (click)="logout()">
     <md-icon class="md-18|md-24|md-36|md-48">exit_to_app</md-icon>
     Esci

@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Spesa } from 'app/spese/spesa';
+
 import { SpesaService } from 'app/spese/spesa.service';
 import { MdDialog, MdDialogRef } from "@angular/material";
 import { SpeseNewComponent } from "app/spese/spese-new/spese-new.component";
 import { NgForm } from "@angular/forms";
+import { Spesa } from "app/entity/spesa";
 
 @Component({
     selector: 'app-spese',
@@ -58,6 +59,12 @@ export class SpeseComponent implements OnInit {
     let dialogRef = this.dialog.open(SpeseNewComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
+
+      if (result != "cancel") {
+        console.log(dialogRef.componentInstance.spesa);
+        this.create(dialogRef.componentInstance.spesa);
+      }
+
     });
 
   }

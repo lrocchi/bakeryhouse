@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, } from '@angular/core';
-import { Spesa } from "app/spese/spesa";
 import { MdDialogRef } from "@angular/material";
 import { NgForm } from "@angular/forms";
+import { Spesa } from "app/entity/spesa";
 
 @Component({
   selector: 'app-spese-new',
@@ -21,11 +21,12 @@ export class SpeseNewComponent {
 
 
   create(){
-    this.loading = true;
+    //this.loading = true;
     console.log("CREATE " + this.spesa.descrizione);
-    this.createNewSpesaEvent.emit(this.spesa);
-    this.spesa = new Spesa();
-    this. loading = false;
+    // this.createNewSpesaEvent.emit(this.spesa);
+    this.dialogRef.close();
+    //this.spesa = new Spesa();
+    //this. loading = false;
   }
 
 }

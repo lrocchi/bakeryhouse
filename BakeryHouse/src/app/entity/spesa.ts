@@ -1,4 +1,6 @@
-import { User } from "app/user";
+
+
+import { User } from "app/entity/user";
 
 export class Spesa {
   public _id: number;
@@ -11,3 +13,11 @@ export class Spesa {
     public utente: User = null
   ) {}
 }
+
+
+export class TipoSpesa{
+
+    nome: String;
+    valida: boolean;
+
+  }
