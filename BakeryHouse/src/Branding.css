@@ -1,0 +1,335 @@
+body {
+  scrollbar-arrow-color: #fff;
+  scrollbar-face-color: #fff
+}
+
+body.Ccm-LoginBody {
+  background: url("./assets/images/Landscape.jpg") repeat center center
+}
+
+@media (max-width: 1024px) {
+  body.Ccm-LoginBody {
+    background: url("./assets/images/PadPortrait.jpg") repeat center center
+  }
+}
+
+@media (max-width: 768px) {
+  body.Ccm-LoginBody {
+    background: url("./assets/images/Mobile.jpg") repeat center center
+  }
+}
+
+@media (max-width: 450px) {
+  body.Ccm-LoginBody {
+    background: url("./assets/images/MobileSmall.jpg") repeat center center
+  }
+}
+
+body.Ccm-LoginBody .Ccm-LoginContainer:before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  background: #ffffff;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 2px #ffffff
+}
+
+::-webkit-scrollbar {
+  width: 12px
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #7fa372;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5)
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #7fa372
+}
+
+.BrandedBackgroundColor, .BrandedBackgroundColorAfter:after, .BrandedBackgroundColorBefore:before {
+  background-color: #7fa372 !important;
+  color: #ffffff !important
+}
+
+.BrandedBackgroundColorLight, .BrandedBackgroundColorLightAfter:after, .BrandedBackgroundColorLightBefore:before {
+  background-color: #b7cbb0 !important;
+  color: #ffffff !important
+}
+
+.BrandedBackgroundColorOpacity, .BrandedBackgroundColorOpacityAfter:after, .BrandedBackgroundColorOpacityBefore:before {
+  background-color: rgba(127, 163, 114, 0.85) !important;
+  color: #ffffff !important
+}
+
+.BrandedBorderColor, .BrandedBorderColorAfter:after, .BrandedBorderColorBefore:before, .BrandedBorderColorFocus-Textarea>textarea:focus, .BrandedBorderColorFocus-Input>input[type="text"]:focus, .BrandedBorderColorFocus-Input>input:focus, .BrandedBorderColorFocus-Input>input[type="password"]:focus, .BrandedBorderColorFocus-Input>input[type="email"]:focus, .BrandedBorderColorFocus-Input>input[type="tel"]:focus, .BrandedBorderColor-Li-A>li>a, .form-control:focus {
+  border-color: #7fa372
+}
+
+.BrandedBorderColorTop {
+  border-top-color: #7fa372 !important
+}
+
+.BrandedBorderColorBottom {
+  border-bottom-color: #7fa372 !important
+}
+
+.BrandedBorderColorHalf, .BrandedBorderColorHalfAfter:after, .BrandedBorderColorHalfBefore:before {
+  border-color: rgba(127, 163, 114, 0.5)
+}
+
+.BrandedBorderColorFocus:focus, .BrandedBorderColorFocus.form-control:focus, .BrandedBorderColorFocus-Textarea>textarea:focus, .BrandedBorderColorFocus-Input>input[type="text"]:focus, .BrandedBorderColorFocus-Input>input:focus, .BrandedBorderColorFocus-Input>input[type="password"]:focus, .BrandedBorderColorFocus-Input>input[type="email"]:focus, .BrandedBorderColorFocus-Input>input[type="tel"]:focus, .form-control:focus {
+  -webkit-box-shadow: 0 0 8px rgba(127, 163, 114, 0.7);
+  -moz-box-shadow: 0 0 8px rgba(127, 163, 114, 0.7);
+  box-shadow: 0 0 8px rgba(127, 163, 114, 0.7)
+}
+
+.BrandedColor, .BrandedColorBefore:before, .BrandedColorAfter:after, .BrandedColorHover:hover {
+  color: #7fa372 !important
+}
+
+.BrandedBackgroundGradientImage, .BrandedBackgroundGradientImageHover:hover {
+  background-image: linear-gradient(#b7cbb0, #7fa372) !important
+}
+
+.BrandedBackgroundColorLowOpacity, .BrandedBackgroundColorLowOpacityBefore:before, .BrandedBackgroundColorLowOpacityAfter:after, .BrandedBackgroundColorHover:hover, .BrandedBackgroundColorFocus:focus, .BrandedBackgroundColorFocus.focus {
+  background-color: rgba(127, 163, 114, 0.1) !important
+}
+
+@-moz-keyframes f_fadeG {
+  0% {
+    background-color: #7fa372
+  }
+  100% {
+    background-color: #b7cbb0
+  }
+}
+
+@-webkit-keyframes f_fadeG {
+  0% {
+    background-color: #7fa372
+  }
+  100% {
+    background-color: #b7cbb0
+  }
+}
+
+@-ms-keyframes f_fadeG {
+  0% {
+    background-color: #7fa372
+  }
+  100% {
+    background-color: #b7cbb0
+  }
+}
+
+@-o-keyframes f_fadeG {
+  0% {
+    background-color: #7fa372
+  }
+  100% {
+    background-color: #b7cbb0
+  }
+}
+
+@keyframes f_fadeG {
+  0% {
+    background-color: #7fa372
+  }
+  100% {
+    background-color: #b7cbb0
+  }
+}
+
+.progress-bar-info {
+  background-color: #7fa372 !important
+}
+
+md-tabs md-ink-bar {
+  background: #7fa372 !important;
+  height: 8px;
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)
+}
+
+md-tabs .md-ripple-container {
+  color: #7fa372 !important
+}
+
+md-checkbox .md-icon:after {
+  border-color: #7fa372 !important
+}
+
+.md-paginator {
+  color: #C9C9C9 !important
+}
+
+md-radio-button.md-checked .md-off {
+  border-color: #7fa372 !important
+}
+
+md-radio-button .md-on {
+  background-color: #7fa372 !important
+}
+
+.NewsFeedItem .NewsFeedContent .NewsFeedItem-CheckListReadMore:hover, .NewsFeedItem .NewsFeedContent .NewsFeedItem-MediaBankFileReadMore:hover {
+  color: #7fa372
+}
+
+.NewsFeedItem .NewsFeedItem-DocumentHolder .NewsFeedItem-DocumentContent .NewsFeedItem-DocumentReadMore:hover {
+  color: #7fa372
+}
+
+.NewsFeedItem .NewsfeedPostContentText a {
+  color: #7fa372
+}
+
+.commentBlock .content a {
+  color: #7fa372
+}
+
+.text-editor a, .text-content a {
+  color: #7fa372
+}
+
+.btn-primary {
+  background: linear-gradient(#b7cbb0, #7fa372) !important
+}
+
+.progress.active .progress-bar {
+  background: #7fa372 !important
+}
+
+.Ccm-Page .Ccm-Data a:hover {
+  color: #7fa372
+}
+
+md-tabs md-next-button md-icon, md-tabs md-prev-button md-icon {
+  color: #7fa372 !important
+}
+
+.CcmGlobalSearch .CcmGlobalSearchInput input:focus {
+  border-color: #7fa372 !important
+}
+
+.CcmList-Icon:active {
+  color: #7fa372
+}
+
+.CcmList-Icon:active:before {
+  color: #7fa372
+}
+
+.Ccm-ListDisplayTypeSelect .Ccm-ListDisplayTypeSelectInner .DisplayTypeSelect:active {
+  color: #7fa372
+}
+
+.Ccm-ListDisplayTypeSelect .Ccm-ListDisplayTypeSelectInner .DisplayTypeSelect.Current:before {
+  color: #7fa372
+}
+
+.CcmSearch.Focus {
+  border-color: #7fa372
+}
+
+.CcmSearchInput ccm-tag .CcmUserTagRemove {
+  background: #7fa372
+}
+
+input:focus ~ .searchCcmIcon {
+  color: #7fa372 !important
+}
+
+input:focus ~ .searchCcmIcon:before {
+  color: #7fa372 !important
+}
+
+.CcmSearch .CcmSearchContent .CcmSearchContentDisplayName:focus {
+  background-color: #7fa372
+}
+
+.ccm-tags-search-control .btn-done, .ccm-tags-search-control .btn-cancel {
+  color: #7fa372 !important;
+  cursor: pointer
+}
+
+.VersionsWrapper document-version-view .modify {
+  background: #fff
+}
+
+.version-list-content .content-version:hover:not(.current-version) {
+  background: #fff
+}
+
+.version-list-content .content-version:hover:not(.current-version) .item:hover {
+  color: #7fa372
+}
+
+.filterCcmIcon:active {
+  color: #7fa372
+}
+
+.select-template-div:hover, .select-template-div:focus, .select-template-div.selected {
+  border-color: #7fa372 !important
+}
+
+.ccm-device-switch .slider md-slider .md-thumb {
+  background: #7fa372 !important
+}
+
+.ccm-device-switch .device-list .device .slider .current {
+  background: #7fa372
+}
+
+>b .AccessCircle:before {
+  border: 7px solid #7fa372
+}
+
+.AccessCircle:after {
+  border: 1px solid #7fa372
+}
+
+.DropdownCircle:before {
+  border: 7px solid #7fa372
+}
+
+.DropdownCircle:after {
+  border: 1px solid #7fa372
+}
+
+.modal-footer .btn-default {
+  background-color: #7fa372 !important
+}
+
+.compare-html ins {
+  background-color: rgba(127, 163, 114, 0.1)
+}
+
+input.ValidationInputError, button.ValidationInputError, li.ValidationInputError, ccm-tags.ValidationInputError, .form-control.ng-invalid.ng-touched, ccm-dropdownlist.form-control.ng-invalid.ng-touched .dropdown-toggle {
+  border: 1px solid #7fa372 !important
+}
+
+.ErrorMessage {
+  border-color: #7fa372
+}
+
+.ErrorMessage:before {
+  border-color: transparent #7fa372
+}
+
+
+/*# sourceMappingURL=Branding.css.map */
