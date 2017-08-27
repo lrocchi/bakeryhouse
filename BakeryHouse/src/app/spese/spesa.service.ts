@@ -5,7 +5,8 @@ import { Http, RequestOptions, Headers} from '@angular/http';
 import 'rxjs';
 // tslint:disable-next-line:import-blacklist
 import { Observable } from 'rxjs'
-import { Spesa } from 'app/spese/spesa';
+import { Spesa } from "app/entity/spesa";
+
 
 @Injectable()
 export class SpesaService {
