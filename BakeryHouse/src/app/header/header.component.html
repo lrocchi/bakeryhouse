@@ -9,10 +9,15 @@
 	<button md-button [mdMenuTriggerFor]="menu" style="color: white; padding: 0 0px;" >{{user.name}} {{user.surname}} <md-icon>more_vert</md-icon></button>
 </md-toolbar> <!-- main app container -->
 <md-menu #menu="mdMenu" yPosition="below" xPosition="after">
-  <button  md-menu-item >
+  <!-- <button md-menu-item> -->
+      <a md-menu-item routerLink="/" routerLinkActive="active">
+      <md-icon class="md-18|md-24|md-36|md-48">home</md-icon>
+      Home</a>
+  <!-- </button> -->
+  <a  md-menu-item routerLink="/gestioneSpese" routerLinkActive="active">
     <md-icon class="md-18|md-24|md-36|md-48">format_list_bulleted</md-icon>
     Gestione Spese
-  </button>
+  </a>
   <button md-menu-item (click)="logout()">
     <md-icon class="md-18|md-24|md-36|md-48">exit_to_app</md-icon>
     Esci

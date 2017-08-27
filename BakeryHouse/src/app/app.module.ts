@@ -17,16 +17,11 @@ import { MaterialModule, MdToolbarModule, MdButtonModule, MdIconModule, MdMenuMo
 import { SpeseListComponent } from './spese/spese-list/spese-list.component';
 import { SpeseNewComponent } from './spese/spese-new/spese-new.component';
 import { CdkTableModule } from '@angular/cdk';
+import { GestioneSpeseComponent } from "app/management/gestione-spese/gestione-spese.component";
+import { AppRoutingModule } from "app/app-routes.component";
 
 
-const appRoutes: Routes = [
-    {  path: 'login', component: LoginComponent },
-    // {  path: 'spese', component: SpeseComponent  },
-    { path: '', component: HomeComponent , canActivate: [AuthGuard] },
 
-    // otherwise redirect to home
-    { path: '**', redirectTo: '' }
-];
 
 /**
  * NgModule that includes all Material modules that are required to serve the demo-app.
@@ -53,21 +48,19 @@ export class DemoMaterialModule {}
     SpeseComponent,
     SpeseListComponent,
     SpeseNewComponent,
+    GestioneSpeseComponent
 
   ],
   imports: [
 
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    ),
     MaterialModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     DemoMaterialModule,
     CdkTableModule,
-    MdDialogModule
+    MdDialogModule,
+    AppRoutingModule
 
   ],
   providers: [
