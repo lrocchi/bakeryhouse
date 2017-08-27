@@ -1,14 +1,12 @@
 <div fxLayout="column" style="height:100%">
     <div fxLayout="row" fxLayoutAlign="space-around center">
-        <header>
-            <app-header></app-header>
-        </header>
+        <app-header></app-header>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-around center" style="height:100%">
         <span></span>
         <div class="Ccm-MainContentView ng-scope">
-            <md-tab-group>
-                  <md-tab label="Spese">
+               <md-tab-group style="font-size:12px">
+                  <md-tab id="tabSpese" label="Spese">
                     <app-spese></app-spese>
                   </md-tab>
                   <md-tab label="Chiusure">
@@ -16,6 +14,7 @@
                     <p>...</p>
                   </md-tab>
                 </md-tab-group>
+
         </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-around center">

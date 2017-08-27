@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { AuthService } from '../_services/auth.service';
 
 
 @Component({
-   selector: 'app-login',
+   selector: 'body',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -20,11 +20,15 @@ export class LoginComponent implements OnInit {
 
   LOGO = './img/Logo.png';
 
+
+
   constructor(
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthService) { }
 
+
+        @HostBinding('class.Ccm-LoginBody') someField: boolean = true;
 
   ngOnInit() {
        // reset login status

@@ -2,10 +2,11 @@ let mongoose = require('mongoose');
 let bcrypt = require('bcrypt');
 
 let UserSchema = new mongoose.Schema({
-    name: {type: String, require: true},
+    name: {type: String, lowercase: true, require: true, unique: true},
     surname: {type: String, require: true},
     username: {type: String, unique:true, require:true},
-    password: {type: String, require: true}
+    password: {type: String, require: true},
+    email: {type: String, lowercase: true,unique: true}
 
 })
 

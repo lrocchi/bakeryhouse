@@ -2,10 +2,33 @@
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+@import './Branding.css';
+@import './concat.css';
+
+.span-fill-remaining {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+	display: flex;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0 5px;
+	flex-direction: column;
+}
 
 
+.Ccm-MainContentView /deep/ md-tab-group md-tab-header .mat-tab-label-container .mat-tab-list .mat-ink-bar{
 
-body {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  transition: .5s cubic-bezier(.35,0,.25,1);
+  background-color: #7fa372;
+}
+
+
+/* body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
@@ -54,6 +77,7 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
     font-size: 14px;
 }
 
+ */
 
 
 
@@ -61,8 +85,7 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
 
 
 
-
-
+/*
 
 .mat-sidenav-container {
 	position: relative;
@@ -74,13 +97,7 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
 	height: 100%;
 }
 
-.mat-toolbar {
-	display: flex;
-	box-sizing: border-box;
-	width: 100%;
-	padding: 0 5px;
-	flex-direction: column;
-}
+
 
 .mat-sidenav {
 	width: 200px;
@@ -246,9 +263,7 @@ input[type="password" ] {
 
 
 
-  .span-fill-remaining {
-    flex: 1 1 auto;
-  }
+
 
 
 
@@ -326,3 +341,5 @@ a {
     vertical-align: baseline;
     background: transparent;
 }
+ */
+

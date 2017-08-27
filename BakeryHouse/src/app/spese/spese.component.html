@@ -3,12 +3,13 @@
 
         <div style="display: inline-block; text-align: right; width: 100%;">
           <md-button-toggle-group #group="mdButtonToggleGroup">
-            <md-button-toggle (click)="openDialog()">
-              <md-icon>add_shopping_cart</md-icon>
-            </md-button-toggle>
+            <!--
+
+             -->
+            <button (click)="openDialog()" class="btn btn-primary Ccm-Button-Primary btn btn-default BrandedBackgroundGradientImage">Aggiungi</button>
           </md-button-toggle-group>
 
-            <app-spese-new (createNewSpesaEvent)="create($event)" *ngIf="visible"></app-spese-new>
+
 
 
          <md-card class="example-card">

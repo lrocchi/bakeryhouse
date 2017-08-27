@@ -1,11 +1,11 @@
 
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, HostBinding } from '@angular/core';
 
 
 
 
 @Component({
-  selector: 'app-root',
+  selector: 'body',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   constructor () {}
 
-
+  @HostBinding('class.Ccm-LoginBody') someField: boolean = false;
 
   @HostListener('window:beforeunload', ['$event'])
   beforeunloadHandler(event) {

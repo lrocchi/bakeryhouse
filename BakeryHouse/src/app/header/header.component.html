@@ -1,4 +1,4 @@
-<md-toolbar  class ="BrandedBackgroundGradientImage" style="text-align: center" >
+<md-toolbar  class ="BrandedBackgroundGradientImage" style="text-align: center; padding: 0 5px;" >
 
 	<!--The whole content below can be removed with the new code.-->
 
@@ -6,11 +6,10 @@
 	<h3 style="color: white">{{title}}</h3>
 
 	<span class="span-fill-remaining"></span>
-	<button md-button [mdMenuTriggerFor]="menu" style="color: white" >{{user.name}} {{user.surname}} <md-icon>more_vert</md-icon></button>
+	<button md-button [mdMenuTriggerFor]="menu" style="color: white; padding: 0 0px;" >{{user.name}} {{user.surname}} <md-icon>more_vert</md-icon></button>
 </md-toolbar> <!-- main app container -->
-<md-menu #menu="mdMenu" yPosition="above" xPosition="before">
-
-  <button md-menu-item (click)="logout()">
+<md-menu #menu="mdMenu" yPosition="below" xPosition="after">
+  <button  md-menu-item >
     <md-icon class="md-18|md-24|md-36|md-48">format_list_bulleted</md-icon>
     Gestione Spese
   </button>
