@@ -1,7 +1,7 @@
-let mongoose = require('mongoose');
-let bcrypt = require('bcrypt');
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
-let UserSchema = new mongoose.Schema({
+var UserSchema = new mongoose.Schema({
     name: {type: String, lowercase: true, require: true, unique: true},
     surname: {type: String, require: true},
     username: {type: String, unique:true, require:true},

@@ -1,8 +1,8 @@
-let express = require('express');
-let router = express.Router();
-let mongoose = require('mongoose');
-let jwt = require('jsonwebtoken');
-let config = require('../config/config')
+var express = require('express');
+var router = express.Router();
+var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
+var config = require('../config/config')
 var User = require('../models/User');
 
 
@@ -74,7 +74,7 @@ router.post('/register', function(req, res) {
       message: 'Please enter email and password.'
     });
   } else {
-    let newUser = new User({
+    var newUser = new User({
       USERNAME: req.body.username,
       password: req.body.password
     });

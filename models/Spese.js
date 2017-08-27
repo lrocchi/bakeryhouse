@@ -1,6 +1,6 @@
-let mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
-let spesaSchema = new mongoose.Schema({
+var spesaSchema = new mongoose.Schema({
     descrizione: {type: String, require: true},
     valore: {type: Number, require: true},
     create_on: {type: Date, default: Date.now},

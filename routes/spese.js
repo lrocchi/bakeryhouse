@@ -1,7 +1,7 @@
-let express = require('express');
-let router = express.Router();
-let mongoose = require('mongoose');
-let config = require('../config/config')
+var express = require('express');
+var router = express.Router();
+var mongoose = require('mongoose');
+var config = require('../config/config')
 var Spese = require('../models/Spese');
 
 
@@ -27,7 +27,7 @@ router.get('/', function(req, res, next){
 
 // GET single Spese by id
 router.get('/today', function(req, res, next){
- let today = new Date();
+ var today = new Date();
   Spese.find({"create_on" : { "$gte" : new Date(today.getFullYear(), today.getMonth(), today.getDate())}}, function(err, speseDocs){
             if(err){ 
               console.log(err);
