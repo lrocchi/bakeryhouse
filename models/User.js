@@ -6,7 +6,12 @@ var UserSchema = new mongoose.Schema({
     surname: {type: String, require: true},
     username: {type: String, unique:true, require:true},
     password: {type: String, require: true},
-    email: {type: String, lowercase: true,unique: true}
+    email: {type: String, lowercase: true,unique: true},
+    ruolo:{
+      type: String,
+      enum: ['User','Admin','Super Admin'] ,
+      default: 'User'
+    }
 
 })
 

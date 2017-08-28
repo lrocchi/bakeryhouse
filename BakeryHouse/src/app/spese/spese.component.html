@@ -1,26 +1,14 @@
-
-
-
-        <div style="display: inline-block; text-align: right; width: 100%;">
-          <md-button-toggle-group #group="mdButtonToggleGroup">
-            <!--
-
-             -->
-            <button (click)="openDialog()" class="btn btn-primary Ccm-Button-Primary btn btn-default BrandedBackgroundGradientImage">Aggiungi</button>
-          </md-button-toggle-group>
-
-
-
-
-         <md-card class="example-card">
-            <md-card-header>
-              <h3>Spese Effettuate Oggi: {{today | date: 'dd/MM/y'}}</h3>
-            </md-card-header>
-            <md-card-content>
-              <app-spese-list [spesaList]="spesaList"></app-spese-list>
-            </md-card-content>
-         </md-card>
-        </div>
-
-
-
+<div style="display: inline-block; text-align: left; width: 100%;">
+  <md-card class="example-card">
+    <md-card-header>
+      <h3>Spese di oggi: {{today | date: 'dd/MM/y'}}</h3>
+      <span class="span-fill-remaining"></span>
+      <div class="ProceedContainer ng-scope">
+        <button (click)="openDialog()" class="btn btn-primary Ccm-Button-Primary btn btn-default BrandedBackgroundGradientImage">Aggiungi</button>
+      </div>
+    </md-card-header>
+    <md-card-content>
+      <app-spese-list [spesaList]="spesaList"></app-spese-list>
+    </md-card-content>
+  </md-card>
+</div>

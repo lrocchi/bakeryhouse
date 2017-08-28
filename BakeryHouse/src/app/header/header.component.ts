@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
         private router: Router,
-        private auth: AuthService
+        public auth: AuthService
         // private localStorage: LocalStorageService,
     ) {
        if (localStorage.getItem('token')) {
