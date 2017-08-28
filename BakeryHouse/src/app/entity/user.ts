@@ -1,6 +1,6 @@
 
 
-
+import { Store } from "app/entity/store";
 
 export class User {
   _id: string;
@@ -9,11 +9,13 @@ export class User {
   username: string;
   password: string;
   email: string;
-  ruolo: Ruolo;
+  ruolo: string;
+  puntoVendita: Store;
 }
 
 export enum Ruolo{
-  "User",
+  "Dipendente",
+  "Store Manager",
   "Admin",
   "Super Admin"
 }

@@ -28,7 +28,7 @@ router.get('/', function(req, res, next){
 // GET single Spese by id
 router.get('/today', function(req, res, next){
  var today = new Date();
-  Spese.find({"create_on" : { "$gte" : new Date(today.getFullYear(), today.getMonth(), today.getDate())}}, function(err, speseDocs){
+  Spese.find({"create_on" : { "$gte" : new Date(today.getFullYear(), today.getMonth(), today.getDate())}}).populate('utente').exec(function(err, speseDocs){
             if(err){ 
               console.log(err);
                 res.send(err);

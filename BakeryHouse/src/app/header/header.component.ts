@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
 
           try {
           this.user = this.jwtHelper.decodeToken(localStorage.getItem('token'))._doc;
+          console.log(JSON.stringify(this.user));
           localStorage.setItem('currUser',JSON.stringify(this.user));
           }catch (e) {
             console.error(e);

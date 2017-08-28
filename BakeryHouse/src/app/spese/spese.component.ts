@@ -3,8 +3,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SpesaService } from 'app/spese/spesa.service';
 import { MdDialog, MdDialogRef } from "@angular/material";
 import { SpeseNewComponent } from "app/spese/spese-new/spese-new.component";
+import { LocalStorageService } from 'ng2-webstorage';
 import { NgForm } from "@angular/forms";
 import { Spesa } from "app/entity/spesa";
+import { User } from "app/entity/user";
 
 @Component({
     selector: 'app-spese',
@@ -29,14 +31,17 @@ export class SpeseComponent implements OnInit {
   getList(){
     // this._spesaService.getSpesaList()
     this._spesaService.getTodaySpesaList()
-    .then(spese => this.spesaList = spese)
+    .then(spese => {this.spesaList = spese; console.log("<<<<<<<<<<<<>>>>>>>>>>>" + JSON.stringify(this.spesaList[0]))})
     .catch(err => console.log(err));
+
   }
 
   create(spesa: Spesa){
     console.log("ECCO");
     let tmpSpesa: Spesa = spesa;
-    tmpSpesa.utente = JSON.parse(localStorage.getItem('currUser'));
+    let usr: User = JSON.parse(localStorage.getItem('currUser'));
+    console.log("USER -->" + JSON.stringify(usr));
+    tmpSpesa.utente = usr;
 
     this._spesaService.addSpesa(tmpSpesa)
     .then((data) => {

@@ -9,9 +9,10 @@ var UserSchema = new mongoose.Schema({
     email: {type: String, lowercase: true,unique: true},
     ruolo:{
       type: String,
-      enum: ['User','Admin','Super Admin'] ,
+      enum: ['Dipendente','Store Manager','Admin','Super Admin'] ,
       default: 'User'
-    }
+    },
+    store:{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' }
 
 })
 
