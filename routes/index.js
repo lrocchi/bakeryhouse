@@ -5,4 +5,9 @@ router.get('/', function(req, res, next){
     res.render('index.html');
 });
 
+router.get('/manage', function(req, res, next){
+    
+    res.render('index');
+});
+
 module.exports = router;

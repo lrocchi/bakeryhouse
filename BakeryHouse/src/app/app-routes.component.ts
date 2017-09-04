@@ -3,14 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from "app/login/login.component";
 import { AuthGuard } from "app/_guards/auth.guard";
 import { HomeComponent } from "app/home/home.component";
-import { GestioneSpeseComponent } from "app/management/gestione-spese/gestione-spese.component";
+
+import { ManagementComponent } from "app/management/management.component";
 
 const appRoutes: Routes = [
-
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'gestioneSpese', component: GestioneSpeseComponent, canActivate: [AuthGuard] },
-
   { path: 'login', component: LoginComponent },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'manage', component: ManagementComponent},
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];

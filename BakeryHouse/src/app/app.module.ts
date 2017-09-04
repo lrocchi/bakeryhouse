@@ -11,14 +11,20 @@ import { HeaderComponent } from "app/header/header.component";
 import { SpeseComponent } from "app/spese/spese.component";
 import { RouterModule } from "@angular/router";
 import { HttpModule } from "@angular/http";
-import { FormsModule } from "@angular/forms";
-import { SpesaService } from "app/spese/spesa.service";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule, MdToolbarModule, MdButtonModule, MdIconModule, MdMenuModule, MdIconRegistry, MdDialogModule, MdDialogRef } from "@angular/material";
 import { SpeseListComponent } from './spese/spese-list/spese-list.component';
 import { SpeseNewComponent } from './spese/spese-new/spese-new.component';
 import { CdkTableModule } from '@angular/cdk';
 import { GestioneSpeseComponent } from "app/management/gestione-spese/gestione-spese.component";
 import { AppRoutingModule } from "app/app-routes.component";
+import { ManagementComponent } from './management/management.component';
+import { CostTypeAddComponent } from './management/gestione-spese/cost-type-add/cost-type-add.component';
+import { SpesaService } from "app/_services/spesa.service";
+import { ConfirmationDialog } from './confirmation-dialog/confirmation-dialog.component';
+import { KeysPipe } from './keys.pipe';
+import { GestioneUtenteComponent } from './management/gestione-utente/gestione-utente.component';
+import { UserService } from "app/_services/user.service";
 
 
 
@@ -33,7 +39,8 @@ import { AppRoutingModule } from "app/app-routes.component";
     MdIconModule,
     MdMenuModule,
     MdDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
   ]
 })
 export class DemoMaterialModule {}
@@ -48,9 +55,15 @@ export class DemoMaterialModule {}
     SpeseComponent,
     SpeseListComponent,
     SpeseNewComponent,
-    GestioneSpeseComponent
+    GestioneSpeseComponent,
+    ManagementComponent,
+    CostTypeAddComponent,
+    ConfirmationDialog,
+    KeysPipe,
+    GestioneUtenteComponent
 
   ],
+
   imports: [
 
     MaterialModule,
@@ -60,16 +73,19 @@ export class DemoMaterialModule {}
     DemoMaterialModule,
     CdkTableModule,
     MdDialogModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
 
   ],
   providers: [
     AuthGuard,
     AuthService,
-    SpesaService
+    SpesaService,
+    UserService
 
   ],
-  bootstrap: [AppComponent, SpeseNewComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [SpeseNewComponent, CostTypeAddComponent, ConfirmationDialog]
 
 })
 

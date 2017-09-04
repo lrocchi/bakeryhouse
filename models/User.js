@@ -10,7 +10,7 @@ var UserSchema = new mongoose.Schema({
     ruolo:{
       type: String,
       enum: ['Dipendente','Store Manager','Admin','Super Admin'] ,
-      default: 'User'
+      default: 'Dipendente'
     },
     store:{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' }
 

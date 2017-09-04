@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var config = require('../config/config')
-var Spese = require('../models/Spese');
+var Spese = require('../models/Cost');
+var CostType = require('../models/CostType');
 
 
 
@@ -14,21 +15,12 @@ router.get('/', function(req, res, next){
     });
 });
 
-// GET single Spese by id
-/* router.get('/:id', function(req, res, next){
-    Spese.findOne({_id: mongoosedb.ObjectId(req.params.id)}, function(err, spesa){
-            if(err){ 
-                res.send(err);
-            }
 
-            res.json(spesa);
-    });
-}); */
 
 // GET single Spese by id
 router.get('/today', function(req, res, next){
  var today = new Date();
-  Spese.find({"create_on" : { "$gte" : new Date(today.getFullYear(), today.getMonth(), today.getDate())}}).populate('utente').exec(function(err, speseDocs){
+  Spese.find({"create_on" : { "$gte" : new Date(today.getFullYear(), today.getMonth(), today.getDate())}}).populate('utente').populate('tipo').exec(function(err, speseDocs){
             if(err){ 
               console.log(err);
                 res.send(err);
@@ -47,7 +39,7 @@ router.post('/', function(req, res, next ) {
     });
   } else { 
     
-    
+    console.log("SPESA  DA AGGIUNGERE: " + JSON.stringify(req.body));
     // Attempt to save the spesa
     Spese.create(req.body,function(err, data) {
       if (err) {
@@ -66,5 +58,28 @@ router.post('/', function(req, res, next ) {
     });
   }
 });
+
+router.delete("/:id", function (req, res) {
+  var id = req.params.id;
+  Spese.findByIdAndRemove(id, function (err, data) {
+    if (err) {
+      return res.json({
+        success: false,
+        message: 'Errore: Tipo spesa non cancellato!',
+        data: data
+      });
+      return;
+    }
+    res.json({
+      success: true,
+      message: 'Tipo spesa cancellato con successo',
+      data: data
+    });
+  });
+});
+
+
+
+
 
 module.exports = router;

@@ -1,9 +1,13 @@
 <md-list>
   <md-list-item *ngFor="let spesa of spesaList">
-    <h4 md-line style="text-align: left;">{{spesa.descrizione}} </h4>
+    <h4 md-line style="text-align: left;"><strong>{{spesa.descrizione}}</strong></h4>
+    <h6 md-line>({{spesa.tipo.nome}})</h6>
     <p style="font-size: 8px;text-align: left;" md-line>{{spesa.update_on | date : 'H:mm:ss'}}</p>
     <div style="display: inline-block; text-align: right; width: 100%;">{{spesa.valore}}&euro;</div>
     <div style="display: inline-block; text-align: right; width: 100%;">
-      <md-icon>edit</md-icon><span></span><md-icon>delete</md-icon></div>
+      <!-- <md-icon>edit</md-icon> -->
+      <span></span>
+      <button md-icon-button (click)="openConfirmationDelete(spesa._id)"><md-icon class="md-24" >delete</md-icon></button>
+    </div>
   </md-list-item>
 </md-list>

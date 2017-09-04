@@ -1,0 +1,56 @@
+<div style="display: inline-block; text-align: left; width: 100%;">
+    <div class="alert alert-danger">{{message}}</div>
+    <md-card class="example-card">
+      <md-card-header>
+          <h3>Categorie di spesa</h3>
+        <span class="span-fill-remaining"></span>
+        <div class="ProceedContainer ng-scope"><button class="btn BKHBrandedButton Ccm-Button-Primary">Aggiungi</button></div>
+      </md-card-header>
+      <md-card-content>
+        <div style="overflow:auto">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <td style="text-align : center"><strong>User ID</strong></td>
+                <td style="text-align : center"><strong>Nome</strong></td>
+                <td style="text-align : center"><strong>Cognome</strong></td>
+                <td style="text-align : center"><strong>Ruolo</strong></td>
+                <td style="text-align : center"><strong>e-mail</strong></td>
+                <td style="text-align : center"><strong>Punto Vendita</strong></td>
+                <td colspan="2"></td>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td>{{user.username}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.surname}}</td>
+                <td>{{user.ruolo}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.puntoVendita}}</td>
+
+                <td style="text-align : center; align-items: center; padding: 0px;">
+                    <button md-icon-button><md-icon class="md-24">mode_edit</md-icon></button>
+                  </td>
+                  <td style="text-align : center; padding: 0px;" >
+                    <button md-icon-button ><md-icon class="md-24" >delete</md-icon></button>
+                  </td>
+
+                </tr>
+                <!-- <td style="text-align : center; align-items: center; padding: 0px;">
+                  <button md-icon-button><md-icon class="md-24">mode_edit</md-icon></button>
+                </td>
+                <td style="text-align : center; padding: 0px;" colspan="2">
+                  <button md-icon-button (click)="openConfirmationDelete(cat._id)"><md-icon class="md-24" >delete</md-icon></button>
+                </td>
+
+              </tr> -->
+
+            </tbody>
+          </table>
+        </div>
+      </md-card-content>
+    </md-card>
+    <div>{{statusMessage}}</div>
+  </div>

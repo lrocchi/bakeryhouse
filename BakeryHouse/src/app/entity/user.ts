@@ -14,8 +14,8 @@ export class User {
 }
 
 export enum Ruolo{
-  "Dipendente",
-  "Store Manager",
-  "Admin",
-  "Super Admin"
+  'Dipendente' = 100,
+  'Store Manager' = 50,
+  'Admin' = 10,
+  'Super Admin' = 1
 }

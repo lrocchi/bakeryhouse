@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { SpesaService } from 'app/spese/spesa.service';
+
 import { MdDialog, MdDialogRef } from "@angular/material";
 import { SpeseNewComponent } from "app/spese/spese-new/spese-new.component";
 import { LocalStorageService } from 'ng2-webstorage';
 import { NgForm } from "@angular/forms";
-import { Spesa } from "app/entity/spesa";
+
 import { User } from "app/entity/user";
+import { Cost } from "app/entity/cost";
+import { SpesaService } from "app/_services/spesa.service";
 
 @Component({
     selector: 'app-spese',
@@ -15,10 +17,11 @@ import { User } from "app/entity/user";
 })
 export class SpeseComponent implements OnInit {
 
+  public message: string;
   public visible: boolean = false;
   today: number = Date.now();
   dialogRef: MdDialogRef<SpeseNewComponent>;
-  spesaList: Array<Spesa>;
+  spesaList: Array<Cost>;
 
 
 
@@ -31,18 +34,18 @@ export class SpeseComponent implements OnInit {
   getList(){
     // this._spesaService.getSpesaList()
     this._spesaService.getTodaySpesaList()
-    .then(spese => {this.spesaList = spese; console.log("<<<<<<<<<<<<>>>>>>>>>>>" + JSON.stringify(this.spesaList[0]))})
+    .then(spese => {this.spesaList = spese; })
     .catch(err => console.log(err));
 
   }
 
-  create(spesa: Spesa){
-    console.log("ECCO");
-    let tmpSpesa: Spesa = spesa;
+  create(spesa: Cost){
+    // console.log("ECCO");
+    let tmpSpesa: Cost = spesa;
     let usr: User = JSON.parse(localStorage.getItem('currUser'));
-    console.log("USER -->" + JSON.stringify(usr));
+    this.message = "";
     tmpSpesa.utente = usr;
-
+    console.log("tmpSpesa -->" + JSON.stringify(tmpSpesa));
     this._spesaService.addSpesa(tmpSpesa)
     .then((data) => {
       if(data.success){
@@ -50,6 +53,7 @@ export class SpeseComponent implements OnInit {
 
       }else{
         console.log(data.message);
+        this.message = data.message;
       }
 
     })
@@ -63,10 +67,10 @@ export class SpeseComponent implements OnInit {
     // this.visible = !this.visible;
     let dialogRef = this.dialog.open(SpeseNewComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      // console.log(result);
 
       if (result != "cancel") {
-        console.log(dialogRef.componentInstance.spesa);
+        // console.log(dialogRef.componentInstance.spesa);
         this.create(dialogRef.componentInstance.spesa);
       }
 
