@@ -25,6 +25,7 @@ import { ConfirmationDialog } from './confirmation-dialog/confirmation-dialog.co
 import { KeysPipe } from './keys.pipe';
 import { GestioneUtenteComponent } from './management/gestione-utente/gestione-utente.component';
 import { UserService } from "app/_services/user.service";
+import { UserAddComponent } from './management/gestione-utente/user-add/user-add.component';
 
 
 
@@ -60,7 +61,8 @@ export class DemoMaterialModule {}
     CostTypeAddComponent,
     ConfirmationDialog,
     KeysPipe,
-    GestioneUtenteComponent
+    GestioneUtenteComponent,
+    UserAddComponent
 
   ],
 
