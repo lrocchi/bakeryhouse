@@ -35,6 +35,6 @@ app.use('/api/spese', spese);
 app.use('/api/users', users);
 app.use('/api/costtype', costType);
 
-app.listen(port, function(){
+app.listen(process.env.PORT || port, function(){
     console.log('Server started on port ' + port);
 })
