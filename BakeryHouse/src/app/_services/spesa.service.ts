@@ -7,6 +7,7 @@ import 'rxjs';
 import { Observable } from 'rxjs'
 import { Cost } from "app/entity/cost";
 import { CostType } from "app/entity/cost-type";
+import { User } from "app/entity/user";
 
 
 
@@ -26,9 +27,10 @@ export class SpesaService {
 
   }
 
-  public getTodaySpesaList() {
+  public getTodaySpesaList(id_store: string) {
     console.log('================= SpesaService.getTodaySpesaList() =====================');
-    return this._http.get('api/spese/today').map(data => data.json()).toPromise();
+    console.log(id_store);
+    return this._http.get('api/spese/today/' + id_store).map(data => data.json()).toPromise();
 
   }
 

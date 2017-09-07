@@ -27,6 +27,10 @@ export class AuthService {
                       // store username and jwt token in local storage to keep user logged in between page refreshes
                       localStorage.setItem('token', jresponse.token);
 
+                      let user = this.jwtHelper.decodeToken(localStorage.getItem('token'))._doc;
+                      console.log(JSON.stringify(user));
+                      localStorage.setItem('currUser',JSON.stringify(user));
+
                     }
                     return jresponse.success;
                   } else {

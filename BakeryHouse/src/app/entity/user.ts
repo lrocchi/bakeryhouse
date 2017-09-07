@@ -10,12 +10,13 @@ export class User {
   password: string;
   email: string;
   ruolo: string;
-  puntoVendita: Store;
+  store: Store;
+  active: boolean;
 }
 
 export enum Ruolo{
-  'Dipendente' = 100,
-  'Store Manager' = 50,
-  'Admin' = 10,
-  'Super Admin' = 1
+  Dipendente = 100,
+  StoreManager = 50,
+  Admin = 10,
+  SuperAdmin = 1
 }

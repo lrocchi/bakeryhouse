@@ -2,12 +2,14 @@
 
 import { User } from "app/entity/user";
 import { CostType } from "app/entity/cost-type";
+import { Store } from "app/entity/store";
 
 export class Cost {
   public _id: string;
   public valore: number ;
   public utente: User;
   public tipo: CostType;
+  public store: Store;
 
   constructor(
     public descrizione: string = "",

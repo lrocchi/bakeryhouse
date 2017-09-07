@@ -1,3 +1,61 @@
-<p>
-  user-add works!
-</p>
+<h3 md-dialog-title>
+  Aggiungi</h3>
+<form name="form" (ngSubmit)="create()"  novalidate >
+
+  <div md-dialog-content>
+
+    <md-input-container class="example-full-width">
+      <input mdInput [(ngModel)]="user.name" placeholder="Nome" autocomplete="off" #name="ngModel" name="name" required>
+    </md-input-container>
+
+    <md-input-container class="example-full-width">
+      <input mdInput [(ngModel)]="user.surname" placeholder="Cognome" autocomplete="off" #surname="ngModel" name="surname"
+        required>
+    </md-input-container>
+
+    <md-input-container class="example-full-width">
+      <input mdInput [(ngModel)]="user.username" placeholder="Username" autocomplete="off" #username="ngModel" name="username"
+        required>
+    </md-input-container>
+
+    <md-input-container class="example-full-width">
+        <input mdInput [(ngModel)]="user.password"  type="password" placeholder="Password" autocomplete="off" #password="ngModel" name="password"
+          required>
+      </md-input-container>
+
+    <md-input-container class="example-full-width">
+      <input mdInput [(ngModel)]="user.email"  placeholder="Email" autocomplete="off" name="email" required>
+    </md-input-container>
+
+    <md-select placeholder="Ruolo" [(ngModel)]="user.ruolo" #role="ngModel" name="role" required>
+      <md-option *ngFor="let ruolo of ruoli | keys" [value]="ruolo.value">
+        {{ruolo.value}}
+      </md-option>
+    </md-select>
+
+    <md-select placeholder="Punto Vendita" [(ngModel)]="user.store" #nome="ngModel" name="store" required>
+      <md-option *ngFor="let store of stores" [value]="store">
+        {{store.nome}} - {{store.indirizzo}}
+      </md-option>
+    </md-select>
+
+
+
+
+    <md-checkbox class="example-margin" #subCategory="ngModel" name="active" [(ngModel)]="user.active" [checked]="user.active"
+      [value]="user.active">Attivo</md-checkbox>
+
+
+  </div>
+  <div md-dialog-actions>
+    <div class="ProceedContainer ng-scope">
+      <button md-dialog-close="cancel" class="btn BKHBrandedButton Ccm-Button-Primary">Annulla</button>
+    </div>
+    <span class="span-fill-remaining"></span>
+    <div class="ProceedContainer ng-scope">
+      <button class="btn BKHBrandedButton Ccm-Button-Primary">Aggiungi</button>
+    </div>
+
+  </div>
+
+</form>

@@ -25,7 +25,8 @@ export class HeaderComponent implements OnInit {
         public auth: AuthService
         // private localStorage: LocalStorageService,
     ) {
-       if (localStorage.getItem('token')) {
+      this.user = JSON.parse(localStorage.getItem('currUser'));
+      /*  if (localStorage.getItem('token')) {
 
           try {
           this.user = this.jwtHelper.decodeToken(localStorage.getItem('token'))._doc;
@@ -36,7 +37,7 @@ export class HeaderComponent implements OnInit {
           }
         }else{
           console.log('Nessun Token')
-        }
+        } */
 
     }
 

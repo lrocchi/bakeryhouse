@@ -17,10 +17,13 @@ router.get('/', function(req, res, next){
 
 
 
-// GET single Spese by id
-router.get('/today', function(req, res, next){
+// GET today costs by id_store
+router.get('/today/:id_store', function(req, res, next){
  var today = new Date();
-  Spese.find({"create_on" : { "$gte" : new Date(today.getFullYear(), today.getMonth(), today.getDate())}}).populate('utente').populate('tipo').exec(function(err, speseDocs){
+ console.log("ID_STORE:" + req.params.id_store);
+  Spese.find({
+      create_on: { $gte : new Date(today.getFullYear(), today.getMonth(), today.getDate())}
+    }).where('store').equals(req.params.id_store).populate('utente').populate('tipo').populate('store').exec(function(err, speseDocs){
             if(err){ 
               console.log(err);
                 res.send(err);

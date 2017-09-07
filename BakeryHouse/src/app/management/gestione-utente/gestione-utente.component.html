@@ -4,7 +4,7 @@
       <md-card-header>
           <h3>Utenti</h3>
         <span class="span-fill-remaining"></span>
-        <div class="ProceedContainer ng-scope"><button class="btn BKHBrandedButton Ccm-Button-Primary">Aggiungi</button></div>
+        <div class="ProceedContainer ng-scope"><button class="btn BKHBrandedButton Ccm-Button-Primary" (click)="openDialog()">Aggiungi</button></div>
       </md-card-header>
       <md-card-content>
         <div style="overflow:auto">
@@ -28,7 +28,7 @@
                 <td>{{user.surname}}</td>
                 <td>{{user.ruolo}}</td>
                 <td>{{user.email}}</td>
-                <td>{{user.puntoVendita}}</td>
+                <td>{{user.store.nome}}</td>
 
                 <td style="text-align : center; align-items: center; padding: 0px;">
                     <button md-icon-button><md-icon class="md-24">mode_edit</md-icon></button>

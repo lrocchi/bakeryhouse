@@ -5,6 +5,5 @@ export class Store {
   nome: string;
   indirizzo: string;
   piva: string;
-  direttore: User;
 
 }

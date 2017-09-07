@@ -25,10 +25,7 @@ export class GestioneSpeseComponent implements OnInit{
   //2. Other Variables
   message : string;
   costType : CostType;
-  selemp : CostType;
   costTypes : Array < CostType >;
-  categories: Array<any>;
-  isNewRecord : boolean;
   statusMessage:string;
 
   constructor( private _spesaService: SpesaService, public dialog: MdDialog){}

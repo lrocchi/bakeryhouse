@@ -12,7 +12,8 @@ var UserSchema = new mongoose.Schema({
       enum: ['Dipendente','Store Manager','Admin','Super Admin'] ,
       default: 'Dipendente'
     },
-    store:{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' }
+    store:{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' },
+    active: {type: Boolean, require: true, default: true}
 
 })
 

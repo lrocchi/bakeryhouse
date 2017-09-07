@@ -6,7 +6,8 @@ var costSchema = new mongoose.Schema({
     create_on: {type: Date, default: Date.now},
     update_on: {type: Date, default: Date.now},
     utente: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    tipo: { type: mongoose.Schema.Types.ObjectId, ref: 'CostType' }
+    tipo: { type: mongoose.Schema.Types.ObjectId, ref: 'CostType' },
+    store: { type: mongoose.Schema.Types.ObjectId, ref: 'Store' }
 })
 
 

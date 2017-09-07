@@ -32,9 +32,10 @@ export class SpeseComponent implements OnInit {
   }
 
   getList(){
-    // this._spesaService.getSpesaList()
-    this._spesaService.getTodaySpesaList()
-    .then(spese => {this.spesaList = spese; })
+    let usr: User = JSON.parse(localStorage.getItem('currUser'));
+    console.log("usr -->" + JSON.stringify(usr));
+    this._spesaService.getTodaySpesaList(usr.store._id)
+    .then(spese => {this.spesaList = spese;  })
     .catch(err => console.log(err));
 
   }
@@ -45,7 +46,8 @@ export class SpeseComponent implements OnInit {
     let usr: User = JSON.parse(localStorage.getItem('currUser'));
     this.message = "";
     tmpSpesa.utente = usr;
-    console.log("tmpSpesa -->" + JSON.stringify(tmpSpesa));
+    tmpSpesa.store = usr.store;
+    // console.log("tmpSpesa -->" + JSON.stringify(tmpSpesa));
     this._spesaService.addSpesa(tmpSpesa)
     .then((data) => {
       if(data.success){

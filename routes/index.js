@@ -7,7 +7,12 @@ router.get('/', function(req, res, next){
 
 router.get('/manage', function(req, res, next){
     
-    res.render('index');
+    res.redirect("/");
+});
+
+router.get('/login', function(req, res, next){
+    
+    res.redirect("/");
 });
 
 module.exports = router;

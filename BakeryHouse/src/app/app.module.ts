@@ -26,6 +26,9 @@ import { KeysPipe } from './keys.pipe';
 import { GestioneUtenteComponent } from './management/gestione-utente/gestione-utente.component';
 import { UserService } from "app/_services/user.service";
 import { UserAddComponent } from './management/gestione-utente/user-add/user-add.component';
+import { GestioneStoreComponent } from './management/gestione-store/gestione-store.component';
+import { StoreAddComponent } from './management/gestione-store/store-add/store-add.component';
+import { StoreService } from "app/_services/store.service";
 
 
 
@@ -62,7 +65,9 @@ export class DemoMaterialModule {}
     ConfirmationDialog,
     KeysPipe,
     GestioneUtenteComponent,
-    UserAddComponent
+    UserAddComponent,
+    GestioneStoreComponent,
+    StoreAddComponent
 
   ],
 
@@ -83,11 +88,12 @@ export class DemoMaterialModule {}
     AuthGuard,
     AuthService,
     SpesaService,
-    UserService
+    UserService,
+    StoreService
 
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SpeseNewComponent, CostTypeAddComponent, ConfirmationDialog]
+  entryComponents: [SpeseNewComponent, CostTypeAddComponent, UserAddComponent, ConfirmationDialog, StoreAddComponent]
 
 })
 

@@ -109,6 +109,9 @@ var AuthService = (function () {
                     console.log(_this.jwtHelper.decodeToken(jresponse.token), _this.jwtHelper.isTokenExpired(jresponse.token));
                     // store username and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('token', jresponse.token);
+                    var user = _this.jwtHelper.decodeToken(localStorage.getItem('token'))._doc;
+                    console.log(JSON.stringify(user));
+                    localStorage.setItem('currUser', JSON.stringify(user));
                 }
                 return jresponse.success;
             }
@@ -182,9 +185,10 @@ var SpesaService = (function () {
     SpesaService.prototype.getSpesaList = function () {
         return this._http.get('api/spese').map(function (data) { return data.json(); }).toPromise();
     };
-    SpesaService.prototype.getTodaySpesaList = function () {
+    SpesaService.prototype.getTodaySpesaList = function (id_store) {
         console.log('================= SpesaService.getTodaySpesaList() =====================');
-        return this._http.get('api/spese/today').map(function (data) { return data.json(); }).toPromise();
+        console.log(id_store);
+        return this._http.get('api/spese/today/' + id_store).map(function (data) { return data.json(); }).toPromise();
     };
     SpesaService.prototype.addSpesa = function (spesa) {
         console.log(JSON.stringify(spesa));
@@ -230,6 +234,55 @@ var _a;
 
 /***/ }),
 
+/***/ "../../../../../src/app/_services/store.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StoreService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var StoreService = (function () {
+    function StoreService(_http) {
+        this._http = _http;
+    }
+    StoreService.prototype.getStoreList = function (onlyActive) {
+        if (onlyActive === void 0) { onlyActive = true; }
+        if (onlyActive) {
+            return this._http.get('api/stores/active').map(function (data) { return data.json(); }).toPromise();
+        }
+        else {
+            return this._http.get('api/stores').map(function (data) { return data.json(); }).toPromise();
+        }
+    };
+    StoreService.prototype.addStore = function (store) {
+        console.log(JSON.stringify(store));
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
+        return this._http.post('api/stores', store, options).map(function (data) { return data.json(); }).toPromise();
+    };
+    return StoreService;
+}());
+StoreService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
+], StoreService);
+
+var _a;
+//# sourceMappingURL=store.service.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/_services/user.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -254,6 +307,12 @@ var UserService = (function () {
     }
     UserService.prototype.getUserList = function () {
         return this._http.get('api/users').map(function (data) { return data.json(); }).toPromise();
+    };
+    UserService.prototype.addUser = function (user) {
+        console.log(JSON.stringify(user));
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
+        return this._http.post('api/users', user, options).map(function (data) { return data.json(); }).toPromise();
     };
     return UserService;
 }());
@@ -427,6 +486,9 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__management_gestione_utente_gestione_utente_component__ = __webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_app_services_user_service__ = __webpack_require__("../../../../../src/app/_services/user.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__management_gestione_utente_user_add_user_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__management_gestione_store_gestione_store_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/gestione-store.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -436,6 +498,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
+
 
 
 
@@ -508,7 +573,9 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_21__confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */],
             __WEBPACK_IMPORTED_MODULE_22__keys_pipe__["a" /* KeysPipe */],
             __WEBPACK_IMPORTED_MODULE_23__management_gestione_utente_gestione_utente_component__["a" /* GestioneUtenteComponent */],
-            __WEBPACK_IMPORTED_MODULE_25__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */]
+            __WEBPACK_IMPORTED_MODULE_25__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */],
+            __WEBPACK_IMPORTED_MODULE_26__management_gestione_store_gestione_store_component__["a" /* GestioneStoreComponent */],
+            __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_12__angular_material__["a" /* MaterialModule */],
@@ -525,10 +592,11 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_4_app_guards_auth_guard__["a" /* AuthGuard */],
             __WEBPACK_IMPORTED_MODULE_5_app_services_auth_service__["a" /* AuthService */],
             __WEBPACK_IMPORTED_MODULE_20_app_services_spesa_service__["a" /* SpesaService */],
-            __WEBPACK_IMPORTED_MODULE_24_app_services_user_service__["a" /* UserService */]
+            __WEBPACK_IMPORTED_MODULE_24_app_services_user_service__["a" /* UserService */],
+            __WEBPACK_IMPORTED_MODULE_28_app_services_store_service__["a" /* StoreService */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]],
-        entryComponents: [__WEBPACK_IMPORTED_MODULE_14__spese_spese_new_spese_new_component__["a" /* SpeseNewComponent */], __WEBPACK_IMPORTED_MODULE_19__management_gestione_spese_cost_type_add_cost_type_add_component__["a" /* CostTypeAddComponent */], __WEBPACK_IMPORTED_MODULE_21__confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */]]
+        entryComponents: [__WEBPACK_IMPORTED_MODULE_14__spese_spese_new_spese_new_component__["a" /* SpeseNewComponent */], __WEBPACK_IMPORTED_MODULE_19__management_gestione_spese_cost_type_add_cost_type_add_component__["a" /* CostTypeAddComponent */], __WEBPACK_IMPORTED_MODULE_25__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */], __WEBPACK_IMPORTED_MODULE_21__confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */]]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_12__angular_material__["g" /* MdIconRegistry */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__angular_material__["g" /* MdIconRegistry */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _b || Object])
 ], AppModule);
@@ -627,6 +695,44 @@ var Cost = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/entity/store.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Store; });
+var Store = (function () {
+    function Store() {
+    }
+    return Store;
+}());
+
+//# sourceMappingURL=store.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/entity/user.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return User; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Ruolo; });
+var User = (function () {
+    function User() {
+    }
+    return User;
+}());
+
+var Ruolo;
+(function (Ruolo) {
+    Ruolo[Ruolo["Dipendente"] = 100] = "Dipendente";
+    Ruolo[Ruolo["StoreManager"] = 50] = "StoreManager";
+    Ruolo[Ruolo["Admin"] = 10] = "Admin";
+    Ruolo[Ruolo["SuperAdmin"] = 1] = "SuperAdmin";
+})(Ruolo || (Ruolo = {}));
+//# sourceMappingURL=user.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/header/header.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -684,19 +790,19 @@ var HeaderComponent = (function () {
         this.auth = auth;
         this.title = 'BakeryHouse!';
         this.jwtHelper = new __WEBPACK_IMPORTED_MODULE_2_angular2_jwt_angular2_jwt__["JwtHelper"]();
-        if (localStorage.getItem('token')) {
+        this.user = JSON.parse(localStorage.getItem('currUser'));
+        /*  if (localStorage.getItem('token')) {
+  
             try {
-                this.user = this.jwtHelper.decodeToken(localStorage.getItem('token'))._doc;
-                console.log(JSON.stringify(this.user));
-                localStorage.setItem('currUser', JSON.stringify(this.user));
+            this.user = this.jwtHelper.decodeToken(localStorage.getItem('token'))._doc;
+            console.log(JSON.stringify(this.user));
+            localStorage.setItem('currUser',JSON.stringify(this.user));
+            }catch (e) {
+              console.error(e);
             }
-            catch (e) {
-                console.error(e);
-            }
-        }
-        else {
-            console.log('Nessun Token');
-        }
+          }else{
+            console.log('Nessun Token')
+          } */
     }
     HeaderComponent.prototype.ngOnInit = function () {
     };
@@ -856,7 +962,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"Ccm-MainContent ng-scope Ccm-LoginMainContent\">\n\n\n  <div class=\"Ccm-LoginContainer\">\n\n    <div class=\"Ccm-LoginImage\"><img alt=\"LOGO\" src=\"./assets/images/Logo.png\"></div>\n\n\n    <form name=\"form\" (ngSubmit)=\"f.form.valid && login()\" #f=\"ngForm\" novalidate>\n      <div class=\"LoginHelpContainer ng-scope\">\n        <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !username.valid }\">\n          <div class=\"Ccm-Login-UserNameContainer\">\n            <!-- <md-icon>person</md-icon> -->\n            <span><md-icon>person</md-icon></span>\n            <input class=\"Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched\" [(ngModel)]=\"model.username\" placeholder=\"Nome Utente\"\n              autocomplete=\"on\" #username=\"ngModel\" name=\"username\" required>\n            <div *ngIf=\"f.submitted && !username.valid\" class=\"help-block\">Username &eacute; obbligatorio</div>\n          </div>\n        </div>\n\n        <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !password.valid }\">\n\n          <div class=\"Ccm-Login-PasswordContainer\">\n            <span><md-icon>lock</md-icon></span>\n            <input id=\"Password\" type=\"password\" class=\"Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched\" [(ngModel)]=\"model.password\"\n              placeholder=\"Password\" #password=\"ngModel\" name=\"password\" required>\n            <div *ngIf=\"f.submitted && !password.valid\" class=\"help-block\">Password &eacute; obbligatorio</div>\n          </div>\n        </div>\n      </div>\n      <div class=\"ProceedContainer ng-scope\">\n        <div class=\"form-group\">\n\n\n          <button [disabled]=\"loading\" class=\"btn btn-primary Ccm-Button-Primary btn btn-default BrandedBackgroundGradientImage LoginButton ng-binding\">Accedi</button>\n        </div>\n\n        <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\n        />\n      </div>\n      <div *ngIf=\"error\" class=\"alert alert-danger\">{{error}}</div>\n    </form>\n  </div>\n\n\n</div>\n"
+module.exports = "<div class=\"Ccm-MainContent ng-scope Ccm-LoginMainContent\">\n\n\n  <div class=\"Ccm-LoginContainer\">\n\n    <div class=\"Ccm-LoginImage\"><img alt=\"LOGO\" src=\"./assets/images/Logo.png\"></div>\n\n\n    <form name=\"form\" (ngSubmit)=\"f.form.valid && login()\" #f=\"ngForm\" novalidate>\n      <div class=\"LoginHelpContainer ng-scope\">\n        <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !username.valid }\">\n          <div class=\"Ccm-Login-UserNameContainer\">\n            <!-- <md-icon>person</md-icon> -->\n            <span><md-icon>person</md-icon></span>\n            <input class=\"Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched\" [(ngModel)]=\"model.username\" placeholder=\"Nome Utente\"\n              autocomplete=\"on\" #username=\"ngModel\" name=\"username\" required>\n            <div *ngIf=\"f.submitted && !username.valid\" class=\"help-block\">Username &eacute; obbligatorio</div>\n          </div>\n        </div>\n\n        <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !password.valid }\">\n\n          <div class=\"Ccm-Login-PasswordContainer\">\n            <span><md-icon>lock</md-icon></span>\n            <input id=\"Password\" type=\"password\" class=\"Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched\" [(ngModel)]=\"model.password\"\n              placeholder=\"Password\" #password=\"ngModel\" name=\"password\" required>\n            <div *ngIf=\"f.submitted && !password.valid\" class=\"help-block\">Password &eacute; obbligatorio</div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"form-group\">\n        <div class=\"ProceedContainer ng-scope\">\n\n          <button [disabled]=\"loading\" class=\"btn btn-primary Ccm-Button-Primary btn btn-default BrandedBackgroundGradientImage LoginButton ng-binding\">Accedi</button>\n        </div>\n\n        <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\n        />\n      </div>\n      <div *ngIf=\"error\" class=\"alert alert-danger\">{{error}}</div>\n    </form>\n  </div>\n\n\n</div>\n"
 
 /***/ }),
 
@@ -1165,6 +1271,172 @@ var _a, _b, _c, _d;
 
 /***/ }),
 
+/***/ "../../../../../src/app/management/gestione-store/gestione-store.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/management/gestione-store/gestione-store.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\n    <div class=\"alert alert-danger\">{{message}}</div>\n    <md-card class=\"example-card\">\n      <md-card-header>\n          <h3>Punti Vendita</h3>\n        <span class=\"span-fill-remaining\"></span>\n        <div class=\"ProceedContainer\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\n      </md-card-header>\n      <md-card-content>\n        <div style=\"overflow:auto\">\n          <table class=\"table table-bordered table-striped\">\n            <thead>\n              <tr>\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\n                <td style=\"text-align : center\"><strong>Indirizzo</strong></td>\n                <td style=\"text-align : center\"><strong>P.iva</strong></td>\n                <td colspan=\"2\"></td>\n\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let store of stores\">\n                <td>{{store.nome}}</td>\n                <td>{{store.indirizzo}}</td>\n                <td>{{store.piva}}</td>\n\n\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                    <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                  </td>\n                  <td style=\"text-align : center; padding: 0px;\" >\n                    <button md-icon-button ><md-icon class=\"md-24\" >delete</md-icon></button>\n                  </td>\n\n                </tr>\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                  <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                </td>\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\n                  <button md-icon-button (click)=\"openConfirmationDelete(cat._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                </td>\n\n              </tr> -->\n\n            </tbody>\n          </table>\n        </div>\n      </md-card-content>\n    </md-card>\n    <div>{{statusMessage}}</div>\n  </div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/management/gestione-store/gestione-store.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GestioneStoreComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_management_gestione_store_store_add_store_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var GestioneStoreComponent = (function () {
+    function GestioneStoreComponent(_storeService, dialog) {
+        this._storeService = _storeService;
+        this.dialog = dialog;
+    }
+    GestioneStoreComponent.prototype.ngOnInit = function () {
+        this.getList();
+    };
+    GestioneStoreComponent.prototype.getList = function () {
+        var _this = this;
+        this._storeService.getStoreList(false)
+            .then(function (stores) { _this.stores = stores; })
+            .catch(function (err) { return console.log(err); });
+    };
+    GestioneStoreComponent.prototype.openDialog = function () {
+        var _this = this;
+        this.message = "";
+        this.dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_2_app_management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */]);
+        this.dialogRef.afterClosed().subscribe(function (result) {
+            console.log(result);
+            if (result != "cancel") {
+                console.log(_this.dialogRef.componentInstance.store);
+                _this.create(_this.dialogRef.componentInstance.store);
+                _this.getList();
+            }
+        });
+    };
+    GestioneStoreComponent.prototype.create = function (store) {
+        this._storeService.addStore(store);
+    };
+    return GestioneStoreComponent;
+}());
+GestioneStoreComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'storeMngmt',
+        template: __webpack_require__("../../../../../src/app/management/gestione-store/gestione-store.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/management/gestione-store/gestione-store.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MdDialog */]) === "function" && _b || Object])
+], GestioneStoreComponent);
+
+var _a, _b;
+//# sourceMappingURL=gestione-store.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/management/gestione-store/store-add/store-add.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".example-full-width {\r\n  width: 100%;\r\n}\r\n\r\n.example-form {\r\n  width: 500px;\r\n}\r\n\r\nmd-select {\r\n  /* display: inline-block;\r\n  /margin-top: 2px; */\r\n  width: 100%;\r\n  padding-bottom: 26px;\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/management/gestione-store/store-add/store-add.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h3 md-dialog-title>\n    Aggiungi</h3>\n  <form name=\"form\" (ngSubmit)=\"f.form.valid && create()\" #f=\"ngForm\" novalidate>\n\n    <div md-dialog-content>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"store.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required>\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"store.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\"\n          required>\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n          <input mdInput [(ngModel)]=\"store.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" required>\n        </md-input-container>\n\n\n      <md-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"store\" >Attivo</md-checkbox>\n\n\n    </div>\n    <div md-dialog-actions>\n      <div class=\"ProceedContainer ng-scope\">\n        <button md-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\n      </div>\n      <span class=\"span-fill-remaining\"></span>\n      <div class=\"ProceedContainer ng-scope\">\n        <button class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\n      </div>\n\n    </div>\n\n  </form>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/management/gestione-store/store-add/store-add.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StoreAddComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_entity_store__ = __webpack_require__("../../../../../src/app/entity/store.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var StoreAddComponent = (function () {
+    function StoreAddComponent(dialogRef) {
+        this.dialogRef = dialogRef;
+        this.store = new __WEBPACK_IMPORTED_MODULE_1_app_entity_store__["a" /* Store */]();
+    }
+    StoreAddComponent.prototype.ngOnInit = function () {
+    };
+    StoreAddComponent.prototype.create = function () {
+        console.log(this + "=" + JSON.stringify(this.store));
+        this.dialogRef.close();
+    };
+    ;
+    return StoreAddComponent;
+}());
+StoreAddComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-store-add',
+        template: __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["e" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["e" /* MdDialogRef */]) === "function" && _a || Object])
+], StoreAddComponent);
+
+var _a;
+//# sourceMappingURL=store-add.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/management/gestione-utente/gestione-utente.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1186,7 +1458,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-utente/gestione-utente.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\n    <div class=\"alert alert-danger\">{{message}}</div>\n    <md-card class=\"example-card\">\n      <md-card-header>\n          <h3>Utenti</h3>\n        <span class=\"span-fill-remaining\"></span>\n        <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button></div>\n      </md-card-header>\n      <md-card-content>\n        <div style=\"overflow:auto\">\n          <table class=\"table table-bordered table-striped\">\n            <thead>\n              <tr>\n                <td style=\"text-align : center\"><strong>User ID</strong></td>\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\n                <td style=\"text-align : center\"><strong>Cognome</strong></td>\n                <td style=\"text-align : center\"><strong>Ruolo</strong></td>\n                <td style=\"text-align : center\"><strong>e-mail</strong></td>\n                <td style=\"text-align : center\"><strong>Punto Vendita</strong></td>\n                <td colspan=\"2\"></td>\n\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let user of users\">\n                <td>{{user.username}}</td>\n                <td>{{user.name}}</td>\n                <td>{{user.surname}}</td>\n                <td>{{user.ruolo}}</td>\n                <td>{{user.email}}</td>\n                <td>{{user.puntoVendita}}</td>\n\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                    <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                  </td>\n                  <td style=\"text-align : center; padding: 0px;\" >\n                    <button md-icon-button ><md-icon class=\"md-24\" >delete</md-icon></button>\n                  </td>\n\n                </tr>\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                  <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                </td>\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\n                  <button md-icon-button (click)=\"openConfirmationDelete(cat._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                </td>\n\n              </tr> -->\n\n            </tbody>\n          </table>\n        </div>\n      </md-card-content>\n    </md-card>\n    <div>{{statusMessage}}</div>\n  </div>\n"
+module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\n    <div class=\"alert alert-danger\">{{message}}</div>\n    <md-card class=\"example-card\">\n      <md-card-header>\n          <h3>Utenti</h3>\n        <span class=\"span-fill-remaining\"></span>\n        <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\n      </md-card-header>\n      <md-card-content>\n        <div style=\"overflow:auto\">\n          <table class=\"table table-bordered table-striped\">\n            <thead>\n              <tr>\n                <td style=\"text-align : center\"><strong>User ID</strong></td>\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\n                <td style=\"text-align : center\"><strong>Cognome</strong></td>\n                <td style=\"text-align : center\"><strong>Ruolo</strong></td>\n                <td style=\"text-align : center\"><strong>e-mail</strong></td>\n                <td style=\"text-align : center\"><strong>Punto Vendita</strong></td>\n                <td colspan=\"2\"></td>\n\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let user of users\">\n                <td>{{user.username}}</td>\n                <td>{{user.name}}</td>\n                <td>{{user.surname}}</td>\n                <td>{{user.ruolo}}</td>\n                <td>{{user.email}}</td>\n                <td>{{user.store.nome}}</td>\n\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                    <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                  </td>\n                  <td style=\"text-align : center; padding: 0px;\" >\n                    <button md-icon-button ><md-icon class=\"md-24\" >delete</md-icon></button>\n                  </td>\n\n                </tr>\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                  <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                </td>\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\n                  <button md-icon-button (click)=\"openConfirmationDelete(cat._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                </td>\n\n              </tr> -->\n\n            </tbody>\n          </table>\n        </div>\n      </md-card-content>\n    </md-card>\n    <div>{{statusMessage}}</div>\n  </div>\n"
 
 /***/ }),
 
@@ -1197,6 +1469,8 @@ module.exports = "<div style=\"display: inline-block; text-align: left; width: 1
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GestioneUtenteComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__ = __webpack_require__("../../../../../src/app/_services/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_management_gestione_utente_user_add_user_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1208,9 +1482,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
 var GestioneUtenteComponent = (function () {
-    function GestioneUtenteComponent(_userService) {
+    function GestioneUtenteComponent(_userService, dialog) {
         this._userService = _userService;
+        this.dialog = dialog;
     }
     GestioneUtenteComponent.prototype.ngOnInit = function () {
         this.getList();
@@ -1221,18 +1498,33 @@ var GestioneUtenteComponent = (function () {
             .then(function (users) { _this.users = users; })
             .catch(function (err) { return console.log(err); });
     };
+    GestioneUtenteComponent.prototype.create = function (user) {
+        this._userService.addUser(user);
+    };
+    GestioneUtenteComponent.prototype.openDialog = function () {
+        var _this = this;
+        this.message = "";
+        this.dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_3_app_management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */]);
+        this.dialogRef.afterClosed().subscribe(function (result) {
+            console.log(result);
+            if (result != "cancel") {
+                _this.create(_this.dialogRef.componentInstance.user);
+                _this.getList();
+            }
+        });
+    };
     return GestioneUtenteComponent;
 }());
 GestioneUtenteComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'app-gestione-utente',
+        selector: 'userMngmt',
         template: __webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["c" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["c" /* MdDialog */]) === "function" && _b || Object])
 ], GestioneUtenteComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=gestione-utente.component.js.map
 
 /***/ }),
@@ -1245,7 +1537,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".example-full-width {\r\n  width: 100%;\r\n}\r\n\r\n.example-form {\r\n  width: 500px;\r\n}\r\n\r\nmd-select {\r\n  /* display: inline-block;\r\n  /margin-top: 2px; */\r\n  width: 100%;\r\n  padding-bottom: 26px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1258,7 +1550,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-utente/user-add/user-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  user-add works!\n</p>\n"
+module.exports = "<h3 md-dialog-title>\n  Aggiungi</h3>\n<form name=\"form\" (ngSubmit)=\"create()\"  novalidate >\n\n  <div md-dialog-content>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"user.name\" placeholder=\"Nome\" autocomplete=\"off\" #name=\"ngModel\" name=\"name\" required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"user.surname\" placeholder=\"Cognome\" autocomplete=\"off\" #surname=\"ngModel\" name=\"surname\"\n        required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"user.username\" placeholder=\"Username\" autocomplete=\"off\" #username=\"ngModel\" name=\"username\"\n        required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"user.password\"  type=\"password\" placeholder=\"Password\" autocomplete=\"off\" #password=\"ngModel\" name=\"password\"\n          required>\n      </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"user.email\"  placeholder=\"Email\" autocomplete=\"off\" name=\"email\" required>\n    </md-input-container>\n\n    <md-select placeholder=\"Ruolo\" [(ngModel)]=\"user.ruolo\" #role=\"ngModel\" name=\"role\" required>\n      <md-option *ngFor=\"let ruolo of ruoli | keys\" [value]=\"ruolo.value\">\n        {{ruolo.value}}\n      </md-option>\n    </md-select>\n\n    <md-select placeholder=\"Punto Vendita\" [(ngModel)]=\"user.store\" #nome=\"ngModel\" name=\"store\" required>\n      <md-option *ngFor=\"let store of stores\" [value]=\"store\">\n        {{store.nome}} - {{store.indirizzo}}\n      </md-option>\n    </md-select>\n\n\n\n\n    <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"active\" [(ngModel)]=\"user.active\" [checked]=\"user.active\"\n      [value]=\"user.active\">Attivo</md-checkbox>\n\n\n  </div>\n  <div md-dialog-actions>\n    <div class=\"ProceedContainer ng-scope\">\n      <button md-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\n    </div>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\">\n      <button class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\n    </div>\n\n  </div>\n\n</form>\n"
 
 /***/ }),
 
@@ -1268,6 +1560,9 @@ module.exports = "<p>\n  user-add works!\n</p>\n"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserAddComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_entity_user__ = __webpack_require__("../../../../../src/app/entity/user.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1278,22 +1573,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var UserAddComponent = (function () {
-    function UserAddComponent() {
+    function UserAddComponent(_storeService, dialogRef) {
+        this._storeService = _storeService;
+        this.dialogRef = dialogRef;
+        this.user = new __WEBPACK_IMPORTED_MODULE_1_app_entity_user__["b" /* User */]();
+        this.ruoli = __WEBPACK_IMPORTED_MODULE_1_app_entity_user__["a" /* Ruolo */];
     }
     UserAddComponent.prototype.ngOnInit = function () {
+        this.getActiveStoresList();
+    };
+    UserAddComponent.prototype.getActiveStoresList = function () {
+        var _this = this;
+        this._storeService.getStoreList(true)
+            .then(function (stores) { _this.stores = stores; })
+            .catch(function (err) { return console.log(err); });
+    };
+    UserAddComponent.prototype.create = function () {
+        console.log("UserAddComponent=" + JSON.stringify(this.user));
+        this.dialogRef.close();
     };
     return UserAddComponent;
 }());
 UserAddComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'app-user-add',
         template: __webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["e" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["e" /* MdDialogRef */]) === "function" && _b || Object])
 ], UserAddComponent);
 
+var _a, _b;
 //# sourceMappingURL=user-add.component.js.map
 
 /***/ }),
@@ -1319,7 +1632,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/management.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"Ccm-MainContentView ng-scope\">\n<md-tab-group style=\"font-size:12px\">\n  <md-tab id=\"tabSpeseCat\" label=\"Gestione Spese\">\n    <speseMngmt></speseMngmt>\n  </md-tab>\n  <md-tab label=\"Utenti\">\n      <app-gestione-utente></app-gestione-utente>\n  </md-tab>\n</md-tab-group>\n</div>\n"
+module.exports = "<div class=\"Ccm-MainContentView ng-scope\">\n<md-tab-group style=\"font-size:12px\">\n  <md-tab id=\"tabSpeseCat\" label=\"Gestione Spese\">\n    <speseMngmt></speseMngmt>\n  </md-tab>\n  <md-tab label=\"Utenti\">\n      <userMngmt></userMngmt>\n  </md-tab>\n  <md-tab label=\"Punti Vendita\">\n      <storeMngmt></storeMngmt>\n  </md-tab>\n</md-tab-group>\n</div>\n"
 
 /***/ }),
 
@@ -1624,8 +1937,9 @@ var SpeseComponent = (function () {
     };
     SpeseComponent.prototype.getList = function () {
         var _this = this;
-        // this._spesaService.getSpesaList()
-        this._spesaService.getTodaySpesaList()
+        var usr = JSON.parse(localStorage.getItem('currUser'));
+        console.log("usr -->" + JSON.stringify(usr));
+        this._spesaService.getTodaySpesaList(usr.store._id)
             .then(function (spese) { _this.spesaList = spese; })
             .catch(function (err) { return console.log(err); });
     };
@@ -1636,7 +1950,8 @@ var SpeseComponent = (function () {
         var usr = JSON.parse(localStorage.getItem('currUser'));
         this.message = "";
         tmpSpesa.utente = usr;
-        console.log("tmpSpesa -->" + JSON.stringify(tmpSpesa));
+        tmpSpesa.store = usr.store;
+        // console.log("tmpSpesa -->" + JSON.stringify(tmpSpesa));
         this._spesaService.addSpesa(tmpSpesa)
             .then(function (data) {
             if (data.success) {

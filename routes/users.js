@@ -13,7 +13,7 @@ var User = require('../models/User');
 router.post('/auth', (req, res) => {
   User.findOne({
     username: req.body.username
-  }, function(err, user) {
+  }).populate('store').exec(function(err, user) {
     if (err) throw err;
 
     if (!user) {
@@ -48,14 +48,14 @@ router.post('/auth', (req, res) => {
 
 // GET all Users
 router.get('/', function(req, res) {
-  User.find({}, function(err, users) {
+  User.find().populate('store').exec({}, function(err, users) {
     res.json(users);
   });
 });
 
 // GET single User by id
 router.get('/:id', function(req, res, next){
-    User.findOne({_id: mongoosedb.ObjectId(req.params.id)}, function(err, userDocs){
+    User.findOne({_id: mongoosedb.ObjectId(req.params.id)}).populate('store').exec(function(err, userDocs){
             if(err){ 
                 res.send(err);
             }
@@ -93,6 +93,36 @@ router.post('/register', function(req, res) {
       });
     });
   }
+});
+
+
+router.post('/', function(req, res, next ) {
+  
+  /*  if (!req.body.nome || !req.body.piva) {
+    res.json({
+      success: false,
+      message: 'Please enter NOME and P.IVA.'
+    });
+  } else {  */
+    
+    console.log("USER  DA AGGIUNGERE: " + JSON.stringify(req.body));
+    // Attempt to save the spesa
+    User.create(req.body,function(err, data) {
+      if (err) {
+        console.log(err);
+        return res.json({
+          success: false,
+          message: 'Utente non aggiunto.',
+          data: data
+        });
+      }
+      res.json({
+        success: true,
+        message: 'Utente aggiunto con successo',
+        data: data
+      });
+    });
+  // }
 });
 
 module.exports = router;
