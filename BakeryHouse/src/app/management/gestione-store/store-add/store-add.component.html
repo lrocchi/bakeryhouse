@@ -1,0 +1,34 @@
+<h3 md-dialog-title>
+    Aggiungi</h3>
+  <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
+
+    <div md-dialog-content>
+
+      <md-input-container class="example-full-width">
+        <input mdInput [(ngModel)]="store.nome" placeholder="Nome" autocomplete="off" #nome="ngModel" name="nome" required>
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <input mdInput [(ngModel)]="store.indirizzo" placeholder="Indirizzo" autocomplete="off" #indirizzo="ngModel" name="indirizzo"
+          required>
+      </md-input-container>
+      <md-input-container class="example-full-width">
+          <input mdInput [(ngModel)]="store.piva" placeholder="Partita Iva" autocomplete="off" #piva="ngModel" name="piva" required>
+        </md-input-container>
+
+
+      <md-checkbox class="example-margin" #active="ngModel" name="active" [(ngModel)]="store" >Attivo</md-checkbox>
+
+
+    </div>
+    <div md-dialog-actions>
+      <div class="ProceedContainer ng-scope">
+        <button md-dialog-close="cancel" class="btn BKHBrandedButton Ccm-Button-Primary">Annulla</button>
+      </div>
+      <span class="span-fill-remaining"></span>
+      <div class="ProceedContainer ng-scope">
+        <button class="btn BKHBrandedButton Ccm-Button-Primary">Aggiungi</button>
+      </div>
+
+    </div>
+
+  </form>

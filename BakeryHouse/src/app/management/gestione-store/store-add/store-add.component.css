@@ -1,0 +1,14 @@
+.example-full-width {
+  width: 100%;
+}
+
+.example-form {
+  width: 500px;
+}
+
+md-select {
+  /* display: inline-block;
+  /margin-top: 2px; */
+  width: 100%;
+  padding-bottom: 26px;
+}
