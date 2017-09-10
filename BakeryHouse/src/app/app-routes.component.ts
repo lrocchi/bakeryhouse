@@ -9,7 +9,12 @@ import { ManagementComponent } from "app/management/management.component";
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'manage', component: ManagementComponent},
+  {
+    path: 'manage',
+    children: [
+      { path: '', component: ManagementComponent },
+    ]
+  },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];

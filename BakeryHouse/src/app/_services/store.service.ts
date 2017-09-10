@@ -27,5 +27,13 @@ export class StoreService {
 
   }
 
+  public updateStore(store: Store){
+
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this._http.put('api/stores/' + store._id, store, options).map(data => data.json()).toPromise();
+  }
+
 
 }

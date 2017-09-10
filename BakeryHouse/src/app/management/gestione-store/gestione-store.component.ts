@@ -3,6 +3,7 @@ import { Store } from "app/entity/store";
 import { StoreService } from "app/_services/store.service";
 import { StoreAddComponent } from "app/management/gestione-store/store-add/store-add.component";
 import { MdDialogRef, MdDialog } from "@angular/material";
+import { EditDialogComponent } from "app/edit-dialog/edit-dialog.component";
 
 @Component({
   selector: 'storeMngmt',
@@ -10,12 +11,16 @@ import { MdDialogRef, MdDialog } from "@angular/material";
   styleUrls: ['./gestione-store.component.css']
 })
 export class GestioneStoreComponent implements OnInit {
+  // constant for swipe action: left or right
+  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
   public stores: Array<Store>;
   public message: string;
   public statusMessage: string;
 
   dialogRef: MdDialogRef<StoreAddComponent>;
+  editDialog: MdDialogRef<EditDialogComponent>;
+
 
 
 
@@ -41,7 +46,6 @@ export class GestioneStoreComponent implements OnInit {
       console.log(result);
 
       if (result != "cancel") {
-        console.log(this.dialogRef.componentInstance.store);
         this.create(this.dialogRef.componentInstance.store);
         this.getList();
       }
@@ -51,6 +55,29 @@ export class GestioneStoreComponent implements OnInit {
 
   create(store: Store) {
     this._storeService.addStore(store);
+  }
+
+
+  openEditDialog(store: Store) {
+    /**
+     * get Store from db
+     */
+    console.log("STORE ID TO MOD ==>" + JSON.stringify(store));
+
+
+    this.editDialog = this.dialog.open(EditDialogComponent, {
+      disableClose: false
+    });
+    this.editDialog.componentInstance.storeObj = store;
+
+    this.editDialog.afterClosed().subscribe(result => {
+      if (result) {
+        console.log("opeEditDialog result: " + result);
+        this._storeService.updateStore(this.editDialog.componentInstance.storeObj);
+        this.getList();
+      }
+      this.editDialog = null;
+    });
   }
 
 }

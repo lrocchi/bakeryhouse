@@ -29,6 +29,7 @@ import { UserAddComponent } from './management/gestione-utente/user-add/user-add
 import { GestioneStoreComponent } from './management/gestione-store/gestione-store.component';
 import { StoreAddComponent } from './management/gestione-store/store-add/store-add.component';
 import { StoreService } from "app/_services/store.service";
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 
 
 
@@ -67,7 +68,8 @@ export class DemoMaterialModule {}
     GestioneUtenteComponent,
     UserAddComponent,
     GestioneStoreComponent,
-    StoreAddComponent
+    StoreAddComponent,
+    EditDialogComponent
 
   ],
 
@@ -93,7 +95,7 @@ export class DemoMaterialModule {}
 
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SpeseNewComponent, CostTypeAddComponent, UserAddComponent, ConfirmationDialog, StoreAddComponent]
+  entryComponents: [SpeseNewComponent, CostTypeAddComponent, UserAddComponent, EditDialogComponent, ConfirmationDialog, StoreAddComponent]
 
 })
 

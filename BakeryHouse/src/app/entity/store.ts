@@ -5,5 +5,6 @@ export class Store {
   nome: string;
   indirizzo: string;
   piva: string;
+  active: boolean = true;
 
 }

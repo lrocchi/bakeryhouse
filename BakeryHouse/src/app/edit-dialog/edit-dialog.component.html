@@ -1,0 +1,43 @@
+<h1 md-dialog-title>Modifica</h1>
+
+
+
+<div md-dialog-content *ngIf="storeObj != null">
+
+
+  <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+
+        <div md-dialog-content>
+
+          <md-input-container class="example-full-width">
+            <input mdInput [(ngModel)]="storeObj.nome" placeholder="Nome" autocomplete="off" #nome="ngModel" name="nome" required value="storeObj.nome" >
+          </md-input-container>
+          <md-input-container class="example-full-width">
+            <input mdInput [(ngModel)]="storeObj.indirizzo" placeholder="Indirizzo" autocomplete="off" #indirizzo="ngModel" name="indirizzo" value="storeObj.indirizzo"
+              required>
+          </md-input-container>
+          <md-input-container class="example-full-width">
+              <input mdInput [(ngModel)]="storeObj.piva" placeholder="Partita Iva" autocomplete="off" #piva="ngModel" name="piva" value="storeObj.piva" required>
+            </md-input-container>
+
+
+          <md-checkbox class="example-margin" #active="ngModel" name="active" [(ngModel)]="storeObj.active" [checked] = "storeObj.active" >Attivo</md-checkbox>
+
+
+        </div>
+
+
+      </form>
+
+</div>
+
+<div md-dialog-content *ngIf="storeObj == null">NULLO</div>
+
+
+
+
+
+<div md-dialog-actions>
+  <button md-button style="color: #fff;background-color: #7fa372;" (click)="dialogRef.close(true)">Confermo</button>
+  <button md-button (click)="dialogRef.close(false)">Annulla</button>
+</div>

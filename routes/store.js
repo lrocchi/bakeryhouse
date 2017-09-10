@@ -6,49 +6,70 @@ var Store = require('../models/Store');
 
 
 // GET all Stores
-router.get('/', function(req, res) {
-    Store.find({}, function(err, users) {
-      res.json(users);
-    });
+router.get('/', function (req, res) {
+  Store.find({}, function (err, users) {
+    res.json(users);
   });
+});
 
-  // GET ONLY active Store
+// GET ONLY active Store
 router.get('/active', function (req, res, next) {
-    Store.where("active").equals(true).exec(function (err, costTypeDoc) {
-      console.log(costTypeDoc);
-      return res.json(costTypeDoc);
-    });
+  Store.where("active").equals(true).exec(function (err, costTypeDoc) {
+    console.log(costTypeDoc);
+    return res.json(costTypeDoc);
   });
+});
 
 
-  router.post('/', function(req, res, next ) {
-    
-     if (!req.body.nome || !req.body.piva) {
-      res.json({
-        success: false,
-        message: 'Please enter NOME and P.IVA.'
-      });
-    } else { 
-      
-      console.log("STORE  DA AGGIUNGERE: " + JSON.stringify(req.body));
-      // Attempt to save the spesa
-      Store.create(req.body,function(err, data) {
-        if (err) {
-          console.log(err);
-          return res.json({
-            success: false,
-            message: 'Punto vendita non aggiunto.',
-            data: data
-          });
-        }
-        res.json({
-          success: true,
-          message: 'Punto vendita aggiunto con successo',
+router.post('/', function (req, res, next) {
+
+  if (!req.body.nome || !req.body.piva) {
+    res.json({
+      success: false,
+      message: 'Please enter NOME and P.IVA.'
+    });
+  } else {
+
+    console.log("STORE  DA AGGIUNGERE: " + JSON.stringify(req.body));
+    // Attempt to save the spesa
+    Store.create(req.body, function (err, data) {
+      if (err) {
+        console.log(err);
+        return res.json({
+          success: false,
+          message: 'Punto vendita non aggiunto.',
           data: data
         });
+      }
+      res.json({
+        success: true,
+        message: 'Punto vendita aggiunto con successo',
+        data: data
+      });
+    });
+  }
+});
+
+router.put('/:id', function (req, res) {
+  var id = req.params.id;
+  var obj = req.body;
+  Store.findByIdAndUpdate(id, obj, function (err, data) {
+    if (err) {
+      console.log(err);
+      return res.json({
+        success: false,
+        message: 'Punto vendita non aggiunto.',
+        data: data
       });
     }
+    res.json({
+      success: true,
+      message: 'Punto vendita aggiunto con successo',
+      data: data
+    });
   });
 
+
+});
 
 module.exports = router;

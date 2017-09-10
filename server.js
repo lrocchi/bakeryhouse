@@ -29,7 +29,8 @@ app.use(express.static(path.join(__dirname,'BakeryHouse/dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/', index);
+
+ app.use('/', index);
 /* app.use('/login', index);
 app.use('/manage', index); */
 

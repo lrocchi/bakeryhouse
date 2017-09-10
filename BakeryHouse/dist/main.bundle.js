@@ -271,6 +271,11 @@ var StoreService = (function () {
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
         return this._http.post('api/stores', store, options).map(function (data) { return data.json(); }).toPromise();
     };
+    StoreService.prototype.updateStore = function (store) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
+        return this._http.put('api/stores/' + store._id, store, options).map(function (data) { return data.json(); }).toPromise();
+    };
     return StoreService;
 }());
 StoreService = __decorate([
@@ -352,7 +357,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var appRoutes = [
     { path: 'login', component: __WEBPACK_IMPORTED_MODULE_2_app_login_login_component__["a" /* LoginComponent */] },
     { path: '', component: __WEBPACK_IMPORTED_MODULE_4_app_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_3_app_guards_auth_guard__["a" /* AuthGuard */]] },
-    { path: 'manage', component: __WEBPACK_IMPORTED_MODULE_5_app_management_management_component__["a" /* ManagementComponent */] },
+    {
+        path: 'manage',
+        children: [
+            { path: '', component: __WEBPACK_IMPORTED_MODULE_5_app_management_management_component__["a" /* ManagementComponent */] },
+        ]
+    },
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];
@@ -489,6 +499,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__management_gestione_store_gestione_store_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/gestione-store.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -498,6 +509,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -575,7 +587,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_23__management_gestione_utente_gestione_utente_component__["a" /* GestioneUtenteComponent */],
             __WEBPACK_IMPORTED_MODULE_25__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */],
             __WEBPACK_IMPORTED_MODULE_26__management_gestione_store_gestione_store_component__["a" /* GestioneStoreComponent */],
-            __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */]
+            __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */],
+            __WEBPACK_IMPORTED_MODULE_29__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_12__angular_material__["a" /* MaterialModule */],
@@ -596,7 +609,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_28_app_services_store_service__["a" /* StoreService */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]],
-        entryComponents: [__WEBPACK_IMPORTED_MODULE_14__spese_spese_new_spese_new_component__["a" /* SpeseNewComponent */], __WEBPACK_IMPORTED_MODULE_19__management_gestione_spese_cost_type_add_cost_type_add_component__["a" /* CostTypeAddComponent */], __WEBPACK_IMPORTED_MODULE_25__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */], __WEBPACK_IMPORTED_MODULE_21__confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */]]
+        entryComponents: [__WEBPACK_IMPORTED_MODULE_14__spese_spese_new_spese_new_component__["a" /* SpeseNewComponent */], __WEBPACK_IMPORTED_MODULE_19__management_gestione_spese_cost_type_add_cost_type_add_component__["a" /* CostTypeAddComponent */], __WEBPACK_IMPORTED_MODULE_25__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */], __WEBPACK_IMPORTED_MODULE_29__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */], __WEBPACK_IMPORTED_MODULE_21__confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */]]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_12__angular_material__["g" /* MdIconRegistry */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__angular_material__["g" /* MdIconRegistry */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _b || Object])
 ], AppModule);
@@ -647,6 +660,70 @@ ConfirmationDialog = __decorate([
 
 var _a;
 //# sourceMappingURL=confirmation-dialog.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/edit-dialog/edit-dialog.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/edit-dialog/edit-dialog.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h1 md-dialog-title>Modifica</h1>\n\n\n\n<div md-dialog-content *ngIf=\"storeObj != null\">\n\n\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\n\n        <div md-dialog-content>\n\n          <md-input-container class=\"example-full-width\">\n            <input mdInput [(ngModel)]=\"storeObj.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required value=\"storeObj.nome\" >\n          </md-input-container>\n          <md-input-container class=\"example-full-width\">\n            <input mdInput [(ngModel)]=\"storeObj.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\" value=\"storeObj.indirizzo\"\n              required>\n          </md-input-container>\n          <md-input-container class=\"example-full-width\">\n              <input mdInput [(ngModel)]=\"storeObj.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" value=\"storeObj.piva\" required>\n            </md-input-container>\n\n\n          <md-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"storeObj.active\" [checked] = \"storeObj.active\" >Attivo</md-checkbox>\n\n\n        </div>\n\n\n      </form>\n\n</div>\n\n<div md-dialog-content *ngIf=\"storeObj == null\">NULLO</div>\n\n\n\n\n\n<div md-dialog-actions>\n  <button md-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\n  <button md-button (click)=\"dialogRef.close(false)\">Annulla</button>\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/edit-dialog/edit-dialog.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditDialogComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var EditDialogComponent = (function () {
+    function EditDialogComponent(dialogRef) {
+        this.dialogRef = dialogRef;
+        this.storeObj = null;
+    }
+    return EditDialogComponent;
+}());
+EditDialogComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-edit-dialog',
+        template: __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MdDialogRef */]) === "function" && _a || Object])
+], EditDialogComponent);
+
+var _a;
+//# sourceMappingURL=edit-dialog.component.js.map
 
 /***/ }),
 
@@ -702,6 +779,7 @@ var Cost = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Store; });
 var Store = (function () {
     function Store() {
+        this.active = true;
     }
     return Store;
 }());
@@ -1292,7 +1370,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-store/gestione-store.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\n    <div class=\"alert alert-danger\">{{message}}</div>\n    <md-card class=\"example-card\">\n      <md-card-header>\n          <h3>Punti Vendita</h3>\n        <span class=\"span-fill-remaining\"></span>\n        <div class=\"ProceedContainer\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\n      </md-card-header>\n      <md-card-content>\n        <div style=\"overflow:auto\">\n          <table class=\"table table-bordered table-striped\">\n            <thead>\n              <tr>\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\n                <td style=\"text-align : center\"><strong>Indirizzo</strong></td>\n                <td style=\"text-align : center\"><strong>P.iva</strong></td>\n                <td colspan=\"2\"></td>\n\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let store of stores\">\n                <td>{{store.nome}}</td>\n                <td>{{store.indirizzo}}</td>\n                <td>{{store.piva}}</td>\n\n\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                    <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                  </td>\n                  <td style=\"text-align : center; padding: 0px;\" >\n                    <button md-icon-button ><md-icon class=\"md-24\" >delete</md-icon></button>\n                  </td>\n\n                </tr>\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                  <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                </td>\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\n                  <button md-icon-button (click)=\"openConfirmationDelete(cat._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                </td>\n\n              </tr> -->\n\n            </tbody>\n          </table>\n        </div>\n      </md-card-content>\n    </md-card>\n    <div>{{statusMessage}}</div>\n  </div>\n"
+module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\n    <div class=\"alert alert-danger\">{{message}}</div>\n    <md-card class=\"example-card\">\n      <md-card-header>\n          <h3>Punti Vendita</h3>\n        <span class=\"span-fill-remaining\"></span>\n        <div class=\"ProceedContainer\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\n      </md-card-header>\n      <md-card-content>\n        <div style=\"overflow:auto\">\n          <table class=\"table table-bordered table-striped\">\n            <thead>\n              <tr>\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\n                <td style=\"text-align : center\"><strong>Indirizzo</strong></td>\n                <td style=\"text-align : center\"><strong>P.iva</strong></td>\n                <td colspan=\"2\"></td>\n\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let store of stores\">\n                <td>{{store.nome}}</td>\n                <td>{{store.indirizzo}}</td>\n                <td>{{store.piva}}</td>\n\n\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                    <button md-icon-button (click)=\"openEditDialog(store)\"><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                  </td>\n                  <td style=\"text-align : center; padding: 0px;\" >\n                    <button md-icon-button ><md-icon class=\"md-24\" >delete</md-icon></button>\n                  </td>\n\n                </tr>\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                  <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                </td>\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\n                  <button md-icon-button (click)=\"openConfirmationDelete(cat._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                </td>\n\n              </tr> -->\n\n            </tbody>\n          </table>\n        </div>\n      </md-card-content>\n    </md-card>\n    <div>{{statusMessage}}</div>\n  </div>\n"
 
 /***/ }),
 
@@ -1305,6 +1383,7 @@ module.exports = "<div style=\"display: inline-block; text-align: left; width: 1
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_management_gestione_store_store_add_store_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1318,10 +1397,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var GestioneStoreComponent = (function () {
     function GestioneStoreComponent(_storeService, dialog) {
         this._storeService = _storeService;
         this.dialog = dialog;
+        // constant for swipe action: left or right
+        this.SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
     }
     GestioneStoreComponent.prototype.ngOnInit = function () {
         this.getList();
@@ -1339,7 +1421,6 @@ var GestioneStoreComponent = (function () {
         this.dialogRef.afterClosed().subscribe(function (result) {
             console.log(result);
             if (result != "cancel") {
-                console.log(_this.dialogRef.componentInstance.store);
                 _this.create(_this.dialogRef.componentInstance.store);
                 _this.getList();
             }
@@ -1347,6 +1428,25 @@ var GestioneStoreComponent = (function () {
     };
     GestioneStoreComponent.prototype.create = function (store) {
         this._storeService.addStore(store);
+    };
+    GestioneStoreComponent.prototype.openEditDialog = function (store) {
+        var _this = this;
+        /**
+         * get Store from db
+         */
+        console.log("STORE ID TO MOD ==>" + JSON.stringify(store));
+        this.editDialog = this.dialog.open(__WEBPACK_IMPORTED_MODULE_4_app_edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */], {
+            disableClose: false
+        });
+        this.editDialog.componentInstance.storeObj = store;
+        this.editDialog.afterClosed().subscribe(function (result) {
+            if (result) {
+                console.log("opeEditDialog result: " + result);
+                _this._storeService.updateStore(_this.editDialog.componentInstance.storeObj);
+                _this.getList();
+            }
+            _this.editDialog = null;
+        });
     };
     return GestioneStoreComponent;
 }());
