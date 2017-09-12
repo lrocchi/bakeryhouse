@@ -81,6 +81,26 @@ router.delete("/:id", function (req, res) {
   });
 });
 
+router.put('/:id', function (req, res) {
+  var id = req.params.id;
+  var obj = req.body;
+  Spesa.findByIdAndUpdate(id, obj, function (err, data) {
+    if (err) {
+      console.log(err);
+      return res.json({
+        success: false,
+        message: 'Spesa non aggiornata.',
+        data: data
+      });
+    }
+    res.json({
+      success: true,
+      message: 'Spesa aggiornata con successo',
+      data: data
+    });
+  });
+
+});
 
 
 

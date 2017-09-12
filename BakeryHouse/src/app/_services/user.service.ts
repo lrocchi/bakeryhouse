@@ -12,18 +12,29 @@ export class UserService {
 
   public getUserList() {
 
-        return this._http.get('api/users').map(data => data.json()).toPromise();
+    return this._http.get('api/users').map(data => data.json()).toPromise();
 
-      }
-      public addUser(user: User) {
-        console.log(JSON.stringify(user));
+  }
+  public addUser(user: User) {
+    console.log(JSON.stringify(user));
+
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this._http.post('api/users', user, options).map(data => data.json()).toPromise();
+
+  }
+
+  public delete(id:string){
+    return this._http.delete('api/users/' + id).map(data => data.json()).toPromise();
+  }
+
+  public update(user: User){
 
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this._http.post('api/users', user, options).map(data => data.json()).toPromise();
-
+        return this._http.put('api/users/' + user._id, user, options).map(data => data.json()).toPromise();
       }
-
 
 }

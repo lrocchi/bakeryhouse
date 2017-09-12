@@ -199,6 +199,11 @@ var SpesaService = (function () {
     SpesaService.prototype.deleteCost = function (id) {
         return this._http.delete('api/spese/' + id).map(function (data) { return data.json(); }).toPromise();
     };
+    SpesaService.prototype.updateCost = function (cost) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
+        return this._http.put('api/spese/' + cost._id, cost, options).map(function (data) { return data.json(); }).toPromise();
+    };
     /**
      * COSTTYPE SECTION
      */
@@ -221,6 +226,11 @@ var SpesaService = (function () {
     };
     SpesaService.prototype.deleteCategory = function (id) {
         return this._http.delete('api/costtype/' + id).map(function (data) { return data.json(); }).toPromise();
+    };
+    SpesaService.prototype.updateCostType = function (cost) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
+        return this._http.put('api/costtype/' + cost._id, cost, options).map(function (data) { return data.json(); }).toPromise();
     };
     return SpesaService;
 }());
@@ -276,6 +286,9 @@ var StoreService = (function () {
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
         return this._http.put('api/stores/' + store._id, store, options).map(function (data) { return data.json(); }).toPromise();
     };
+    StoreService.prototype.delete = function (id) {
+        return this._http.delete('api/stores/' + id).map(function (data) { return data.json(); }).toPromise();
+    };
     return StoreService;
 }());
 StoreService = __decorate([
@@ -318,6 +331,14 @@ var UserService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
         return this._http.post('api/users', user, options).map(function (data) { return data.json(); }).toPromise();
+    };
+    UserService.prototype.delete = function (id) {
+        return this._http.delete('api/users/' + id).map(function (data) { return data.json(); }).toPromise();
+    };
+    UserService.prototype.update = function (user) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
+        return this._http.put('api/users/' + user._id, user, options).map(function (data) { return data.json(); }).toPromise();
     };
     return UserService;
 }());
@@ -684,7 +705,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/edit-dialog/edit-dialog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 md-dialog-title>Modifica</h1>\n\n\n\n<div md-dialog-content *ngIf=\"storeObj != null\">\n\n\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\n\n        <div md-dialog-content>\n\n          <md-input-container class=\"example-full-width\">\n            <input mdInput [(ngModel)]=\"storeObj.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required value=\"storeObj.nome\" >\n          </md-input-container>\n          <md-input-container class=\"example-full-width\">\n            <input mdInput [(ngModel)]=\"storeObj.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\" value=\"storeObj.indirizzo\"\n              required>\n          </md-input-container>\n          <md-input-container class=\"example-full-width\">\n              <input mdInput [(ngModel)]=\"storeObj.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" value=\"storeObj.piva\" required>\n            </md-input-container>\n\n\n          <md-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"storeObj.active\" [checked] = \"storeObj.active\" >Attivo</md-checkbox>\n\n\n        </div>\n\n\n      </form>\n\n</div>\n\n<div md-dialog-content *ngIf=\"storeObj == null\">NULLO</div>\n\n\n\n\n\n<div md-dialog-actions>\n  <button md-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\n  <button md-button (click)=\"dialogRef.close(false)\">Annulla</button>\n</div>\n"
+module.exports = "<h1 md-dialog-title>Modifica</h1>\n\n\n\n<div *ngIf=\"storeObj != null\">\n\n\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\n\n      <div md-dialog-content>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"storeObj.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required value=\"storeObj.nome\">\n    </md-input-container>\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"storeObj.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\"\n        value=\"storeObj.indirizzo\" required>\n    </md-input-container>\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"storeObj.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" value=\"storeObj.piva\"\n        required>\n    </md-input-container>\n\n\n    <md-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"storeObj.active\" [checked]=\"storeObj.active\">Attivo</md-checkbox>\n\n      </div>\n\n\n\n  </form>\n\n</div>\n\n<div *ngIf=\"userObj != null\">\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\n\n      <div md-dialog-content>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"userObj.name\" placeholder=\"Nome\" autocomplete=\"off\" #name=\"ngModel\" name=\"name\" required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"userObj.surname\" placeholder=\"Cognome\" autocomplete=\"off\" #surname=\"ngModel\" name=\"surname\" required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"userObj.username\" placeholder=\"Username\" autocomplete=\"off\" #username=\"ngModel\" name=\"username\"\n        required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"userObj.password\" type=\"password\" placeholder=\"Password\" autocomplete=\"off\" #password=\"ngModel\"\n        name=\"password\" required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"userObj.email\" placeholder=\"Email\" autocomplete=\"off\" #email=\"ngModel\" name=\"email\" required>\n    </md-input-container>\n\n    <md-select placeholder=\"Ruolo\" [(ngModel)]=\"userObj.ruolo\" #ruolo=\"ngModel\" name=\"role\" required>\n      <md-option *ngFor=\"let ruolo of roles | keys\" >\n        {{ruolo.value}}\n      </md-option>\n    </md-select>\n\n    <md-select placeholder=\"Punto Vendita\" [(ngModel)]=\"userObj.store\" #store=\"ngModel\" name=\"store\" required>\n      <md-option *ngFor=\"let store of stores\" [value]=\"store\">\n        {{store.nome}}\n      </md-option>\n    </md-select>\n\n\n\n\n    <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"active\" [(ngModel)]=\"userObj.active\" [checked]=\"userObj.active\"\n      [value]=\"userObj.active\">Attivo</md-checkbox>\n\n      </div>\n\n  </form>\n</div>\n\n\n\n\n\n\n<div md-dialog-actions>\n  <button md-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\n  <button md-button (click)=\"dialogRef.close(false)\">Annulla</button>\n</div>\n"
 
 /***/ }),
 
@@ -695,6 +716,7 @@ module.exports = "<h1 md-dialog-title>Modifica</h1>\n\n\n\n<div md-dialog-conten
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditDialogComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_entity_user__ = __webpack_require__("../../../../../src/app/entity/user.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -706,11 +728,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var EditDialogComponent = (function () {
     function EditDialogComponent(dialogRef) {
         this.dialogRef = dialogRef;
         this.storeObj = null;
+        this.userObj = null;
+        this.roles = __WEBPACK_IMPORTED_MODULE_2_app_entity_user__["a" /* Ruolo */];
     }
+    EditDialogComponent.prototype.ngOnInit = function () {
+        console.log("INIT*****************************************");
+    };
     return EditDialogComponent;
 }());
 EditDialogComponent = __decorate([
@@ -1370,7 +1398,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-store/gestione-store.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\n    <div class=\"alert alert-danger\">{{message}}</div>\n    <md-card class=\"example-card\">\n      <md-card-header>\n          <h3>Punti Vendita</h3>\n        <span class=\"span-fill-remaining\"></span>\n        <div class=\"ProceedContainer\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\n      </md-card-header>\n      <md-card-content>\n        <div style=\"overflow:auto\">\n          <table class=\"table table-bordered table-striped\">\n            <thead>\n              <tr>\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\n                <td style=\"text-align : center\"><strong>Indirizzo</strong></td>\n                <td style=\"text-align : center\"><strong>P.iva</strong></td>\n                <td colspan=\"2\"></td>\n\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let store of stores\">\n                <td>{{store.nome}}</td>\n                <td>{{store.indirizzo}}</td>\n                <td>{{store.piva}}</td>\n\n\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                    <button md-icon-button (click)=\"openEditDialog(store)\"><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                  </td>\n                  <td style=\"text-align : center; padding: 0px;\" >\n                    <button md-icon-button ><md-icon class=\"md-24\" >delete</md-icon></button>\n                  </td>\n\n                </tr>\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                  <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                </td>\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\n                  <button md-icon-button (click)=\"openConfirmationDelete(cat._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                </td>\n\n              </tr> -->\n\n            </tbody>\n          </table>\n        </div>\n      </md-card-content>\n    </md-card>\n    <div>{{statusMessage}}</div>\n  </div>\n"
+module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\n    <div class=\"alert alert-danger\">{{message}}</div>\n    <md-card class=\"example-card\">\n      <md-card-header>\n          <h3>Punti Vendita</h3>\n        <span class=\"span-fill-remaining\"></span>\n        <div class=\"ProceedContainer\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\n      </md-card-header>\n      <md-card-content>\n        <div style=\"overflow:auto\">\n          <table class=\"table table-bordered table-striped\">\n            <thead>\n              <tr>\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\n                <td style=\"text-align : center\"><strong>Indirizzo</strong></td>\n                <td style=\"text-align : center\"><strong>P.iva</strong></td>\n                <td colspan=\"2\"></td>\n\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let store of stores\">\n                <td>{{store.nome}}</td>\n                <td>{{store.indirizzo}}</td>\n                <td>{{store.piva}}</td>\n\n\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                    <button md-icon-button (click)=\"openEditDialog(store)\"><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                  </td>\n                  <td style=\"text-align : center; padding: 0px;\" >\n                    <button md-icon-button (click)=\"openConfirmationDelete(store._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                  </td>\n\n                </tr>\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                  <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                </td>\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\n                  <button md-icon-button (click)=\"openConfirmationDelete(cat._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                </td>\n\n              </tr> -->\n\n            </tbody>\n          </table>\n        </div>\n      </md-card-content>\n    </md-card>\n    <div>{{statusMessage}}</div>\n  </div>\n"
 
 /***/ }),
 
@@ -1384,6 +1412,7 @@ module.exports = "<div style=\"display: inline-block; text-align: left; width: 1
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_management_gestione_store_store_add_store_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_confirmation_dialog_confirmation_dialog_component__ = __webpack_require__("../../../../../src/app/confirmation-dialog/confirmation-dialog.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1393,6 +1422,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -1446,6 +1476,21 @@ var GestioneStoreComponent = (function () {
                 _this.getList();
             }
             _this.editDialog = null;
+        });
+    };
+    GestioneStoreComponent.prototype.openConfirmationDelete = function (id) {
+        var _this = this;
+        this.confirmDialog = this.dialog.open(__WEBPACK_IMPORTED_MODULE_5_app_confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], {
+            disableClose: false
+        });
+        this.confirmDialog.componentInstance.confirmMessage = "Sei sicuro di voler cancellare questo elemento?";
+        this.confirmDialog.afterClosed().subscribe(function (result) {
+            if (result) {
+                _this._storeService.delete(id)
+                    .then(function (types) { _this.getList(); })
+                    .catch(function (err) { return console.log(err); });
+            }
+            _this.confirmDialog = null;
         });
     };
     return GestioneStoreComponent;
@@ -1558,7 +1603,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-utente/gestione-utente.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\n    <div class=\"alert alert-danger\">{{message}}</div>\n    <md-card class=\"example-card\">\n      <md-card-header>\n          <h3>Utenti</h3>\n        <span class=\"span-fill-remaining\"></span>\n        <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\n      </md-card-header>\n      <md-card-content>\n        <div style=\"overflow:auto\">\n          <table class=\"table table-bordered table-striped\">\n            <thead>\n              <tr>\n                <td style=\"text-align : center\"><strong>User ID</strong></td>\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\n                <td style=\"text-align : center\"><strong>Cognome</strong></td>\n                <td style=\"text-align : center\"><strong>Ruolo</strong></td>\n                <td style=\"text-align : center\"><strong>e-mail</strong></td>\n                <td style=\"text-align : center\"><strong>Punto Vendita</strong></td>\n                <td colspan=\"2\"></td>\n\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let user of users\">\n                <td>{{user.username}}</td>\n                <td>{{user.name}}</td>\n                <td>{{user.surname}}</td>\n                <td>{{user.ruolo}}</td>\n                <td>{{user.email}}</td>\n                <td>{{user.store.nome}}</td>\n\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                    <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                  </td>\n                  <td style=\"text-align : center; padding: 0px;\" >\n                    <button md-icon-button ><md-icon class=\"md-24\" >delete</md-icon></button>\n                  </td>\n\n                </tr>\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                  <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                </td>\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\n                  <button md-icon-button (click)=\"openConfirmationDelete(cat._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                </td>\n\n              </tr> -->\n\n            </tbody>\n          </table>\n        </div>\n      </md-card-content>\n    </md-card>\n    <div>{{statusMessage}}</div>\n  </div>\n"
+module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\n    <div class=\"alert alert-danger\">{{message}}</div>\n    <md-card class=\"example-card\">\n      <md-card-header>\n          <h3>Utenti</h3>\n        <span class=\"span-fill-remaining\"></span>\n        <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\n      </md-card-header>\n      <md-card-content>\n        <div style=\"overflow:auto\">\n          <table class=\"table table-bordered table-striped\">\n            <thead>\n              <tr>\n                <td style=\"text-align : center\"><strong>User ID</strong></td>\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\n                <td style=\"text-align : center\"><strong>Cognome</strong></td>\n                <td style=\"text-align : center\"><strong>Ruolo</strong></td>\n                <td style=\"text-align : center\"><strong>e-mail</strong></td>\n                <td style=\"text-align : center\"><strong>Punto Vendita</strong></td>\n                <td colspan=\"2\"></td>\n\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let user of users\">\n                <td>{{user.username}}</td>\n                <td>{{user.name}}</td>\n                <td>{{user.surname}}</td>\n                <td>{{user.ruolo}}</td>\n                <td>{{user.email}}</td>\n                <td>{{user.store.nome}}</td>\n\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                    <button md-icon-button (click)=\"openEditDialog(user)\"><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                  </td>\n                  <td style=\"text-align : center; padding: 0px;\" >\n                    <button md-icon-button (click)=\"openConfirmationDelete(user._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                  </td>\n\n                </tr>\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                  <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                </td>\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\n                  <button md-icon-button (click)=\"openConfirmationDelete(cat._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                </td>\n\n              </tr> -->\n\n            </tbody>\n          </table>\n        </div>\n      </md-card-content>\n    </md-card>\n    <div>{{statusMessage}}</div>\n  </div>\n"
 
 /***/ }),
 
@@ -1571,6 +1616,9 @@ module.exports = "<div style=\"display: inline-block; text-align: left; width: 1
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__ = __webpack_require__("../../../../../src/app/_services/user.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_management_gestione_utente_user_add_user_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_confirmation_dialog_confirmation_dialog_component__ = __webpack_require__("../../../../../src/app/confirmation-dialog/confirmation-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1584,8 +1632,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
 var GestioneUtenteComponent = (function () {
-    function GestioneUtenteComponent(_userService, dialog) {
+    function GestioneUtenteComponent(_storeService, _userService, dialog) {
+        this._storeService = _storeService;
         this._userService = _userService;
         this.dialog = dialog;
     }
@@ -1601,6 +1653,12 @@ var GestioneUtenteComponent = (function () {
     GestioneUtenteComponent.prototype.create = function (user) {
         this._userService.addUser(user);
     };
+    GestioneUtenteComponent.prototype.getActiveStoresList = function () {
+        var _this = this;
+        this._storeService.getStoreList(true)
+            .then(function (stores) { _this.stores = stores; })
+            .catch(function (err) { return console.log(err); });
+    };
     GestioneUtenteComponent.prototype.openDialog = function () {
         var _this = this;
         this.message = "";
@@ -1613,6 +1671,43 @@ var GestioneUtenteComponent = (function () {
             }
         });
     };
+    GestioneUtenteComponent.prototype.openConfirmationDelete = function (id) {
+        var _this = this;
+        this.confirmDialog = this.dialog.open(__WEBPACK_IMPORTED_MODULE_4_app_confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], {
+            disableClose: false
+        });
+        this.confirmDialog.componentInstance.confirmMessage = "Sei sicuro di voler cancellare questo elemento?";
+        this.confirmDialog.afterClosed().subscribe(function (result) {
+            if (result) {
+                _this._userService.delete(id)
+                    .then(function (types) { _this.getList(); })
+                    .catch(function (err) { return console.log(err); });
+            }
+            _this.confirmDialog = null;
+        });
+    };
+    GestioneUtenteComponent.prototype.openEditDialog = function (user) {
+        /**
+         * get Store from db
+         */
+        var _this = this;
+        this.editDialog = this.dialog.open(__WEBPACK_IMPORTED_MODULE_5_app_edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */], {
+            disableClose: false
+        });
+        this.editDialog.componentInstance.userObj = user;
+        this.getActiveStoresList();
+        this.editDialog.componentInstance.stores = this.stores;
+        this.editDialog.afterClosed().subscribe(function (result) {
+            if (result) {
+                console.log("opeEditDialog result: " + result);
+                _this._userService.update(_this.editDialog.componentInstance.userObj);
+                _this.getList();
+            }
+            _this.editDialog.componentInstance.userObj = null;
+            _this.editDialog.componentInstance.stores = null;
+            _this.editDialog = null;
+        });
+    };
     return GestioneUtenteComponent;
 }());
 GestioneUtenteComponent = __decorate([
@@ -1621,10 +1716,10 @@ GestioneUtenteComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["c" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["c" /* MdDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["c" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["c" /* MdDialog */]) === "function" && _c || Object])
 ], GestioneUtenteComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=gestione-utente.component.js.map
 
 /***/ }),

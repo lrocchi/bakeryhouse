@@ -72,4 +72,23 @@ router.put('/:id', function (req, res) {
 
 });
 
+router.delete("/:id", function (req, res) {
+  var id = req.params.id;
+  Store.findByIdAndRemove(id, function (err, data) {
+    if (err) {
+      return res.json({
+        success: false,
+        message: 'Errore: Punto vendita non cancellato!',
+        data: data
+      });
+      return;
+    }
+    res.json({
+      success: true,
+      message: 'Punto vendita cancellato con successo',
+      data: data
+    });
+  });
+});
+
 module.exports = router;

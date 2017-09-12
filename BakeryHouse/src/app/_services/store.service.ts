@@ -35,5 +35,9 @@ export class StoreService {
     return this._http.put('api/stores/' + store._id, store, options).map(data => data.json()).toPromise();
   }
 
+  public delete(id:string){
+    return this._http.delete('api/stores/' + id).map(data => data.json()).toPromise();
+  }
+
 
 }

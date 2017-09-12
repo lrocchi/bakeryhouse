@@ -125,4 +125,44 @@ router.post('/', function(req, res, next ) {
   // }
 });
 
+router.put('/:id', function (req, res) {
+  var id = req.params.id;
+  var obj = req.body;
+  User.findByIdAndUpdate(id, obj, function (err, data) {
+    if (err) {
+      console.log(err);
+      return res.json({
+        success: false,
+        message: 'Utente non aggiornato.',
+        data: data
+      });
+    }
+    res.json({
+      success: true,
+      message: 'Utente aggiornato con successo',
+      data: data
+    });
+  });
+
+});
+
+router.delete("/:id", function (req, res) {
+  var id = req.params.id;
+  User.findByIdAndRemove(id, function (err, data) {
+    if (err) {
+      return res.json({
+        success: false,
+        message: 'Errore: Utente non cancellato!',
+        data: data
+      });
+      return;
+    }
+    res.json({
+      success: true,
+      message: 'Utente cancellato con successo',
+      data: data
+    });
+  });
+});
+
 module.exports = router;

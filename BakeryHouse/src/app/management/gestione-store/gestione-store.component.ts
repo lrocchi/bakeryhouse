@@ -4,6 +4,7 @@ import { StoreService } from "app/_services/store.service";
 import { StoreAddComponent } from "app/management/gestione-store/store-add/store-add.component";
 import { MdDialogRef, MdDialog } from "@angular/material";
 import { EditDialogComponent } from "app/edit-dialog/edit-dialog.component";
+import { ConfirmationDialog } from "app/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'storeMngmt',
@@ -20,6 +21,7 @@ export class GestioneStoreComponent implements OnInit {
 
   dialogRef: MdDialogRef<StoreAddComponent>;
   editDialog: MdDialogRef<EditDialogComponent>;
+  confirmDialog: MdDialogRef<ConfirmationDialog>;
 
 
 
@@ -77,6 +79,23 @@ export class GestioneStoreComponent implements OnInit {
         this.getList();
       }
       this.editDialog = null;
+    });
+  }
+
+
+  openConfirmationDelete(id: string) {
+    this.confirmDialog = this.dialog.open(ConfirmationDialog, {
+      disableClose: false
+    });
+    this.confirmDialog.componentInstance.confirmMessage = "Sei sicuro di voler cancellare questo elemento?"
+
+    this.confirmDialog.afterClosed().subscribe(result => {
+      if (result) {
+       this._storeService.delete(id)
+          .then(types => { this.getList(); })
+          .catch(err => console.log(err));
+      }
+      this.confirmDialog = null;
     });
   }
 

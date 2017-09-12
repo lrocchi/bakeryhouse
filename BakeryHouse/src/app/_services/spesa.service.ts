@@ -44,11 +44,17 @@ export class SpesaService {
 
   }
 
-  public deleteCost(id:string){
+  public deleteCost(id: string) {
     return this._http.delete('api/spese/' + id).map(data => data.json()).toPromise();
   }
 
+  public updateCost(cost: Cost) {
 
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this._http.put('api/spese/' + cost._id, cost, options).map(data => data.json()).toPromise();
+  }
 
   /**
    * COSTTYPE SECTION
@@ -71,10 +77,10 @@ export class SpesaService {
 
   // Lista di sottocategorie data una categoria
   public getSubTypeList(val: string) {
-        console.log('PARAMETRO=' + val);
-        return this._http.get('api/costtype/categories/' + val).map(data => data.json()).toPromise();
+    console.log('PARAMETRO=' + val);
+    return this._http.get('api/costtype/categories/' + val).map(data => data.json()).toPromise();
 
-      }
+  }
 
   public getCategoriesList() {
 
@@ -82,11 +88,16 @@ export class SpesaService {
 
   }
 
-  public deleteCategory(id:string){
+  public deleteCategory(id: string) {
     return this._http.delete('api/costtype/' + id).map(data => data.json()).toPromise();
   }
+  public updateCostType(cost: CostType) {
 
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
 
+    return this._http.put('api/costtype/' + cost._id, cost, options).map(data => data.json()).toPromise();
+  }
 
 }
 
