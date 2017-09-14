@@ -7,24 +7,24 @@
 
   <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 
-      <div md-dialog-content>
+    <div md-dialog-content>
 
-    <md-input-container class="example-full-width">
-      <input mdInput [(ngModel)]="storeObj.nome" placeholder="Nome" autocomplete="off" #nome="ngModel" name="nome" required value="storeObj.nome">
-    </md-input-container>
-    <md-input-container class="example-full-width">
-      <input mdInput [(ngModel)]="storeObj.indirizzo" placeholder="Indirizzo" autocomplete="off" #indirizzo="ngModel" name="indirizzo"
-        value="storeObj.indirizzo" required>
-    </md-input-container>
-    <md-input-container class="example-full-width">
-      <input mdInput [(ngModel)]="storeObj.piva" placeholder="Partita Iva" autocomplete="off" #piva="ngModel" name="piva" value="storeObj.piva"
-        required>
-    </md-input-container>
+      <md-input-container class="example-full-width">
+        <input mdInput [(ngModel)]="storeObj.nome" placeholder="Nome" autocomplete="off" #nome="ngModel" name="nome" required value="storeObj.nome">
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <input mdInput [(ngModel)]="storeObj.indirizzo" placeholder="Indirizzo" autocomplete="off" #indirizzo="ngModel" name="indirizzo"
+          value="storeObj.indirizzo" required>
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <input mdInput [(ngModel)]="storeObj.piva" placeholder="Partita Iva" autocomplete="off" #piva="ngModel" name="piva" value="storeObj.piva"
+          required>
+      </md-input-container>
 
 
-    <md-checkbox class="example-margin" #active="ngModel" name="active" [(ngModel)]="storeObj.active" [checked]="storeObj.active">Attivo</md-checkbox>
+      <md-checkbox class="example-margin" #active="ngModel" name="active" [(ngModel)]="storeObj.active" [checked]="storeObj.active">Attivo</md-checkbox>
 
-      </div>
+    </div>
 
 
 
@@ -35,49 +35,51 @@
 <div *ngIf="userObj != null">
   <form name="form" (ngSubmit)="f.form.valid" novalidate>
 
-      <div md-dialog-content>
+    <div md-dialog-content>
 
-    <md-input-container class="example-full-width">
-      <input mdInput [(ngModel)]="userObj.name" placeholder="Nome" autocomplete="off" #name="ngModel" name="name" required>
-    </md-input-container>
+      <md-input-container class="example-full-width">
+        <input mdInput [(ngModel)]="userObj.name" placeholder="Nome" autocomplete="off" #name="ngModel" name="name" required>
+      </md-input-container>
 
-    <md-input-container class="example-full-width">
-      <input mdInput [(ngModel)]="userObj.surname" placeholder="Cognome" autocomplete="off" #surname="ngModel" name="surname" required>
-    </md-input-container>
+      <md-input-container class="example-full-width">
+        <input mdInput [(ngModel)]="userObj.surname" placeholder="Cognome" autocomplete="off" #surname="ngModel" name="surname" required>
+      </md-input-container>
 
-    <md-input-container class="example-full-width">
-      <input mdInput [(ngModel)]="userObj.username" placeholder="Username" autocomplete="off" #username="ngModel" name="username"
-        required>
-    </md-input-container>
+      <md-input-container class="example-full-width">
+        <input mdInput [(ngModel)]="userObj.username" placeholder="Username" autocomplete="off" #username="ngModel" name="username"
+          required>
+      </md-input-container>
 
-    <md-input-container class="example-full-width">
-      <input mdInput [(ngModel)]="userObj.password" type="password" placeholder="Password" autocomplete="off" #password="ngModel"
-        name="password" required>
-    </md-input-container>
+      <md-input-container class="example-full-width">
+        <input mdInput [(ngModel)]="userObj.password" type="password" placeholder="Password" autocomplete="off" #password="ngModel"
+          name="password" required>
+      </md-input-container>
 
-    <md-input-container class="example-full-width">
-      <input mdInput [(ngModel)]="userObj.email" placeholder="Email" autocomplete="off" #email="ngModel" name="email" required>
-    </md-input-container>
+      <md-input-container class="example-full-width">
+        <input mdInput [(ngModel)]="userObj.email" placeholder="Email" autocomplete="off" #email="ngModel" name="email" required>
+      </md-input-container>
 
-    <md-select placeholder="Ruolo" [(ngModel)]="userObj.ruolo" #ruolo="ngModel" name="role" required>
-      <md-option *ngFor="let ruolo of roles | keys" >
-        {{ruolo.value}}
-      </md-option>
-    </md-select>
-
-    <md-select placeholder="Punto Vendita" [(ngModel)]="userObj.store" #store="ngModel" name="store" required>
-      <md-option *ngFor="let store of stores" [value]="store">
-        {{store.nome}}
-      </md-option>
-    </md-select>
-
-
-
-
-    <md-checkbox class="example-margin" #subCategory="ngModel" name="active" [(ngModel)]="userObj.active" [checked]="userObj.active"
-      [value]="userObj.active">Attivo</md-checkbox>
-
+      <div class="example-full-width">
+        <md-select placeholder="Ruolo" [(ngModel)]="userObj.ruolo" #ruolo="ngModel" name="role" required>
+          <md-option *ngFor="let ruolo of roles | keys" [value]="ruolo.value">
+            {{ruolo.value}}
+          </md-option>
+        </md-select>
       </div>
+      <span></span>
+      <div class="example-full-width">
+        <md-select placeholder="Punto Vendita" [(ngModel)]="userObj.store._id" #store="ngModel" name="store"
+          required>
+          <md-option *ngFor="let store of stores" [value]="store._id">{{store.nome}}</md-option>
+        </md-select>
+      </div>
+
+
+
+      <md-checkbox class="example-margin" #subCategory="ngModel" name="active" [(ngModel)]="userObj.active" [checked]="userObj.active"
+        [value]="userObj.active">Attivo</md-checkbox>
+
+    </div>
 
   </form>
 </div>

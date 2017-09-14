@@ -705,7 +705,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/edit-dialog/edit-dialog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 md-dialog-title>Modifica</h1>\n\n\n\n<div *ngIf=\"storeObj != null\">\n\n\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\n\n      <div md-dialog-content>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"storeObj.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required value=\"storeObj.nome\">\n    </md-input-container>\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"storeObj.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\"\n        value=\"storeObj.indirizzo\" required>\n    </md-input-container>\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"storeObj.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" value=\"storeObj.piva\"\n        required>\n    </md-input-container>\n\n\n    <md-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"storeObj.active\" [checked]=\"storeObj.active\">Attivo</md-checkbox>\n\n      </div>\n\n\n\n  </form>\n\n</div>\n\n<div *ngIf=\"userObj != null\">\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\n\n      <div md-dialog-content>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"userObj.name\" placeholder=\"Nome\" autocomplete=\"off\" #name=\"ngModel\" name=\"name\" required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"userObj.surname\" placeholder=\"Cognome\" autocomplete=\"off\" #surname=\"ngModel\" name=\"surname\" required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"userObj.username\" placeholder=\"Username\" autocomplete=\"off\" #username=\"ngModel\" name=\"username\"\n        required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"userObj.password\" type=\"password\" placeholder=\"Password\" autocomplete=\"off\" #password=\"ngModel\"\n        name=\"password\" required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"userObj.email\" placeholder=\"Email\" autocomplete=\"off\" #email=\"ngModel\" name=\"email\" required>\n    </md-input-container>\n\n    <md-select placeholder=\"Ruolo\" [(ngModel)]=\"userObj.ruolo\" #ruolo=\"ngModel\" name=\"role\" required>\n      <md-option *ngFor=\"let ruolo of roles | keys\" >\n        {{ruolo.value}}\n      </md-option>\n    </md-select>\n\n    <md-select placeholder=\"Punto Vendita\" [(ngModel)]=\"userObj.store\" #store=\"ngModel\" name=\"store\" required>\n      <md-option *ngFor=\"let store of stores\" [value]=\"store\">\n        {{store.nome}}\n      </md-option>\n    </md-select>\n\n\n\n\n    <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"active\" [(ngModel)]=\"userObj.active\" [checked]=\"userObj.active\"\n      [value]=\"userObj.active\">Attivo</md-checkbox>\n\n      </div>\n\n  </form>\n</div>\n\n\n\n\n\n\n<div md-dialog-actions>\n  <button md-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\n  <button md-button (click)=\"dialogRef.close(false)\">Annulla</button>\n</div>\n"
+module.exports = "<h1 md-dialog-title>Modifica</h1>\n\n\n\n<div *ngIf=\"storeObj != null\">\n\n\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\n\n    <div md-dialog-content>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"storeObj.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required value=\"storeObj.nome\">\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"storeObj.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\"\n          value=\"storeObj.indirizzo\" required>\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"storeObj.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" value=\"storeObj.piva\"\n          required>\n      </md-input-container>\n\n\n      <md-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"storeObj.active\" [checked]=\"storeObj.active\">Attivo</md-checkbox>\n\n    </div>\n\n\n\n  </form>\n\n</div>\n\n<div *ngIf=\"userObj != null\">\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\n\n    <div md-dialog-content>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.name\" placeholder=\"Nome\" autocomplete=\"off\" #name=\"ngModel\" name=\"name\" required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.surname\" placeholder=\"Cognome\" autocomplete=\"off\" #surname=\"ngModel\" name=\"surname\" required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.username\" placeholder=\"Username\" autocomplete=\"off\" #username=\"ngModel\" name=\"username\"\n          required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.password\" type=\"password\" placeholder=\"Password\" autocomplete=\"off\" #password=\"ngModel\"\n          name=\"password\" required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.email\" placeholder=\"Email\" autocomplete=\"off\" #email=\"ngModel\" name=\"email\" required>\n      </md-input-container>\n\n      <div class=\"example-full-width\">\n        <md-select placeholder=\"Ruolo\" [(ngModel)]=\"userObj.ruolo\" #ruolo=\"ngModel\" name=\"role\" required>\n          <md-option *ngFor=\"let ruolo of roles | keys\" [value]=\"ruolo.value\">\n            {{ruolo.value}}\n          </md-option>\n        </md-select>\n      </div>\n      <span></span>\n      <div class=\"example-full-width\">\n        <md-select placeholder=\"Punto Vendita\" [(ngModel)]=\"userObj.store._id\" #store=\"ngModel\" name=\"store\"\n          required>\n          <md-option *ngFor=\"let store of stores\" [value]=\"store._id\">{{store.nome}}</md-option>\n        </md-select>\n      </div>\n\n\n\n      <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"active\" [(ngModel)]=\"userObj.active\" [checked]=\"userObj.active\"\n        [value]=\"userObj.active\">Attivo</md-checkbox>\n\n    </div>\n\n  </form>\n</div>\n\n\n\n\n\n\n<div md-dialog-actions>\n  <button md-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\n  <button md-button (click)=\"dialogRef.close(false)\">Annulla</button>\n</div>\n"
 
 /***/ }),
 
@@ -717,6 +717,7 @@ module.exports = "<h1 md-dialog-title>Modifica</h1>\n\n\n\n<div *ngIf=\"storeObj
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_entity_user__ = __webpack_require__("../../../../../src/app/entity/user.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -729,15 +730,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var EditDialogComponent = (function () {
-    function EditDialogComponent(dialogRef) {
+    function EditDialogComponent(_storeService, dialogRef) {
+        this._storeService = _storeService;
         this.dialogRef = dialogRef;
         this.storeObj = null;
         this.userObj = null;
         this.roles = __WEBPACK_IMPORTED_MODULE_2_app_entity_user__["a" /* Ruolo */];
     }
     EditDialogComponent.prototype.ngOnInit = function () {
-        console.log("INIT*****************************************");
+        this.getActiveStoresList();
+    };
+    EditDialogComponent.prototype.getActiveStoresList = function () {
+        var _this = this;
+        this._storeService.getStoreList(true)
+            .then(function (stores) { _this.stores = stores; })
+            .catch(function (err) { return console.log(err); });
     };
     return EditDialogComponent;
 }());
@@ -747,10 +756,10 @@ EditDialogComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.html"),
         styles: [__webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MdDialogRef */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MdDialogRef */]) === "function" && _b || Object])
 ], EditDialogComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=edit-dialog.component.js.map
 
 /***/ }),
@@ -1700,8 +1709,9 @@ var GestioneUtenteComponent = (function () {
         this.editDialog.afterClosed().subscribe(function (result) {
             if (result) {
                 console.log("opeEditDialog result: " + result);
-                _this._userService.update(_this.editDialog.componentInstance.userObj);
-                _this.getList();
+                _this._userService.update(_this.editDialog.componentInstance.userObj).then(function (value) {
+                    return _this.getList();
+                }).catch(function (err) { console.log(err.message); _this.message = err.message; });
             }
             _this.editDialog.componentInstance.userObj = null;
             _this.editDialog.componentInstance.stores = null;

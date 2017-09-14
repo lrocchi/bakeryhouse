@@ -96,8 +96,8 @@ export class GestioneUtenteComponent implements OnInit {
     this.editDialog.afterClosed().subscribe(result => {
       if (result) {
         console.log("opeEditDialog result: " + result);
-        this._userService.update(this.editDialog.componentInstance.userObj);
-        this.getList();
+        this._userService.update(this.editDialog.componentInstance.userObj).then(value =>
+        this.getList()).catch(err =>{ console.log(err.message); this.message = err.message;});
       }
       this.editDialog.componentInstance.userObj = null;
       this.editDialog.componentInstance.stores = null;
