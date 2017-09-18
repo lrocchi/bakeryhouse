@@ -18,8 +18,8 @@ export class UserService {
   public addUser(user: User) {
     console.log(JSON.stringify(user));
 
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
 
     return this._http.post('api/users', user, options).map(data => data.json()).toPromise();
 
@@ -31,8 +31,8 @@ export class UserService {
 
   public update(user: User){
 
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options = new RequestOptions({ headers: headers });
 
         return this._http.put('api/users/' + user._id, user, options).map(data => data.json()).toPromise();
       }

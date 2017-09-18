@@ -7,8 +7,8 @@ import { LocalStorageService } from 'ng2-webstorage';
 import { NgForm } from "@angular/forms";
 
 import { User } from "app/entity/user";
-import { Cost } from "app/entity/cost";
-import { SpesaService } from "app/_services/spesa.service";
+import { Cost } from 'app/entity/cost';
+import { SpesaService } from 'app/_services/spesa.service';
 
 @Component({
     selector: 'app-spese',
@@ -18,7 +18,7 @@ import { SpesaService } from "app/_services/spesa.service";
 export class SpeseComponent implements OnInit {
 
   public message: string;
-  public visible: boolean = false;
+  public visible = false;
   today: number = Date.now();
   dialogRef: MdDialogRef<SpeseNewComponent>;
   spesaList: Array<Cost>;
@@ -32,8 +32,8 @@ export class SpeseComponent implements OnInit {
   }
 
   getList(){
-    let usr: User = JSON.parse(localStorage.getItem('currUser'));
-    console.log("usr -->" + JSON.stringify(usr));
+    const usr: User = JSON.parse(localStorage.getItem('currUser'));
+    console.log('usr -->' + JSON.stringify(usr));
     this._spesaService.getTodaySpesaList(usr.store._id)
     .then(spese => {this.spesaList = spese;  })
     .catch(err => console.log(err));
@@ -42,9 +42,9 @@ export class SpeseComponent implements OnInit {
 
   create(spesa: Cost){
     // console.log("ECCO");
-    let tmpSpesa: Cost = spesa;
-    let usr: User = JSON.parse(localStorage.getItem('currUser'));
-    this.message = "";
+    const tmpSpesa: Cost = spesa;
+    const usr: User = JSON.parse(localStorage.getItem('currUser'));
+    this.message = '';
     tmpSpesa.utente = usr;
     tmpSpesa.store = usr.store;
     // console.log("tmpSpesa -->" + JSON.stringify(tmpSpesa));
@@ -67,11 +67,11 @@ export class SpeseComponent implements OnInit {
 
   openDialog(){
     // this.visible = !this.visible;
-    let dialogRef = this.dialog.open(SpeseNewComponent);
+    const dialogRef = this.dialog.open(SpeseNewComponent);
     dialogRef.afterClosed().subscribe(result => {
       // console.log(result);
 
-      if (result != "cancel") {
+      if (result !== 'cancel') {
         // console.log(dialogRef.componentInstance.spesa);
         this.create(dialogRef.componentInstance.spesa);
       }

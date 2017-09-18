@@ -521,6 +521,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__chiusure_chiusure_component__ = __webpack_require__("../../../../../src/app/chiusure/chiusure.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -530,6 +531,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -609,7 +611,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_25__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */],
             __WEBPACK_IMPORTED_MODULE_26__management_gestione_store_gestione_store_component__["a" /* GestioneStoreComponent */],
             __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */],
-            __WEBPACK_IMPORTED_MODULE_29__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */]
+            __WEBPACK_IMPORTED_MODULE_29__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */],
+            __WEBPACK_IMPORTED_MODULE_30__chiusure_chiusure_component__["a" /* ChiusureComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_12__angular_material__["a" /* MaterialModule */],
@@ -637,6 +640,70 @@ AppModule = __decorate([
 
 var _a, _b;
 //# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/chiusure/chiusure.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/chiusure/chiusure.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<md-card>\n  <md-card-title-group>\n      <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"spinnerValue\"></md-progress-spinner>\n    <md-card-title>Resoconto delle 12:00</md-card-title>\n    <md-card-subtitle>stato: da inserire</md-card-subtitle>\n  </md-card-title-group>\n  <md-card-content class=\"md-content\">\n\n\n    <p><span><i>Eseguito da:</i></span><span> <strong>Luca Rocchi</strong></span></p>\n    <p><span>In cassa: </span><span>10000 &euro;</span></p>\n    <p><span>POS:</span><span></span></p>\n    <p><span>Ticket:</span><span></span></p>\n  </md-card-content>\n  <md-card-actions>\n    <button md-button disabled=\"true\">INSERISCI</button>\n  </md-card-actions>\n</md-card>\n\n<md-card>\n  <md-card-title-group>\n    <img md-card-sm-image>\n    <md-card-title>Resoconto delle 16:00</md-card-title>\n    <md-card-subtitle>stato: da inserire</md-card-subtitle>\n  </md-card-title-group>\n  <md-card-content class=\"md-content\">\n    <p><span><i>Eseguito da:</i></span><span> <strong>Luca Rocchi</strong></span></p>\n    <p><span>In cassa: </span><span>10000 &euro;</span></p>\n    <p><span>POS:</span><span></span></p>\n    <p><span>Ticket:</span><span></span></p>\n  </md-card-content>\n  <md-card-actions>\n    <button md-button disabled=\"true\">INSERISCI</button>\n  </md-card-actions>\n</md-card>\n\n<md-card>\n  <md-card-title-group>\n    <img md-card-sm-image>\n    <md-card-title>Resoconto delle 20:00</md-card-title>\n    <md-card-subtitle>stato: da inserire</md-card-subtitle>\n  </md-card-title-group>\n  <md-card-content class=\"md-content\">\n    <p><span><i>Eseguito da:</i></span><span> <strong>Luca Rocchi</strong></span></p>\n    <p><span>In cassa: </span><span>10000 &euro;</span></p>\n    <p><span>POS:</span><span></span></p>\n    <p><span>Ticket:</span><span></span></p>\n  </md-card-content>\n  <md-card-actions>\n    <button md-button disabled=\"true\">INSERISCI</button>\n  </md-card-actions>\n</md-card>\n\n<md-card>\n  <md-card-title-group>\n    <img md-card-sm-image>\n    <md-card-title>Chiusura</md-card-title>\n    <md-card-subtitle>stato: da inserire</md-card-subtitle>\n  </md-card-title-group>\n  <md-card-content class=\"md-content\">\n    <p><span><i>Eseguito da:</i></span><span> <strong>Luca Rocchi</strong></span></p>\n    <p><span>In cassa: </span><span>10000 &euro;</span></p>\n    <p><span>POS:</span><span></span></p>\n    <p><span>Ticket:</span><span></span></p>\n  </md-card-content>\n  <md-card-actions>\n    <button md-button disabled=\"true\">INSERISCI</button>\n  </md-card-actions>\n</md-card>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/chiusure/chiusure.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChiusureComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ChiusureComponent = (function () {
+    function ChiusureComponent() {
+        this.spinnerColor = 'red';
+        this.spinnerMode = 'determinate';
+        this.spinnerValue = 50;
+    }
+    ChiusureComponent.prototype.ngOnInit = function () {
+    };
+    return ChiusureComponent;
+}());
+ChiusureComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-chiusure',
+        template: __webpack_require__("../../../../../src/app/chiusure/chiusure.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/chiusure/chiusure.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], ChiusureComponent);
+
+//# sourceMappingURL=chiusure.component.js.map
 
 /***/ }),
 
@@ -780,9 +847,10 @@ var CostTypeCategories;
 (function (CostTypeCategories) {
     CostTypeCategories[CostTypeCategories["Food"] = 10] = "Food";
     CostTypeCategories[CostTypeCategories["Delivery"] = 20] = "Delivery";
-    CostTypeCategories[CostTypeCategories["Fatture"] = 31] = "Fatture";
-    CostTypeCategories[CostTypeCategories["Manutenzione"] = 32] = "Manutenzione";
-    CostTypeCategories[CostTypeCategories["Varie"] = 33] = "Varie";
+    CostTypeCategories[CostTypeCategories["Ticket"] = 30] = "Ticket";
+    CostTypeCategories[CostTypeCategories["Fatture"] = 100] = "Fatture";
+    CostTypeCategories[CostTypeCategories["Manutenzione"] = 120] = "Manutenzione";
+    CostTypeCategories[CostTypeCategories["Varie"] = 200] = "Varie";
 })(CostTypeCategories || (CostTypeCategories = {}));
 //# sourceMappingURL=cost-type.js.map
 
@@ -795,7 +863,7 @@ var CostTypeCategories;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Cost; });
 var Cost = (function () {
     function Cost(descrizione, create_on, update_on) {
-        if (descrizione === void 0) { descrizione = ""; }
+        if (descrizione === void 0) { descrizione = ''; }
         if (create_on === void 0) { create_on = Date.now().toString(); }
         if (update_on === void 0) { update_on = Date.now().toString(); }
         this.descrizione = descrizione;
@@ -837,6 +905,7 @@ var User = (function () {
     return User;
 }());
 
+// tslint:disable-next-line:one-line
 var Ruolo;
 (function (Ruolo) {
     Ruolo[Ruolo["Dipendente"] = 100] = "Dipendente";
@@ -967,7 +1036,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n        <div class=\"Ccm-MainContentView ng-scope\">\n               <md-tab-group style=\"font-size:12px\">\n                  <md-tab id=\"tabSpese\" label=\"Spese\">\n                    <app-spese></app-spese>\n                  </md-tab>\n                  <md-tab label=\"Chiusure\">\n                    <h1>Some more tab content</h1>\n                    <p>...</p>\n                  </md-tab>\n                </md-tab-group>\n\n        </div>\n\n"
+module.exports = "\n\n        <div class=\"Ccm-MainContentView ng-scope\">\n               <md-tab-group style=\"font-size:12px\">\n                  <md-tab id=\"tabSpese\" label=\"Spese\">\n                    <app-spese></app-spese>\n                  </md-tab>\n                  <md-tab label=\"Chiusure\">\n                    <app-chiusure></app-chiusure>\n                  </md-tab>\n                </md-tab-group>\n\n        </div>\n\n"
 
 /***/ }),
 
@@ -1670,11 +1739,11 @@ var GestioneUtenteComponent = (function () {
     };
     GestioneUtenteComponent.prototype.openDialog = function () {
         var _this = this;
-        this.message = "";
+        this.message = '';
         this.dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_3_app_management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */]);
         this.dialogRef.afterClosed().subscribe(function (result) {
             console.log(result);
-            if (result != "cancel") {
+            if (result != 'cancel') {
                 _this.create(_this.dialogRef.componentInstance.user);
                 _this.getList();
             }
@@ -1685,7 +1754,7 @@ var GestioneUtenteComponent = (function () {
         this.confirmDialog = this.dialog.open(__WEBPACK_IMPORTED_MODULE_4_app_confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], {
             disableClose: false
         });
-        this.confirmDialog.componentInstance.confirmMessage = "Sei sicuro di voler cancellare questo elemento?";
+        this.confirmDialog.componentInstance.confirmMessage = 'Sei sicuro di voler cancellare questo elemento?';
         this.confirmDialog.afterClosed().subscribe(function (result) {
             if (result) {
                 _this._userService.delete(id)
@@ -1708,10 +1777,13 @@ var GestioneUtenteComponent = (function () {
         this.editDialog.componentInstance.stores = this.stores;
         this.editDialog.afterClosed().subscribe(function (result) {
             if (result) {
-                console.log("opeEditDialog result: " + result);
-                _this._userService.update(_this.editDialog.componentInstance.userObj).then(function (value) {
-                    return _this.getList();
-                }).catch(function (err) { console.log(err.message); _this.message = err.message; });
+                console.log('opeEditDialog result: ' + result);
+                _this._userService.update(_this.editDialog.componentInstance.userObj)
+                    .then(function (value) { return _this.getList(); })
+                    .catch(function (err) {
+                    console.log(err.message);
+                    _this.message = err.message;
+                });
             }
             _this.editDialog.componentInstance.userObj = null;
             _this.editDialog.componentInstance.stores = null;
@@ -2000,7 +2072,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/spese/spese-new/spese-new.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3 md-dialog-title>\n  Nuova Spesa</h3>\n<form name=\"form\" (ngSubmit)=\"f.form.valid && create()\" #f=\"ngForm\" novalidate>\n\n  <div md-dialog-content>\n    <md-select placeholder=\"Categoria\" name=\"categoria\" [(ngModel)]=\"tmpCategory\" required (change)=\"getSubCategoryList()\">\n       <md-option *ngFor=\"let types of categoryTypes | keys\" [value]=\"types.value\">\n        {{types.value}}\n      </md-option>\n    </md-select>\n\n    <!-- Sezione Sottocategoria - Visualizzato solo per Delivery e Food -->\n    <md-select placeholder=\"Tipologia\" [(ngModel)]=\"spesa.tipo\" name=\"tipo\" required *ngIf=\"tmpCategory=='Delivery'\">\n      <md-option *ngFor=\"let types of costTypes\" [value]=\"types\">\n        {{types.subCategory}}\n      </md-option>\n    </md-select>\n\n    <md-select placeholder=\"Spesa\" [(ngModel)]=\"spesa.tipo\" name=\"tipo\" required *ngIf=\"tmpCategory=='Food'\" (change)=\"setDescription()\">\n        <md-option *ngFor=\"let types of costTypes\" [value]=\"types\">\n          {{types.subCategory}}\n        </md-option>\n      </md-select>\n\n\n\n\n    <md-input-container class=\"example-full-width\" *ngIf=\"tmpCategory!='Food'\">\n      <input mdInput placeholder=\"Spesa\" [(ngModel)]=\"spesa.descrizione\" name=\"descrizione\" required>\n      <!-- <md-error *ngIf=\"descrizioneFormControl.hasError('required')\">\n        Campo <strong>obbligatorio</strong>\n      </md-error> -->\n    </md-input-container>\n\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"spesa.valore\" placeholder=\"Valore(€)\" autocomplete=\"off\" #valore=\"ngModel\" name=\"valore\" required>\n      <!-- <md-error *ngIf=\"descrizioneFormControl.hasError('required')\">\n        Campo <strong>obbligatorio</strong>\n      </md-error> -->\n    </md-input-container>\n\n  </div>\n  <div md-dialog-actions>\n    <div class=\"ProceedContainer ng-scope\">\n      <button md-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\n    </div>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\">\n      <button [disabled]=\"loading\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\n    </div>\n    <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\n    />\n  </div>\n\n</form>\n"
+module.exports = "<h3 md-dialog-title>\n  Nuova Spesa</h3>\n<form name=\"form\" (ngSubmit)=\"f.form.valid && create()\" #f=\"ngForm\" novalidate>\n\n  <div md-dialog-content>\n    <md-select placeholder=\"Categoria\" name=\"categoria\" [(ngModel)]=\"tmpCategory\" required (change)=\"getSubCategoryList()\">\n       <md-option *ngFor=\"let types of categoryTypes | keys\" [value]=\"types.value\">\n        {{types.value}}\n      </md-option>\n    </md-select>\n\n    <!-- Sezione Sottocategoria - Visualizzato solo per Delivery e Food -->\n   <!--  <md-select placeholder=\"Tipologia\" [(ngModel)]=\"spesa.tipo\" name=\"tipo\" required *ngIf=\"tmpCategory=='Delivery'\">\n      <md-option *ngFor=\"let types of costTypes\" [value]=\"types\">\n        {{types.subCategory}}\n      </md-option>\n    </md-select> -->\n\n    <md-select placeholder=\"Spesa\" [(ngModel)]=\"spesa.tipo\" name=\"tipo\" required *ngIf=\"tmpCategory=='Food' || tmpCategory=='Delivery'\" (change)=\"setDescription()\">\n        <md-option *ngFor=\"let types of costTypes\" [value]=\"types\">\n          {{types.subCategory}}\n        </md-option>\n      </md-select>\n\n\n\n\n    <md-input-container class=\"example-full-width\" *ngIf=\"tmpCategory!='Food' && tmpCategory!='Delivery'\">\n      <input mdInput placeholder=\"Spesa\" [(ngModel)]=\"spesa.descrizione\" name=\"descrizione\" required>\n      <!-- <md-error *ngIf=\"descrizioneFormControl.hasError('required')\">\n        Campo <strong>obbligatorio</strong>\n      </md-error> -->\n    </md-input-container>\n\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"spesa.valore\" placeholder=\"Valore(€)\" autocomplete=\"off\" #valore=\"ngModel\" name=\"valore\" required>\n      <!-- <md-error *ngIf=\"descrizioneFormControl.hasError('required')\">\n        Campo <strong>obbligatorio</strong>\n      </md-error> -->\n    </md-input-container>\n\n  </div>\n  <div md-dialog-actions>\n    <div class=\"ProceedContainer ng-scope\">\n      <button md-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\n    </div>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\">\n      <button [disabled]=\"loading\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\n    </div>\n    <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\n    />\n  </div>\n\n</form>\n"
 
 /***/ }),
 
@@ -2143,7 +2215,7 @@ var SpeseComponent = (function () {
     SpeseComponent.prototype.getList = function () {
         var _this = this;
         var usr = JSON.parse(localStorage.getItem('currUser'));
-        console.log("usr -->" + JSON.stringify(usr));
+        console.log('usr -->' + JSON.stringify(usr));
         this._spesaService.getTodaySpesaList(usr.store._id)
             .then(function (spese) { _this.spesaList = spese; })
             .catch(function (err) { return console.log(err); });
@@ -2153,7 +2225,7 @@ var SpeseComponent = (function () {
         // console.log("ECCO");
         var tmpSpesa = spesa;
         var usr = JSON.parse(localStorage.getItem('currUser'));
-        this.message = "";
+        this.message = '';
         tmpSpesa.utente = usr;
         tmpSpesa.store = usr.store;
         // console.log("tmpSpesa -->" + JSON.stringify(tmpSpesa));
@@ -2176,7 +2248,7 @@ var SpeseComponent = (function () {
         var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_2_app_spese_spese_new_spese_new_component__["a" /* SpeseNewComponent */]);
         dialogRef.afterClosed().subscribe(function (result) {
             // console.log(result);
-            if (result != "cancel") {
+            if (result !== 'cancel') {
                 // console.log(dialogRef.componentInstance.spesa);
                 _this.create(dialogRef.componentInstance.spesa);
             }

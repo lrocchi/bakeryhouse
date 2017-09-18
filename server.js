@@ -8,6 +8,7 @@ var spese = require('./routes/spese');
 var users = require('./routes/users');
 var stores = require('./routes/store');
 var costType = require('./routes/costType');
+var balance = require('./routes/balance');
 
 var config = require('./config/config')
 var port = 3000;
@@ -36,6 +37,7 @@ app.use('/manage', index); */
 
 
 app.use('/api/spese', spese);
+app.use('/api/balance', balance);
 app.use('/api/users', users);
 app.use('/api/stores', stores);
 app.use('/api/costtype', costType);

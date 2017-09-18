@@ -30,6 +30,7 @@ import { GestioneStoreComponent } from './management/gestione-store/gestione-sto
 import { StoreAddComponent } from './management/gestione-store/store-add/store-add.component';
 import { StoreService } from "app/_services/store.service";
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { ChiusureComponent } from './chiusure/chiusure.component';
 
 
 
@@ -69,7 +70,8 @@ export class DemoMaterialModule {}
     UserAddComponent,
     GestioneStoreComponent,
     StoreAddComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    ChiusureComponent
 
   ],
 

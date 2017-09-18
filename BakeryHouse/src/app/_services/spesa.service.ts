@@ -5,9 +5,9 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs';
 // tslint:disable-next-line:import-blacklist
 import { Observable } from 'rxjs'
-import { Cost } from "app/entity/cost";
-import { CostType } from "app/entity/cost-type";
-import { User } from "app/entity/user";
+import { Cost } from 'app/entity/cost';
+import { CostType } from 'app/entity/cost-type';
+import { User } from 'app/entity/user';
 
 
 
@@ -37,8 +37,8 @@ export class SpesaService {
   public addSpesa(spesa: Cost) {
     console.log(JSON.stringify(spesa));
 
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
 
     return this._http.post('api/spese', spesa, options).map(data => data.json()).toPromise();
 
@@ -50,8 +50,8 @@ export class SpesaService {
 
   public updateCost(cost: Cost) {
 
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
 
     return this._http.put('api/spese/' + cost._id, cost, options).map(data => data.json()).toPromise();
   }
@@ -63,8 +63,8 @@ export class SpesaService {
   public addType(type: CostType) {
     console.log(JSON.stringify(type));
 
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
 
     return this._http.post('api/costtype', type, options).map(data => data.json()).toPromise();
   }
@@ -93,8 +93,8 @@ export class SpesaService {
   }
   public updateCostType(cost: CostType) {
 
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
 
     return this._http.put('api/costtype/' + cost._id, cost, options).map(data => data.json()).toPromise();
   }

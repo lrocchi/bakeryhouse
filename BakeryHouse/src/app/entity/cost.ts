@@ -1,8 +1,8 @@
 
 
-import { User } from "app/entity/user";
-import { CostType } from "app/entity/cost-type";
-import { Store } from "app/entity/store";
+import { User } from 'app/entity/user';
+import { CostType } from 'app/entity/cost-type';
+import { Store } from 'app/entity/store';
 
 export class Cost {
   public _id: string;
@@ -12,7 +12,7 @@ export class Cost {
   public store: Store;
 
   constructor(
-    public descrizione: string = "",
+    public descrizione: string = '',
 
     public create_on: string = Date.now().toString(),
     public update_on: string = Date.now().toString(),

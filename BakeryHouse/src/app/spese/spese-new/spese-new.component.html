@@ -10,13 +10,13 @@
     </md-select>
 
     <!-- Sezione Sottocategoria - Visualizzato solo per Delivery e Food -->
-    <md-select placeholder="Tipologia" [(ngModel)]="spesa.tipo" name="tipo" required *ngIf="tmpCategory=='Delivery'">
+   <!--  <md-select placeholder="Tipologia" [(ngModel)]="spesa.tipo" name="tipo" required *ngIf="tmpCategory=='Delivery'">
       <md-option *ngFor="let types of costTypes" [value]="types">
         {{types.subCategory}}
       </md-option>
-    </md-select>
+    </md-select> -->
 
-    <md-select placeholder="Spesa" [(ngModel)]="spesa.tipo" name="tipo" required *ngIf="tmpCategory=='Food'" (change)="setDescription()">
+    <md-select placeholder="Spesa" [(ngModel)]="spesa.tipo" name="tipo" required *ngIf="tmpCategory=='Food' || tmpCategory=='Delivery'" (change)="setDescription()">
         <md-option *ngFor="let types of costTypes" [value]="types">
           {{types.subCategory}}
         </md-option>
@@ -25,7 +25,7 @@
 
 
 
-    <md-input-container class="example-full-width" *ngIf="tmpCategory!='Food'">
+    <md-input-container class="example-full-width" *ngIf="tmpCategory!='Food' && tmpCategory!='Delivery'">
       <input mdInput placeholder="Spesa" [(ngModel)]="spesa.descrizione" name="descrizione" required>
       <!-- <md-error *ngIf="descrizioneFormControl.hasError('required')">
         Campo <strong>obbligatorio</strong>

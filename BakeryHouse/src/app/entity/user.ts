@@ -1,6 +1,6 @@
 
 
-import { Store } from "app/entity/store";
+import { Store } from 'app/entity/store';
 
 export class User {
   _id: string;
@@ -14,6 +14,7 @@ export class User {
   active: boolean;
 }
 
+// tslint:disable-next-line:one-line
 export enum Ruolo{
   Dipendente = 100,
   StoreManager = 50,
