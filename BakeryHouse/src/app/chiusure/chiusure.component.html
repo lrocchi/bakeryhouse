@@ -1,13 +1,13 @@
-<md-card>
+<md-card *ngIf="lastBalance?.cassa!=null">
   <md-card-title-group>
-      <md-progress-spinner class="example-margin" [color]="spinnerColor" [mode]="spinnerMode" [value]="spinnerValue"></md-progress-spinner>
-    <md-card-title>Resoconto delle 12:00</md-card-title>
+      <md-progress-spinner class="example-margin" [color]="spinnerColor" [mode]="spinnerMode" [value]="lastBalance.value"></md-progress-spinner>
+    <md-card-title >Resoconto delle 12:00</md-card-title>
     <md-card-subtitle>stato: da inserire</md-card-subtitle>
   </md-card-title-group>
   <md-card-content class="md-content">
 
 
-    <p><span><i>Eseguito da:</i></span><span> <strong>Luca Rocchi</strong></span></p>
+    <p><span><i>Ultimo Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>
     <p><span>In cassa: </span><span>10000 &euro;</span></p>
     <p><span>POS:</span><span></span></p>
     <p><span>Ticket:</span><span></span></p>
@@ -17,51 +17,15 @@
   </md-card-actions>
 </md-card>
 
-<md-card>
+<md-card *ngIf="lastBalance?.cassa==null">
   <md-card-title-group>
-    <img md-card-sm-image>
-    <md-card-title>Resoconto delle 16:00</md-card-title>
+      <md-progress-spinner class="example-margin" [color]="spinnerColor" [mode]="spinnerMode" [value]="0"></md-progress-spinner>
+    <md-card-title >Primo resoconto della giornata</md-card-title>
     <md-card-subtitle>stato: da inserire</md-card-subtitle>
   </md-card-title-group>
   <md-card-content class="md-content">
-    <p><span><i>Eseguito da:</i></span><span> <strong>Luca Rocchi</strong></span></p>
-    <p><span>In cassa: </span><span>10000 &euro;</span></p>
-    <p><span>POS:</span><span></span></p>
-    <p><span>Ticket:</span><span></span></p>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button disabled="true">INSERISCI</button>
-  </md-card-actions>
-</md-card>
+    <p><span>Fondo giorno precedente: </span><span>{{lastBalance.prevCapital}} &euro;</span></p>
 
-<md-card>
-  <md-card-title-group>
-    <img md-card-sm-image>
-    <md-card-title>Resoconto delle 20:00</md-card-title>
-    <md-card-subtitle>stato: da inserire</md-card-subtitle>
-  </md-card-title-group>
-  <md-card-content class="md-content">
-    <p><span><i>Eseguito da:</i></span><span> <strong>Luca Rocchi</strong></span></p>
-    <p><span>In cassa: </span><span>10000 &euro;</span></p>
-    <p><span>POS:</span><span></span></p>
-    <p><span>Ticket:</span><span></span></p>
-  </md-card-content>
-  <md-card-actions>
-    <button md-button disabled="true">INSERISCI</button>
-  </md-card-actions>
-</md-card>
-
-<md-card>
-  <md-card-title-group>
-    <img md-card-sm-image>
-    <md-card-title>Chiusura</md-card-title>
-    <md-card-subtitle>stato: da inserire</md-card-subtitle>
-  </md-card-title-group>
-  <md-card-content class="md-content">
-    <p><span><i>Eseguito da:</i></span><span> <strong>Luca Rocchi</strong></span></p>
-    <p><span>In cassa: </span><span>10000 &euro;</span></p>
-    <p><span>POS:</span><span></span></p>
-    <p><span>Ticket:</span><span></span></p>
   </md-card-content>
   <md-card-actions>
     <button md-button disabled="true">INSERISCI</button>

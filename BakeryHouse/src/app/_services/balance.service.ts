@@ -9,7 +9,15 @@ export class BalanceService {
 
 
   public getTodayBalanceList(id_store: string) {
-    return this._http.get('api/balance/today/' + id_store).map(data => data.json()).toPromise();
+    const date = new Date();
+
+    return this._http.get('api/balance/' + date.getUTCSeconds() + '/' + id_store).map(data => data.json()).toPromise();
+
+  }
+
+  public getBalanceList(id_store: string, date: Date) {
+
+    return this._http.get('api/balance/' + date.getUTCSeconds() + '/' + id_store).map(data => data.json()).toPromise();
 
   }
 

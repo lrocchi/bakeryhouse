@@ -153,6 +153,53 @@ var _a;
 
 /***/ }),
 
+/***/ "../../../../../src/app/_services/balance.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BalanceService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var BalanceService = (function () {
+    function BalanceService(_http) {
+        this._http = _http;
+    }
+    BalanceService.prototype.getTodayBalanceList = function (id_store) {
+        var date = new Date();
+        return this._http.get('api/balance/' + date.getUTCSeconds() + '/' + id_store).map(function (data) { return data.json(); }).toPromise();
+    };
+    BalanceService.prototype.getBalanceList = function (id_store, date) {
+        return this._http.get('api/balance/' + date.getUTCSeconds() + '/' + id_store).map(function (data) { return data.json(); }).toPromise();
+    };
+    BalanceService.prototype.addBalance = function (balance) {
+        console.log(JSON.stringify(balance));
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers });
+        return this._http.post('api/balance', balance, options).map(function (data) { return data.json(); }).toPromise();
+    };
+    return BalanceService;
+}());
+BalanceService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
+], BalanceService);
+
+var _a;
+//# sourceMappingURL=balance.service.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/_services/spesa.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -522,6 +569,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__chiusure_chiusure_component__ = __webpack_require__("../../../../../src/app/chiusure/chiusure.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31_app_services_balance_service__ = __webpack_require__("../../../../../src/app/_services/balance.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -531,6 +579,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -630,7 +679,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_5_app_services_auth_service__["a" /* AuthService */],
             __WEBPACK_IMPORTED_MODULE_20_app_services_spesa_service__["a" /* SpesaService */],
             __WEBPACK_IMPORTED_MODULE_24_app_services_user_service__["a" /* UserService */],
-            __WEBPACK_IMPORTED_MODULE_28_app_services_store_service__["a" /* StoreService */]
+            __WEBPACK_IMPORTED_MODULE_28_app_services_store_service__["a" /* StoreService */],
+            __WEBPACK_IMPORTED_MODULE_31_app_services_balance_service__["a" /* BalanceService */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]],
         entryComponents: [__WEBPACK_IMPORTED_MODULE_14__spese_spese_new_spese_new_component__["a" /* SpeseNewComponent */], __WEBPACK_IMPORTED_MODULE_19__management_gestione_spese_cost_type_add_cost_type_add_component__["a" /* CostTypeAddComponent */], __WEBPACK_IMPORTED_MODULE_25__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */], __WEBPACK_IMPORTED_MODULE_29__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */], __WEBPACK_IMPORTED_MODULE_21__confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */]]
@@ -664,7 +714,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/chiusure/chiusure.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<md-card>\n  <md-card-title-group>\n      <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"spinnerValue\"></md-progress-spinner>\n    <md-card-title>Resoconto delle 12:00</md-card-title>\n    <md-card-subtitle>stato: da inserire</md-card-subtitle>\n  </md-card-title-group>\n  <md-card-content class=\"md-content\">\n\n\n    <p><span><i>Eseguito da:</i></span><span> <strong>Luca Rocchi</strong></span></p>\n    <p><span>In cassa: </span><span>10000 &euro;</span></p>\n    <p><span>POS:</span><span></span></p>\n    <p><span>Ticket:</span><span></span></p>\n  </md-card-content>\n  <md-card-actions>\n    <button md-button disabled=\"true\">INSERISCI</button>\n  </md-card-actions>\n</md-card>\n\n<md-card>\n  <md-card-title-group>\n    <img md-card-sm-image>\n    <md-card-title>Resoconto delle 16:00</md-card-title>\n    <md-card-subtitle>stato: da inserire</md-card-subtitle>\n  </md-card-title-group>\n  <md-card-content class=\"md-content\">\n    <p><span><i>Eseguito da:</i></span><span> <strong>Luca Rocchi</strong></span></p>\n    <p><span>In cassa: </span><span>10000 &euro;</span></p>\n    <p><span>POS:</span><span></span></p>\n    <p><span>Ticket:</span><span></span></p>\n  </md-card-content>\n  <md-card-actions>\n    <button md-button disabled=\"true\">INSERISCI</button>\n  </md-card-actions>\n</md-card>\n\n<md-card>\n  <md-card-title-group>\n    <img md-card-sm-image>\n    <md-card-title>Resoconto delle 20:00</md-card-title>\n    <md-card-subtitle>stato: da inserire</md-card-subtitle>\n  </md-card-title-group>\n  <md-card-content class=\"md-content\">\n    <p><span><i>Eseguito da:</i></span><span> <strong>Luca Rocchi</strong></span></p>\n    <p><span>In cassa: </span><span>10000 &euro;</span></p>\n    <p><span>POS:</span><span></span></p>\n    <p><span>Ticket:</span><span></span></p>\n  </md-card-content>\n  <md-card-actions>\n    <button md-button disabled=\"true\">INSERISCI</button>\n  </md-card-actions>\n</md-card>\n\n<md-card>\n  <md-card-title-group>\n    <img md-card-sm-image>\n    <md-card-title>Chiusura</md-card-title>\n    <md-card-subtitle>stato: da inserire</md-card-subtitle>\n  </md-card-title-group>\n  <md-card-content class=\"md-content\">\n    <p><span><i>Eseguito da:</i></span><span> <strong>Luca Rocchi</strong></span></p>\n    <p><span>In cassa: </span><span>10000 &euro;</span></p>\n    <p><span>POS:</span><span></span></p>\n    <p><span>Ticket:</span><span></span></p>\n  </md-card-content>\n  <md-card-actions>\n    <button md-button disabled=\"true\">INSERISCI</button>\n  </md-card-actions>\n</md-card>\n"
+module.exports = "<md-card *ngIf=\"lastBalance?.cassa!=null\">\n  <md-card-title-group>\n      <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\"></md-progress-spinner>\n    <md-card-title >Resoconto delle 12:00</md-card-title>\n    <md-card-subtitle>stato: da inserire</md-card-subtitle>\n  </md-card-title-group>\n  <md-card-content class=\"md-content\">\n\n\n    <p><span><i>Ultimo Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\n    <p><span>In cassa: </span><span>10000 &euro;</span></p>\n    <p><span>POS:</span><span></span></p>\n    <p><span>Ticket:</span><span></span></p>\n  </md-card-content>\n  <md-card-actions>\n    <button md-button disabled=\"true\">INSERISCI</button>\n  </md-card-actions>\n</md-card>\n\n<md-card *ngIf=\"lastBalance?.cassa==null\">\n  <md-card-title-group>\n      <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"0\"></md-progress-spinner>\n    <md-card-title >Primo resoconto della giornata</md-card-title>\n    <md-card-subtitle>stato: da inserire</md-card-subtitle>\n  </md-card-title-group>\n  <md-card-content class=\"md-content\">\n    <p><span>Fondo giorno precedente: </span><span>{{lastBalance.prevCapital}} &euro;</span></p>\n\n  </md-card-content>\n  <md-card-actions>\n    <button md-button disabled=\"true\">INSERISCI</button>\n  </md-card-actions>\n</md-card>\n"
 
 /***/ }),
 
@@ -674,6 +724,8 @@ module.exports = "<md-card>\n  <md-card-title-group>\n      <md-progress-spinner
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChiusureComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__ = __webpack_require__("../../../../../src/app/_services/balance.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_entity_Balance__ = __webpack_require__("../../../../../src/app/entity/Balance.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -684,13 +736,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var ChiusureComponent = (function () {
-    function ChiusureComponent() {
+    function ChiusureComponent(_balanceService) {
+        this._balanceService = _balanceService;
         this.spinnerColor = 'red';
         this.spinnerMode = 'determinate';
         this.spinnerValue = 50;
     }
     ChiusureComponent.prototype.ngOnInit = function () {
+        this.getLastBalance();
+    };
+    ChiusureComponent.prototype.getLastBalance = function () {
+        var _this = this;
+        var usr = JSON.parse(localStorage.getItem('currUser'));
+        console.log('usr -->' + JSON.stringify(usr));
+        this._balanceService.getTodayBalanceList(usr.store._id)
+            .then(function (balance) {
+            if (balance.length > 0) {
+                _this.lastBalance = balance[0];
+            }
+            else {
+                _this.lastBalance = new __WEBPACK_IMPORTED_MODULE_2_app_entity_Balance__["a" /* Balance */]();
+                _this.lastBalance.giorno = new Date().toString();
+                _this.lastBalance.user = usr;
+                _this.lastBalance.store = usr.store;
+                _this.lastBalance.tipo = _this.lastBalance.tipo.Pranzo;
+                _this.lastBalance.value = 0;
+            }
+        })
+            .catch(function (err) { return console.log(err); });
+        this._balanceService.getBalanceList(usr.store._id, new Date())
+            .then(function (balance) {
+            var tmp = balance[0];
+            _this.lastBalance.prevCapital = tmp.prevCapital;
+        })
+            .catch(function (err) { return console.log(err); });
     };
     return ChiusureComponent;
 }());
@@ -700,9 +782,10 @@ ChiusureComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/chiusure/chiusure.component.html"),
         styles: [__webpack_require__("../../../../../src/app/chiusure/chiusure.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */]) === "function" && _a || Object])
 ], ChiusureComponent);
 
+var _a;
 //# sourceMappingURL=chiusure.component.js.map
 
 /***/ }),
@@ -828,6 +911,30 @@ EditDialogComponent = __decorate([
 
 var _a, _b;
 //# sourceMappingURL=edit-dialog.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/entity/Balance.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Balance; });
+/* unused harmony export BalanceType */
+var Balance = (function () {
+    function Balance() {
+        this.giorno = Date.now().toString();
+    }
+    return Balance;
+}());
+
+var BalanceType;
+(function (BalanceType) {
+    BalanceType[BalanceType["Pranzo"] = 12] = "Pranzo";
+    BalanceType[BalanceType["Pomeriggio"] = 16] = "Pomeriggio";
+    BalanceType[BalanceType["Cena"] = 20] = "Cena";
+    BalanceType[BalanceType["Chiusura"] = 24] = "Chiusura";
+})(BalanceType || (BalanceType = {}));
+//# sourceMappingURL=Balance.js.map
 
 /***/ }),
 

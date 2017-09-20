@@ -5,12 +5,26 @@ var config = require('../config/config')
 var Balance = require('../models/Balance');
 
 
-// GET today costs by id_store
-router.get('/today/:id_store', function(req, res, next){
+// GET today balances by id_store, ordered by date descending so it is possible get only the last one
+/* router.get('/today/:id_store', function(req, res, next){
     var today = new Date();
     Balance.find({
-         create_on: { $gte : new Date(today.getFullYear(), today.getMonth(), today.getDate())}
-       }).where('store').equals(req.params.id_store).populate('user').populate('store').exec(function(err, balanceDocs){
+         date: { $gte : new Date(today.getFullYear(), today.getMonth(), today.getDate())}
+       }).where('store').equals(req.params.id_store).sort({day: -1}) .populate('user').populate('store').exec(function(err, balanceDocs){
+               if(err){ 
+                 console.log(err);
+                   res.send(err);
+               }
+               res.json(balanceDocs);
+       });
+   }); */
+
+   router.get('/:epoch/:id_store', function(req, res, next){
+    var today = new Date();
+    today.setUTCSeconds(req.params.epoch);
+    Balance.find({
+         date: { $gte : new Date(today.getFullYear(), today.getMonth(), today.getDate())}
+       }).where('store').equals(req.params.id_store).sort({day: -1}) .populate('user').populate('store').exec(function(err, balanceDocs){
                if(err){ 
                  console.log(err);
                    res.send(err);
@@ -19,6 +33,7 @@ router.get('/today/:id_store', function(req, res, next){
        });
    });
 
+   
 
    router.post('/', function(req, res, next ) {
     

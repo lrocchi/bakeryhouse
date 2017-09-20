@@ -31,6 +31,7 @@ import { StoreAddComponent } from './management/gestione-store/store-add/store-a
 import { StoreService } from "app/_services/store.service";
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { ChiusureComponent } from './chiusure/chiusure.component';
+import { BalanceService } from 'app/_services/balance.service';
 
 
 
@@ -93,7 +94,8 @@ export class DemoMaterialModule {}
     AuthService,
     SpesaService,
     UserService,
-    StoreService
+    StoreService,
+    BalanceService
 
   ],
   bootstrap: [AppComponent],
