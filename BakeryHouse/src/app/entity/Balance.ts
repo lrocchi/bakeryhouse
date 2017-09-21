@@ -3,7 +3,7 @@ import { Store } from 'app/entity/store';
 
 export class Balance {
   public _id: string;
-  public tipo: {'Pranzo', 'Pomeriggio', 'Cena', 'Chiusura'};
+  public tipo: string;
   public value: number;
   public giorno: string = Date.now().toString();
   public user: User;
@@ -20,8 +20,8 @@ export class Balance {
 }
 
 export enum BalanceType {
-  Pranzo = 12,
-  Pomeriggio = 16,
-  Cena = 20,
-  Chiusura = 24
+  Pranzo = 25,
+  Pomeriggio = 50,
+  Cena = 75,
+  Chiusura = 100
 }

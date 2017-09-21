@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 
-import { MdDialog, MdDialogRef } from "@angular/material";
-import { SpeseNewComponent } from "app/spese/spese-new/spese-new.component";
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { SpeseNewComponent } from 'app/spese/spese-new/spese-new.component';
 import { LocalStorageService } from 'ng2-webstorage';
-import { NgForm } from "@angular/forms";
+import { NgForm } from '@angular/forms';
 
-import { User } from "app/entity/user";
+import { User } from 'app/entity/user';
 import { Cost } from 'app/entity/cost';
 import { SpesaService } from 'app/_services/spesa.service';
 

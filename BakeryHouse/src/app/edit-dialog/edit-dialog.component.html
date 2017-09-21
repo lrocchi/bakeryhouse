@@ -1,4 +1,4 @@
-<h1 md-dialog-title>Modifica</h1>
+<h1 md-dialog-title>{{title}}</h1>
 
 
 <!-- STORE EDIT -->
@@ -70,8 +70,7 @@
       </div>
       <span></span>
       <div class="example-full-width">
-        <md-select placeholder="Punto Vendita" [(ngModel)]="userObj.store._id" #store="ngModel" name="store"
-          required>
+        <md-select placeholder="Punto Vendita" [(ngModel)]="userObj.store._id" #store="ngModel" name="store" required>
           <md-option *ngFor="let store of stores" [value]="store._id">{{store.nome}}</md-option>
         </md-select>
       </div>
@@ -87,7 +86,62 @@
 </div>
 
 
+<div *ngIf="balanceObj != null">
+  <form name="form" (ngSubmit)="f.form.valid" novalidate>
+    <div md-dialog-content>
+      <md-card>
+          <md-card-header>
+              <h3>Cassa</h3>
+            </md-card-header>
+        <md-card-content>
+          <section class="example-section">
+            <md-input-container class="example-margin">
+              <input mdInput type="number" min="0" placeholder="100€">
+            </md-input-container>
+            <md-input-container class="example-margin">
+              <input mdInput type="number" min="0" placeholder="50€">
+            </md-input-container>
+            <md-input-container class="example-margin">
+              <input mdInput type="number" min="0" placeholder="10€">
+            </md-input-container>
+            <md-input-container class="example-margin">
+              <input mdInput type="number" min="0" placeholder="5€">
+            </md-input-container>
+            <md-input-container class="example-margin">
+              <input mdInput type="number" min="0" placeholder="2€">
+            </md-input-container>
+            <md-input-container class="example-margin">
+              <input mdInput type="number" min="0" placeholder="1€">
+            </md-input-container>
+            <md-input-container class="example-margin">
+              <input mdInput type="number" min="0" placeholder="0.5€">
+            </md-input-container>
+            <md-input-container class="example-margin">
+              <input mdInput type="number" min="0" placeholder="0.20€">
+            </md-input-container>
+            <md-input-container class="example-margin">
+              <input mdInput type="number" min="0" placeholder="0.10€">
+            </md-input-container>
+          </section>
+        </md-card-content>
+      </md-card>
+      <md-input-container class="example-full-width">
+        <input mdInput type="number" [(ngModel)]="balanceObj.cassa" placeholder="Cassa" autocomplete="off" #cassa="ngModel" name="cassa"
+          required>
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <input mdInput type="number" [(ngModel)]="balanceObj.pos" placeholder="Pos" autocomplete="off" #pos="ngModel" name="pos"
+          required>
+      </md-input-container>
 
+      <md-input-container class="example-full-width">
+        <input mdInput type="number" [(ngModel)]="balanceObj.ticket" placeholder="Ticket" autocomplete="off" #ticket="ngModel" name="ticket"
+          required>
+      </md-input-container>
+
+    </div>
+  </form>
+</div>
 
 
 

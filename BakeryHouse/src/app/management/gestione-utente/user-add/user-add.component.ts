@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { User, Ruolo } from "app/entity/user";
-import { Store } from "app/entity/store";
-import { MdDialogRef } from "@angular/material";
-import { StoreService } from "app/_services/store.service";
-import { UserService } from "app/_services/user.service";
+import { User, Ruolo } from 'app/entity/user';
+import { Store } from 'app/entity/store';
+import { MdDialogRef } from '@angular/material';
+import { StoreService } from 'app/_services/store.service';
+import { UserService } from 'app/_services/user.service';
 
 
 @Component({
@@ -31,8 +31,8 @@ export class UserAddComponent implements OnInit {
   }
 
 
-  create(){
-    console.log("UserAddComponent=" + JSON.stringify(this.user));
+  create() {
+    console.log('UserAddComponent=' + JSON.stringify(this.user));
     this.dialogRef.close();
   }
 

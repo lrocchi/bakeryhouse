@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from "app/entity/user";
-import { UserService } from "app/_services/user.service";
-import { MdDialogRef, MdDialog } from "@angular/material";
-import { UserAddComponent } from "app/management/gestione-utente/user-add/user-add.component";
-import { ConfirmationDialog } from "app/confirmation-dialog/confirmation-dialog.component";
-import { EditDialogComponent } from "app/edit-dialog/edit-dialog.component";
+import { User } from 'app/entity/user';
+import { UserService } from 'app/_services/user.service';
+import { MdDialogRef, MdDialog } from '@angular/material';
+import { UserAddComponent } from 'app/management/gestione-utente/user-add/user-add.component';
+import { ConfirmationDialog } from 'app/confirmation-dialog/confirmation-dialog.component';
+import { EditDialogComponent } from 'app/edit-dialog/edit-dialog.component';
 import { Store } from 'app/entity/store';
 import { StoreService } from 'app/_services/store.service';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'userMngmt',
   templateUrl: './gestione-utente.component.html',
   styleUrls: ['./gestione-utente.component.css']

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialogRef } from "@angular/material";
-import { Store } from "app/entity/store";
-import { User, Ruolo } from "app/entity/user";
+import { MdDialogRef } from '@angular/material';
+import { Store } from 'app/entity/store';
+import { User, Ruolo } from 'app/entity/user';
 import { StoreService } from 'app/_services/store.service';
+import { Balance } from 'app/entity/Balance';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -11,10 +12,11 @@ import { StoreService } from 'app/_services/store.service';
 })
 export class EditDialogComponent implements OnInit {
 
-
+title: String = 'Modifica';
 
   storeObj: Store = null;
   userObj: User = null;
+  balanceObj: Balance = null;
   roles = Ruolo;
   public stores: Array<Store>;
 
