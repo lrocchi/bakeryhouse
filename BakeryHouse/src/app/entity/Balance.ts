@@ -2,8 +2,10 @@ import { User } from 'app/entity/user';
 import { Store } from 'app/entity/store';
 
 export class Balance {
+
+  /* db properties */
   public _id: string;
-  public tipo: string;
+  public type: string;
   public value: number;
   public giorno: string = Date.now().toString();
   public user: User;
@@ -16,6 +18,9 @@ export class Balance {
 
   public prevCapital: number;
   public capital: number;
+
+
+
 
 }
 

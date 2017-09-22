@@ -89,42 +89,7 @@
 <div *ngIf="balanceObj != null">
   <form name="form" (ngSubmit)="f.form.valid" novalidate>
     <div md-dialog-content>
-      <md-card>
-          <md-card-header>
-              <h3>Cassa</h3>
-            </md-card-header>
-        <md-card-content>
-          <section class="example-section">
-            <md-input-container class="example-margin">
-              <input mdInput type="number" min="0" placeholder="100€">
-            </md-input-container>
-            <md-input-container class="example-margin">
-              <input mdInput type="number" min="0" placeholder="50€">
-            </md-input-container>
-            <md-input-container class="example-margin">
-              <input mdInput type="number" min="0" placeholder="10€">
-            </md-input-container>
-            <md-input-container class="example-margin">
-              <input mdInput type="number" min="0" placeholder="5€">
-            </md-input-container>
-            <md-input-container class="example-margin">
-              <input mdInput type="number" min="0" placeholder="2€">
-            </md-input-container>
-            <md-input-container class="example-margin">
-              <input mdInput type="number" min="0" placeholder="1€">
-            </md-input-container>
-            <md-input-container class="example-margin">
-              <input mdInput type="number" min="0" placeholder="0.5€">
-            </md-input-container>
-            <md-input-container class="example-margin">
-              <input mdInput type="number" min="0" placeholder="0.20€">
-            </md-input-container>
-            <md-input-container class="example-margin">
-              <input mdInput type="number" min="0" placeholder="0.10€">
-            </md-input-container>
-          </section>
-        </md-card-content>
-      </md-card>
+
       <md-input-container class="example-full-width">
         <input mdInput type="number" [(ngModel)]="balanceObj.cassa" placeholder="Cassa" autocomplete="off" #cassa="ngModel" name="cassa"
           required>

@@ -715,7 +715,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/chiusure/chiusure.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\n  <div class=\"alert alert-danger\">{{message}}</div>\n  <md-card class=\"example-card\">\n    <md-card-header>\n      <h3>Resoconto</h3>\n      <span class=\"span-fill-remaining\"></span>\n      <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\n    </md-card-header>\n    <md-card-content>\n      <!-- <md-card *ngFor=\"let obj of balance\">\n        <md-card-title-group>\n          <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"obj.value\"></md-progress-spinner>\n          <md-card-title>Resoconto {{obj.tipo}}</md-card-title>\n          <md-card-subtitle>stato: inserito</md-card-subtitle>\n        </md-card-title-group>\n        <md-card-content class=\"md-content\">\n\n\n          <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{obj.user.name}} {{obj.user.surname}}</strong></span></p>\n          <p><span>In cassa: </span><span>{{obj.cassa}} &euro;</span></p>\n          <p><span>POS:</span><span>{{obj.pos}}</span></p>\n          <p><span>Ticket:</span><span>{{obj.ticket}}</span></p>\n        </md-card-content>\n        <md-card-actions>\n          <button md-button disabled=\"true\">INSERISCI</button>\n        </md-card-actions>\n      </md-card> -->\n    </md-card-content>\n  </md-card>\n<!-- </div> -->\n\n\n<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\">\n  <div class=\"alert alert-danger\">{{message}}</div>\n  <div>\n    <h3>Resoconto</h3>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\n  </div>\n\n  <md-card *ngFor=\"let obj of balance\">\n    <md-card-title-group>\n      <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"obj.value\"></md-progress-spinner>\n      <md-card-title>Resoconto {{obj.tipo}}</md-card-title>\n      <md-card-subtitle>stato: inserito</md-card-subtitle>\n    </md-card-title-group>\n    <md-card-content class=\"md-content\">\n\n\n      <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{obj.user.name}} {{obj.user.surname}}</strong></span></p>\n      <p><span>In cassa: </span><span>{{obj.cassa}} &euro;</span></p>\n      <p><span>POS:</span><span>{{obj.pos}}</span></p>\n      <p><span>Ticket:</span><span>{{obj.ticket}}</span></p>\n    </md-card-content>\n    <md-card-actions>\n      <button md-button disabled=\"true\">INSERISCI</button>\n    </md-card-actions>\n  </md-card>\n\n</div> -->\n"
+module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\n<div class=\"alert alert-danger\">{{message}}</div>\n<md-card class=\"example-card\">\n  <md-card-header>\n    <h1 *ngIf=\"diff>0\">Resoconto tra {{timerMessage}}</h1>\n    <h1 *ngIf=\"diff<0\" style=\"color: red\">Resoconto in ritardo di {{timerMessage}}</h1>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\" *ngIf=\"diff<0\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\" *ngIf=\"lastBalance?.type!=='Chiusura'\">Aggiungi</button></div>\n  </md-card-header>\n  <md-card-content>\n    <md-card *ngFor=\"let obj of balance\">\n      <md-card-title-group>\n        <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"obj.value\" aria-label=\"100\"></md-progress-spinner>\n        <md-card-title>Resoconto {{obj.type}}</md-card-title>\n        <md-card-subtitle>stato: inserito</md-card-subtitle>\n      </md-card-title-group>\n      <md-card-content class=\"md-content\">\n\n\n        <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{obj.user.name}} {{obj.user.surname}}</strong></span></p>\n        <p><span>In cassa: </span><span>{{obj.cassa}} &euro;</span></p>\n        <p><span>POS:</span><span> <strong>{{obj.pos}}</strong></span></p>\n        <p><span>Ticket:</span><span> <strong>{{obj.ticket}}</strong></span></p>\n      </md-card-content>\n      <!-- <md-card-actions>\n        <button md-button disabled=\"true\">SEGNALA</button>\n      </md-card-actions> -->\n    </md-card>\n  </md-card-content>\n</md-card>\n<!-- </div> -->\n\n\n<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\">\n  <div class=\"alert alert-danger\">{{message}}</div>\n  <div>\n    <h3>Resoconto</h3>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\n  </div>\n\n  <md-card *ngFor=\"let obj of balance\">\n    <md-card-title-group>\n      <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"obj.value\"></md-progress-spinner>\n      <md-card-title>Resoconto {{obj.tipo}}</md-card-title>\n      <md-card-subtitle>stato: inserito</md-card-subtitle>\n    </md-card-title-group>\n    <md-card-content class=\"md-content\">\n\n\n      <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{obj.user.name}} {{obj.user.surname}}</strong></span></p>\n      <p><span>In cassa: </span><span>{{obj.cassa}} &euro;</span></p>\n      <p><span>POS:</span><span>{{obj.pos}}</span></p>\n      <p><span>Ticket:</span><span>{{obj.ticket}}</span></p>\n    </md-card-content>\n    <md-card-actions>\n      <button md-button disabled=\"true\">INSERISCI</button>\n    </md-card-actions>\n  </md-card>\n\n</div> -->\n"
 
 /***/ }),
 
@@ -729,6 +729,8 @@ module.exports = "<!-- <div style=\"display: inline-block; text-align: left; wid
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_entity_Balance__ = __webpack_require__("../../../../../src/app/entity/Balance.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -743,17 +745,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ChiusureComponent = (function () {
     function ChiusureComponent(_balanceService, dialog) {
         this._balanceService = _balanceService;
         this.dialog = dialog;
-        this.spinnerColor = 'red';
+        this.spinnerColor = 'normal';
         this.spinnerMode = 'determinate';
-        this.spinnerValue = 50;
         this.usr = JSON.parse(localStorage.getItem('currUser'));
     }
     ChiusureComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.getList();
+        /* TIMER */
+        // this.future = new Date(this.futureString);
+        this.$counter = __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__["Observable"].interval(1000).map(function (x) {
+            _this.diff = Math.floor((_this.future.getTime() - new Date().getTime()) / 1000);
+            return x;
+        });
+        this.subscription = this.$counter.subscribe(function (x) { return _this.timerMessage = _this.dhms(_this.diff); });
+        /* FINE TIMER */
     };
     ChiusureComponent.prototype.getList = function () {
         var _this = this;
@@ -761,6 +772,32 @@ var ChiusureComponent = (function () {
         this._balanceService.getTodayBalanceList(this.usr.store._id)
             .then(function (balance) {
             _this.balance = balance;
+            _this.lastBalance = balance[0];
+            var oDate = new Date();
+            oDate.setMinutes(0);
+            oDate.setSeconds(0);
+            switch (_this.lastBalance.value) {
+                case 25:
+                    oDate.setHours(16);
+                    break;
+                case 50:
+                    oDate.setHours(20);
+                    break;
+                case 75:
+                    oDate.setHours(24);
+                    break;
+                case 100:
+                    oDate.setDate(oDate.getDate() + 1);
+                    oDate.setHours(12);
+                    oDate.setMinutes(0);
+                    oDate.setSeconds(0);
+                    break;
+                default:
+                    oDate.setHours(12);
+                    _this.future = oDate;
+                    break;
+            }
+            _this.future = oDate;
         })
             .catch(function (err) { return console.log(err); });
     };
@@ -772,7 +809,7 @@ var ChiusureComponent = (function () {
             .then(function (balance) {
             var tmp = balance[0];
             if (tmp) {
-                _this.lastBalance.prevCapital = tmp.prevCapital;
+                _this.prevCapital = tmp.capital;
             }
         })
             .catch(function (err) { return console.log(err); });
@@ -790,28 +827,59 @@ var ChiusureComponent = (function () {
         balance.user = this.usr;
         balance.store = this.usr.store;
         /* if (this.lastBalance) {
-          balance.tipo = this.lastBalance.tipo;
+          balance.type = this.lastBalance.type;
         }else {
-          balance.tipo = BalanceType[25];
+          balance.type = BalanceType[25];
         } */
-        balance.value = 0;
+        balance.value = this.lastBalance.value + 25;
+        balance.type = __WEBPACK_IMPORTED_MODULE_2_app_entity_Balance__["b" /* BalanceType */][this.lastBalance.value + 25];
         // balance.prevCapital = this.lastBalance.prevCapital;
         this.editDialog.componentInstance.balanceObj = balance;
         this.editDialog.componentInstance.title = 'Aggiungi resoconto';
         this.editDialog.afterClosed().subscribe(function (result) {
             if (result) {
+                var tmpBal = _this.editDialog.componentInstance.balanceObj;
                 console.log('opeEditDialog result: ' + result);
-                _this._balanceService.addBalance(_this.editDialog.componentInstance.balanceObj)
+                _this._balanceService.addBalance(tmpBal)
                     .then(function (value) { return _this.getList(); })
                     .catch(function (err) {
                     console.log(err.message);
                     _this.message = err.message;
                 });
             }
-            _this.editDialog.componentInstance.userObj = null;
-            _this.editDialog.componentInstance.stores = null;
+            _this.editDialog.componentInstance.balanceObj = null;
             _this.editDialog = null;
+            _this.getList();
         });
+    };
+    ChiusureComponent.prototype.dhms = function (t) {
+        var days, hours, minutes, seconds;
+        if (t >= 0) {
+            days = Math.floor(t / 86400);
+            t -= days * 86400;
+            hours = Math.floor(t / 3600) % 24;
+            t -= hours * 3600;
+            minutes = Math.floor(t / 60) % 60;
+            t -= minutes * 60;
+            seconds = t % 60;
+        }
+        else {
+            days = Math.floor(t / 86400);
+            t -= days * 86400;
+            hours = Math.floor(t / 3600) % 24;
+            t -= hours * 3600;
+            hours = 24 - hours;
+            minutes = Math.floor(t / 60) % 60;
+            t -= minutes * 60;
+            minutes = 60 - minutes;
+            seconds = t % 60;
+            seconds = 60 - seconds;
+        }
+        return [
+            hours + 'h',
+            minutes + 'm',
+            seconds + 's'
+        ].join(' ');
     };
     return ChiusureComponent;
 }());
@@ -894,7 +962,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/edit-dialog/edit-dialog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 md-dialog-title>{{title}}</h1>\n\n\n<!-- STORE EDIT -->\n<div *ngIf=\"storeObj != null\">\n\n\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\n\n    <div md-dialog-content>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"storeObj.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required value=\"storeObj.nome\">\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"storeObj.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\"\n          value=\"storeObj.indirizzo\" required>\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"storeObj.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" value=\"storeObj.piva\"\n          required>\n      </md-input-container>\n\n\n      <md-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"storeObj.active\" [checked]=\"storeObj.active\">Attivo</md-checkbox>\n\n    </div>\n\n\n\n  </form>\n\n</div>\n\n\n<!-- USER EDIT -->\n<div *ngIf=\"userObj != null\">\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\n\n    <div md-dialog-content>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.name\" placeholder=\"Nome\" autocomplete=\"off\" #name=\"ngModel\" name=\"name\" required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.surname\" placeholder=\"Cognome\" autocomplete=\"off\" #surname=\"ngModel\" name=\"surname\" required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.username\" placeholder=\"Username\" autocomplete=\"off\" #username=\"ngModel\" name=\"username\"\n          required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.password\" type=\"password\" placeholder=\"Password\" autocomplete=\"off\" #password=\"ngModel\"\n          name=\"password\" required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.email\" placeholder=\"Email\" autocomplete=\"off\" #email=\"ngModel\" name=\"email\" required>\n      </md-input-container>\n\n      <div class=\"example-full-width\">\n        <md-select placeholder=\"Ruolo\" [(ngModel)]=\"userObj.ruolo\" #ruolo=\"ngModel\" name=\"role\" required>\n          <md-option *ngFor=\"let ruolo of roles | keys\" [value]=\"ruolo.value\">\n            {{ruolo.value}}\n          </md-option>\n        </md-select>\n      </div>\n      <span></span>\n      <div class=\"example-full-width\">\n        <md-select placeholder=\"Punto Vendita\" [(ngModel)]=\"userObj.store._id\" #store=\"ngModel\" name=\"store\" required>\n          <md-option *ngFor=\"let store of stores\" [value]=\"store._id\">{{store.nome}}</md-option>\n        </md-select>\n      </div>\n\n\n\n      <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"active\" [(ngModel)]=\"userObj.active\" [checked]=\"userObj.active\"\n        [value]=\"userObj.active\">Attivo</md-checkbox>\n\n    </div>\n\n  </form>\n</div>\n\n\n<div *ngIf=\"balanceObj != null\">\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\n    <div md-dialog-content>\n      <md-card>\n          <md-card-header>\n              <h3>Cassa</h3>\n            </md-card-header>\n        <md-card-content>\n          <section class=\"example-section\">\n            <md-input-container class=\"example-margin\">\n              <input mdInput type=\"number\" min=\"0\" placeholder=\"100€\">\n            </md-input-container>\n            <md-input-container class=\"example-margin\">\n              <input mdInput type=\"number\" min=\"0\" placeholder=\"50€\">\n            </md-input-container>\n            <md-input-container class=\"example-margin\">\n              <input mdInput type=\"number\" min=\"0\" placeholder=\"10€\">\n            </md-input-container>\n            <md-input-container class=\"example-margin\">\n              <input mdInput type=\"number\" min=\"0\" placeholder=\"5€\">\n            </md-input-container>\n            <md-input-container class=\"example-margin\">\n              <input mdInput type=\"number\" min=\"0\" placeholder=\"2€\">\n            </md-input-container>\n            <md-input-container class=\"example-margin\">\n              <input mdInput type=\"number\" min=\"0\" placeholder=\"1€\">\n            </md-input-container>\n            <md-input-container class=\"example-margin\">\n              <input mdInput type=\"number\" min=\"0\" placeholder=\"0.5€\">\n            </md-input-container>\n            <md-input-container class=\"example-margin\">\n              <input mdInput type=\"number\" min=\"0\" placeholder=\"0.20€\">\n            </md-input-container>\n            <md-input-container class=\"example-margin\">\n              <input mdInput type=\"number\" min=\"0\" placeholder=\"0.10€\">\n            </md-input-container>\n          </section>\n        </md-card-content>\n      </md-card>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput type=\"number\" [(ngModel)]=\"balanceObj.cassa\" placeholder=\"Cassa\" autocomplete=\"off\" #cassa=\"ngModel\" name=\"cassa\"\n          required>\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput type=\"number\" [(ngModel)]=\"balanceObj.pos\" placeholder=\"Pos\" autocomplete=\"off\" #pos=\"ngModel\" name=\"pos\"\n          required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput type=\"number\" [(ngModel)]=\"balanceObj.ticket\" placeholder=\"Ticket\" autocomplete=\"off\" #ticket=\"ngModel\" name=\"ticket\"\n          required>\n      </md-input-container>\n\n    </div>\n  </form>\n</div>\n\n\n\n<div md-dialog-actions>\n  <button md-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\n  <button md-button (click)=\"dialogRef.close(false)\">Annulla</button>\n</div>\n"
+module.exports = "<h1 md-dialog-title>{{title}}</h1>\n\n\n<!-- STORE EDIT -->\n<div *ngIf=\"storeObj != null\">\n\n\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\n\n    <div md-dialog-content>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"storeObj.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required value=\"storeObj.nome\">\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"storeObj.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\"\n          value=\"storeObj.indirizzo\" required>\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"storeObj.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" value=\"storeObj.piva\"\n          required>\n      </md-input-container>\n\n\n      <md-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"storeObj.active\" [checked]=\"storeObj.active\">Attivo</md-checkbox>\n\n    </div>\n\n\n\n  </form>\n\n</div>\n\n\n<!-- USER EDIT -->\n<div *ngIf=\"userObj != null\">\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\n\n    <div md-dialog-content>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.name\" placeholder=\"Nome\" autocomplete=\"off\" #name=\"ngModel\" name=\"name\" required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.surname\" placeholder=\"Cognome\" autocomplete=\"off\" #surname=\"ngModel\" name=\"surname\" required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.username\" placeholder=\"Username\" autocomplete=\"off\" #username=\"ngModel\" name=\"username\"\n          required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.password\" type=\"password\" placeholder=\"Password\" autocomplete=\"off\" #password=\"ngModel\"\n          name=\"password\" required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.email\" placeholder=\"Email\" autocomplete=\"off\" #email=\"ngModel\" name=\"email\" required>\n      </md-input-container>\n\n      <div class=\"example-full-width\">\n        <md-select placeholder=\"Ruolo\" [(ngModel)]=\"userObj.ruolo\" #ruolo=\"ngModel\" name=\"role\" required>\n          <md-option *ngFor=\"let ruolo of roles | keys\" [value]=\"ruolo.value\">\n            {{ruolo.value}}\n          </md-option>\n        </md-select>\n      </div>\n      <span></span>\n      <div class=\"example-full-width\">\n        <md-select placeholder=\"Punto Vendita\" [(ngModel)]=\"userObj.store._id\" #store=\"ngModel\" name=\"store\" required>\n          <md-option *ngFor=\"let store of stores\" [value]=\"store._id\">{{store.nome}}</md-option>\n        </md-select>\n      </div>\n\n\n\n      <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"active\" [(ngModel)]=\"userObj.active\" [checked]=\"userObj.active\"\n        [value]=\"userObj.active\">Attivo</md-checkbox>\n\n    </div>\n\n  </form>\n</div>\n\n\n<div *ngIf=\"balanceObj != null\">\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\n    <div md-dialog-content>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput type=\"number\" [(ngModel)]=\"balanceObj.cassa\" placeholder=\"Cassa\" autocomplete=\"off\" #cassa=\"ngModel\" name=\"cassa\"\n          required>\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput type=\"number\" [(ngModel)]=\"balanceObj.pos\" placeholder=\"Pos\" autocomplete=\"off\" #pos=\"ngModel\" name=\"pos\"\n          required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput type=\"number\" [(ngModel)]=\"balanceObj.ticket\" placeholder=\"Ticket\" autocomplete=\"off\" #ticket=\"ngModel\" name=\"ticket\"\n          required>\n      </md-input-container>\n\n    </div>\n  </form>\n</div>\n\n\n\n<div md-dialog-actions>\n  <button md-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\n  <button md-button (click)=\"dialogRef.close(false)\">Annulla</button>\n</div>\n"
 
 /***/ }),
 
@@ -960,7 +1028,7 @@ var _a, _b;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Balance; });
-/* unused harmony export BalanceType */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return BalanceType; });
 var Balance = (function () {
     function Balance() {
         this.giorno = Date.now().toString();

@@ -24,7 +24,7 @@ var Balance = require('../models/Balance');
     today.setUTCSeconds(req.params.epoch);
     Balance.find({
          date: { $gte : new Date(today.getFullYear(), today.getMonth(), today.getDate())}
-       }).where('store').equals(req.params.id_store).sort({day: -1}) .populate('user').populate('store').exec(function(err, balanceDocs){
+       }).where('store').equals(req.params.id_store).sort({date: 'desc'}).populate('user').populate('store').exec(function(err, balanceDocs){
                if(err){ 
                  console.log(err);
                    res.send(err);
