@@ -65,38 +65,43 @@ export class ChiusureComponent implements OnInit {
       .then(balance => {
         this.balance = balance;
         this.lastBalance = balance[0];
-
-        const oDate = new Date();
-        oDate.setMinutes(0);
-        oDate.setSeconds(0);
-        switch (this.lastBalance.value) {
-          case 25:
-            oDate.setHours(16);
-            break;
-          case 50:
-            oDate.setHours(20);
-            break;
-          case 75:
-            oDate.setHours(24);
-            break;
-          case 100:
-            oDate.setDate(oDate.getDate() + 1);
-            oDate.setHours(12);
-            oDate.setMinutes(0);
-            oDate.setSeconds(0);
-            break;
-          default:
-
-            oDate.setHours(12);
-
-            this.future = oDate;
-            break;
-        }
-        this.future = oDate;
-
       })
       .catch(err => console.log(err));
 
+    const oDate = new Date();
+    oDate.setMinutes(0);
+    oDate.setSeconds(0);
+    if (this.lastBalance) {
+
+      switch (this.lastBalance.value) {
+        case 25:
+          oDate.setHours(16);
+          break;
+        case 50:
+          oDate.setHours(20);
+          break;
+        case 75:
+          oDate.setHours(24);
+          break;
+        case 100:
+          oDate.setDate(oDate.getDate() + 1);
+          oDate.setHours(12);
+          oDate.setMinutes(0);
+          oDate.setSeconds(0);
+          break;
+        default:
+
+          oDate.setHours(12);
+
+          this.future = oDate;
+          break;
+      }
+      this.future = oDate;
+    } else {
+      oDate.setHours(12);
+
+      this.future = oDate;
+    }
   }
 
 

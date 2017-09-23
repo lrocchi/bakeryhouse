@@ -715,7 +715,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/chiusure/chiusure.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\n<div class=\"alert alert-danger\">{{message}}</div>\n<md-card class=\"example-card\">\n  <md-card-header>\n    <h1 *ngIf=\"diff>0\">Prossimo resoconto tra {{timerMessage}}</h1>\n    <h1 *ngIf=\"diff<0\" style=\"color: red\">Resoconto in ritardo di {{timerMessage}}</h1>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\" *ngIf=\"diff<0\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\" *ngIf=\"lastBalance?.type!=='Chiusura'\">Aggiungi</button></div>\n  </md-card-header>\n  <md-card-content>\n    <md-card *ngIf=\"lastBalance\">\n      <md-card-title-group>\n        <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\" aria-label=\"100\"></md-progress-spinner>\n        <md-card-title>Resoconto {{lastBalance.type}}</md-card-title>\n        <md-card-subtitle>stato: inserito</md-card-subtitle>\n      </md-card-title-group>\n      <md-card-content class=\"md-content\">\n\n\n        <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\n        <p><span>In cassa: </span><span><strong>{{lastBalance.cassa}} &euro;</strong></span></p>\n        <p><span>POS:</span><span> <strong>{{lastBalance.pos}} &euro;</strong></span></p>\n        <p><span>Ticket:</span><span> <strong>{{lastBalance.ticket}} &euro;</strong></span></p>\n      </md-card-content>\n      <!-- <md-card-actions>\n        <button md-button disabled=\"true\">SEGNALA</button>\n      </md-card-actions> -->\n    </md-card>\n  </md-card-content>\n</md-card>\n<!-- </div> -->\n\n\n<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\">\n  <div class=\"alert alert-danger\">{{message}}</div>\n  <div>\n    <h3>Resoconto</h3>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\n  </div>\n\n  <md-card *ngFor=\"let lastBalance of balance\">\n    <md-card-title-group>\n      <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\"></md-progress-spinner>\n      <md-card-title>Resoconto {{lastBalance.tipo}}</md-card-title>\n      <md-card-subtitle>stato: inserito</md-card-subtitle>\n    </md-card-title-group>\n    <md-card-content class=\"md-content\">\n\n\n      <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\n      <p><span>In cassa: </span><span>{{lastBalance.cassa}} &euro;</span></p>\n      <p><span>POS:</span><span>{{lastBalance.pos}}</span></p>\n      <p><span>Ticket:</span><span>{{lastBalance.ticket}}</span></p>\n    </md-card-content>\n    <md-card-actions>\n      <button md-button disabled=\"true\">INSERISCI</button>\n    </md-card-actions>\n  </md-card>\n\n</div> -->\n"
+module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\n<div class=\"alert alert-danger\">{{message}}</div>\n<md-card class=\"example-card\">\n  <md-card-header>\n    <h3 *ngIf=\"diff>0\">Prossimo resoconto tra {{timerMessage}}</h3>\n    <h3 *ngIf=\"diff<0\" style=\"color: red\">Resoconto in ritardo di {{timerMessage}}</h3>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\" *ngIf=\"diff<0\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\" *ngIf=\"lastBalance?.type!=='Chiusura'\">Aggiungi</button></div>\n  </md-card-header>\n  <md-card-content>\n    <md-card *ngIf=\"lastBalance\">\n      <md-card-title-group>\n        <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\" aria-label=\"100\"></md-progress-spinner>\n        <md-card-title>Resoconto {{lastBalance.type}}</md-card-title>\n        <md-card-subtitle>stato: inserito</md-card-subtitle>\n      </md-card-title-group>\n      <md-card-content class=\"md-content\">\n\n\n        <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\n        <p><span>In cassa: </span><span><strong>{{lastBalance.cassa}} &euro;</strong></span></p>\n        <p><span>POS:</span><span> <strong>{{lastBalance.pos}} &euro;</strong></span></p>\n        <p><span>Ticket:</span><span> <strong>{{lastBalance.ticket}} &euro;</strong></span></p>\n      </md-card-content>\n      <!-- <md-card-actions>\n        <button md-button disabled=\"true\">SEGNALA</button>\n      </md-card-actions> -->\n    </md-card>\n  </md-card-content>\n</md-card>\n<!-- </div> -->\n\n\n<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\">\n  <div class=\"alert alert-danger\">{{message}}</div>\n  <div>\n    <h3>Resoconto</h3>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\n  </div>\n\n  <md-card *ngFor=\"let lastBalance of balance\">\n    <md-card-title-group>\n      <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\"></md-progress-spinner>\n      <md-card-title>Resoconto {{lastBalance.tipo}}</md-card-title>\n      <md-card-subtitle>stato: inserito</md-card-subtitle>\n    </md-card-title-group>\n    <md-card-content class=\"md-content\">\n\n\n      <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\n      <p><span>In cassa: </span><span>{{lastBalance.cassa}} &euro;</span></p>\n      <p><span>POS:</span><span>{{lastBalance.pos}}</span></p>\n      <p><span>Ticket:</span><span>{{lastBalance.ticket}}</span></p>\n    </md-card-content>\n    <md-card-actions>\n      <button md-button disabled=\"true\">INSERISCI</button>\n    </md-card-actions>\n  </md-card>\n\n</div> -->\n"
 
 /***/ }),
 
@@ -773,10 +773,13 @@ var ChiusureComponent = (function () {
             .then(function (balance) {
             _this.balance = balance;
             _this.lastBalance = balance[0];
-            var oDate = new Date();
-            oDate.setMinutes(0);
-            oDate.setSeconds(0);
-            switch (_this.lastBalance.value) {
+        })
+            .catch(function (err) { return console.log(err); });
+        var oDate = new Date();
+        oDate.setMinutes(0);
+        oDate.setSeconds(0);
+        if (this.lastBalance) {
+            switch (this.lastBalance.value) {
                 case 25:
                     oDate.setHours(16);
                     break;
@@ -794,12 +797,15 @@ var ChiusureComponent = (function () {
                     break;
                 default:
                     oDate.setHours(12);
-                    _this.future = oDate;
+                    this.future = oDate;
                     break;
             }
-            _this.future = oDate;
-        })
-            .catch(function (err) { return console.log(err); });
+            this.future = oDate;
+        }
+        else {
+            oDate.setHours(12);
+            this.future = oDate;
+        }
     };
     ChiusureComponent.prototype.getPrevCapital = function () {
         var _this = this;
