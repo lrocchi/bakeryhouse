@@ -1,6 +1,6 @@
 <!-- <div style="display: inline-block; text-align: left; width: 100%;"> -->
 <div class="alert alert-danger">{{message}}</div>
-<md-card class="example-card">
+<md-card>
   <md-card-header>
     <h3 *ngIf="diff>0">Prossimo resoconto tra {{timerMessage}}</h3>
     <h3 *ngIf="diff<0" style="color: red">Resoconto in ritardo di {{timerMessage}}</h3>
@@ -10,7 +10,7 @@
   <md-card-content>
     <md-card *ngIf="lastBalance">
       <md-card-title-group>
-        <md-progress-spinner class="example-margin" [color]="spinnerColor" [mode]="spinnerMode" [value]="lastBalance.value" aria-label="100"></md-progress-spinner>
+        <md-progress-spinner class="example-margin" [color]="spinnerColor" [mode]="spinnerMode" [value]="lastBalance.value">100</md-progress-spinner>
         <md-card-title>Resoconto {{lastBalance.type}}</md-card-title>
         <md-card-subtitle>stato: inserito</md-card-subtitle>
       </md-card-title-group>
