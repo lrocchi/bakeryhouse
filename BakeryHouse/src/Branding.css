@@ -1,6 +1,7 @@
 body {
   scrollbar-arrow-color: #fff;
-  scrollbar-face-color: #fff
+  scrollbar-face-color: #fff;
+  font-size: 14px;
 }
 
 body.Ccm-LoginBody {
@@ -10,6 +11,9 @@ body.Ccm-LoginBody {
 @media (max-width: 1024px) {
   body.Ccm-LoginBody {
     background: url("./assets/images/PadPortrait.jpg") repeat center center
+  }
+  body {
+    font-size: 16px;
   }
 }
 
@@ -732,7 +736,7 @@ table td[class*=col-], table th[class*=col-] {
   margin-top: 10px
 }
 
-.Ccm-Login-Footer {
+/* .Ccm-Login-Footer {
   margin: 10px auto;
   width: 290px;
   text-align: center;
@@ -742,7 +746,7 @@ table td[class*=col-], table th[class*=col-] {
 
 .Ccm-Login-Footer>p {
   margin: 0px
-}
+} */
 body.Ccm-LoginBody .Ccm-LoginContainer:before {
   content: '';
   position: absolute;

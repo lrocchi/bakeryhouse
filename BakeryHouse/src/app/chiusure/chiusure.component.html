@@ -2,8 +2,10 @@
 <div class="alert alert-danger">{{message}}</div>
 <md-card>
   <md-card-header>
-    <h3 *ngIf="diff>0">Prossimo resoconto tra {{timerMessage}}</h3>
-    <h3 *ngIf="diff<0" style="color: red">Resoconto in ritardo di {{timerMessage}}</h3>
+
+    <h3 *ngIf="diff>0" style="max-width:50%">Prossimo resoconto tra <p>{{timerMessage}}</p></h3>
+    <h3 *ngIf="diff<0" style="max-width:50%; color: red" >Resoconto in ritardo di {{timerMessage}}</h3>
+
     <span class="span-fill-remaining"></span>
     <div class="ProceedContainer ng-scope" *ngIf="diff<0"><button class="btn BKHBrandedButton Ccm-Button-Primary" (click)="openEditDialog()" *ngIf="lastBalance?.type!=='Chiusura'">Aggiungi</button></div>
   </md-card-header>
