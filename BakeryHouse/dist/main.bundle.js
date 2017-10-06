@@ -233,9 +233,19 @@ var SpesaService = (function () {
         return this._http.get('api/spese').map(function (data) { return data.json(); }).toPromise();
     };
     SpesaService.prototype.getTodaySpesaList = function (id_store) {
-        console.log('================= SpesaService.getTodaySpesaList() =====================');
-        console.log(id_store);
-        return this._http.get('api/spese/today/' + id_store).map(function (data) { return data.json(); }).toPromise();
+        var today = new Date();
+        today.setHours(0, 0 - today.getTimezoneOffset(), 0);
+        /* today.setMinutes(0);
+        today.setSeconds(1) */
+        var stringToday = today.toISOString();
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers,
+            params: {
+                'store': id_store,
+            } });
+        return this._http.get('api/spese/today/', options).map(function (data) { return data.json(); }).toPromise();
+        // return this._http.get('api/spese?store=' + id_store + '&create_on={ "$gte" : ' + stringToday + ' }')
+        // return this._http.get('api/spese', options).map(data => data.json()).toPromise();
     };
     SpesaService.prototype.addSpesa = function (spesa) {
         console.log(JSON.stringify(spesa));
@@ -427,6 +437,7 @@ var appRoutes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_4_app_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_3_app_guards_auth_guard__["a" /* AuthGuard */]] },
     {
         path: 'manage',
+        canActivate: [__WEBPACK_IMPORTED_MODULE_3_app_guards_auth_guard__["a" /* AuthGuard */]],
         children: [
             { path: '', component: __WEBPACK_IMPORTED_MODULE_5_app_management_management_component__["a" /* ManagementComponent */] },
         ]
@@ -477,7 +488,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"column\" style=\"height:100%\">\n  <div fxLayout=\"row\" fxLayoutAlign=\"space-around center\">\n    <app-header></app-header>\n  </div>\n  <div fxLayout=\"row\" fxLayoutAlign=\"space-around center\" style=\"height:100%\">\n    <span></span>\n    <router-outlet></router-outlet>\n  </div>\n  <div fxLayout=\"row\" fxLayoutAlign=\"space-around center\">\n    <footer>\n      <router-outlet name=\"footer\"></router-outlet>\n    </footer>\n  </div>\n</div>\n\n"
+module.exports = "<div fxLayout=\"column\" style=\"height:100%\">\n  <div fxLayout=\"row\" fxLayoutAlign=\"space-around center\">\n    <app-header></app-header>\n  </div>\n  <div fxLayout=\"row\" fxLayoutAlign=\"space-around center\" style=\"height:100%\">\n    <span></span>\n    <router-outlet></router-outlet>\n  </div>\n\n</div>\n\n"
 
 /***/ }),
 
@@ -501,24 +512,21 @@ var AppComponent = (function () {
     function AppComponent() {
         this.someField = false;
     }
+    /*
+      @HostListener('window:beforeunload', ['$event'])
+      beforeunloadHandler(event) {
+        // Gestione dello scarico pagina, compresi i refresh
+    
+      } */
     AppComponent.prototype.ngOnInit = function () {
         // Store sidenav to service
-    };
-    AppComponent.prototype.beforeunloadHandler = function (event) {
-        // Gestione dello scarico pagina, compresi i refresh
     };
     return AppComponent;
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostBinding"])('class.Ccm-LoginBody'),
-    __metadata("design:type", Boolean)
+    __metadata("design:type", Object)
 ], AppComponent.prototype, "someField", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"])('window:beforeunload', ['$event']),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], AppComponent.prototype, "beforeunloadHandler", null);
 AppComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'body',
@@ -1061,6 +1069,8 @@ var BalanceType;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return CostTypeCategories; });
 var CostType = (function () {
     function CostType() {
+        this.active = true;
+        this.hasDescription = true;
     }
     return CostType;
 }());
@@ -1197,18 +1207,6 @@ var HeaderComponent = (function () {
         this.title = 'BakeryHouse!';
         this.jwtHelper = new __WEBPACK_IMPORTED_MODULE_2_angular2_jwt_angular2_jwt__["JwtHelper"]();
         this.user = JSON.parse(localStorage.getItem('currUser'));
-        /*  if (localStorage.getItem('token')) {
-  
-            try {
-            this.user = this.jwtHelper.decodeToken(localStorage.getItem('token'))._doc;
-            console.log(JSON.stringify(this.user));
-            localStorage.setItem('currUser',JSON.stringify(this.user));
-            }catch (e) {
-              console.error(e);
-            }
-          }else{
-            console.log('Nessun Token')
-          } */
     }
     HeaderComponent.prototype.ngOnInit = function () {
     };
@@ -1427,7 +1425,7 @@ var LoginComponent = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["HostBinding"])('class.Ccm-LoginBody'),
-    __metadata("design:type", Boolean)
+    __metadata("design:type", Object)
 ], LoginComponent.prototype, "someField", void 0);
 LoginComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -1464,7 +1462,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-spese/cost-type-add/cost-type-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3 md-dialog-title>\n  Aggiungi</h3>\n<form name=\"form\" (ngSubmit)=\"f.form.valid && create()\" #f=\"ngForm\" novalidate>\n\n  <div md-dialog-content>\n\n    <md-select placeholder=\"Categoria\" [(ngModel)]=\"costType.nome\" #nome=\"ngModel\" name=\"nome\" required>\n      <md-option *ngFor=\"let types of categoryTypes | keys\" [value]=\"types.value\">\n        {{types.value}}\n      </md-option>\n    </md-select>\n\n\n\n    <md-input-container class=\"example-full-width\" >\n      <input mdInput [(ngModel)]=\"costType.subCategory\" placeholder=\"descrizione\" autocomplete=\"off\" #subCategory=\"ngModel\" name=\"subCategory\" [disabled]= \"!(costType.nome=='Delivery' || costType.nome=='Food')\">\n\n    </md-input-container>\n\n\n    <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"hasDescription\" [(ngModel)]=\"costType.hasDescription\" [checked]=\"costType.nome=='Delivery'\" [value]=\"costType.nome=='Delivery'\" >con descrizione</md-checkbox>\n\n    <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"attiva\" [(ngModel)]=\"costType.active\" [value]=\"true\" [checked]=\"true\">attivo</md-checkbox>\n\n\n  </div>\n  <div md-dialog-actions>\n    <div class=\"ProceedContainer ng-scope\">\n      <button md-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\n    </div>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\">\n      <button [disabled]=\"loading\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\n    </div>\n    <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\n    />\n  </div>\n\n</form>\n"
+module.exports = "<h3 md-dialog-title>\n  Aggiungi</h3>\n<form name=\"form\" (ngSubmit)=\"f.form.valid && create()\" #f=\"ngForm\" novalidate>\n\n  <div md-dialog-content>\n\n    <md-select placeholder=\"Categoria\" [(ngModel)]=\"costType.nome\" #nome=\"ngModel\" name=\"nome\" required>\n      <md-option *ngFor=\"let types of categoryTypes | keys\" [value]=\"types.value\">\n        {{types.value}}\n      </md-option>\n    </md-select>\n\n\n\n    <md-input-container class=\"example-full-width\" >\n      <input mdInput [(ngModel)]=\"costType.subCategory\" placeholder=\"descrizione\" autocomplete=\"off\" #subCategory=\"ngModel\" name=\"subCategory\" [disabled]= \"costType.hasDescription\">\n\n    </md-input-container>\n\n\n    <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"hasDescription\" [(ngModel)]=\"costType.hasDescription\" >con descrizione</md-checkbox>\n\n    <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"attiva\" [(ngModel)]=\"costType.active\" >attivo</md-checkbox>\n\n\n  </div>\n  <div md-dialog-actions>\n    <div class=\"ProceedContainer ng-scope\">\n      <button md-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\n    </div>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\">\n      <button [disabled]=\"loading\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\n    </div>\n    <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\n    />\n  </div>\n\n</form>\n"
 
 /***/ }),
 
@@ -1513,12 +1511,12 @@ var CostTypeAddComponent = (function () {
             .catch(function (err) { return console.log(err); });
     };
     CostTypeAddComponent.prototype.create = function () {
-        //this.loading = true;
-        console.log("CREATE " + this.costType.nome);
+        // this.loading = true;
+        console.log('CREATE ' + this.costType.nome);
         // this.createNewSpesaEvent.emit(this.spesa);
         this.dialogRef.close();
-        //this.spesa = new Cost();
-        //this. loading = false;
+        // this.spesa = new Cost();
+        // this. loading = false;
     };
     return CostTypeAddComponent;
 }());
@@ -2347,8 +2345,8 @@ var SpeseNewComponent = (function () {
         this._spesaService.getSubTypeList(this.tmpCategory)
             .then(function (costType) {
             _this.costTypes = costType;
-            if ((_this.tmpCategory != 'Food') && (_this.tmpCategory != 'Delivery')) {
-                console.log("tmpCategory=" + _this.tmpCategory);
+            if ((_this.tmpCategory !== 'Food') && (_this.tmpCategory !== 'Delivery')) {
+                console.log('tmpCategory=' + _this.tmpCategory);
                 console.log(JSON.stringify(costType));
                 _this.spesa.tipo = costType[0];
             }
@@ -2438,7 +2436,6 @@ var SpeseComponent = (function () {
     SpeseComponent.prototype.getList = function () {
         var _this = this;
         var usr = JSON.parse(localStorage.getItem('currUser'));
-        console.log('usr -->' + JSON.stringify(usr));
         this._spesaService.getTodaySpesaList(usr.store._id)
             .then(function (spese) { _this.spesaList = spese; })
             .catch(function (err) { return console.log(err); });

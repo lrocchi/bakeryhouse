@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
-import { User } from "app/entity/user";
+import { User } from 'app/entity/user';
 
 @Component({
 

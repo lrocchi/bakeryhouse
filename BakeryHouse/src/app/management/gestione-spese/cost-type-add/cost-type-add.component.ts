@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CostType, CostTypeCategories } from "app/entity/cost-type";
-import { MdDialogRef } from "@angular/material";
-import { SpesaService } from "app/_services/spesa.service";
+import { CostType, CostTypeCategories } from 'app/entity/cost-type';
+import { MdDialogRef } from '@angular/material';
+import { SpesaService } from 'app/_services/spesa.service';
 
 @Component({
   templateUrl: './cost-type-add.component.html',
@@ -11,7 +11,7 @@ export class CostTypeAddComponent implements OnInit {
   categories: any;
 
 
-  public loading: boolean = false;
+  public loading = false;
   costType: CostType= new CostType();
   public categoryTypes = CostTypeCategories;
 
@@ -30,11 +30,11 @@ export class CostTypeAddComponent implements OnInit {
   }
 
   create(){
-    //this.loading = true;
-    console.log("CREATE " + this.costType.nome);
+    // this.loading = true;
+    console.log('CREATE ' + this.costType.nome);
     // this.createNewSpesaEvent.emit(this.spesa);
     this.dialogRef.close();
-    //this.spesa = new Cost();
-    //this. loading = false;
+    // this.spesa = new Cost();
+    // this. loading = false;
   }
 }

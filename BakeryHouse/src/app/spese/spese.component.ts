@@ -31,9 +31,8 @@ export class SpeseComponent implements OnInit {
     this.getList();
   }
 
-  getList(){
+  getList() {
     const usr: User = JSON.parse(localStorage.getItem('currUser'));
-    console.log('usr -->' + JSON.stringify(usr));
     this._spesaService.getTodaySpesaList(usr.store._id)
     .then(spese => {this.spesaList = spese;  })
     .catch(err => console.log(err));

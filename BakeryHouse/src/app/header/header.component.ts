@@ -5,7 +5,7 @@ import { LocalStorageService } from 'ng2-webstorage';
 
 import { JwtHelper } from 'angular2-jwt/angular2-jwt';
 import { AuthService } from 'app/_services/auth.service';
-import { User, Ruolo } from "app/entity/user";
+import { User, Ruolo } from 'app/entity/user';
 
 @Component({
 
@@ -26,18 +26,7 @@ export class HeaderComponent implements OnInit {
         // private localStorage: LocalStorageService,
     ) {
       this.user = JSON.parse(localStorage.getItem('currUser'));
-      /*  if (localStorage.getItem('token')) {
 
-          try {
-          this.user = this.jwtHelper.decodeToken(localStorage.getItem('token'))._doc;
-          console.log(JSON.stringify(this.user));
-          localStorage.setItem('currUser',JSON.stringify(this.user));
-          }catch (e) {
-            console.error(e);
-          }
-        }else{
-          console.log('Nessun Token')
-        } */
 
     }
 

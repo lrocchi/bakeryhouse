@@ -8,7 +8,8 @@ var CostType = require('../models/CostType');
 
 // GET all CostType
 router.get('/', function (req, res, next) {
-  CostType.find({}).sort('nome').exec((err, costTypeDoc) => {
+  // console.log("REQ.QUERY" + req.query);
+  CostType.find(req.query).sort('nome').exec((err, costTypeDoc) => {
     //console.log(costTypeDoc);
     return res.json(costTypeDoc);
   });
@@ -17,7 +18,7 @@ router.get('/', function (req, res, next) {
 
 // GET Distinct Categories
 router.get('/categories', function (req, res, next) {
-  CostType.find().distinct('nome', function (err, costTypeDoc) {
+  CostType.find(req.query).distinct('nome', function (err, costTypeDoc) {
     console.log(costTypeDoc);
     return res.json(costTypeDoc);
   });

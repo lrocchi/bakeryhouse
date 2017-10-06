@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output, OnInit, } from '@angular/core';
-import { MdDialogRef } from "@angular/material";
-import { NgForm, FormControl, Validators } from "@angular/forms";
-import { Cost } from "app/entity/cost";
-import { CostType, CostTypeCategories } from "app/entity/cost-type";
-import { SpesaService } from "app/_services/spesa.service";
+import { MdDialogRef } from '@angular/material';
+import { NgForm, FormControl, Validators } from '@angular/forms';
+import { Cost } from 'app/entity/cost';
+import { CostType, CostTypeCategories } from 'app/entity/cost-type';
+import { SpesaService } from 'app/_services/spesa.service';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class SpeseNewComponent implements OnInit {
 
   public categoryTypes = CostTypeCategories;
   public tmpCategory: string;
-  public loading: boolean = false;
+  public loading = false;
   public spesa: Cost = new Cost();
   public costTypes: Array<CostType>;
 
@@ -45,8 +45,8 @@ export class SpeseNewComponent implements OnInit {
     this._spesaService.getSubTypeList(this.tmpCategory)
       .then(costType => {
         this.costTypes = costType;
-        if ((this.tmpCategory != 'Food') && (this.tmpCategory != 'Delivery')) {
-          console.log("tmpCategory=" + this.tmpCategory);
+        if ((this.tmpCategory !== 'Food') && (this.tmpCategory !== 'Delivery')) {
+          console.log('tmpCategory=' + this.tmpCategory);
           console.log(JSON.stringify(costType));
 
           this.spesa.tipo = costType[0];

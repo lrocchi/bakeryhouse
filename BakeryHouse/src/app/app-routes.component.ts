@@ -1,16 +1,17 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from "app/login/login.component";
-import { AuthGuard } from "app/_guards/auth.guard";
-import { HomeComponent } from "app/home/home.component";
+import { LoginComponent } from 'app/login/login.component';
+import { AuthGuard } from 'app/_guards/auth.guard';
+import { HomeComponent } from 'app/home/home.component';
 
-import { ManagementComponent } from "app/management/management.component";
+import { ManagementComponent } from 'app/management/management.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   {
     path: 'manage',
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: ManagementComponent },
     ]

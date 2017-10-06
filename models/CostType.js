@@ -5,6 +5,7 @@ var costTypeSchema = new mongoose.Schema({
     subCategory: {type: String, require: false},
     hasDescription: {type: Boolean, require: true, default: false},
     active: {type: Boolean, require: true, default: true},
+    store:{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' }
     
 })
 

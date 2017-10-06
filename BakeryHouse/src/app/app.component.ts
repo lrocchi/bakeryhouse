@@ -14,7 +14,13 @@ import { Component, HostListener, OnInit, HostBinding } from '@angular/core';
 export class AppComponent implements OnInit {
 
 
+   @HostBinding('class.Ccm-LoginBody') someField = false;
+/*
+  @HostListener('window:beforeunload', ['$event'])
+  beforeunloadHandler(event) {
+    // Gestione dello scarico pagina, compresi i refresh
 
+  } */
 
   ngOnInit(): void {
     // Store sidenav to service
@@ -23,12 +29,7 @@ export class AppComponent implements OnInit {
 
   constructor () {}
 
-  @HostBinding('class.Ccm-LoginBody') someField: boolean = false;
 
-  @HostListener('window:beforeunload', ['$event'])
-  beforeunloadHandler(event) {
-    // Gestione dello scarico pagina, compresi i refresh
 
-  }
 }
 

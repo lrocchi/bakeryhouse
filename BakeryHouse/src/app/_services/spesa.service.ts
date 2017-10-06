@@ -28,9 +28,26 @@ export class SpesaService {
   }
 
   public getTodaySpesaList(id_store: string) {
-    console.log('================= SpesaService.getTodaySpesaList() =====================');
-    console.log(id_store);
-    return this._http.get('api/spese/today/' + id_store).map(data => data.json()).toPromise();
+
+
+    const today = new Date();
+    today.setHours(0 , 0 - today.getTimezoneOffset(), 0);
+    /* today.setMinutes(0);
+    today.setSeconds(1) */
+
+    const stringToday = today.toISOString();
+
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers,
+      params: {
+        'store' : id_store,
+        // 'create_on' : { '$gte' : { '$date': stringToday } }  }
+    } });
+
+
+    return this._http.get('api/spese/today/', options).map(data => data.json()).toPromise();
+    // return this._http.get('api/spese?store=' + id_store + '&create_on={ "$gte" : ' + stringToday + ' }')
+    // return this._http.get('api/spese', options).map(data => data.json()).toPromise();
 
   }
 

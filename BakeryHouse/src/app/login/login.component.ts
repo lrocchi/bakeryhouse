@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
 
   LOGO = './img/Logo.png';
-
+  @HostBinding('class.Ccm-LoginBody') someField = true;
 
 
   constructor(
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         private authenticationService: AuthService) { }
 
 
-        @HostBinding('class.Ccm-LoginBody') someField: boolean = true;
+
 
   ngOnInit() {
        // reset login status

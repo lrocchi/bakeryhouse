@@ -13,14 +13,14 @@
 
 
     <md-input-container class="example-full-width" >
-      <input mdInput [(ngModel)]="costType.subCategory" placeholder="descrizione" autocomplete="off" #subCategory="ngModel" name="subCategory" [disabled]= "!(costType.nome=='Delivery' || costType.nome=='Food')">
+      <input mdInput [(ngModel)]="costType.subCategory" placeholder="descrizione" autocomplete="off" #subCategory="ngModel" name="subCategory" [disabled]= "costType.hasDescription">
 
     </md-input-container>
 
 
-    <md-checkbox class="example-margin" #subCategory="ngModel" name="hasDescription" [(ngModel)]="costType.hasDescription" [checked]="costType.nome=='Delivery'" [value]="costType.nome=='Delivery'" >con descrizione</md-checkbox>
+    <md-checkbox class="example-margin" #subCategory="ngModel" name="hasDescription" [(ngModel)]="costType.hasDescription" >con descrizione</md-checkbox>
 
-    <md-checkbox class="example-margin" #subCategory="ngModel" name="attiva" [(ngModel)]="costType.active" [value]="true" [checked]="true">attivo</md-checkbox>
+    <md-checkbox class="example-margin" #subCategory="ngModel" name="attiva" [(ngModel)]="costType.active" >attivo</md-checkbox>
 
 
   </div>
