@@ -1,12 +1,12 @@
 <div style="display: inline-block; text-align: left; width: 100%;">
     <div class="alert alert-danger">{{message}}</div>
-    <md-card class="example-card">
-      <md-card-header>
+    <mat-card class="example-card">
+      <mat-card-header>
           <h3>Punti Vendita</h3>
         <span class="span-fill-remaining"></span>
         <div class="ProceedContainer"><button class="btn BKHBrandedButton Ccm-Button-Primary" (click)="openDialog()">Aggiungi</button></div>
-      </md-card-header>
-      <md-card-content>
+      </mat-card-header>
+      <mat-card-content>
         <div style="overflow:auto">
           <table class="table table-bordered table-striped">
             <thead>
@@ -26,18 +26,18 @@
 
 
                 <td style="text-align : center; align-items: center; padding: 0px;">
-                    <button md-icon-button (click)="openEditDialog(store)"><md-icon class="md-24">mode_edit</md-icon></button>
+                    <button mat-icon-button (click)="openEditDialog(store)"><mat-icon class="mat-24">mode_edit</mat-icon></button>
                   </td>
                   <td style="text-align : center; padding: 0px;" >
-                    <button md-icon-button (click)="openConfirmationDelete(store._id)"><md-icon class="md-24" >delete</md-icon></button>
+                    <button mat-icon-button (click)="openConfirmationDelete(store._id)"><mat-icon class="mat-24" >delete</mat-icon></button>
                   </td>
 
                 </tr>
                 <!-- <td style="text-align : center; align-items: center; padding: 0px;">
-                  <button md-icon-button><md-icon class="md-24">mode_edit</md-icon></button>
+                  <button mat-icon-button><mat-icon class="mat-24">mode_edit</mat-icon></button>
                 </td>
                 <td style="text-align : center; padding: 0px;" colspan="2">
-                  <button md-icon-button (click)="openConfirmationDelete(cat._id)"><md-icon class="md-24" >delete</md-icon></button>
+                  <button mat-icon-button (click)="openConfirmationDelete(cat._id)"><mat-icon class="mat-24" >delete</mat-icon></button>
                 </td>
 
               </tr> -->
@@ -45,7 +45,7 @@
             </tbody>
           </table>
         </div>
-      </md-card-content>
-    </md-card>
+      </mat-card-content>
+    </mat-card>
     <div>{{statusMessage}}</div>
   </div>

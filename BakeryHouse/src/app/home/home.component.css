@@ -10,17 +10,3 @@
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 } */
-
-.mat-ink-bar {
-  position: absolute;
-  bottom: 0;
-  height: 4px;
-  transition: .5s cubic-bezier(.35,0,.25,1);
-  background-color: #7fa372;
-}
-
-
-.mat-menu-item {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size: 14px;
-}

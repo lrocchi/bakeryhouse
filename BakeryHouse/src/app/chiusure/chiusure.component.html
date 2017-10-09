@@ -1,35 +1,35 @@
 <!-- <div style="display: inline-block; text-align: left; width: 100%;"> -->
 <div class="alert alert-danger">{{message}}</div>
-<md-card>
-  <md-card-header>
+<mat-card>
+  <mat-card-header>
 
     <h3 *ngIf="diff>0" style="max-width:50%">Prossimo resoconto tra <p>{{timerMessage}}</p></h3>
     <h3 *ngIf="diff<0" style="max-width:50%; color: red" >Resoconto in ritardo di {{timerMessage}}</h3>
 
     <span class="span-fill-remaining"></span>
     <div class="ProceedContainer ng-scope" *ngIf="diff<0"><button class="btn BKHBrandedButton Ccm-Button-Primary" (click)="openEditDialog()" *ngIf="lastBalance?.type!=='Chiusura'">Aggiungi</button></div>
-  </md-card-header>
-  <md-card-content>
-    <md-card *ngIf="lastBalance">
-      <md-card-title-group>
-        <md-progress-spinner class="example-margin" [color]="spinnerColor" [mode]="spinnerMode" [value]="lastBalance.value">100</md-progress-spinner>
-        <md-card-title>Resoconto {{lastBalance.type}}</md-card-title>
-        <md-card-subtitle>stato: inserito</md-card-subtitle>
-      </md-card-title-group>
-      <md-card-content class="md-content">
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card *ngIf="lastBalance">
+      <mat-card-title-group>
+        <mat-progress-spinner class="example-margin" color="spinnerColor" mode="spinnerMode" value="lastBalance.value">100</mat-progress-spinner>
+        <mat-card-title>Resoconto {{lastBalance.type}}</mat-card-title>
+        <mat-card-subtitle>stato: inserito</mat-card-subtitle>
+      </mat-card-title-group>
+      <mat-card-content class="md-content">
 
 
         <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>
         <p><span>In cassa: </span><span><strong>{{lastBalance.cassa}} &euro;</strong></span></p>
         <p><span>POS:</span><span> <strong>{{lastBalance.pos}} &euro;</strong></span></p>
         <p><span>Ticket:</span><span> <strong>{{lastBalance.ticket}} &euro;</strong></span></p>
-      </md-card-content>
-      <!-- <md-card-actions>
+      </mat-card-content>
+      <!-- <mat-card-actions>
         <button md-button disabled="true">SEGNALA</button>
-      </md-card-actions> -->
-    </md-card>
-  </md-card-content>
-</md-card>
+      </mat-card-actions> -->
+    </mat-card>
+  </mat-card-content>
+</mat-card>
 <!-- </div> -->
 
 
@@ -41,23 +41,23 @@
     <div class="ProceedContainer ng-scope"><button class="btn BKHBrandedButton Ccm-Button-Primary" (click)="openEditDialog()">Aggiungi</button></div>
   </div>
 
-  <md-card *ngFor="let lastBalance of balance">
-    <md-card-title-group>
-      <md-progress-spinner class="example-margin" [color]="spinnerColor" [mode]="spinnerMode" [value]="lastBalance.value"></md-progress-spinner>
-      <md-card-title>Resoconto {{lastBalance.tipo}}</md-card-title>
-      <md-card-subtitle>stato: inserito</md-card-subtitle>
-    </md-card-title-group>
-    <md-card-content class="md-content">
+  <mat-card *ngFor="let lastBalance of balance">
+    <mat-card-title-group>
+      <md-progress-spinner class="example-margin" color="spinnerColor" [mode]="spinnerMode" [value]="lastBalance.value"></md-progress-spinner>
+      <mat-card-title>Resoconto {{lastBalance.tipo}}</mat-card-title>
+      <mat-card-subtitle>stato: inserito</mat-card-subtitle>
+    </mat-card-title-group>
+    <mat-card-content class="md-content">
 
 
       <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>
       <p><span>In cassa: </span><span>{{lastBalance.cassa}} &euro;</span></p>
       <p><span>POS:</span><span>{{lastBalance.pos}}</span></p>
       <p><span>Ticket:</span><span>{{lastBalance.ticket}}</span></p>
-    </md-card-content>
-    <md-card-actions>
+    </mat-card-content>
+    <mat-card-actions>
       <button md-button disabled="true">INSERISCI</button>
-    </md-card-actions>
-  </md-card>
+    </mat-card-actions>
+  </mat-card>
 
 </div> -->

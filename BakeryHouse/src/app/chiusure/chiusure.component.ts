@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BalanceService } from 'app/_services/balance.service';
 import { Balance, BalanceType } from 'app/entity/Balance';
 import { User } from 'app/entity/user';
-import { MdDialogRef, MdDialog } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { EditDialogComponent } from 'app/edit-dialog/edit-dialog.component';
 import { Observable, Subscription } from 'rxjs/Rx';
 
@@ -35,10 +35,10 @@ export class ChiusureComponent implements OnInit {
   balance: Array<Balance>;
 
 
-  // confirmDialog: MdDialogRef<ConfirmationDialog>;
-  editDialog: MdDialogRef<EditDialogComponent>;
+  // confirmDialog: MatDialogRef<ConfirmationDialog>;
+  editDialog: MatDialogRef<EditDialogComponent>;
 
-  constructor(private _balanceService: BalanceService, public dialog: MdDialog) {
+  constructor(private _balanceService: BalanceService, public dialog: MatDialog) {
     this.usr = JSON.parse(localStorage.getItem('currUser'));
   }
 

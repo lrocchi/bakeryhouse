@@ -1,55 +1,55 @@
-<h3 md-dialog-title>
+<h3 mat-dialog-title>
   Nuova Spesa</h3>
 <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
 
-  <div md-dialog-content>
-    <md-select placeholder="Categoria" name="categoria" [(ngModel)]="tmpCategory" required (change)="getSubCategoryList()">
-       <md-option *ngFor="let types of categoryTypes | keys" [value]="types.value">
+  <div mat-dialog-content>
+    <mat-select placeholder="Categoria" name="categoria" [(ngModel)]="tmpCategory" required (change)="getSubCategoryList()">
+       <mat-option *ngFor="let types of categoryTypes | keys" value="types.value">
         {{types.value}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
     <!-- Sezione Sottocategoria - Visualizzato solo per Delivery e Food -->
-   <!--  <md-select placeholder="Tipologia" [(ngModel)]="spesa.tipo" name="tipo" required *ngIf="tmpCategory=='Delivery'">
-      <md-option *ngFor="let types of costTypes" [value]="types">
+   <!--  <mat-select placeholder="Tipologia" [(ngModel)]="spesa.tipo" name="tipo" required *ngIf="tmpCategory=='Delivery'">
+      <mat-option *ngFor="let types of costTypes" [value]="types">
         {{types.subCategory}}
-      </md-option>
-    </md-select> -->
+      </mat-option>
+    </mat-select> -->
 
-    <md-select placeholder="Spesa" [(ngModel)]="spesa.tipo" name="tipo" required *ngIf="tmpCategory=='Food' || tmpCategory=='Delivery'" (change)="setDescription()">
-        <md-option *ngFor="let types of costTypes" [value]="types">
+    <mat-select placeholder="Spesa" [(ngModel)]="spesa.tipo" name="tipo" required *ngIf="tmpCategory=='Food' || tmpCategory=='Delivery'" (change)="setDescription()">
+        <mat-option *ngFor="let types of costTypes" value="types">
           {{types.subCategory}}
-        </md-option>
-      </md-select>
+        </mat-option>
+      </mat-select>
 
 
 
 
-    <md-input-container class="example-full-width" *ngIf="tmpCategory!='Food' && tmpCategory!='Delivery'">
-      <input mdInput placeholder="Spesa" [(ngModel)]="spesa.descrizione" name="descrizione" required>
-      <!-- <md-error *ngIf="descrizioneFormControl.hasError('required')">
+    <mat-input-container class="example-full-width" *ngIf="tmpCategory!='Food' && tmpCategory!='Delivery'">
+      <input matInput placeholder="Spesa" [(ngModel)]="spesa.descrizione" name="descrizione" required>
+      <!-- <mat-error *ngIf="descrizioneFormControl.hasError('required')">
         Campo <strong>obbligatorio</strong>
-      </md-error> -->
-    </md-input-container>
+      </mat-error> -->
+    </mat-input-container>
 
 
-    <md-input-container class="example-full-width">
-      <input mdInput [(ngModel)]="spesa.valore" placeholder="Valore(€)" autocomplete="off" #valore="ngModel" name="valore" required>
-      <!-- <md-error *ngIf="descrizioneFormControl.hasError('required')">
+    <mat-input-container class="example-full-width">
+      <input matInput [(ngModel)]="spesa.valore" placeholder="Valore(€)" autocomplete="off" #valore="ngModel" name="valore" required>
+      <!-- <mat-error *ngIf="descrizioneFormControl.hasError('required')">
         Campo <strong>obbligatorio</strong>
-      </md-error> -->
-    </md-input-container>
+      </mat-error> -->
+    </mat-input-container>
 
   </div>
-  <div md-dialog-actions>
+  <div mat-dialog-actions>
     <div class="ProceedContainer ng-scope">
-      <button md-dialog-close="cancel" class="btn BKHBrandedButton Ccm-Button-Primary">Annulla</button>
+      <button mat-dialog-close="cancel" class="btn BKHBrandedButton Ccm-Button-Primary">Annulla</button>
     </div>
     <span class="span-fill-remaining"></span>
     <div class="ProceedContainer ng-scope">
       <button [disabled]="loading" class="btn BKHBrandedButton Ccm-Button-Primary">Aggiungi</button>
     </div>
-    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmatEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fmatgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmatsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
     />
   </div>
 

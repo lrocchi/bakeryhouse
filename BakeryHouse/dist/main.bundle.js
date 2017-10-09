@@ -4,7 +4,11 @@ webpackJsonp(["main"],{
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
-	return new Promise(function(resolve, reject) { reject(new Error("Cannot find module '" + req + "'.")); });
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncatched exception popping up in devtools
+	return Promise.resolve().then(function() {
+		throw new Error("Cannot find module '" + req + "'.");
+	});
 }
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
@@ -488,7 +492,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"column\" style=\"height:100%\">\n  <div fxLayout=\"row\" fxLayoutAlign=\"space-around center\">\n    <app-header></app-header>\n  </div>\n  <div fxLayout=\"row\" fxLayoutAlign=\"space-around center\" style=\"height:100%\">\n    <span></span>\n    <router-outlet></router-outlet>\n  </div>\n\n</div>\n\n"
+module.exports = "<div fxLayout=\"column\" style=\"height:100%\">\r\n  <div fxLayout=\"row\" fxLayoutAlign=\"space-around center\">\r\n    <app-header></app-header>\r\n  </div>\r\n  <div fxLayout=\"row\" fxLayoutAlign=\"space-around center\" style=\"height:100%\">\r\n    <span></span>\r\n    <router-outlet></router-outlet>\r\n  </div>\r\n\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -558,26 +562,27 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_app_spese_spese_component__ = __webpack_require__("../../../../../src/app/spese/spese.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__spese_spese_list_spese_list_component__ = __webpack_require__("../../../../../src/app/spese/spese-list/spese-list.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__spese_spese_new_spese_new_component__ = __webpack_require__("../../../../../src/app/spese/spese-new/spese-new.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_cdk__ = __webpack_require__("../../../cdk/@angular/cdk.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_app_management_gestione_spese_gestione_spese_component__ = __webpack_require__("../../../../../src/app/management/gestione-spese/gestione-spese.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_app_app_routes_component__ = __webpack_require__("../../../../../src/app/app-routes.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__management_management_component__ = __webpack_require__("../../../../../src/app/management/management.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__management_gestione_spese_cost_type_add_cost_type_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-spese/cost-type-add/cost-type-add.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_app_services_spesa_service__ = __webpack_require__("../../../../../src/app/_services/spesa.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__confirmation_dialog_confirmation_dialog_component__ = __webpack_require__("../../../../../src/app/confirmation-dialog/confirmation-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__keys_pipe__ = __webpack_require__("../../../../../src/app/keys.pipe.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__management_gestione_utente_gestione_utente_component__ = __webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_app_services_user_service__ = __webpack_require__("../../../../../src/app/_services/user.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__management_gestione_utente_user_add_user_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__management_gestione_store_gestione_store_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/gestione-store.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__chiusure_chiusure_component__ = __webpack_require__("../../../../../src/app/chiusure/chiusure.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31_app_services_balance_service__ = __webpack_require__("../../../../../src/app/_services/balance.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_material___ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__spese_spese_list_spese_list_component__ = __webpack_require__("../../../../../src/app/spese/spese-list/spese-list.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__spese_spese_new_spese_new_component__ = __webpack_require__("../../../../../src/app/spese/spese-new/spese-new.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__angular_cdk_table__ = __webpack_require__("../../../cdk/esm5/table.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_app_management_gestione_spese_gestione_spese_component__ = __webpack_require__("../../../../../src/app/management/gestione-spese/gestione-spese.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_app_app_routes_component__ = __webpack_require__("../../../../../src/app/app-routes.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__management_management_component__ = __webpack_require__("../../../../../src/app/management/management.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__management_gestione_spese_cost_type_add_cost_type_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-spese/cost-type-add/cost-type-add.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_app_services_spesa_service__ = __webpack_require__("../../../../../src/app/_services/spesa.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__confirmation_dialog_confirmation_dialog_component__ = __webpack_require__("../../../../../src/app/confirmation-dialog/confirmation-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__keys_pipe__ = __webpack_require__("../../../../../src/app/keys.pipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__management_gestione_utente_gestione_utente_component__ = __webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_app_services_user_service__ = __webpack_require__("../../../../../src/app/_services/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__management_gestione_utente_user_add_user_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_gestione_store_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/gestione-store.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__management_gestione_store_store_add_store_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__chiusure_chiusure_component__ = __webpack_require__("../../../../../src/app/chiusure/chiusure.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32_app_services_balance_service__ = __webpack_require__("../../../../../src/app/_services/balance.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -587,6 +592,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -631,21 +637,23 @@ var DemoMaterialModule = (function () {
 DemoMaterialModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["NgModule"])({
         exports: [
-            __WEBPACK_IMPORTED_MODULE_12__angular_material__["i" /* MdToolbarModule */],
-            __WEBPACK_IMPORTED_MODULE_12__angular_material__["b" /* MdButtonModule */],
-            __WEBPACK_IMPORTED_MODULE_12__angular_material__["f" /* MdIconModule */],
-            __WEBPACK_IMPORTED_MODULE_12__angular_material__["h" /* MdMenuModule */],
-            __WEBPACK_IMPORTED_MODULE_12__angular_material__["d" /* MdDialogModule */],
+            __WEBPACK_IMPORTED_MODULE_12__angular_material___["j" /* MatToolbarModule */],
+            __WEBPACK_IMPORTED_MODULE_12__angular_material___["a" /* MatButtonModule */],
+            __WEBPACK_IMPORTED_MODULE_12__angular_material___["e" /* MatIconModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["g" /* MatMenuModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["c" /* MatDialogModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["h" /* MatProgressSpinnerModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["i" /* MatTabsModule */],
             __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
         ]
     })
 ], DemoMaterialModule);
 
 var AppModule = (function () {
-    function AppModule(mdIconRegistry, domSanitizer) {
-        this.mdIconRegistry = mdIconRegistry;
+    function AppModule(matIconRegistry, domSanitizer) {
+        this.matIconRegistry = matIconRegistry;
         this.domSanitizer = domSanitizer;
-        mdIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('/assets/mdi.svg'));
+        matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('/assets/mdi.svg'));
     }
     return AppModule;
 }());
@@ -658,43 +666,42 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_8_app_header_header_component__["a" /* HeaderComponent */],
             __WEBPACK_IMPORTED_MODULE_8_app_header_header_component__["a" /* HeaderComponent */],
             __WEBPACK_IMPORTED_MODULE_9_app_spese_spese_component__["a" /* SpeseComponent */],
-            __WEBPACK_IMPORTED_MODULE_13__spese_spese_list_spese_list_component__["a" /* SpeseListComponent */],
-            __WEBPACK_IMPORTED_MODULE_14__spese_spese_new_spese_new_component__["a" /* SpeseNewComponent */],
-            __WEBPACK_IMPORTED_MODULE_16_app_management_gestione_spese_gestione_spese_component__["a" /* GestioneSpeseComponent */],
-            __WEBPACK_IMPORTED_MODULE_18__management_management_component__["a" /* ManagementComponent */],
-            __WEBPACK_IMPORTED_MODULE_19__management_gestione_spese_cost_type_add_cost_type_add_component__["a" /* CostTypeAddComponent */],
-            __WEBPACK_IMPORTED_MODULE_21__confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */],
-            __WEBPACK_IMPORTED_MODULE_22__keys_pipe__["a" /* KeysPipe */],
-            __WEBPACK_IMPORTED_MODULE_23__management_gestione_utente_gestione_utente_component__["a" /* GestioneUtenteComponent */],
-            __WEBPACK_IMPORTED_MODULE_25__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */],
-            __WEBPACK_IMPORTED_MODULE_26__management_gestione_store_gestione_store_component__["a" /* GestioneStoreComponent */],
-            __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */],
-            __WEBPACK_IMPORTED_MODULE_29__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */],
-            __WEBPACK_IMPORTED_MODULE_30__chiusure_chiusure_component__["a" /* ChiusureComponent */]
+            __WEBPACK_IMPORTED_MODULE_14__spese_spese_list_spese_list_component__["a" /* SpeseListComponent */],
+            __WEBPACK_IMPORTED_MODULE_15__spese_spese_new_spese_new_component__["a" /* SpeseNewComponent */],
+            __WEBPACK_IMPORTED_MODULE_17_app_management_gestione_spese_gestione_spese_component__["a" /* GestioneSpeseComponent */],
+            __WEBPACK_IMPORTED_MODULE_19__management_management_component__["a" /* ManagementComponent */],
+            __WEBPACK_IMPORTED_MODULE_20__management_gestione_spese_cost_type_add_cost_type_add_component__["a" /* CostTypeAddComponent */],
+            __WEBPACK_IMPORTED_MODULE_22__confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */],
+            __WEBPACK_IMPORTED_MODULE_23__keys_pipe__["a" /* KeysPipe */],
+            __WEBPACK_IMPORTED_MODULE_24__management_gestione_utente_gestione_utente_component__["a" /* GestioneUtenteComponent */],
+            __WEBPACK_IMPORTED_MODULE_26__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */],
+            __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_gestione_store_component__["a" /* GestioneStoreComponent */],
+            __WEBPACK_IMPORTED_MODULE_28__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */],
+            __WEBPACK_IMPORTED_MODULE_30__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */],
+            __WEBPACK_IMPORTED_MODULE_31__chiusure_chiusure_component__["a" /* ChiusureComponent */]
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_12__angular_material__["a" /* MaterialModule */],
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_11__angular_forms__["c" /* FormsModule */],
+            __WEBPACK_IMPORTED_MODULE_11__angular_forms__["d" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_10__angular_http__["HttpModule"],
             DemoMaterialModule,
-            __WEBPACK_IMPORTED_MODULE_15__angular_cdk__["l" /* CdkTableModule */],
-            __WEBPACK_IMPORTED_MODULE_12__angular_material__["d" /* MdDialogModule */],
-            __WEBPACK_IMPORTED_MODULE_17_app_app_routes_component__["a" /* AppRoutingModule */],
-            __WEBPACK_IMPORTED_MODULE_11__angular_forms__["h" /* ReactiveFormsModule */]
+            __WEBPACK_IMPORTED_MODULE_16__angular_cdk_table__["m" /* CdkTableModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["c" /* MatDialogModule */],
+            __WEBPACK_IMPORTED_MODULE_18_app_app_routes_component__["a" /* AppRoutingModule */],
+            __WEBPACK_IMPORTED_MODULE_11__angular_forms__["i" /* ReactiveFormsModule */]
         ],
         providers: [
             __WEBPACK_IMPORTED_MODULE_4_app_guards_auth_guard__["a" /* AuthGuard */],
             __WEBPACK_IMPORTED_MODULE_5_app_services_auth_service__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_20_app_services_spesa_service__["a" /* SpesaService */],
-            __WEBPACK_IMPORTED_MODULE_24_app_services_user_service__["a" /* UserService */],
-            __WEBPACK_IMPORTED_MODULE_28_app_services_store_service__["a" /* StoreService */],
-            __WEBPACK_IMPORTED_MODULE_31_app_services_balance_service__["a" /* BalanceService */]
+            __WEBPACK_IMPORTED_MODULE_21_app_services_spesa_service__["a" /* SpesaService */],
+            __WEBPACK_IMPORTED_MODULE_25_app_services_user_service__["a" /* UserService */],
+            __WEBPACK_IMPORTED_MODULE_29_app_services_store_service__["a" /* StoreService */],
+            __WEBPACK_IMPORTED_MODULE_32_app_services_balance_service__["a" /* BalanceService */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]],
-        entryComponents: [__WEBPACK_IMPORTED_MODULE_14__spese_spese_new_spese_new_component__["a" /* SpeseNewComponent */], __WEBPACK_IMPORTED_MODULE_19__management_gestione_spese_cost_type_add_cost_type_add_component__["a" /* CostTypeAddComponent */], __WEBPACK_IMPORTED_MODULE_25__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */], __WEBPACK_IMPORTED_MODULE_29__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */], __WEBPACK_IMPORTED_MODULE_21__confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */]]
+        entryComponents: [__WEBPACK_IMPORTED_MODULE_15__spese_spese_new_spese_new_component__["a" /* SpeseNewComponent */], __WEBPACK_IMPORTED_MODULE_20__management_gestione_spese_cost_type_add_cost_type_add_component__["a" /* CostTypeAddComponent */], __WEBPACK_IMPORTED_MODULE_26__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */], __WEBPACK_IMPORTED_MODULE_30__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */], __WEBPACK_IMPORTED_MODULE_22__confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], __WEBPACK_IMPORTED_MODULE_28__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */]]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_12__angular_material__["g" /* MdIconRegistry */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__angular_material__["g" /* MdIconRegistry */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_13__angular_material__["f" /* MatIconRegistry */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__angular_material__["f" /* MatIconRegistry */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _b || Object])
 ], AppModule);
 
 var _a, _b;
@@ -723,7 +730,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/chiusure/chiusure.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\n<div class=\"alert alert-danger\">{{message}}</div>\n<md-card>\n  <md-card-header>\n\n    <h3 *ngIf=\"diff>0\" style=\"max-width:50%\">Prossimo resoconto tra <p>{{timerMessage}}</p></h3>\n    <h3 *ngIf=\"diff<0\" style=\"max-width:50%; color: red\" >Resoconto in ritardo di {{timerMessage}}</h3>\n\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\" *ngIf=\"diff<0\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\" *ngIf=\"lastBalance?.type!=='Chiusura'\">Aggiungi</button></div>\n  </md-card-header>\n  <md-card-content>\n    <md-card *ngIf=\"lastBalance\">\n      <md-card-title-group>\n        <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\">100</md-progress-spinner>\n        <md-card-title>Resoconto {{lastBalance.type}}</md-card-title>\n        <md-card-subtitle>stato: inserito</md-card-subtitle>\n      </md-card-title-group>\n      <md-card-content class=\"md-content\">\n\n\n        <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\n        <p><span>In cassa: </span><span><strong>{{lastBalance.cassa}} &euro;</strong></span></p>\n        <p><span>POS:</span><span> <strong>{{lastBalance.pos}} &euro;</strong></span></p>\n        <p><span>Ticket:</span><span> <strong>{{lastBalance.ticket}} &euro;</strong></span></p>\n      </md-card-content>\n      <!-- <md-card-actions>\n        <button md-button disabled=\"true\">SEGNALA</button>\n      </md-card-actions> -->\n    </md-card>\n  </md-card-content>\n</md-card>\n<!-- </div> -->\n\n\n<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\">\n  <div class=\"alert alert-danger\">{{message}}</div>\n  <div>\n    <h3>Resoconto</h3>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\n  </div>\n\n  <md-card *ngFor=\"let lastBalance of balance\">\n    <md-card-title-group>\n      <md-progress-spinner class=\"example-margin\" [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\"></md-progress-spinner>\n      <md-card-title>Resoconto {{lastBalance.tipo}}</md-card-title>\n      <md-card-subtitle>stato: inserito</md-card-subtitle>\n    </md-card-title-group>\n    <md-card-content class=\"md-content\">\n\n\n      <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\n      <p><span>In cassa: </span><span>{{lastBalance.cassa}} &euro;</span></p>\n      <p><span>POS:</span><span>{{lastBalance.pos}}</span></p>\n      <p><span>Ticket:</span><span>{{lastBalance.ticket}}</span></p>\n    </md-card-content>\n    <md-card-actions>\n      <button md-button disabled=\"true\">INSERISCI</button>\n    </md-card-actions>\n  </md-card>\n\n</div> -->\n"
+module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n<div class=\"alert alert-danger\">{{message}}</div>\r\n<mat-card>\r\n  <mat-card-header>\r\n\r\n    <h3 *ngIf=\"diff>0\" style=\"max-width:50%\">Prossimo resoconto tra <p>{{timerMessage}}</p></h3>\r\n    <h3 *ngIf=\"diff<0\" style=\"max-width:50%; color: red\" >Resoconto in ritardo di {{timerMessage}}</h3>\r\n\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div class=\"ProceedContainer ng-scope\" *ngIf=\"diff<0\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\" *ngIf=\"lastBalance?.type!=='Chiusura'\">Aggiungi</button></div>\r\n  </mat-card-header>\r\n  <mat-card-content>\r\n    <mat-card *ngIf=\"lastBalance\">\r\n      <mat-card-title-group>\r\n        <mat-progress-spinner class=\"example-margin\" color=\"spinnerColor\" mode=\"spinnerMode\" value=\"lastBalance.value\">100</mat-progress-spinner>\r\n        <mat-card-title>Resoconto {{lastBalance.type}}</mat-card-title>\r\n        <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n      </mat-card-title-group>\r\n      <mat-card-content class=\"md-content\">\r\n\r\n\r\n        <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\r\n        <p><span>In cassa: </span><span><strong>{{lastBalance.cassa}} &euro;</strong></span></p>\r\n        <p><span>POS:</span><span> <strong>{{lastBalance.pos}} &euro;</strong></span></p>\r\n        <p><span>Ticket:</span><span> <strong>{{lastBalance.ticket}} &euro;</strong></span></p>\r\n      </mat-card-content>\r\n      <!-- <mat-card-actions>\r\n        <button md-button disabled=\"true\">SEGNALA</button>\r\n      </mat-card-actions> -->\r\n    </mat-card>\r\n  </mat-card-content>\r\n</mat-card>\r\n<!-- </div> -->\r\n\r\n\r\n<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n  <div class=\"alert alert-danger\">{{message}}</div>\r\n  <div>\r\n    <h3>Resoconto</h3>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\r\n  </div>\r\n\r\n  <mat-card *ngFor=\"let lastBalance of balance\">\r\n    <mat-card-title-group>\r\n      <md-progress-spinner class=\"example-margin\" color=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\"></md-progress-spinner>\r\n      <mat-card-title>Resoconto {{lastBalance.tipo}}</mat-card-title>\r\n      <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n    </mat-card-title-group>\r\n    <mat-card-content class=\"md-content\">\r\n\r\n\r\n      <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\r\n      <p><span>In cassa: </span><span>{{lastBalance.cassa}} &euro;</span></p>\r\n      <p><span>POS:</span><span>{{lastBalance.pos}}</span></p>\r\n      <p><span>Ticket:</span><span>{{lastBalance.ticket}}</span></p>\r\n    </mat-card-content>\r\n    <mat-card-actions>\r\n      <button md-button disabled=\"true\">INSERISCI</button>\r\n    </mat-card-actions>\r\n  </mat-card>\r\n\r\n</div> -->\r\n"
 
 /***/ }),
 
@@ -735,7 +742,7 @@ module.exports = "<!-- <div style=\"display: inline-block; text-align: left; wid
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__ = __webpack_require__("../../../../../src/app/_services/balance.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_entity_Balance__ = __webpack_require__("../../../../../src/app/entity/Balance.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Rx__);
@@ -903,7 +910,7 @@ ChiusureComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/chiusure/chiusure.component.html"),
         styles: [__webpack_require__("../../../../../src/app/chiusure/chiusure.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MdDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MatDialog */]) === "function" && _b || Object])
 ], ChiusureComponent);
 
 var _a, _b;
@@ -914,7 +921,7 @@ var _a, _b;
 /***/ "../../../../../src/app/confirmation-dialog/confirmation-dialog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 md-dialog-title>Conferma</h1>\n<div md-dialog-content>{{confirmMessage}}</div>\n<div md-dialog-actions>\n  <button md-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\n  <button md-button (click)=\"dialogRef.close(false)\">Annulla</button>\n</div>\n"
+module.exports = "<h1 mat-dialog-title>Conferma</h1>\r\n<div mat-dialog-content>{{confirmMessage}}</div>\r\n<div mat-dialog-actions>\r\n  <button mat-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\r\n  <button mat-button (click)=\"dialogRef.close(false)\">Annulla</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -924,7 +931,7 @@ module.exports = "<h1 md-dialog-title>Conferma</h1>\n<div md-dialog-content>{{co
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConfirmationDialog; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -946,8 +953,10 @@ ConfirmationDialog = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-confirmation-dialog',
         template: __webpack_require__("../../../../../src/app/confirmation-dialog/confirmation-dialog.component.html")
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MdDialogRef */]) === "function" && _a || Object])
+    })
+    // tslint:disable-next-line:component-class-suffix
+    ,
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatDialogRef */]) === "function" && _a || Object])
 ], ConfirmationDialog);
 
 var _a;
@@ -976,7 +985,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/edit-dialog/edit-dialog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 md-dialog-title>{{title}}</h1>\n\n\n<!-- STORE EDIT -->\n<div *ngIf=\"storeObj != null\">\n\n\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\n\n    <div md-dialog-content>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"storeObj.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required value=\"storeObj.nome\">\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"storeObj.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\"\n          value=\"storeObj.indirizzo\" required>\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"storeObj.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" value=\"storeObj.piva\"\n          required>\n      </md-input-container>\n\n\n      <md-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"storeObj.active\" [checked]=\"storeObj.active\">Attivo</md-checkbox>\n\n    </div>\n\n\n\n  </form>\n\n</div>\n\n\n<!-- USER EDIT -->\n<div *ngIf=\"userObj != null\">\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\n\n    <div md-dialog-content>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.name\" placeholder=\"Nome\" autocomplete=\"off\" #name=\"ngModel\" name=\"name\" required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.surname\" placeholder=\"Cognome\" autocomplete=\"off\" #surname=\"ngModel\" name=\"surname\" required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.username\" placeholder=\"Username\" autocomplete=\"off\" #username=\"ngModel\" name=\"username\"\n          required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.password\" type=\"password\" placeholder=\"Password\" autocomplete=\"off\" #password=\"ngModel\"\n          name=\"password\" required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"userObj.email\" placeholder=\"Email\" autocomplete=\"off\" #email=\"ngModel\" name=\"email\" required>\n      </md-input-container>\n\n      <div class=\"example-full-width\">\n        <md-select placeholder=\"Ruolo\" [(ngModel)]=\"userObj.ruolo\" #ruolo=\"ngModel\" name=\"role\" required>\n          <md-option *ngFor=\"let ruolo of roles | keys\" [value]=\"ruolo.value\">\n            {{ruolo.value}}\n          </md-option>\n        </md-select>\n      </div>\n      <span></span>\n      <div class=\"example-full-width\">\n        <md-select placeholder=\"Punto Vendita\" [(ngModel)]=\"userObj.store._id\" #store=\"ngModel\" name=\"store\" required>\n          <md-option *ngFor=\"let store of stores\" [value]=\"store._id\">{{store.nome}}</md-option>\n        </md-select>\n      </div>\n\n\n\n      <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"active\" [(ngModel)]=\"userObj.active\" [checked]=\"userObj.active\"\n        [value]=\"userObj.active\">Attivo</md-checkbox>\n\n    </div>\n\n  </form>\n</div>\n\n\n<div *ngIf=\"balanceObj != null\">\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\n    <div md-dialog-content>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput type=\"number\" [(ngModel)]=\"balanceObj.cassa\" placeholder=\"Cassa\" autocomplete=\"off\" #cassa=\"ngModel\" name=\"cassa\"\n          required>\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput type=\"number\" [(ngModel)]=\"balanceObj.pos\" placeholder=\"Pos\" autocomplete=\"off\" #pos=\"ngModel\" name=\"pos\"\n          required>\n      </md-input-container>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput type=\"number\" [(ngModel)]=\"balanceObj.ticket\" placeholder=\"Ticket\" autocomplete=\"off\" #ticket=\"ngModel\" name=\"ticket\"\n          required>\n      </md-input-container>\n\n    </div>\n  </form>\n</div>\n\n\n\n<div md-dialog-actions>\n  <button md-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\n  <button md-button (click)=\"dialogRef.close(false)\">Annulla</button>\n</div>\n"
+module.exports = "<h1 mat-dialog-title>{{title}}</h1>\r\n\r\n\r\n<!-- STORE EDIT -->\r\n<div *ngIf=\"storeObj != null\">\r\n\r\n\r\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\r\n\r\n    <div mat-dialog-content>\r\n\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput [(ngModel)]=\"storeObj.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required value=\"storeObj.nome\">\r\n      </mat-input-container>\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput [(ngModel)]=\"storeObj.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\"\r\n          value=\"storeObj.indirizzo\" required>\r\n      </mat-input-container>\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput [(ngModel)]=\"storeObj.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" value=\"storeObj.piva\"\r\n          required>\r\n      </mat-input-container>\r\n\r\n\r\n      <mat-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"storeObj.active\" checked=\"storeObj.active\">Attivo</mat-checkbox>\r\n\r\n    </div>\r\n\r\n\r\n\r\n  </form>\r\n\r\n</div>\r\n\r\n\r\n<!-- USER EDIT -->\r\n<div *ngIf=\"userObj != null\">\r\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\r\n\r\n    <div mat-dialog-content>\r\n\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput [(ngModel)]=\"userObj.name\" placeholder=\"Nome\" autocomplete=\"off\" #name=\"ngModel\" name=\"name\" required>\r\n      </mat-input-container>\r\n\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput [(ngModel)]=\"userObj.surname\" placeholder=\"Cognome\" autocomplete=\"off\" #surname=\"ngModel\" name=\"surname\" required>\r\n      </mat-input-container>\r\n\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput [(ngModel)]=\"userObj.username\" placeholder=\"Username\" autocomplete=\"off\" #username=\"ngModel\" name=\"username\"\r\n          required>\r\n      </mat-input-container>\r\n\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput [(ngModel)]=\"userObj.password\" type=\"password\" placeholder=\"Password\" autocomplete=\"off\" #password=\"ngModel\"\r\n          name=\"password\" required>\r\n      </mat-input-container>\r\n\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput [(ngModel)]=\"userObj.email\" placeholder=\"Email\" autocomplete=\"off\" #email=\"ngModel\" name=\"email\" required>\r\n      </mat-input-container>\r\n\r\n      <div class=\"example-full-width\">\r\n        <mat-select placeholder=\"Ruolo\" [(ngModel)]=\"userObj.ruolo\" #ruolo=\"ngModel\" name=\"role\" required>\r\n          <mat-option *ngFor=\"let ruolo of roles | keys\" value=\"ruolo.value\">\r\n            {{ruolo.value}}\r\n          </mat-option>\r\n        </mat-select>\r\n      </div>\r\n      <span></span>\r\n      <div class=\"example-full-width\">\r\n        <mat-select placeholder=\"Punto Vendita\" [(ngModel)]=\"userObj.store._id\" #store=\"ngModel\" name=\"store\" required>\r\n          <mat-option *ngFor=\"let store of stores\" value=\"store._id\">{{store.nome}}</mat-option>\r\n        </mat-select>\r\n      </div>\r\n\r\n\r\n\r\n      <mat-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"active\" [(ngModel)]=\"userObj.active\" checked=\"userObj.active\"\r\n        value=\"userObj.active\">Attivo</mat-checkbox>\r\n\r\n    </div>\r\n\r\n  </form>\r\n</div>\r\n\r\n\r\n<div *ngIf=\"balanceObj != null\">\r\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\r\n    <div mat-dialog-content>\r\n\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput type=\"number\" [(ngModel)]=\"balanceObj.cassa\" placeholder=\"Cassa\" autocomplete=\"off\" #cassa=\"ngModel\" name=\"cassa\"\r\n          required>\r\n      </mat-input-container>\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput type=\"number\" [(ngModel)]=\"balanceObj.pos\" placeholder=\"Pos\" autocomplete=\"off\" #pos=\"ngModel\" name=\"pos\"\r\n          required>\r\n      </mat-input-container>\r\n\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput type=\"number\" [(ngModel)]=\"balanceObj.ticket\" placeholder=\"Ticket\" autocomplete=\"off\" #ticket=\"ngModel\" name=\"ticket\"\r\n          required>\r\n      </mat-input-container>\r\n\r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n\r\n\r\n<div mat-dialog-actions>\r\n  <button mat-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\r\n  <button mat-button (click)=\"dialogRef.close(false)\">Annulla</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -986,7 +995,7 @@ module.exports = "<h1 md-dialog-title>{{title}}</h1>\n\n\n<!-- STORE EDIT -->\n<
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditDialogComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_entity_user__ = __webpack_require__("../../../../../src/app/entity/user.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1029,7 +1038,7 @@ EditDialogComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.html"),
         styles: [__webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MdDialogRef */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatDialogRef */]) === "function" && _b || Object])
 ], EditDialogComponent);
 
 var _a, _b;
@@ -1170,7 +1179,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<md-toolbar *ngIf=\"auth.loggedIn()\"  class =\"BrandedBackgroundGradientImage\" style=\"text-align: center; padding: 0 5px;\" >\r\n\r\n\t<!--The whole content below can be removed with the new code.-->\r\n\r\n  <div md-card-avatar class=\"example-header-image\"></div>\r\n\t<h3 style=\"color: white\">{{title}}</h3>\r\n\r\n\t<span class=\"span-fill-remaining\"></span>\r\n\t<button md-button [mdMenuTriggerFor]=\"menu\" style=\"color: white; padding: 0 0px;\" >{{user.name}}<md-icon>more_vert</md-icon></button>\r\n</md-toolbar> <!-- main app container -->\r\n<md-menu #menu=\"mdMenu\" yPosition=\"below\" xPosition=\"after\">\r\n  <!-- <button md-menu-item> -->\r\n      <a md-menu-item routerLink=\"/\" routerLinkActive=\"active\">\r\n      <md-icon class=\"md-18|md-24|md-36|md-48\">home</md-icon>\r\n      Home</a>\r\n  <!-- </button> -->\r\n  <a  md-menu-item routerLink=\"/manage\" routerLinkActive=\"active\">\r\n    <md-icon class=\"md-18|md-24|md-36|md-48\">format_list_bulleted</md-icon>\r\n    Gestione\r\n  </a>\r\n  <button md-menu-item (click)=\"logout()\">\r\n    <md-icon class=\"md-18|md-24|md-36|md-48\">exit_to_app</md-icon>\r\n    Esci\r\n  </button>\r\n</md-menu>\r\n"
+module.exports = "<mat-toolbar *ngIf=\"auth.loggedIn()\"  class =\"BrandedBackgroundGradientImage\" style=\"text-align: center; padding: 0 5px;\" >\r\n\r\n\t<!--The whole content below can be removed with the new code.-->\r\n\r\n  <div mat-card-avatar class=\"example-header-image\"></div>\r\n\t<h3 style=\"color: white\">{{title}}</h3>\r\n\r\n\t<span class=\"span-fill-remaining\"></span>\r\n\t<button mat-button [matMenuTriggerFor]=\"menu\" style=\"color: white; padding: 0 0px;\" >{{user.name}}<mat-icon>more_vert</mat-icon></button>\r\n</mat-toolbar> <!-- main app container -->\r\n\r\n<mat-menu #menu=\"matMenu\"  yPosition=\"below\" xPosition=\"after\">\r\n\r\n      <a mat-menu-item routerLink=\"/\" routerLinkActive=\"active\">\r\n      <mat-icon class=\"md-18|md-24|md-36|md-48\">home</mat-icon>\r\n      Home</a>\r\n\r\n  <a  mat-menu-item routerLink=\"/manage\" routerLinkActive=\"active\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">format_list_bulleted</mat-icon>\r\n    Gestione\r\n  </a>\r\n  <button mat-menu-item (click)=\"logout()\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">exit_to_app</mat-icon>\r\n    Esci\r\n  </button>\r\n</mat-menu>\r\n\r\n"
 
 /***/ }),
 
@@ -1243,7 +1252,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "\r\n/* div.Ccm-MainContentView {\r\n    height: 100%;\r\n    min-height: 100%;\r\n}\r\n\r\n.Ccm-MainContent .Ccm-MainContentView {\r\n    height: 100%;\r\n    min-height: 100%;\r\n    overflow: auto;\r\n    -webkit-overflow-scrolling: touch;\r\n} */\r\n\r\n.mat-ink-bar {\r\n  position: absolute;\r\n  bottom: 0;\r\n  height: 4px;\r\n  transition: .5s cubic-bezier(.35,0,.25,1);\r\n  background-color: #7fa372;\r\n}\r\n\r\n\r\n.mat-menu-item {\r\n  font-family: Roboto, \"Helvetica Neue\", sans-serif;\r\n  font-size: 14px;\r\n}\r\n", ""]);
+exports.push([module.i, "\r\n/* div.Ccm-MainContentView {\r\n    height: 100%;\r\n    min-height: 100%;\r\n}\r\n\r\n.Ccm-MainContent .Ccm-MainContentView {\r\n    height: 100%;\r\n    min-height: 100%;\r\n    overflow: auto;\r\n    -webkit-overflow-scrolling: touch;\r\n} */\r\n", ""]);
 
 // exports
 
@@ -1256,7 +1265,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n        <div class=\"Ccm-MainContentView ng-scope\">\n               <md-tab-group style=\"font-size:12px\">\n                  <md-tab id=\"tabSpese\" label=\"Spese\">\n                    <app-spese></app-spese>\n                  </md-tab>\n                  <md-tab id=\"tabChiusure\" label=\"Chiusure\">\n                    <app-chiusure></app-chiusure>\n                  </md-tab>\n                </md-tab-group>\n\n        </div>\n\n"
+module.exports = "\r\n\r\n        <div class=\"Ccm-MainContentView ng-scope\">\r\n               <mat-tab-group style=\"font-size:12px\">\r\n                  <mat-tab id=\"tabSpese\" label=\"Spese\">\r\n                    <app-spese></app-spese>\r\n                  </mat-tab>\r\n                  <mat-tab id=\"tabChiusure\" label=\"Chiusure\">\r\n                    <app-chiusure></app-chiusure>\r\n                  </mat-tab>\r\n                </mat-tab-group>\r\n\r\n        </div>\r\n\r\n"
 
 /***/ }),
 
@@ -1366,7 +1375,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"Ccm-MainContent ng-scope Ccm-LoginMainContent\">\n\n\n  <div class=\"Ccm-LoginContainer\">\n\n    <div class=\"Ccm-LoginImage\"><img alt=\"LOGO\" src=\"./assets/images/Logo.png\"></div>\n\n\n    <form name=\"form\" (ngSubmit)=\"f.form.valid && login()\" #f=\"ngForm\" novalidate>\n      <div class=\"LoginHelpContainer ng-scope\">\n        <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !username.valid }\">\n          <div class=\"Ccm-Login-UserNameContainer\">\n            <!-- <md-icon>person</md-icon> -->\n            <span><md-icon>person</md-icon></span>\n            <input class=\"Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched\" [(ngModel)]=\"model.username\" placeholder=\"Nome Utente\"\n              autocomplete=\"on\" #username=\"ngModel\" name=\"username\" required>\n            <div *ngIf=\"f.submitted && !username.valid\" class=\"help-block\">Username &eacute; obbligatorio</div>\n          </div>\n        </div>\n\n        <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !password.valid }\">\n\n          <div class=\"Ccm-Login-PasswordContainer\">\n            <span><md-icon>lock</md-icon></span>\n            <input id=\"Password\" type=\"password\" class=\"Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched\" [(ngModel)]=\"model.password\"\n              placeholder=\"Password\" #password=\"ngModel\" name=\"password\" required>\n            <div *ngIf=\"f.submitted && !password.valid\" class=\"help-block\">Password &eacute; obbligatorio</div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"form-group\">\n        <div class=\"ProceedContainer ng-scope\">\n\n          <button [disabled]=\"loading\" class=\"btn btn-primary Ccm-Button-Primary btn btn-default BrandedBackgroundGradientImage LoginButton ng-binding\">Accedi</button>\n        </div>\n\n        <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\n        />\n      </div>\n      <div *ngIf=\"error\" class=\"alert alert-danger\">{{error}}</div>\n    </form>\n  </div>\n\n\n</div>\n"
+module.exports = "<div class=\"Ccm-MainContent ng-scope Ccm-LoginMainContent\">\r\n\r\n\r\n  <div class=\"Ccm-LoginContainer\">\r\n\r\n    <div class=\"Ccm-LoginImage\"><img alt=\"LOGO\" src=\"./assets/images/Logo.png\"></div>\r\n\r\n\r\n    <form name=\"form\" (ngSubmit)=\"f.form.valid && login()\" #f=\"ngForm\" novalidate>\r\n      <div class=\"LoginHelpContainer ng-scope\">\r\n        <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !username.valid }\">\r\n          <div class=\"Ccm-Login-UserNameContainer\">\r\n            <!-- <mat-icon>person</mat-icon> -->\r\n            <span><mat-icon>person</mat-icon></span>\r\n            <input class=\"Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched\" [(ngModel)]=\"model.username\" placeholder=\"Nome Utente\"\r\n              autocomplete=\"on\" #username=\"ngModel\" name=\"username\" required>\r\n            <div *ngIf=\"f.submitted && !username.valid\" class=\"help-block\">Username &eacute; obbligatorio</div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !password.valid }\">\r\n\r\n          <div class=\"Ccm-Login-PasswordContainer\">\r\n            <span><mat-icon>lock</mat-icon></span>\r\n            <input id=\"Password\" type=\"password\" class=\"Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched\" [(ngModel)]=\"model.password\"\r\n              placeholder=\"Password\" #password=\"ngModel\" name=\"password\" required>\r\n            <div *ngIf=\"f.submitted && !password.valid\" class=\"help-block\">Password &eacute; obbligatorio</div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"ProceedContainer ng-scope\">\r\n\r\n          <button [disabled]=\"loading\" class=\"btn btn-primary Ccm-Button-Primary btn btn-default BrandedBackgroundGradientImage LoginButton ng-binding\">Accedi</button>\r\n        </div>\r\n\r\n        <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\r\n        />\r\n      </div>\r\n      <div *ngIf=\"error\" class=\"alert alert-danger\">{{error}}</div>\r\n    </form>\r\n  </div>\r\n\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1462,7 +1471,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-spese/cost-type-add/cost-type-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3 md-dialog-title>\n  Aggiungi</h3>\n<form name=\"form\" (ngSubmit)=\"f.form.valid && create()\" #f=\"ngForm\" novalidate>\n\n  <div md-dialog-content>\n\n    <md-select placeholder=\"Categoria\" [(ngModel)]=\"costType.nome\" #nome=\"ngModel\" name=\"nome\" required>\n      <md-option *ngFor=\"let types of categoryTypes | keys\" [value]=\"types.value\">\n        {{types.value}}\n      </md-option>\n    </md-select>\n\n\n\n    <md-input-container class=\"example-full-width\" >\n      <input mdInput [(ngModel)]=\"costType.subCategory\" placeholder=\"descrizione\" autocomplete=\"off\" #subCategory=\"ngModel\" name=\"subCategory\" [disabled]= \"costType.hasDescription\">\n\n    </md-input-container>\n\n\n    <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"hasDescription\" [(ngModel)]=\"costType.hasDescription\" >con descrizione</md-checkbox>\n\n    <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"attiva\" [(ngModel)]=\"costType.active\" >attivo</md-checkbox>\n\n\n  </div>\n  <div md-dialog-actions>\n    <div class=\"ProceedContainer ng-scope\">\n      <button md-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\n    </div>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\">\n      <button [disabled]=\"loading\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\n    </div>\n    <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\n    />\n  </div>\n\n</form>\n"
+module.exports = "<h3 mat-dialog-title>\r\n  Aggiungi</h3>\r\n<form name=\"form\" (ngSubmit)=\"f.form.valid && create()\" #f=\"ngForm\" novalidate>\r\n\r\n  <div mat-dialog-content>\r\n\r\n    <mat-select placeholder=\"Categoria\" [(ngModel)]=\"costType.nome\" #nome=\"ngModel\" name=\"nome\" required>\r\n      <mat-option *ngFor=\"let types of categoryTypes | keys\" value=\"types.value\">\r\n        {{types.value}}\r\n      </mat-option>\r\n    </mat-select>\r\n\r\n\r\n\r\n    <mat-input-container class=\"example-full-width\" >\r\n      <input matInput [(ngModel)]=\"costType.subCategory\" placeholder=\"descrizione\" autocomplete=\"off\" #subCategory=\"ngModel\" name=\"subCategory\" [disabled]= \"costType.hasDescription\">\r\n\r\n    </mat-input-container>\r\n\r\n\r\n    <mat-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"hasDescription\" [(ngModel)]=\"costType.hasDescription\" >con descrizione</mat-checkbox>\r\n\r\n    <mat-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"attiva\" [(ngModel)]=\"costType.active\" >attivo</mat-checkbox>\r\n\r\n\r\n  </div>\r\n  <div mat-dialog-actions>\r\n    <div class=\"ProceedContainer ng-scope\">\r\n      <button mat-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\r\n    </div>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div class=\"ProceedContainer ng-scope\">\r\n      <button [disabled]=\"loading\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\r\n    </div>\r\n    <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmatEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fmatgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmatsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\r\n    />\r\n  </div>\r\n\r\n</form>\r\n"
 
 /***/ }),
 
@@ -1473,7 +1482,7 @@ module.exports = "<h3 md-dialog-title>\n  Aggiungi</h3>\n<form name=\"form\" (ng
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CostTypeAddComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_entity_cost_type__ = __webpack_require__("../../../../../src/app/entity/cost-type.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__ = __webpack_require__("../../../../../src/app/_services/spesa.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1530,7 +1539,7 @@ CostTypeAddComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-spese/cost-type-add/cost-type-add.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-spese/cost-type-add/cost-type-add.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["e" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["e" /* MdDialogRef */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["d" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["d" /* MatDialogRef */]) === "function" && _b || Object])
 ], CostTypeAddComponent);
 
 var _a, _b;
@@ -1541,7 +1550,7 @@ var _a, _b;
 /***/ "../../../../../src/app/management/gestione-spese/gestione-spese.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\n  <div class=\"alert alert-danger\">{{message}}</div>\n  <md-card class=\"example-card\">\n    <md-card-header>\n        <h3>Categorie di spesa</h3>\n      <span class=\"span-fill-remaining\"></span>\n      <div class=\"ProceedContainer ng-scope\"><button (click)=\"openDialog()\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button></div>\n    </md-card-header>\n    <md-card-content>\n      <div style=\"overflow:auto\">\n        <table class=\"table table-bordered table-striped\">\n          <thead>\n            <tr>\n              <td style=\"text-align : center\"><strong>Categoria</strong></td>\n              <td style=\"text-align : center\"><strong>SottoCategoria</strong></td>\n              <td style=\"text-align : center\"><strong>Descrittivo</strong></td>\n              <td style=\"text-align : center\"><strong>Attivo</strong></td>\n              <td colspan=\"2\"></td>\n\n            </tr>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let cat of costTypes\">\n              <td>{{cat.nome}}</td>\n              <td>{{cat.subCategory}}</td>\n              <td style=\"text-align : center\">\n                <md-icon *ngIf=\"cat.hasDescription==false\">check_box_outline_blank</md-icon>\n                <md-icon *ngIf=\"cat.hasDescription==true\">check_box</md-icon>\n              </td>\n              <td style=\"text-align : center\">\n                <md-icon *ngIf=\"cat.active==false\">check_box_outline_blank</md-icon>\n                <md-icon *ngIf=\"cat.active==true\">check_box</md-icon>\n              </td>\n              <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n              </td> -->\n              <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\n                <button md-icon-button (click)=\"openConfirmationDelete(cat._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n              </td>\n\n            </tr>\n\n          </tbody>\n        </table>\n      </div>\n    </md-card-content>\n  </md-card>\n  <div>{{statusMessage}}</div>\n</div>\n"
+module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n  <div class=\"alert alert-danger\">{{message}}</div>\r\n  <mat-card class=\"example-card\">\r\n    <mat-card-header>\r\n        <h3>Categorie di spesa</h3>\r\n      <span class=\"span-fill-remaining\"></span>\r\n      <div class=\"ProceedContainer ng-scope\"><button (click)=\"openDialog()\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button></div>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n      <div style=\"overflow:auto\">\r\n        <table class=\"table table-bordered table-striped\">\r\n          <thead>\r\n            <tr>\r\n              <td style=\"text-align : center\"><strong>Categoria</strong></td>\r\n              <td style=\"text-align : center\"><strong>SottoCategoria</strong></td>\r\n              <td style=\"text-align : center\"><strong>Descrittivo</strong></td>\r\n              <td style=\"text-align : center\"><strong>Attivo</strong></td>\r\n              <td colspan=\"2\"></td>\r\n\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let cat of costTypes\">\r\n              <td>{{cat.nome}}</td>\r\n              <td>{{cat.subCategory}}</td>\r\n              <td style=\"text-align : center\">\r\n                <mat-icon *ngIf=\"cat.hasDescription==false\">check_box_outline_blank</mat-icon>\r\n                <mat-icon *ngIf=\"cat.hasDescription==true\">check_box</mat-icon>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <mat-icon *ngIf=\"cat.active==false\">check_box_outline_blank</mat-icon>\r\n                <mat-icon *ngIf=\"cat.active==true\">check_box</mat-icon>\r\n              </td>\r\n              <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                <button mat-icon-button><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n              </td> -->\r\n              <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\r\n                <button mat-icon-button (click)=\"openConfirmationDelete(cat._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n              </td>\r\n\r\n            </tr>\r\n\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </mat-card-content>\r\n  </mat-card>\r\n  <div>{{statusMessage}}</div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1569,7 +1578,7 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GestioneSpeseComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_management_gestione_spese_cost_type_add_cost_type_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-spese/cost-type-add/cost-type-add.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__ = __webpack_require__("../../../../../src/app/_services/spesa.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_confirmation_dialog_confirmation_dialog_component__ = __webpack_require__("../../../../../src/app/confirmation-dialog/confirmation-dialog.component.ts");
@@ -1603,11 +1612,11 @@ var GestioneSpeseComponent = (function () {
     };
     GestioneSpeseComponent.prototype.openDialog = function () {
         var _this = this;
-        this.message = "";
+        this.message = '';
         this.dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_2_app_management_gestione_spese_cost_type_add_cost_type_add_component__["a" /* CostTypeAddComponent */]);
         this.dialogRef.afterClosed().subscribe(function (result) {
             console.log(result);
-            if (result != "cancel") {
+            if (result !== 'cancel') {
                 console.log(_this.dialogRef.componentInstance.costType);
                 _this.create(_this.dialogRef.componentInstance.costType);
             }
@@ -1618,7 +1627,7 @@ var GestioneSpeseComponent = (function () {
     };
     GestioneSpeseComponent.prototype.create = function (type) {
         var _this = this;
-        console.log("ECCO");
+        console.log('ECCO');
         this._spesaService.addType(type)
             .then(function (data) {
             if (data.success) {
@@ -1640,10 +1649,10 @@ var GestioneSpeseComponent = (function () {
         this.confirmDialog = this.dialog.open(__WEBPACK_IMPORTED_MODULE_4_app_confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], {
             disableClose: false
         });
-        this.confirmDialog.componentInstance.confirmMessage = "Sei sicuro di voler cancellare questo elemento?";
+        this.confirmDialog.componentInstance.confirmMessage = 'Sei sicuro di voler cancellare questo elemento?';
         this.confirmDialog.afterClosed().subscribe(function (result) {
             if (result) {
-                console.log("CANCELLA");
+                console.log('CANCELLA');
                 _this._spesaService.deleteCategory(id)
                     .then(function (types) { _this.getList(); })
                     .catch(function (err) { return console.log(err); });
@@ -1667,7 +1676,7 @@ GestioneSpeseComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-spese/gestione-spese.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-spese/gestione-spese.component.scss")]
     }),
-    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MdDialog */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatDialog */]) === "function" && _d || Object])
 ], GestioneSpeseComponent);
 
 var _a, _b, _c, _d;
@@ -1696,7 +1705,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-store/gestione-store.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\n    <div class=\"alert alert-danger\">{{message}}</div>\n    <md-card class=\"example-card\">\n      <md-card-header>\n          <h3>Punti Vendita</h3>\n        <span class=\"span-fill-remaining\"></span>\n        <div class=\"ProceedContainer\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\n      </md-card-header>\n      <md-card-content>\n        <div style=\"overflow:auto\">\n          <table class=\"table table-bordered table-striped\">\n            <thead>\n              <tr>\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\n                <td style=\"text-align : center\"><strong>Indirizzo</strong></td>\n                <td style=\"text-align : center\"><strong>P.iva</strong></td>\n                <td colspan=\"2\"></td>\n\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let store of stores\">\n                <td>{{store.nome}}</td>\n                <td>{{store.indirizzo}}</td>\n                <td>{{store.piva}}</td>\n\n\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                    <button md-icon-button (click)=\"openEditDialog(store)\"><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                  </td>\n                  <td style=\"text-align : center; padding: 0px;\" >\n                    <button md-icon-button (click)=\"openConfirmationDelete(store._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                  </td>\n\n                </tr>\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                  <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                </td>\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\n                  <button md-icon-button (click)=\"openConfirmationDelete(cat._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                </td>\n\n              </tr> -->\n\n            </tbody>\n          </table>\n        </div>\n      </md-card-content>\n    </md-card>\n    <div>{{statusMessage}}</div>\n  </div>\n"
+module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n    <div class=\"alert alert-danger\">{{message}}</div>\r\n    <mat-card class=\"example-card\">\r\n      <mat-card-header>\r\n          <h3>Punti Vendita</h3>\r\n        <span class=\"span-fill-remaining\"></span>\r\n        <div class=\"ProceedContainer\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\r\n      </mat-card-header>\r\n      <mat-card-content>\r\n        <div style=\"overflow:auto\">\r\n          <table class=\"table table-bordered table-striped\">\r\n            <thead>\r\n              <tr>\r\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\r\n                <td style=\"text-align : center\"><strong>Indirizzo</strong></td>\r\n                <td style=\"text-align : center\"><strong>P.iva</strong></td>\r\n                <td colspan=\"2\"></td>\r\n\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr *ngFor=\"let store of stores\">\r\n                <td>{{store.nome}}</td>\r\n                <td>{{store.indirizzo}}</td>\r\n                <td>{{store.piva}}</td>\r\n\r\n\r\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                    <button mat-icon-button (click)=\"openEditDialog(store)\"><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n                  </td>\r\n                  <td style=\"text-align : center; padding: 0px;\" >\r\n                    <button mat-icon-button (click)=\"openConfirmationDelete(store._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n                  </td>\r\n\r\n                </tr>\r\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                  <button mat-icon-button><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n                </td>\r\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\r\n                  <button mat-icon-button (click)=\"openConfirmationDelete(cat._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n                </td>\r\n\r\n              </tr> -->\r\n\r\n            </tbody>\r\n          </table>\r\n        </div>\r\n      </mat-card-content>\r\n    </mat-card>\r\n    <div>{{statusMessage}}</div>\r\n  </div>\r\n"
 
 /***/ }),
 
@@ -1708,7 +1717,7 @@ module.exports = "<div style=\"display: inline-block; text-align: left; width: 1
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_management_gestione_store_store_add_store_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_confirmation_dialog_confirmation_dialog_component__ = __webpack_require__("../../../../../src/app/confirmation-dialog/confirmation-dialog.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1744,11 +1753,11 @@ var GestioneStoreComponent = (function () {
     };
     GestioneStoreComponent.prototype.openDialog = function () {
         var _this = this;
-        this.message = "";
+        this.message = '';
         this.dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_2_app_management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */]);
         this.dialogRef.afterClosed().subscribe(function (result) {
             console.log(result);
-            if (result != "cancel") {
+            if (result != 'cancel') {
                 _this.create(_this.dialogRef.componentInstance.store);
                 _this.getList();
             }
@@ -1762,14 +1771,14 @@ var GestioneStoreComponent = (function () {
         /**
          * get Store from db
          */
-        console.log("STORE ID TO MOD ==>" + JSON.stringify(store));
+        console.log('STORE ID TO MOD ==>' + JSON.stringify(store));
         this.editDialog = this.dialog.open(__WEBPACK_IMPORTED_MODULE_4_app_edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */], {
             disableClose: false
         });
         this.editDialog.componentInstance.storeObj = store;
         this.editDialog.afterClosed().subscribe(function (result) {
             if (result) {
-                console.log("opeEditDialog result: " + result);
+                console.log('opeEditDialog result: ' + result);
                 _this._storeService.updateStore(_this.editDialog.componentInstance.storeObj);
                 _this.getList();
             }
@@ -1781,7 +1790,7 @@ var GestioneStoreComponent = (function () {
         this.confirmDialog = this.dialog.open(__WEBPACK_IMPORTED_MODULE_5_app_confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], {
             disableClose: false
         });
-        this.confirmDialog.componentInstance.confirmMessage = "Sei sicuro di voler cancellare questo elemento?";
+        this.confirmDialog.componentInstance.confirmMessage = 'Sei sicuro di voler cancellare questo elemento?';
         this.confirmDialog.afterClosed().subscribe(function (result) {
             if (result) {
                 _this._storeService.delete(id)
@@ -1799,7 +1808,7 @@ GestioneStoreComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-store/gestione-store.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-store/gestione-store.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MdDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["b" /* MatDialog */]) === "function" && _b || Object])
 ], GestioneStoreComponent);
 
 var _a, _b;
@@ -1828,7 +1837,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-store/store-add/store-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3 md-dialog-title>\n    Aggiungi</h3>\n  <form name=\"form\" (ngSubmit)=\"f.form.valid && create()\" #f=\"ngForm\" novalidate>\n\n    <div md-dialog-content>\n\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"store.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required>\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"store.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\"\n          required>\n      </md-input-container>\n      <md-input-container class=\"example-full-width\">\n          <input mdInput [(ngModel)]=\"store.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" required>\n        </md-input-container>\n\n\n      <md-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"store\" >Attivo</md-checkbox>\n\n\n    </div>\n    <div md-dialog-actions>\n      <div class=\"ProceedContainer ng-scope\">\n        <button md-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\n      </div>\n      <span class=\"span-fill-remaining\"></span>\n      <div class=\"ProceedContainer ng-scope\">\n        <button class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\n      </div>\n\n    </div>\n\n  </form>\n"
+module.exports = "<h3 mat-dialog-title>\r\n    Aggiungi</h3>\r\n  <form name=\"form\" (ngSubmit)=\"f.form.valid && create()\" #f=\"ngForm\" novalidate>\r\n\r\n    <div mat-dialog-content>\r\n\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput [(ngModel)]=\"store.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required>\r\n      </mat-input-container>\r\n      <mat-input-container class=\"example-full-width\">\r\n        <input matInput [(ngModel)]=\"store.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\"\r\n          required>\r\n      </mat-input-container>\r\n      <mat-input-container class=\"example-full-width\">\r\n          <input matInput [(ngModel)]=\"store.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" required>\r\n        </mat-input-container>\r\n\r\n\r\n      <mat-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"store\" >Attivo</mat-checkbox>\r\n\r\n\r\n    </div>\r\n    <div mat-dialog-actions>\r\n      <div class=\"ProceedContainer ng-scope\">\r\n        <button mat-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\r\n      </div>\r\n      <span class=\"span-fill-remaining\"></span>\r\n      <div class=\"ProceedContainer ng-scope\">\r\n        <button class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </form>\r\n"
 
 /***/ }),
 
@@ -1839,7 +1848,7 @@ module.exports = "<h3 md-dialog-title>\n    Aggiungi</h3>\n  <form name=\"form\"
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StoreAddComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_entity_store__ = __webpack_require__("../../../../../src/app/entity/store.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1860,7 +1869,7 @@ var StoreAddComponent = (function () {
     StoreAddComponent.prototype.ngOnInit = function () {
     };
     StoreAddComponent.prototype.create = function () {
-        console.log(this + "=" + JSON.stringify(this.store));
+        console.log(this + '=' + JSON.stringify(this.store));
         this.dialogRef.close();
     };
     ;
@@ -1872,7 +1881,7 @@ StoreAddComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["e" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["e" /* MdDialogRef */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["d" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["d" /* MatDialogRef */]) === "function" && _a || Object])
 ], StoreAddComponent);
 
 var _a;
@@ -1901,7 +1910,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-utente/gestione-utente.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\n    <div class=\"alert alert-danger\">{{message}}</div>\n    <md-card class=\"example-card\">\n      <md-card-header>\n          <h3>Utenti</h3>\n        <span class=\"span-fill-remaining\"></span>\n        <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\n      </md-card-header>\n      <md-card-content>\n        <div style=\"overflow:auto\">\n          <table class=\"table table-bordered table-striped\">\n            <thead>\n              <tr>\n                <td style=\"text-align : center\"><strong>User ID</strong></td>\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\n                <td style=\"text-align : center\"><strong>Cognome</strong></td>\n                <td style=\"text-align : center\"><strong>Ruolo</strong></td>\n                <td style=\"text-align : center\"><strong>e-mail</strong></td>\n                <td style=\"text-align : center\"><strong>Punto Vendita</strong></td>\n                <td colspan=\"2\"></td>\n\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let user of users\">\n                <td>{{user.username}}</td>\n                <td>{{user.name}}</td>\n                <td>{{user.surname}}</td>\n                <td>{{user.ruolo}}</td>\n                <td>{{user.email}}</td>\n                <td>{{user.store.nome}}</td>\n\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                    <button md-icon-button (click)=\"openEditDialog(user)\"><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                  </td>\n                  <td style=\"text-align : center; padding: 0px;\" >\n                    <button md-icon-button (click)=\"openConfirmationDelete(user._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                  </td>\n\n                </tr>\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\n                  <button md-icon-button><md-icon class=\"md-24\">mode_edit</md-icon></button>\n                </td>\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\n                  <button md-icon-button (click)=\"openConfirmationDelete(cat._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n                </td>\n\n              </tr> -->\n\n            </tbody>\n          </table>\n        </div>\n      </md-card-content>\n    </md-card>\n    <div>{{statusMessage}}</div>\n  </div>\n"
+module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n    <div class=\"alert alert-danger\">{{message}}</div>\r\n    <mat-card class=\"example-card\">\r\n      <mat-card-header>\r\n          <h3>Utenti</h3>\r\n        <span class=\"span-fill-remaining\"></span>\r\n        <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\r\n      </mat-card-header>\r\n      <mat-card-content>\r\n        <div style=\"overflow:auto\">\r\n          <table class=\"table table-bordered table-striped\">\r\n            <thead>\r\n              <tr>\r\n                <td style=\"text-align : center\"><strong>User ID</strong></td>\r\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\r\n                <td style=\"text-align : center\"><strong>Cognome</strong></td>\r\n                <td style=\"text-align : center\"><strong>Ruolo</strong></td>\r\n                <td style=\"text-align : center\"><strong>e-mail</strong></td>\r\n                <td style=\"text-align : center\"><strong>Punto Vendita</strong></td>\r\n                <td colspan=\"2\"></td>\r\n\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr *ngFor=\"let user of users\">\r\n                <td>{{user.username}}</td>\r\n                <td>{{user.name}}</td>\r\n                <td>{{user.surname}}</td>\r\n                <td>{{user.ruolo}}</td>\r\n                <td>{{user.email}}</td>\r\n                <td>{{user.store.nome}}</td>\r\n\r\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                    <button mat-icon-button (click)=\"openEditDialog(user)\"><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n                  </td>\r\n                  <td style=\"text-align : center; padding: 0px;\" >\r\n                    <button mat-icon-button (click)=\"openConfirmationDelete(user._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n                  </td>\r\n\r\n                </tr>\r\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                  <button mat-icon-button><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n                </td>\r\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\r\n                  <button mat-icon-button (click)=\"openConfirmationDelete(cat._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n                </td>\r\n\r\n              </tr> -->\r\n\r\n            </tbody>\r\n          </table>\r\n        </div>\r\n      </mat-card-content>\r\n    </mat-card>\r\n    <div>{{statusMessage}}</div>\r\n  </div>\r\n"
 
 /***/ }),
 
@@ -1912,7 +1921,7 @@ module.exports = "<div style=\"display: inline-block; text-align: left; width: 1
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GestioneUtenteComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__ = __webpack_require__("../../../../../src/app/_services/user.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_management_gestione_utente_user_add_user_add_component__ = __webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_confirmation_dialog_confirmation_dialog_component__ = __webpack_require__("../../../../../src/app/confirmation-dialog/confirmation-dialog.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
@@ -1963,7 +1972,7 @@ var GestioneUtenteComponent = (function () {
         this.dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_3_app_management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */]);
         this.dialogRef.afterClosed().subscribe(function (result) {
             console.log(result);
-            if (result != 'cancel') {
+            if (result !== 'cancel') {
                 _this.create(_this.dialogRef.componentInstance.user);
                 _this.getList();
             }
@@ -2019,7 +2028,7 @@ GestioneUtenteComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["c" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["c" /* MdDialog */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["b" /* MatDialog */]) === "function" && _c || Object])
 ], GestioneUtenteComponent);
 
 var _a, _b, _c;
@@ -2048,7 +2057,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-utente/user-add/user-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3 md-dialog-title>\n  Aggiungi</h3>\n<form name=\"form\" (ngSubmit)=\"create()\"  novalidate >\n\n  <div md-dialog-content>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"user.name\" placeholder=\"Nome\" autocomplete=\"off\" #name=\"ngModel\" name=\"name\" required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"user.surname\" placeholder=\"Cognome\" autocomplete=\"off\" #surname=\"ngModel\" name=\"surname\"\n        required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"user.username\" placeholder=\"Username\" autocomplete=\"off\" #username=\"ngModel\" name=\"username\"\n        required>\n    </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n        <input mdInput [(ngModel)]=\"user.password\"  type=\"password\" placeholder=\"Password\" autocomplete=\"off\" #password=\"ngModel\" name=\"password\"\n          required>\n      </md-input-container>\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"user.email\"  placeholder=\"Email\" autocomplete=\"off\" name=\"email\" required>\n    </md-input-container>\n\n    <md-select placeholder=\"Ruolo\" [(ngModel)]=\"user.ruolo\" #role=\"ngModel\" name=\"role\" required>\n      <md-option *ngFor=\"let ruolo of ruoli | keys\" [value]=\"ruolo.value\">\n        {{ruolo.value}}\n      </md-option>\n    </md-select>\n\n    <md-select placeholder=\"Punto Vendita\" [(ngModel)]=\"user.store\" #nome=\"ngModel\" name=\"store\" required>\n      <md-option *ngFor=\"let store of stores\" [value]=\"store\">\n        {{store.nome}} - {{store.indirizzo}}\n      </md-option>\n    </md-select>\n\n\n\n\n    <md-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"active\" [(ngModel)]=\"user.active\" [checked]=\"user.active\"\n      [value]=\"user.active\">Attivo</md-checkbox>\n\n\n  </div>\n  <div md-dialog-actions>\n    <div class=\"ProceedContainer ng-scope\">\n      <button md-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\n    </div>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\">\n      <button class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\n    </div>\n\n  </div>\n\n</form>\n"
+module.exports = "<h3 mat-dialog-title>\r\n  Aggiungi</h3>\r\n<form name=\"form\" (ngSubmit)=\"create()\"  novalidate >\r\n\r\n  <div mat-dialog-content>\r\n\r\n    <mat-input-container class=\"example-full-width\">\r\n      <input matInput [(ngModel)]=\"user.name\" placeholder=\"Nome\" autocomplete=\"off\" #name=\"ngModel\" name=\"name\" required>\r\n    </mat-input-container>\r\n\r\n    <mat-input-container class=\"example-full-width\">\r\n      <input matInput [(ngModel)]=\"user.surname\" placeholder=\"Cognome\" autocomplete=\"off\" #surname=\"ngModel\" name=\"surname\"\r\n        required>\r\n    </mat-input-container>\r\n\r\n    <mat-input-container class=\"example-full-width\">\r\n      <input matInput [(ngModel)]=\"user.username\" placeholder=\"Username\" autocomplete=\"off\" #username=\"ngModel\" name=\"username\"\r\n        required>\r\n    </mat-input-container>\r\n\r\n    <mat-input-container class=\"example-full-width\">\r\n        <input matInput [(ngModel)]=\"user.password\"  type=\"password\" placeholder=\"Password\" autocomplete=\"off\" #password=\"ngModel\" name=\"password\"\r\n          required>\r\n      </mat-input-container>\r\n\r\n    <mat-input-container class=\"example-full-width\">\r\n      <input matInput [(ngModel)]=\"user.email\"  placeholder=\"Email\" autocomplete=\"off\" name=\"email\" required>\r\n    </mat-input-container>\r\n\r\n    <mat-select placeholder=\"Ruolo\" [(ngModel)]=\"user.ruolo\" #role=\"ngModel\" name=\"role\" required>\r\n      <mat-option *ngFor=\"let ruolo of ruoli | keys\" value=\"ruolo.value\">\r\n        {{ruolo.value}}\r\n      </mat-option>\r\n    </mat-select>\r\n\r\n    <mat-select placeholder=\"Punto Vendita\" [(ngModel)]=\"user.store\" #nome=\"ngModel\" name=\"store\" required>\r\n      <mat-option *ngFor=\"let store of stores\" value=\"store\">\r\n        {{store.nome}} - {{store.indirizzo}}\r\n      </mat-option>\r\n    </mat-select>\r\n\r\n\r\n\r\n\r\n    <mat-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"active\" [(ngModel)]=\"user.active\" checked=\"user.active\"\r\n      value=\"user.active\">Attivo</mat-checkbox>\r\n\r\n\r\n  </div>\r\n  <div mat-dialog-actions>\r\n    <div class=\"ProceedContainer ng-scope\">\r\n      <button mat-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\r\n    </div>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div class=\"ProceedContainer ng-scope\">\r\n      <button class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\r\n    </div>\r\n\r\n  </div>\r\n\r\n</form>\r\n"
 
 /***/ }),
 
@@ -2059,7 +2068,7 @@ module.exports = "<h3 md-dialog-title>\n  Aggiungi</h3>\n<form name=\"form\" (ng
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserAddComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_entity_user__ = __webpack_require__("../../../../../src/app/entity/user.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__ = __webpack_require__("../../../../../src/app/_services/store.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2101,7 +2110,7 @@ UserAddComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["e" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["e" /* MdDialogRef */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["d" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["d" /* MatDialogRef */]) === "function" && _b || Object])
 ], UserAddComponent);
 
 var _a, _b;
@@ -2130,7 +2139,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/management.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"Ccm-MainContentView ng-scope\">\n<md-tab-group style=\"font-size:12px\">\n  <md-tab id=\"tabSpeseCat\" label=\"Gestione Spese\">\n    <speseMngmt></speseMngmt>\n  </md-tab>\n  <md-tab label=\"Utenti\">\n      <userMngmt></userMngmt>\n  </md-tab>\n  <md-tab label=\"Punti Vendita\">\n      <storeMngmt></storeMngmt>\n  </md-tab>\n</md-tab-group>\n</div>\n"
+module.exports = "<div class=\"Ccm-MainContentView ng-scope\">\r\n<mat-tab-group style=\"font-size:12px\">\r\n  <mat-tab id=\"tabSpeseCat\" label=\"Gestione Spese\">\r\n    <speseMngmt></speseMngmt>\r\n  </mat-tab>\r\n  <mat-tab label=\"Utenti\">\r\n      <userMngmt></userMngmt>\r\n  </mat-tab>\r\n  <mat-tab label=\"Punti Vendita\">\r\n      <storeMngmt></storeMngmt>\r\n  </mat-tab>\r\n</mat-tab-group>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2190,7 +2199,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/spese/spese-list/spese-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<md-list>\n  <md-list-item *ngFor=\"let spesa of spesaList\">\n    <h4 md-line style=\"text-align: left;\"><strong>{{spesa.descrizione}}</strong></h4>\n    <h6 md-line>({{spesa.tipo.nome}})</h6>\n    <p style=\"font-size: 8px;text-align: left;\" md-line>{{spesa.update_on | date : 'H:mm:ss'}}</p>\n    <div style=\"display: inline-block; text-align: right; width: 100%;\">{{spesa.valore}}&euro;</div>\n    <div style=\"display: inline-block; text-align: right; width: 100%;\">\n      <!-- <md-icon>edit</md-icon> -->\n      <span></span>\n      <button md-icon-button (click)=\"openConfirmationDelete(spesa._id)\"><md-icon class=\"md-24\" >delete</md-icon></button>\n    </div>\n  </md-list-item>\n</md-list>\n"
+module.exports = "<mat-list>\r\n  <mat-list-item *ngFor=\"let spesa of spesaList\">\r\n    <h4 mat-line style=\"text-align: left;\"><strong>{{spesa.descrizione}}</strong></h4>\r\n    <h6 mat-line>({{spesa.tipo.nome}})</h6>\r\n    <p style=\"font-size: 8px;text-align: left;\" mat-line>{{spesa.update_on | date : 'H:mm:ss'}}</p>\r\n    <div style=\"display: inline-block; text-align: right; width: 100%;\">{{spesa.valore}}&euro;</div>\r\n    <div style=\"display: inline-block; text-align: right; width: 100%;\">\r\n      <!-- <mat-icon>edit</mat-icon> -->\r\n      <span></span>\r\n      <button mat-icon-button (click)=\"openConfirmationDelete(spesa._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n    </div>\r\n  </mat-list-item>\r\n</mat-list>\r\n"
 
 /***/ }),
 
@@ -2200,7 +2209,7 @@ module.exports = "<md-list>\n  <md-list-item *ngFor=\"let spesa of spesaList\">\
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SpeseListComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_startWith__ = __webpack_require__("../../../../rxjs/add/operator/startWith.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_startWith___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_startWith__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_merge__ = __webpack_require__("../../../../rxjs/add/observable/merge.js");
@@ -2237,10 +2246,10 @@ var SpeseListComponent = (function () {
         this.confirmDialog = this.dialog.open(__WEBPACK_IMPORTED_MODULE_6_app_confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], {
             disableClose: false
         });
-        this.confirmDialog.componentInstance.confirmMessage = "Sei sicuro di voler cancellare questo elemento?";
+        this.confirmDialog.componentInstance.confirmMessage = 'Sei sicuro di voler cancellare questo elemento?';
         this.confirmDialog.afterClosed().subscribe(function (result) {
             if (result) {
-                console.log("CANCELLA");
+                console.log('CANCELLA');
                 _this._spesaService.deleteCost(id)
                     .then(function (types) { _this.reloadEvent.emit(); })
                     .catch(function (err) { return console.log(err); });
@@ -2264,7 +2273,7 @@ SpeseListComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/spese/spese-list/spese-list.component.html"),
         styles: [__webpack_require__("../../../../../src/app/spese/spese-list/spese-list.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MdDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatDialog */]) === "function" && _b || Object])
 ], SpeseListComponent);
 
 var _a, _b;
@@ -2293,7 +2302,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/spese/spese-new/spese-new.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3 md-dialog-title>\n  Nuova Spesa</h3>\n<form name=\"form\" (ngSubmit)=\"f.form.valid && create()\" #f=\"ngForm\" novalidate>\n\n  <div md-dialog-content>\n    <md-select placeholder=\"Categoria\" name=\"categoria\" [(ngModel)]=\"tmpCategory\" required (change)=\"getSubCategoryList()\">\n       <md-option *ngFor=\"let types of categoryTypes | keys\" [value]=\"types.value\">\n        {{types.value}}\n      </md-option>\n    </md-select>\n\n    <!-- Sezione Sottocategoria - Visualizzato solo per Delivery e Food -->\n   <!--  <md-select placeholder=\"Tipologia\" [(ngModel)]=\"spesa.tipo\" name=\"tipo\" required *ngIf=\"tmpCategory=='Delivery'\">\n      <md-option *ngFor=\"let types of costTypes\" [value]=\"types\">\n        {{types.subCategory}}\n      </md-option>\n    </md-select> -->\n\n    <md-select placeholder=\"Spesa\" [(ngModel)]=\"spesa.tipo\" name=\"tipo\" required *ngIf=\"tmpCategory=='Food' || tmpCategory=='Delivery'\" (change)=\"setDescription()\">\n        <md-option *ngFor=\"let types of costTypes\" [value]=\"types\">\n          {{types.subCategory}}\n        </md-option>\n      </md-select>\n\n\n\n\n    <md-input-container class=\"example-full-width\" *ngIf=\"tmpCategory!='Food' && tmpCategory!='Delivery'\">\n      <input mdInput placeholder=\"Spesa\" [(ngModel)]=\"spesa.descrizione\" name=\"descrizione\" required>\n      <!-- <md-error *ngIf=\"descrizioneFormControl.hasError('required')\">\n        Campo <strong>obbligatorio</strong>\n      </md-error> -->\n    </md-input-container>\n\n\n    <md-input-container class=\"example-full-width\">\n      <input mdInput [(ngModel)]=\"spesa.valore\" placeholder=\"Valore(€)\" autocomplete=\"off\" #valore=\"ngModel\" name=\"valore\" required>\n      <!-- <md-error *ngIf=\"descrizioneFormControl.hasError('required')\">\n        Campo <strong>obbligatorio</strong>\n      </md-error> -->\n    </md-input-container>\n\n  </div>\n  <div md-dialog-actions>\n    <div class=\"ProceedContainer ng-scope\">\n      <button md-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\n    </div>\n    <span class=\"span-fill-remaining\"></span>\n    <div class=\"ProceedContainer ng-scope\">\n      <button [disabled]=\"loading\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\n    </div>\n    <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\n    />\n  </div>\n\n</form>\n"
+module.exports = "<h3 mat-dialog-title>\r\n  Nuova Spesa</h3>\r\n<form name=\"form\" (ngSubmit)=\"f.form.valid && create()\" #f=\"ngForm\" novalidate>\r\n\r\n  <div mat-dialog-content>\r\n    <mat-select placeholder=\"Categoria\" name=\"categoria\" [(ngModel)]=\"tmpCategory\" required (change)=\"getSubCategoryList()\">\r\n       <mat-option *ngFor=\"let types of categoryTypes | keys\" value=\"types.value\">\r\n        {{types.value}}\r\n      </mat-option>\r\n    </mat-select>\r\n\r\n    <!-- Sezione Sottocategoria - Visualizzato solo per Delivery e Food -->\r\n   <!--  <mat-select placeholder=\"Tipologia\" [(ngModel)]=\"spesa.tipo\" name=\"tipo\" required *ngIf=\"tmpCategory=='Delivery'\">\r\n      <mat-option *ngFor=\"let types of costTypes\" [value]=\"types\">\r\n        {{types.subCategory}}\r\n      </mat-option>\r\n    </mat-select> -->\r\n\r\n    <mat-select placeholder=\"Spesa\" [(ngModel)]=\"spesa.tipo\" name=\"tipo\" required *ngIf=\"tmpCategory=='Food' || tmpCategory=='Delivery'\" (change)=\"setDescription()\">\r\n        <mat-option *ngFor=\"let types of costTypes\" value=\"types\">\r\n          {{types.subCategory}}\r\n        </mat-option>\r\n      </mat-select>\r\n\r\n\r\n\r\n\r\n    <mat-input-container class=\"example-full-width\" *ngIf=\"tmpCategory!='Food' && tmpCategory!='Delivery'\">\r\n      <input matInput placeholder=\"Spesa\" [(ngModel)]=\"spesa.descrizione\" name=\"descrizione\" required>\r\n      <!-- <mat-error *ngIf=\"descrizioneFormControl.hasError('required')\">\r\n        Campo <strong>obbligatorio</strong>\r\n      </mat-error> -->\r\n    </mat-input-container>\r\n\r\n\r\n    <mat-input-container class=\"example-full-width\">\r\n      <input matInput [(ngModel)]=\"spesa.valore\" placeholder=\"Valore(€)\" autocomplete=\"off\" #valore=\"ngModel\" name=\"valore\" required>\r\n      <!-- <mat-error *ngIf=\"descrizioneFormControl.hasError('required')\">\r\n        Campo <strong>obbligatorio</strong>\r\n      </mat-error> -->\r\n    </mat-input-container>\r\n\r\n  </div>\r\n  <div mat-dialog-actions>\r\n    <div class=\"ProceedContainer ng-scope\">\r\n      <button mat-dialog-close=\"cancel\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Annulla</button>\r\n    </div>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div class=\"ProceedContainer ng-scope\">\r\n      <button [disabled]=\"loading\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button>\r\n    </div>\r\n    <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmatEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fmatgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmatsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\r\n    />\r\n  </div>\r\n\r\n</form>\r\n"
 
 /***/ }),
 
@@ -2303,7 +2312,7 @@ module.exports = "<h3 md-dialog-title>\n  Nuova Spesa</h3>\n<form name=\"form\" 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SpeseNewComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_entity_cost__ = __webpack_require__("../../../../../src/app/entity/cost.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_entity_cost_type__ = __webpack_require__("../../../../../src/app/entity/cost-type.ts");
@@ -2327,8 +2336,8 @@ var SpeseNewComponent = (function () {
     function SpeseNewComponent(_spesaService, dialogRef) {
         this._spesaService = _spesaService;
         this.dialogRef = dialogRef;
-        this.descrizioneFormControl = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormControl */]('', [
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["i" /* Validators */].required,
+        this.descrizioneFormControl = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]('', [
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required,
         ]);
         this.categoryTypes = __WEBPACK_IMPORTED_MODULE_4_app_entity_cost_type__["b" /* CostTypeCategories */];
         this.loading = false;
@@ -2368,7 +2377,7 @@ SpeseNewComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/spese/spese-new/spese-new.component.html"),
         styles: [__webpack_require__("../../../../../src/app/spese/spese-new/spese-new.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MdDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MdDialogRef */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatDialogRef */]) === "function" && _b || Object])
 ], SpeseNewComponent);
 
 var _a, _b;
@@ -2397,7 +2406,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/spese/spese.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n    <div class=\"alert alert-danger\">{{message}}</div>\r\n  <md-card>\r\n    <md-card-header>\r\n      <h3>Spese di oggi: {{today | date: 'dd/MM/y'}}</h3>\r\n      <span class=\"span-fill-remaining\"></span>\r\n      <div class=\"ProceedContainer ng-scope\">\r\n        <button (click)=\"openDialog()\" class=\"btn BKHBrandedButton Ccm-Button-Primary \">Aggiungi</button>\r\n      </div>\r\n    </md-card-header>\r\n    <md-card-content>\r\n      <app-spese-list (reloadEvent)=\"getList()\" [spesaList]=\"spesaList\"></app-spese-list>\r\n    </md-card-content>\r\n  </md-card>\r\n<!-- </div> -->\r\n"
+module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n    <div class=\"alert alert-danger\">{{message}}</div>\r\n  <mat-card>\r\n    <mat-card-header>\r\n      <h3>Spese di oggi: {{today | date: 'dd/MM/y'}}</h3>\r\n      <span class=\"span-fill-remaining\"></span>\r\n      <div class=\"ProceedContainer ng-scope\">\r\n        <button (click)=\"openDialog()\" class=\"btn BKHBrandedButton Ccm-Button-Primary \">Aggiungi</button>\r\n      </div>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n      <app-spese-list (reloadEvent)=\"getList()\" [spesaList]=\"spesaList\"></app-spese-list>\r\n    </mat-card-content>\r\n  </mat-card>\r\n<!-- </div> -->\r\n"
 
 /***/ }),
 
@@ -2407,7 +2416,7 @@ module.exports = "<!-- <div style=\"display: inline-block; text-align: left; wid
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SpeseComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/@angular/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_spese_spese_new_spese_new_component__ = __webpack_require__("../../../../../src/app/spese/spese-new/spese-new.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__ = __webpack_require__("../../../../../src/app/_services/spesa.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2485,7 +2494,7 @@ SpeseComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/spese/spese.component.html"),
         styles: [__webpack_require__("../../../../../src/app/spese/spese.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MdDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MdDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatDialog */]) === "function" && _b || Object])
 ], SpeseComponent);
 
 var _a, _b;

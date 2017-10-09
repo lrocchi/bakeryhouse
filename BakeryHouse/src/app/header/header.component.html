@@ -1,25 +1,27 @@
-<md-toolbar *ngIf="auth.loggedIn()"  class ="BrandedBackgroundGradientImage" style="text-align: center; padding: 0 5px;" >
+<mat-toolbar *ngIf="auth.loggedIn()"  class ="BrandedBackgroundGradientImage" style="text-align: center; padding: 0 5px;" >
 
 	<!--The whole content below can be removed with the new code.-->
 
-  <div md-card-avatar class="example-header-image"></div>
+  <div mat-card-avatar class="example-header-image"></div>
 	<h3 style="color: white">{{title}}</h3>
 
 	<span class="span-fill-remaining"></span>
-	<button md-button [mdMenuTriggerFor]="menu" style="color: white; padding: 0 0px;" >{{user.name}}<md-icon>more_vert</md-icon></button>
-</md-toolbar> <!-- main app container -->
-<md-menu #menu="mdMenu" yPosition="below" xPosition="after">
-  <!-- <button md-menu-item> -->
-      <a md-menu-item routerLink="/" routerLinkActive="active">
-      <md-icon class="md-18|md-24|md-36|md-48">home</md-icon>
+	<button mat-button [matMenuTriggerFor]="menu" style="color: white; padding: 0 0px;" >{{user.name}}<mat-icon>more_vert</mat-icon></button>
+</mat-toolbar> <!-- main app container -->
+
+<mat-menu #menu="matMenu"  yPosition="below" xPosition="after">
+
+      <a mat-menu-item routerLink="/" routerLinkActive="active">
+      <mat-icon class="md-18|md-24|md-36|md-48">home</mat-icon>
       Home</a>
-  <!-- </button> -->
-  <a  md-menu-item routerLink="/manage" routerLinkActive="active">
-    <md-icon class="md-18|md-24|md-36|md-48">format_list_bulleted</md-icon>
+
+  <a  mat-menu-item routerLink="/manage" routerLinkActive="active">
+    <mat-icon class="md-18|md-24|md-36|md-48">format_list_bulleted</mat-icon>
     Gestione
   </a>
-  <button md-menu-item (click)="logout()">
-    <md-icon class="md-18|md-24|md-36|md-48">exit_to_app</md-icon>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon class="md-18|md-24|md-36|md-48">exit_to_app</mat-icon>
     Esci
   </button>
-</md-menu>
+</mat-menu>
+

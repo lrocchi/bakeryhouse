@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { Store } from 'app/entity/store';
 import { User, Ruolo } from 'app/entity/user';
 import { StoreService } from 'app/_services/store.service';
@@ -20,7 +20,7 @@ title: String = 'Modifica';
   roles = Ruolo;
   public stores: Array<Store>;
 
-  constructor(private _storeService: StoreService, public dialogRef: MdDialogRef<EditDialogComponent>) { }
+  constructor(private _storeService: StoreService, public dialogRef: MatDialogRef<EditDialogComponent>) { }
 
   ngOnInit() {
     this.getActiveStoresList();

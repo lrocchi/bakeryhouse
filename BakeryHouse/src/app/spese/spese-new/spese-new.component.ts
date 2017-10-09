@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output, OnInit, } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { NgForm, FormControl, Validators } from '@angular/forms';
 import { Cost } from 'app/entity/cost';
 import { CostType, CostTypeCategories } from 'app/entity/cost-type';
@@ -29,7 +29,7 @@ export class SpeseNewComponent implements OnInit {
 
   @Output() createNewSpesaEvent = new EventEmitter<Cost>();
 
-  constructor(private _spesaService: SpesaService, public dialogRef: MdDialogRef<SpeseNewComponent>) { }
+  constructor(private _spesaService: SpesaService, public dialogRef: MatDialogRef<SpeseNewComponent>) { }
 
   ngOnInit(): void {
 

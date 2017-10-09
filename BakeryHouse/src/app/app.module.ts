@@ -12,11 +12,12 @@ import { SpeseComponent } from 'app/spese/spese.component';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule, MdToolbarModule, MdButtonModule, MdIconModule} from '@angular/material';
-import { MdMenuModule, MdIconRegistry, MdDialogModule, MdDialogRef } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatIconModule } from '@angular/material/';
+import { MatMenu, MatProgressSpinnerModule, MatTabsModule } from '@angular/material';
+import { MatMenuModule, MatIconRegistry, MatDialogModule, MatDialogRef} from '@angular/material';
 import { SpeseListComponent } from './spese/spese-list/spese-list.component';
 import { SpeseNewComponent } from './spese/spese-new/spese-new.component';
-import { CdkTableModule } from '@angular/cdk';
+import { CdkTableModule } from '@angular/cdk/table';
 import { GestioneSpeseComponent } from 'app/management/gestione-spese/gestione-spese.component';
 import { AppRoutingModule } from 'app/app-routes.component';
 import { ManagementComponent } from './management/management.component';
@@ -42,16 +43,18 @@ import { BalanceService } from 'app/_services/balance.service';
  */
 @NgModule({
   exports: [
-    MdToolbarModule,
-    MdButtonModule,
-    MdIconModule,
-    MdMenuModule,
-    MdDialogModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
     BrowserAnimationsModule,
 
   ]
 })
-export class DemoMaterialModule {}
+export class DemoMaterialModule { }
 
 @NgModule({
   declarations: [
@@ -79,13 +82,12 @@ export class DemoMaterialModule {}
 
   imports: [
 
-    MaterialModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     DemoMaterialModule,
     CdkTableModule,
-    MdDialogModule,
+    MatDialogModule,
     AppRoutingModule,
     ReactiveFormsModule
 
@@ -105,8 +107,8 @@ export class DemoMaterialModule {}
 })
 
 export class AppModule {
-  constructor(private mdIconRegistry: MdIconRegistry, private domSanitizer: DomSanitizer) {
-        mdIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('/assets/mdi.svg'));
-    }
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('/assets/mdi.svg'));
+  }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'app/entity/user';
 import { UserService } from 'app/_services/user.service';
-import { MdDialogRef, MdDialog } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { UserAddComponent } from 'app/management/gestione-utente/user-add/user-add.component';
 import { ConfirmationDialog } from 'app/confirmation-dialog/confirmation-dialog.component';
 import { EditDialogComponent } from 'app/edit-dialog/edit-dialog.component';
@@ -23,11 +23,11 @@ export class GestioneUtenteComponent implements OnInit {
   public statusMessage: string;
 
 
-  dialogRef: MdDialogRef<UserAddComponent>;
-  confirmDialog: MdDialogRef<ConfirmationDialog>;
-  editDialog: MdDialogRef<EditDialogComponent>;
+  dialogRef: MatDialogRef<UserAddComponent>;
+  confirmDialog: MatDialogRef<ConfirmationDialog>;
+  editDialog: MatDialogRef<EditDialogComponent>;
 
-  constructor(private _storeService: StoreService, private _userService: UserService, public dialog: MdDialog) { }
+  constructor(private _storeService: StoreService, private _userService: UserService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getList();
@@ -58,7 +58,7 @@ export class GestioneUtenteComponent implements OnInit {
     this.dialogRef.afterClosed().subscribe(result => {
       console.log(result);
 
-      if (result != 'cancel') {
+      if (result !== 'cancel') {
         this.create(this.dialogRef.componentInstance.user);
         this.getList();
       }

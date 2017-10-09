@@ -10,8 +10,8 @@
       <div class="LoginHelpContainer ng-scope">
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
           <div class="Ccm-Login-UserNameContainer">
-            <!-- <md-icon>person</md-icon> -->
-            <span><md-icon>person</md-icon></span>
+            <!-- <mat-icon>person</mat-icon> -->
+            <span><mat-icon>person</mat-icon></span>
             <input class="Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" [(ngModel)]="model.username" placeholder="Nome Utente"
               autocomplete="on" #username="ngModel" name="username" required>
             <div *ngIf="f.submitted && !username.valid" class="help-block">Username &eacute; obbligatorio</div>
@@ -21,7 +21,7 @@
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
 
           <div class="Ccm-Login-PasswordContainer">
-            <span><md-icon>lock</md-icon></span>
+            <span><mat-icon>lock</mat-icon></span>
             <input id="Password" type="password" class="Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" [(ngModel)]="model.password"
               placeholder="Password" #password="ngModel" name="password" required>
             <div *ngIf="f.submitted && !password.valid" class="help-block">Password &eacute; obbligatorio</div>

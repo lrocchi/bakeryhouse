@@ -171,17 +171,17 @@ body.Ccm-LoginBody .Ccm-LoginContainer:before {
   background-color: #7fa372 !important
 }
 
-md-tabs md-ink-bar {
+mat-tab-group mat-tab-header mat-ink-bar {
   background: #7fa372 !important;
   height: 8px;
   transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)
 }
 
-md-tabs .md-ripple-container {
+mat-tabs .md-ripple-container {
   color: #7fa372 !important
 }
 
-md-checkbox .md-icon:after {
+mat-checkbox .md-icon:after {
   border-color: #7fa372 !important
 }
 
@@ -189,11 +189,11 @@ md-checkbox .md-icon:after {
   color: #C9C9C9 !important
 }
 
-md-radio-button.md-checked .md-off {
+mat-radio-button .md-checked .md-off {
   border-color: #7fa372 !important
 }
 
-md-radio-button .md-on {
+mat-radio-button .md-on {
   background-color: #7fa372 !important
 }
 
@@ -229,7 +229,7 @@ md-radio-button .md-on {
   color: #7fa372
 }
 
-md-tabs md-next-button md-icon, md-tabs md-prev-button md-icon {
+mat-tabs mat-next-button mat-icon, mat-tabs mat-prev-button mat-icon {
   color: #7fa372 !important
 }
 
@@ -298,7 +298,7 @@ input:focus ~ .searchCcmIcon:before {
   border-color: #7fa372 !important
 }
 
-.ccm-device-switch .slider md-slider .md-thumb {
+.ccm-device-switch .slider mat-slider .md-thumb {
   background: #7fa372 !important
 }
 
@@ -664,7 +664,7 @@ table td[class*=col-], table th[class*=col-] {
 .Ccm-LoginContainer-Bottom input {
   margin-right: 5px
 }
-.Ccm-LoginContainer-Bottom>md-checkbox {
+.Ccm-LoginContainer-Bottom>mat-checkbox {
   flex: 1;
   text-align: left;
   display: inline;

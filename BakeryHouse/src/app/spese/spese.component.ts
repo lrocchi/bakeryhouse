@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { SpeseNewComponent } from 'app/spese/spese-new/spese-new.component';
 import { LocalStorageService } from 'ng2-webstorage';
 import { NgForm } from '@angular/forms';
@@ -11,21 +11,21 @@ import { Cost } from 'app/entity/cost';
 import { SpesaService } from 'app/_services/spesa.service';
 
 @Component({
-    selector: 'app-spese',
-    templateUrl: 'spese.component.html',
-    styleUrls: ['spese.component.css']
+  selector: 'app-spese',
+  templateUrl: 'spese.component.html',
+  styleUrls: ['spese.component.css']
 })
 export class SpeseComponent implements OnInit {
 
   public message: string;
   public visible = false;
   today: number = Date.now();
-  dialogRef: MdDialogRef<SpeseNewComponent>;
+  dialogRef: MatDialogRef<SpeseNewComponent>;
   spesaList: Array<Cost>;
 
 
 
-  constructor( private _spesaService: SpesaService, public dialog: MdDialog) {}
+  constructor(private _spesaService: SpesaService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getList();
@@ -34,12 +34,12 @@ export class SpeseComponent implements OnInit {
   getList() {
     const usr: User = JSON.parse(localStorage.getItem('currUser'));
     this._spesaService.getTodaySpesaList(usr.store._id)
-    .then(spese => {this.spesaList = spese;  })
-    .catch(err => console.log(err));
+      .then(spese => { this.spesaList = spese; })
+      .catch(err => console.log(err));
 
   }
 
-  create(spesa: Cost){
+  create(spesa: Cost) {
     // console.log("ECCO");
     const tmpSpesa: Cost = spesa;
     const usr: User = JSON.parse(localStorage.getItem('currUser'));
@@ -48,23 +48,23 @@ export class SpeseComponent implements OnInit {
     tmpSpesa.store = usr.store;
     // console.log("tmpSpesa -->" + JSON.stringify(tmpSpesa));
     this._spesaService.addSpesa(tmpSpesa)
-    .then((data) => {
-      if(data.success){
-        this.getList();
+      .then((data) => {
+        if (data.success) {
+          this.getList();
 
-      }else{
-        console.log(data.message);
-        this.message = data.message;
-      }
+        } else {
+          console.log(data.message);
+          this.message = data.message;
+        }
 
-    })
-    .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
     this.closeDialog();
 
   }
 
 
-  openDialog(){
+  openDialog() {
     // this.visible = !this.visible;
     const dialogRef = this.dialog.open(SpeseNewComponent);
     dialogRef.afterClosed().subscribe(result => {
@@ -79,7 +79,7 @@ export class SpeseComponent implements OnInit {
 
   }
 
-  closeDialog(){
+  closeDialog() {
     this.dialog.closeAll();
   }
 

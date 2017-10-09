@@ -1,12 +1,12 @@
 <div style="display: inline-block; text-align: left; width: 100%;">
   <div class="alert alert-danger">{{message}}</div>
-  <md-card class="example-card">
-    <md-card-header>
+  <mat-card class="example-card">
+    <mat-card-header>
         <h3>Categorie di spesa</h3>
       <span class="span-fill-remaining"></span>
       <div class="ProceedContainer ng-scope"><button (click)="openDialog()" class="btn BKHBrandedButton Ccm-Button-Primary">Aggiungi</button></div>
-    </md-card-header>
-    <md-card-content>
+    </mat-card-header>
+    <mat-card-content>
       <div style="overflow:auto">
         <table class="table table-bordered table-striped">
           <thead>
@@ -24,18 +24,18 @@
               <td>{{cat.nome}}</td>
               <td>{{cat.subCategory}}</td>
               <td style="text-align : center">
-                <md-icon *ngIf="cat.hasDescription==false">check_box_outline_blank</md-icon>
-                <md-icon *ngIf="cat.hasDescription==true">check_box</md-icon>
+                <mat-icon *ngIf="cat.hasDescription==false">check_box_outline_blank</mat-icon>
+                <mat-icon *ngIf="cat.hasDescription==true">check_box</mat-icon>
               </td>
               <td style="text-align : center">
-                <md-icon *ngIf="cat.active==false">check_box_outline_blank</md-icon>
-                <md-icon *ngIf="cat.active==true">check_box</md-icon>
+                <mat-icon *ngIf="cat.active==false">check_box_outline_blank</mat-icon>
+                <mat-icon *ngIf="cat.active==true">check_box</mat-icon>
               </td>
               <!-- <td style="text-align : center; align-items: center; padding: 0px;">
-                <button md-icon-button><md-icon class="md-24">mode_edit</md-icon></button>
+                <button mat-icon-button><mat-icon class="mat-24">mode_edit</mat-icon></button>
               </td> -->
               <td style="text-align : center; padding: 0px;" colspan="2">
-                <button md-icon-button (click)="openConfirmationDelete(cat._id)"><md-icon class="md-24" >delete</md-icon></button>
+                <button mat-icon-button (click)="openConfirmationDelete(cat._id)"><mat-icon class="mat-24" >delete</mat-icon></button>
               </td>
 
             </tr>
@@ -43,7 +43,7 @@
           </tbody>
         </table>
       </div>
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
   <div>{{statusMessage}}</div>
 </div>

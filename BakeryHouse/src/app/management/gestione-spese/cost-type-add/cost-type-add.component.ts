@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CostType, CostTypeCategories } from 'app/entity/cost-type';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { SpesaService } from 'app/_services/spesa.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class CostTypeAddComponent implements OnInit {
   public categoryTypes = CostTypeCategories;
 
 
-  constructor(private _spesaService: SpesaService, public dialogRef: MdDialogRef<CostTypeAddComponent>) { }
+  constructor(private _spesaService: SpesaService, public dialogRef: MatDialogRef<CostTypeAddComponent>) { }
 
 
   @Input() public set dropdownType(value: any) {

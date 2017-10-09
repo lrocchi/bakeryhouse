@@ -1,38 +1,38 @@
-<h3 md-dialog-title>
+<h3 mat-dialog-title>
   Aggiungi</h3>
 <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
 
-  <div md-dialog-content>
+  <div mat-dialog-content>
 
-    <md-select placeholder="Categoria" [(ngModel)]="costType.nome" #nome="ngModel" name="nome" required>
-      <md-option *ngFor="let types of categoryTypes | keys" [value]="types.value">
+    <mat-select placeholder="Categoria" [(ngModel)]="costType.nome" #nome="ngModel" name="nome" required>
+      <mat-option *ngFor="let types of categoryTypes | keys" value="types.value">
         {{types.value}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
 
 
-    <md-input-container class="example-full-width" >
-      <input mdInput [(ngModel)]="costType.subCategory" placeholder="descrizione" autocomplete="off" #subCategory="ngModel" name="subCategory" [disabled]= "costType.hasDescription">
+    <mat-input-container class="example-full-width" >
+      <input matInput [(ngModel)]="costType.subCategory" placeholder="descrizione" autocomplete="off" #subCategory="ngModel" name="subCategory" [disabled]= "costType.hasDescription">
 
-    </md-input-container>
+    </mat-input-container>
 
 
-    <md-checkbox class="example-margin" #subCategory="ngModel" name="hasDescription" [(ngModel)]="costType.hasDescription" >con descrizione</md-checkbox>
+    <mat-checkbox class="example-margin" #subCategory="ngModel" name="hasDescription" [(ngModel)]="costType.hasDescription" >con descrizione</mat-checkbox>
 
-    <md-checkbox class="example-margin" #subCategory="ngModel" name="attiva" [(ngModel)]="costType.active" >attivo</md-checkbox>
+    <mat-checkbox class="example-margin" #subCategory="ngModel" name="attiva" [(ngModel)]="costType.active" >attivo</mat-checkbox>
 
 
   </div>
-  <div md-dialog-actions>
+  <div mat-dialog-actions>
     <div class="ProceedContainer ng-scope">
-      <button md-dialog-close="cancel" class="btn BKHBrandedButton Ccm-Button-Primary">Annulla</button>
+      <button mat-dialog-close="cancel" class="btn BKHBrandedButton Ccm-Button-Primary">Annulla</button>
     </div>
     <span class="span-fill-remaining"></span>
     <div class="ProceedContainer ng-scope">
       <button [disabled]="loading" class="btn BKHBrandedButton Ccm-Button-Primary">Aggiungi</button>
     </div>
-    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmatEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fmatgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmatsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
     />
   </div>
 

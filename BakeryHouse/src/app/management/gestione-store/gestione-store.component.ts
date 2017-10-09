@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from "app/entity/store";
-import { StoreService } from "app/_services/store.service";
-import { StoreAddComponent } from "app/management/gestione-store/store-add/store-add.component";
-import { MdDialogRef, MdDialog } from "@angular/material";
-import { EditDialogComponent } from "app/edit-dialog/edit-dialog.component";
-import { ConfirmationDialog } from "app/confirmation-dialog/confirmation-dialog.component";
+import { Store } from 'app/entity/store';
+import { StoreService } from 'app/_services/store.service';
+import { StoreAddComponent } from 'app/management/gestione-store/store-add/store-add.component';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { EditDialogComponent } from 'app/edit-dialog/edit-dialog.component';
+import { ConfirmationDialog } from 'app/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'storeMngmt',
@@ -19,14 +19,14 @@ export class GestioneStoreComponent implements OnInit {
   public message: string;
   public statusMessage: string;
 
-  dialogRef: MdDialogRef<StoreAddComponent>;
-  editDialog: MdDialogRef<EditDialogComponent>;
-  confirmDialog: MdDialogRef<ConfirmationDialog>;
+  dialogRef: MatDialogRef<StoreAddComponent>;
+  editDialog: MatDialogRef<EditDialogComponent>;
+  confirmDialog: MatDialogRef<ConfirmationDialog>;
 
 
 
 
-  constructor(private _storeService: StoreService, public dialog: MdDialog) { }
+  constructor(private _storeService: StoreService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getList();
@@ -42,12 +42,12 @@ export class GestioneStoreComponent implements OnInit {
 
   openDialog() {
 
-    this.message = "";
+    this.message = '';
     this.dialogRef = this.dialog.open(StoreAddComponent);
     this.dialogRef.afterClosed().subscribe(result => {
       console.log(result);
 
-      if (result != "cancel") {
+      if (result != 'cancel') {
         this.create(this.dialogRef.componentInstance.store);
         this.getList();
       }
@@ -64,7 +64,7 @@ export class GestioneStoreComponent implements OnInit {
     /**
      * get Store from db
      */
-    console.log("STORE ID TO MOD ==>" + JSON.stringify(store));
+    console.log('STORE ID TO MOD ==>' + JSON.stringify(store));
 
 
     this.editDialog = this.dialog.open(EditDialogComponent, {
@@ -74,7 +74,7 @@ export class GestioneStoreComponent implements OnInit {
 
     this.editDialog.afterClosed().subscribe(result => {
       if (result) {
-        console.log("opeEditDialog result: " + result);
+        console.log('opeEditDialog result: ' + result);
         this._storeService.updateStore(this.editDialog.componentInstance.storeObj);
         this.getList();
       }
@@ -87,7 +87,7 @@ export class GestioneStoreComponent implements OnInit {
     this.confirmDialog = this.dialog.open(ConfirmationDialog, {
       disableClose: false
     });
-    this.confirmDialog.componentInstance.confirmMessage = "Sei sicuro di voler cancellare questo elemento?"
+    this.confirmDialog.componentInstance.confirmMessage = 'Sei sicuro di voler cancellare questo elemento?'
 
     this.confirmDialog.afterClosed().subscribe(result => {
       if (result) {

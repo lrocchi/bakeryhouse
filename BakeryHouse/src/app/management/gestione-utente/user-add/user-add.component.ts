@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User, Ruolo } from 'app/entity/user';
 import { Store } from 'app/entity/store';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { StoreService } from 'app/_services/store.service';
 import { UserService } from 'app/_services/user.service';
 
@@ -18,7 +18,7 @@ export class UserAddComponent implements OnInit {
 
 
 
-  constructor(  private _storeService: StoreService, public dialogRef: MdDialogRef<UserAddComponent>) { }
+  constructor(  private _storeService: StoreService, public dialogRef: MatDialogRef<UserAddComponent>) { }
 
   ngOnInit() {
     this.getActiveStoresList();

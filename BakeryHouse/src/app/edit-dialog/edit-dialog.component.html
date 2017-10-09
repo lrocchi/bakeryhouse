@@ -1,4 +1,4 @@
-<h1 md-dialog-title>{{title}}</h1>
+<h1 mat-dialog-title>{{title}}</h1>
 
 
 <!-- STORE EDIT -->
@@ -7,22 +7,22 @@
 
   <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 
-    <div md-dialog-content>
+    <div mat-dialog-content>
 
-      <md-input-container class="example-full-width">
-        <input mdInput [(ngModel)]="storeObj.nome" placeholder="Nome" autocomplete="off" #nome="ngModel" name="nome" required value="storeObj.nome">
-      </md-input-container>
-      <md-input-container class="example-full-width">
-        <input mdInput [(ngModel)]="storeObj.indirizzo" placeholder="Indirizzo" autocomplete="off" #indirizzo="ngModel" name="indirizzo"
+      <mat-input-container class="example-full-width">
+        <input matInput [(ngModel)]="storeObj.nome" placeholder="Nome" autocomplete="off" #nome="ngModel" name="nome" required value="storeObj.nome">
+      </mat-input-container>
+      <mat-input-container class="example-full-width">
+        <input matInput [(ngModel)]="storeObj.indirizzo" placeholder="Indirizzo" autocomplete="off" #indirizzo="ngModel" name="indirizzo"
           value="storeObj.indirizzo" required>
-      </md-input-container>
-      <md-input-container class="example-full-width">
-        <input mdInput [(ngModel)]="storeObj.piva" placeholder="Partita Iva" autocomplete="off" #piva="ngModel" name="piva" value="storeObj.piva"
+      </mat-input-container>
+      <mat-input-container class="example-full-width">
+        <input matInput [(ngModel)]="storeObj.piva" placeholder="Partita Iva" autocomplete="off" #piva="ngModel" name="piva" value="storeObj.piva"
           required>
-      </md-input-container>
+      </mat-input-container>
 
 
-      <md-checkbox class="example-margin" #active="ngModel" name="active" [(ngModel)]="storeObj.active" [checked]="storeObj.active">Attivo</md-checkbox>
+      <mat-checkbox class="example-margin" #active="ngModel" name="active" [(ngModel)]="storeObj.active" checked="storeObj.active">Attivo</mat-checkbox>
 
     </div>
 
@@ -37,48 +37,48 @@
 <div *ngIf="userObj != null">
   <form name="form" (ngSubmit)="f.form.valid" novalidate>
 
-    <div md-dialog-content>
+    <div mat-dialog-content>
 
-      <md-input-container class="example-full-width">
-        <input mdInput [(ngModel)]="userObj.name" placeholder="Nome" autocomplete="off" #name="ngModel" name="name" required>
-      </md-input-container>
+      <mat-input-container class="example-full-width">
+        <input matInput [(ngModel)]="userObj.name" placeholder="Nome" autocomplete="off" #name="ngModel" name="name" required>
+      </mat-input-container>
 
-      <md-input-container class="example-full-width">
-        <input mdInput [(ngModel)]="userObj.surname" placeholder="Cognome" autocomplete="off" #surname="ngModel" name="surname" required>
-      </md-input-container>
+      <mat-input-container class="example-full-width">
+        <input matInput [(ngModel)]="userObj.surname" placeholder="Cognome" autocomplete="off" #surname="ngModel" name="surname" required>
+      </mat-input-container>
 
-      <md-input-container class="example-full-width">
-        <input mdInput [(ngModel)]="userObj.username" placeholder="Username" autocomplete="off" #username="ngModel" name="username"
+      <mat-input-container class="example-full-width">
+        <input matInput [(ngModel)]="userObj.username" placeholder="Username" autocomplete="off" #username="ngModel" name="username"
           required>
-      </md-input-container>
+      </mat-input-container>
 
-      <md-input-container class="example-full-width">
-        <input mdInput [(ngModel)]="userObj.password" type="password" placeholder="Password" autocomplete="off" #password="ngModel"
+      <mat-input-container class="example-full-width">
+        <input matInput [(ngModel)]="userObj.password" type="password" placeholder="Password" autocomplete="off" #password="ngModel"
           name="password" required>
-      </md-input-container>
+      </mat-input-container>
 
-      <md-input-container class="example-full-width">
-        <input mdInput [(ngModel)]="userObj.email" placeholder="Email" autocomplete="off" #email="ngModel" name="email" required>
-      </md-input-container>
+      <mat-input-container class="example-full-width">
+        <input matInput [(ngModel)]="userObj.email" placeholder="Email" autocomplete="off" #email="ngModel" name="email" required>
+      </mat-input-container>
 
       <div class="example-full-width">
-        <md-select placeholder="Ruolo" [(ngModel)]="userObj.ruolo" #ruolo="ngModel" name="role" required>
-          <md-option *ngFor="let ruolo of roles | keys" [value]="ruolo.value">
+        <mat-select placeholder="Ruolo" [(ngModel)]="userObj.ruolo" #ruolo="ngModel" name="role" required>
+          <mat-option *ngFor="let ruolo of roles | keys" value="ruolo.value">
             {{ruolo.value}}
-          </md-option>
-        </md-select>
+          </mat-option>
+        </mat-select>
       </div>
       <span></span>
       <div class="example-full-width">
-        <md-select placeholder="Punto Vendita" [(ngModel)]="userObj.store._id" #store="ngModel" name="store" required>
-          <md-option *ngFor="let store of stores" [value]="store._id">{{store.nome}}</md-option>
-        </md-select>
+        <mat-select placeholder="Punto Vendita" [(ngModel)]="userObj.store._id" #store="ngModel" name="store" required>
+          <mat-option *ngFor="let store of stores" value="store._id">{{store.nome}}</mat-option>
+        </mat-select>
       </div>
 
 
 
-      <md-checkbox class="example-margin" #subCategory="ngModel" name="active" [(ngModel)]="userObj.active" [checked]="userObj.active"
-        [value]="userObj.active">Attivo</md-checkbox>
+      <mat-checkbox class="example-margin" #subCategory="ngModel" name="active" [(ngModel)]="userObj.active" checked="userObj.active"
+        value="userObj.active">Attivo</mat-checkbox>
 
     </div>
 
@@ -88,21 +88,21 @@
 
 <div *ngIf="balanceObj != null">
   <form name="form" (ngSubmit)="f.form.valid" novalidate>
-    <div md-dialog-content>
+    <div mat-dialog-content>
 
-      <md-input-container class="example-full-width">
-        <input mdInput type="number" [(ngModel)]="balanceObj.cassa" placeholder="Cassa" autocomplete="off" #cassa="ngModel" name="cassa"
+      <mat-input-container class="example-full-width">
+        <input matInput type="number" [(ngModel)]="balanceObj.cassa" placeholder="Cassa" autocomplete="off" #cassa="ngModel" name="cassa"
           required>
-      </md-input-container>
-      <md-input-container class="example-full-width">
-        <input mdInput type="number" [(ngModel)]="balanceObj.pos" placeholder="Pos" autocomplete="off" #pos="ngModel" name="pos"
+      </mat-input-container>
+      <mat-input-container class="example-full-width">
+        <input matInput type="number" [(ngModel)]="balanceObj.pos" placeholder="Pos" autocomplete="off" #pos="ngModel" name="pos"
           required>
-      </md-input-container>
+      </mat-input-container>
 
-      <md-input-container class="example-full-width">
-        <input mdInput type="number" [(ngModel)]="balanceObj.ticket" placeholder="Ticket" autocomplete="off" #ticket="ngModel" name="ticket"
+      <mat-input-container class="example-full-width">
+        <input matInput type="number" [(ngModel)]="balanceObj.ticket" placeholder="Ticket" autocomplete="off" #ticket="ngModel" name="ticket"
           required>
-      </md-input-container>
+      </mat-input-container>
 
     </div>
   </form>
@@ -110,7 +110,7 @@
 
 
 
-<div md-dialog-actions>
-  <button md-button style="color: #fff;background-color: #7fa372;" (click)="dialogRef.close(true)">Confermo</button>
-  <button md-button (click)="dialogRef.close(false)">Annulla</button>
+<div mat-dialog-actions>
+  <button mat-button style="color: #fff;background-color: #7fa372;" (click)="dialogRef.close(true)">Confermo</button>
+  <button mat-button (click)="dialogRef.close(false)">Annulla</button>
 </div>
