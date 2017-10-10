@@ -23,6 +23,7 @@ export class SpeseNewComponent implements OnInit {
 
   public categoryTypes = CostTypeCategories;
   public tmpCategory: string;
+
   public loading = false;
   public spesa: Cost = new Cost();
   public costTypes: Array<CostType>;
@@ -46,7 +47,7 @@ export class SpeseNewComponent implements OnInit {
     this._spesaService.getSubTypeList(this.tmpCategory)
       .then(costType => {
         this.costTypes = costType;
-        if ((this.tmpCategory !== 'Food') && (this.tmpCategory !== 'Delivery')) {
+        if ((this.tmpCategory !== 'Food') && (this.tmpCategory !== 'Delivery') && (this.tmpCategory !== 'Ticket')) {
           console.log('tmpCategory=' + this.tmpCategory);
           console.log(JSON.stringify(costType));
 

@@ -3,45 +3,46 @@
 <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
 
   <div mat-dialog-content>
-    <dl>
-      <dt>
-        <mat-form-field>
-          <mat-select placeholder="Categoria" name="tmpCategory" [(ngModel)]="tmpCategory" [required]="true" (change)="getSubCategoryList()">
-            <mat-option *ngFor="let types of categoryTypes | keys" [value]="types.value">
-              {{types.value}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
 
 
-      </dt>
-      <dt>
-        <mat-form-field *ngIf="tmpCategory=='Food' || tmpCategory=='Delivery'">
-          <mat-select placeholder="Spesa" [(ngModel)]="spesa.tipo" name="tipo" [required]="true" (change)="setDescription()">
-            <mat-option *ngFor="let types of costTypes" [value]="types">
-              {{types.subCategory}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-      </dt>
-      <dt>
-        <mat-form-field *ngIf="tmpCategory!='Food' && tmpCategory!='Delivery'">
-          <input matInput placeholder="Spesa" [(ngModel)]="spesa.descrizione" name="descrizione" [required]="true">
-        </mat-form-field>
-
-      </dt>
-      <dt>
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Categoria" name="tmpCategory" [(ngModel)]="tmpCategory" [required]="true" (change)="getSubCategoryList()">
+        <mat-option *ngFor="let types of categoryTypes | keys" [value]="types.value">
+          {{types.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
 
-        <mat-form-field>
-          <input matInput [(ngModel)]="spesa.valore" placeholder="Valore(€)" autocomplete="off" #valore="ngModel" name="valore" required>
-        </mat-form-field>
 
 
-      </dt>
+    <!-- <mat-form-field *ngIf="tmpCategory=='Food' || tmpCategory=='Delivery' || tmpCategory=='Ticket'"> -->
+    <mat-form-field class="example-full-width" *ngIf="tmpCategory=='Food' || tmpCategory=='Delivery' || tmpCategory=='Ticket'">
+      <mat-select placeholder="Spesa" [(ngModel)]="spesa.tipo" name="tipo" [required]="true" (change)="setDescription()">
+        <mat-option *ngFor="let types of costTypes" [value]="types">
+          {{types.subCategory}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    </dl>
+
+
+    <mat-form-field class="example-full-width" *ngIf="tmpCategory!='Food' && tmpCategory!='Delivery' && tmpCategory!='Ticket'">
+      <input matInput placeholder="Spesa" [(ngModel)]="spesa.descrizione" name="descrizione" [required]="true">
+    </mat-form-field>
+
+
+
+
+
+    <mat-form-field class="example-full-width">
+      <input matInput [(ngModel)]="spesa.valore" placeholder="Valore(€)" autocomplete="off" #valore="ngModel" name="valore" required>
+    </mat-form-field>
+
+
+
+
+
 
   </div>
 
