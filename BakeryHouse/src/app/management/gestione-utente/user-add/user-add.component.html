@@ -1,44 +1,45 @@
 <h3 mat-dialog-title>
   Aggiungi</h3>
-<form name="form" (ngSubmit)="create()"  novalidate >
+<form name="form" (ngSubmit)="create()" novalidate>
 
   <div mat-dialog-content>
 
-    <mat-input-container class="example-full-width">
+    <mat-form-field class="example-full-width">
       <input matInput [(ngModel)]="user.name" placeholder="Nome" autocomplete="off" #name="ngModel" name="name" required>
-    </mat-input-container>
+    </mat-form-field>
 
-    <mat-input-container class="example-full-width">
-      <input matInput [(ngModel)]="user.surname" placeholder="Cognome" autocomplete="off" #surname="ngModel" name="surname"
-        required>
-    </mat-input-container>
+    <mat-form-field class="example-full-width">
+      <input matInput [(ngModel)]="user.surname" placeholder="Cognome" autocomplete="off" #surname="ngModel" name="surname" required>
+    </mat-form-field>
 
-    <mat-input-container class="example-full-width">
+    <mat-form-field class="example-full-width">
       <input matInput [(ngModel)]="user.username" placeholder="Username" autocomplete="off" #username="ngModel" name="username"
         required>
-    </mat-input-container>
+    </mat-form-field>
 
-    <mat-input-container class="example-full-width">
-        <input matInput [(ngModel)]="user.password"  type="password" placeholder="Password" autocomplete="off" #password="ngModel" name="password"
-          required>
-      </mat-input-container>
+    <mat-form-field class="example-full-width">
+      <input matInput [(ngModel)]="user.password" type="password" placeholder="Password" autocomplete="off" #password="ngModel"
+        name="password" required>
+    </mat-form-field>
 
-    <mat-input-container class="example-full-width">
-      <input matInput [(ngModel)]="user.email"  placeholder="Email" autocomplete="off" name="email" required>
-    </mat-input-container>
+    <mat-form-field class="example-full-width">
+      <input matInput [(ngModel)]="user.email" placeholder="Email" autocomplete="off" name="email" required>
+    </mat-form-field>
 
-    <mat-select placeholder="Ruolo" [(ngModel)]="user.ruolo" #role="ngModel" name="role" required>
-      <mat-option *ngFor="let ruolo of ruoli | keys" value="ruolo.value">
-        {{ruolo.value}}
-      </mat-option>
-    </mat-select>
-
-    <mat-select placeholder="Punto Vendita" [(ngModel)]="user.store" #nome="ngModel" name="store" required>
-      <mat-option *ngFor="let store of stores" value="store">
-        {{store.nome}} - {{store.indirizzo}}
-      </mat-option>
-    </mat-select>
-
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Ruolo" [(ngModel)]="user.ruolo" #role="ngModel" name="role" required>
+        <mat-option *ngFor="let ruolo of ruoli | keys" value="ruolo.value">
+          {{ruolo.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Punto Vendita" [(ngModel)]="user.store" #nome="ngModel" name="store" required>
+        <mat-option *ngFor="let store of stores" value="store">
+          {{store.nome}} - {{store.indirizzo}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
 
 

@@ -1,13 +1,25 @@
-<mat-list>
-  <mat-list-item *ngFor="let spesa of spesaList">
-    <h4 mat-line style="text-align: left;"><strong>{{spesa.descrizione}}</strong></h4>
-    <h6 mat-line>({{spesa.tipo.nome}})</h6>
-    <p style="font-size: 8px;text-align: left;" mat-line>{{spesa.update_on | date : 'H:mm:ss'}}</p>
-    <div style="display: inline-block; text-align: right; width: 100%;">{{spesa.valore}}&euro;</div>
-    <div style="display: inline-block; text-align: right; width: 100%;">
-      <!-- <mat-icon>edit</mat-icon> -->
-      <span></span>
-      <button mat-icon-button (click)="openConfirmationDelete(spesa._id)"><mat-icon class="mat-24" >delete</mat-icon></button>
-    </div>
-  </mat-list-item>
-</mat-list>
+<md-list>
+  <md-list-item *ngFor="let spesa of spesaList">
+    <md-card>
+      <md-card-content>
+        <span style='float:left; background-color: none; text-align: left;'>
+          <h3 md-line style="text-align: left;">
+            <strong>{{spesa.descrizione}}</strong>
+          </h3>
+          <h6 md-line>({{spesa.tipo.nome}})</h6>
+          <p style="font-size: 8px;text-align: left;" md-line>{{spesa.update_on | date : 'H:mm:ss'}}</p>
+        </span>
+
+
+        <span style="float: right; background-color: none; text-align: right;">
+          <h1 md-line>
+            <strong>{{spesa.valore}}&euro;</strong>
+          </h1>
+          <button mat-icon-button (click)="openConfirmationDelete(spesa._id)">
+            <mat-icon class="mat-24">delete</mat-icon>
+          </button>
+        </span>
+      </md-card-content>
+    </md-card>
+  </md-list-item>
+</md-list>
