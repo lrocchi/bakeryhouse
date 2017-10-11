@@ -1,27 +1,35 @@
-<mat-toolbar *ngIf="auth.loggedIn()"  class ="BrandedBackgroundGradientImage" style="text-align: center; padding: 0 5px;" >
+<mat-toolbar *ngIf="auth.loggedIn()" class="BrandedBackgroundGradientImage" style="text-align: center; padding: 0 5px;">
 
-	<!--The whole content below can be removed with the new code.-->
+  <!--The whole content below can be removed with the new code.-->
 
   <div mat-card-avatar class="example-header-image"></div>
-	<h3 style="color: white">{{title}}</h3>
+  <h3 style="color: white">{{title}}</h3>
 
-	<span class="span-fill-remaining"></span>
-	<button mat-button [matMenuTriggerFor]="menu" style="color: white; padding: 0 0px;" >{{user.name}}<mat-icon>more_vert</mat-icon></button>
-</mat-toolbar> <!-- main app container -->
+  <span class="span-fill-remaining"></span>
+  <button mat-button [matMenuTriggerFor]="menu" style="color: white; padding: 0 0px;">{{user.name}}
+    <mat-icon>more_vert</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- main app container -->
 
-<mat-menu #menu="matMenu"  yPosition="below" xPosition="after">
+<mat-menu #menu="matMenu" yPosition="below" xPosition="after">
 
-      <a mat-menu-item routerLink="/" routerLinkActive="active">
-      <mat-icon class="md-18|md-24|md-36|md-48">home</mat-icon>
-      Home</a>
+  <a mat-menu-item routerLink="/" routerLinkActive="active">
+    <mat-icon class="md-18|md-24|md-36|md-48">home</mat-icon>
+    Home</a>
 
-  <a  mat-menu-item routerLink="/manage" routerLinkActive="active">
+  <a mat-menu-item routerLink="/manage" routerLinkActive="active">
     <mat-icon class="md-18|md-24|md-36|md-48">format_list_bulleted</mat-icon>
     Gestione
   </a>
+
+  <a mat-menu-item routerLink="/report" routerLinkActive="active">
+    <mat-icon class="md-18|md-24|md-36|md-48">trending_up</mat-icon>
+    Report
+  </a>
+
   <button mat-menu-item (click)="logout()">
     <mat-icon class="md-18|md-24|md-36|md-48">exit_to_app</mat-icon>
     Esci
   </button>
 </mat-menu>
-

@@ -1,4 +1,5 @@
-<div class="Ccm-MainContent ng-scope Ccm-LoginMainContent">
+<!-- <div class="Ccm-MainContent ng-scope Ccm-LoginMainContent"> -->
+    <div class="Ccm-MainContent Ccm-LoginMainContent">
 
 
   <div class="Ccm-LoginContainer">
@@ -7,13 +8,13 @@
 
 
     <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-      <div class="LoginHelpContainer ng-scope">
+      <div class="LoginHelpContainer">
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
           <div class="Ccm-Login-UserNameContainer">
             <!-- <mat-icon>person</mat-icon> -->
             <span><mat-icon>person</mat-icon></span>
             <input class="Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" [(ngModel)]="model.username" placeholder="Nome Utente"
-              autocomplete="on" #username="ngModel" name="username" required>
+              autocomplete="off" #username="ngModel" name="username" required>
             <div *ngIf="f.submitted && !username.valid" class="help-block">Username &eacute; obbligatorio</div>
           </div>
         </div>

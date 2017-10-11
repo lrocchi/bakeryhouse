@@ -424,12 +424,14 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_guards_auth_guard__ = __webpack_require__("../../../../../src/app/_guards/auth.guard.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_home_home_component__ = __webpack_require__("../../../../../src/app/home/home.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_management_management_component__ = __webpack_require__("../../../../../src/app/management/management.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_report_general_report_component__ = __webpack_require__("../../../../../src/app/report/general-report.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -444,6 +446,13 @@ var appRoutes = [
         canActivate: [__WEBPACK_IMPORTED_MODULE_3_app_guards_auth_guard__["a" /* AuthGuard */]],
         children: [
             { path: '', component: __WEBPACK_IMPORTED_MODULE_5_app_management_management_component__["a" /* ManagementComponent */] },
+        ]
+    },
+    {
+        path: 'report',
+        canActivate: [__WEBPACK_IMPORTED_MODULE_3_app_guards_auth_guard__["a" /* AuthGuard */]],
+        children: [
+            { path: '', component: __WEBPACK_IMPORTED_MODULE_6_app_report_general_report_component__["a" /* GeneralReportComponent */] },
         ]
     },
     // otherwise redirect to home
@@ -492,7 +501,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"column\" style=\"height:100%\">\r\n  <div fxLayout=\"row\" fxLayoutAlign=\"space-around center\">\r\n    <app-header></app-header>\r\n  </div>\r\n  <div fxLayout=\"row\" fxLayoutAlign=\"space-around center\" style=\"height:100%\">\r\n    <span></span>\r\n    <router-outlet></router-outlet>\r\n  </div>\r\n\r\n</div>\r\n\r\n"
+module.exports = "<div fxLayout=\"column\">\r\n  <app-header></app-header>\r\n  <router-outlet></router-outlet>\r\n\r\n\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -583,6 +592,10 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__edit_dialog_edit_dialog_component__ = __webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__chiusure_chiusure_component__ = __webpack_require__("../../../../../src/app/chiusure/chiusure.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32_app_services_balance_service__ = __webpack_require__("../../../../../src/app/_services/balance.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__report_general_report_component__ = __webpack_require__("../../../../../src/app/report/general-report.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34_devextreme_angular__ = __webpack_require__("../../../../devextreme-angular/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34_devextreme_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_34_devextreme_angular__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__angular_flex_layout__ = __webpack_require__("../../../flex-layout/@angular/flex-layout.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -627,6 +640,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
+/*   import { LayoutModule } from '../../modules/layout.module';
+   import { TreeModule } from '../../modules/tree.module';
+    import { ListBoxModule } from '../../modules/listbox.module';
+     import { DataTableModule } from '../../modules/datatable.module';
+      import { ChartModule } from '../../modules/chart.module';
+       import { MenuModule } from '../../modules/menu.module';
+
+ */
 /**
  * NgModule that includes all Material modules that are required to serve the demo-app.
  */
@@ -651,7 +675,8 @@ DemoMaterialModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_13__angular_material__["c" /* MatCardModule */],
             __WEBPACK_IMPORTED_MODULE_13__angular_material__["h" /* MatFormFieldModule */],
             __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
-        ]
+        ],
+        declarations: []
     })
 ], DemoMaterialModule);
 
@@ -684,17 +709,21 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_27__management_gestione_store_gestione_store_component__["a" /* GestioneStoreComponent */],
             __WEBPACK_IMPORTED_MODULE_28__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */],
             __WEBPACK_IMPORTED_MODULE_30__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */],
-            __WEBPACK_IMPORTED_MODULE_31__chiusure_chiusure_component__["a" /* ChiusureComponent */]
+            __WEBPACK_IMPORTED_MODULE_31__chiusure_chiusure_component__["a" /* ChiusureComponent */],
+            __WEBPACK_IMPORTED_MODULE_33__report_general_report_component__["a" /* GeneralReportComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_11__angular_forms__["d" /* FormsModule */],
+            __WEBPACK_IMPORTED_MODULE_11__angular_forms__["FormsModule"],
             __WEBPACK_IMPORTED_MODULE_10__angular_http__["HttpModule"],
             DemoMaterialModule,
             __WEBPACK_IMPORTED_MODULE_16__angular_cdk_table__["m" /* CdkTableModule */],
             __WEBPACK_IMPORTED_MODULE_13__angular_material__["f" /* MatDialogModule */],
             __WEBPACK_IMPORTED_MODULE_18_app_app_routes_component__["a" /* AppRoutingModule */],
-            __WEBPACK_IMPORTED_MODULE_11__angular_forms__["i" /* ReactiveFormsModule */]
+            __WEBPACK_IMPORTED_MODULE_11__angular_forms__["ReactiveFormsModule"],
+            __WEBPACK_IMPORTED_MODULE_34_devextreme_angular__["DxChartModule"],
+            __WEBPACK_IMPORTED_MODULE_34_devextreme_angular__["DxDataGridModule"],
+            __WEBPACK_IMPORTED_MODULE_35__angular_flex_layout__["a" /* FlexLayoutModule */],
         ],
         providers: [
             __WEBPACK_IMPORTED_MODULE_4_app_guards_auth_guard__["a" /* AuthGuard */],
@@ -1195,7 +1224,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar *ngIf=\"auth.loggedIn()\"  class =\"BrandedBackgroundGradientImage\" style=\"text-align: center; padding: 0 5px;\" >\r\n\r\n\t<!--The whole content below can be removed with the new code.-->\r\n\r\n  <div mat-card-avatar class=\"example-header-image\"></div>\r\n\t<h3 style=\"color: white\">{{title}}</h3>\r\n\r\n\t<span class=\"span-fill-remaining\"></span>\r\n\t<button mat-button [matMenuTriggerFor]=\"menu\" style=\"color: white; padding: 0 0px;\" >{{user.name}}<mat-icon>more_vert</mat-icon></button>\r\n</mat-toolbar> <!-- main app container -->\r\n\r\n<mat-menu #menu=\"matMenu\"  yPosition=\"below\" xPosition=\"after\">\r\n\r\n      <a mat-menu-item routerLink=\"/\" routerLinkActive=\"active\">\r\n      <mat-icon class=\"md-18|md-24|md-36|md-48\">home</mat-icon>\r\n      Home</a>\r\n\r\n  <a  mat-menu-item routerLink=\"/manage\" routerLinkActive=\"active\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">format_list_bulleted</mat-icon>\r\n    Gestione\r\n  </a>\r\n  <button mat-menu-item (click)=\"logout()\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">exit_to_app</mat-icon>\r\n    Esci\r\n  </button>\r\n</mat-menu>\r\n\r\n"
+module.exports = "<mat-toolbar *ngIf=\"auth.loggedIn()\" class=\"BrandedBackgroundGradientImage\" style=\"text-align: center; padding: 0 5px;\">\r\n\r\n  <!--The whole content below can be removed with the new code.-->\r\n\r\n  <div mat-card-avatar class=\"example-header-image\"></div>\r\n  <h3 style=\"color: white\">{{title}}</h3>\r\n\r\n  <span class=\"span-fill-remaining\"></span>\r\n  <button mat-button [matMenuTriggerFor]=\"menu\" style=\"color: white; padding: 0 0px;\">{{user.name}}\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n</mat-toolbar>\r\n<!-- main app container -->\r\n\r\n<mat-menu #menu=\"matMenu\" yPosition=\"below\" xPosition=\"after\">\r\n\r\n  <a mat-menu-item routerLink=\"/\" routerLinkActive=\"active\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">home</mat-icon>\r\n    Home</a>\r\n\r\n  <a mat-menu-item routerLink=\"/manage\" routerLinkActive=\"active\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">format_list_bulleted</mat-icon>\r\n    Gestione\r\n  </a>\r\n\r\n  <a mat-menu-item routerLink=\"/report\" routerLinkActive=\"active\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">trending_up</mat-icon>\r\n    Report\r\n  </a>\r\n\r\n  <button mat-menu-item (click)=\"logout()\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">exit_to_app</mat-icon>\r\n    Esci\r\n  </button>\r\n</mat-menu>\r\n"
 
 /***/ }),
 
@@ -1268,7 +1297,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "\r\n/* div.Ccm-MainContentView {\r\n    height: 100%;\r\n    min-height: 100%;\r\n}\r\n\r\n.Ccm-MainContent .Ccm-MainContentView {\r\n    height: 100%;\r\n    min-height: 100%;\r\n    overflow: auto;\r\n    -webkit-overflow-scrolling: touch;\r\n} */\r\n", ""]);
+exports.push([module.i, "\r\n div.Ccm-MainContentView {\r\n    height: 100%;\r\n    min-height: 100%;\r\n}\r\n/*\r\n.Ccm-MainContent .Ccm-MainContentView {\r\n    height: 100%;\r\n    min-height: 100%;\r\n    overflow: auto;\r\n    -webkit-overflow-scrolling: touch;\r\n} */\r\n", ""]);
 
 // exports
 
@@ -1281,7 +1310,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n        <div class=\"Ccm-MainContentView ng-scope\">\r\n               <mat-tab-group style=\"font-size:12px\">\r\n                  <mat-tab id=\"tabSpese\" label=\"Spese\">\r\n                    <app-spese></app-spese>\r\n                  </mat-tab>\r\n                  <mat-tab id=\"tabChiusure\" label=\"Chiusure\">\r\n                    <app-chiusure></app-chiusure>\r\n                  </mat-tab>\r\n                </mat-tab-group>\r\n\r\n        </div>\r\n\r\n"
+module.exports = "<mat-tab-group style=\"font-size:12px; width: 100%\">\r\n  <mat-tab id=\"tabSpese\" label=\"Spese\">\r\n    <app-spese></app-spese>\r\n  </mat-tab>\r\n  <mat-tab id=\"tabChiusure\" label=\"Chiusure\">\r\n    <app-chiusure></app-chiusure>\r\n  </mat-tab>\r\n</mat-tab-group>\r\n"
 
 /***/ }),
 
@@ -1391,7 +1420,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"Ccm-MainContent ng-scope Ccm-LoginMainContent\">\r\n\r\n\r\n  <div class=\"Ccm-LoginContainer\">\r\n\r\n    <div class=\"Ccm-LoginImage\"><img alt=\"LOGO\" src=\"./assets/images/Logo.png\"></div>\r\n\r\n\r\n    <form name=\"form\" (ngSubmit)=\"f.form.valid && login()\" #f=\"ngForm\" novalidate>\r\n      <div class=\"LoginHelpContainer ng-scope\">\r\n        <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !username.valid }\">\r\n          <div class=\"Ccm-Login-UserNameContainer\">\r\n            <!-- <mat-icon>person</mat-icon> -->\r\n            <span><mat-icon>person</mat-icon></span>\r\n            <input class=\"Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched\" [(ngModel)]=\"model.username\" placeholder=\"Nome Utente\"\r\n              autocomplete=\"on\" #username=\"ngModel\" name=\"username\" required>\r\n            <div *ngIf=\"f.submitted && !username.valid\" class=\"help-block\">Username &eacute; obbligatorio</div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !password.valid }\">\r\n\r\n          <div class=\"Ccm-Login-PasswordContainer\">\r\n            <span><mat-icon>lock</mat-icon></span>\r\n            <input id=\"Password\" type=\"password\" class=\"Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched\" [(ngModel)]=\"model.password\"\r\n              placeholder=\"Password\" #password=\"ngModel\" name=\"password\" required>\r\n            <div *ngIf=\"f.submitted && !password.valid\" class=\"help-block\">Password &eacute; obbligatorio</div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"ProceedContainer ng-scope\">\r\n\r\n          <button [disabled]=\"loading\" class=\"btn btn-primary Ccm-Button-Primary btn btn-default BrandedBackgroundGradientImage LoginButton ng-binding\">Accedi</button>\r\n        </div>\r\n\r\n        <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\r\n        />\r\n      </div>\r\n      <div *ngIf=\"error\" class=\"alert alert-danger\">{{error}}</div>\r\n    </form>\r\n  </div>\r\n\r\n\r\n</div>\r\n"
+module.exports = "<!-- <div class=\"Ccm-MainContent ng-scope Ccm-LoginMainContent\"> -->\r\n    <div class=\"Ccm-MainContent Ccm-LoginMainContent\">\r\n\r\n\r\n  <div class=\"Ccm-LoginContainer\">\r\n\r\n    <div class=\"Ccm-LoginImage\"><img alt=\"LOGO\" src=\"./assets/images/Logo.png\"></div>\r\n\r\n\r\n    <form name=\"form\" (ngSubmit)=\"f.form.valid && login()\" #f=\"ngForm\" novalidate>\r\n      <div class=\"LoginHelpContainer\">\r\n        <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !username.valid }\">\r\n          <div class=\"Ccm-Login-UserNameContainer\">\r\n            <!-- <mat-icon>person</mat-icon> -->\r\n            <span><mat-icon>person</mat-icon></span>\r\n            <input class=\"Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched\" [(ngModel)]=\"model.username\" placeholder=\"Nome Utente\"\r\n              autocomplete=\"off\" #username=\"ngModel\" name=\"username\" required>\r\n            <div *ngIf=\"f.submitted && !username.valid\" class=\"help-block\">Username &eacute; obbligatorio</div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !password.valid }\">\r\n\r\n          <div class=\"Ccm-Login-PasswordContainer\">\r\n            <span><mat-icon>lock</mat-icon></span>\r\n            <input id=\"Password\" type=\"password\" class=\"Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched\" [(ngModel)]=\"model.password\"\r\n              placeholder=\"Password\" #password=\"ngModel\" name=\"password\" required>\r\n            <div *ngIf=\"f.submitted && !password.valid\" class=\"help-block\">Password &eacute; obbligatorio</div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group\">\r\n        <div class=\"ProceedContainer ng-scope\">\r\n\r\n          <button [disabled]=\"loading\" class=\"btn btn-primary Ccm-Button-Primary btn btn-default BrandedBackgroundGradientImage LoginButton ng-binding\">Accedi</button>\r\n        </div>\r\n\r\n        <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\r\n        />\r\n      </div>\r\n      <div *ngIf=\"error\" class=\"alert alert-danger\">{{error}}</div>\r\n    </form>\r\n  </div>\r\n\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2194,6 +2223,82 @@ ManagementComponent = __decorate([
 
 /***/ }),
 
+/***/ "../../../../../src/app/report/general-report.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".jqx-layout-group-auto-hide-content-vertical {\r\n  width: 200px;\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/report/general-report.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div fxLayout=\"row\" flexLayout.xs=\"column\" fxLayoutAlign=\"start start\">\n\n  <div fxLayout fxFlex fxFlexOrder.xs=\"1\">\n    <dx-chart [dataSource]=\"costList\">\n      <dxi-series argumentField=\"descrizione\" valueField=\"valore\" type=\"bar\"></dxi-series>\n    </dx-chart>\n  </div>\n  <div fxLayout fxFlex fxFlexOrder.xs=\"2\">\n    <dx-data-grid id=\"gridContainer\" [dataSource]=\"costList\" [columns]=\"['descrizione', 'valore','utente.surname', 'tipo.nome']\">\n    </dx-data-grid>\n  </div>\n\n</div>\n<div fxLayout=\"row\" flexLayout.xs=\"column\" fxLayoutAlign=\"start start\">\n  <div fxLayout fxFlex fxFlexOrder.xs=\"3\">\n    FFFFFFFFFFFF\n  </div>\n  <div fxLayout fxFlex fxFlexOrder.xs=\"4\">\n    <dx-chart [dataSource]=\"costList\">\n      <dxi-series argumentField=\"descrizione\" valueField=\"valore\" type=\"spline\"></dxi-series>\n    </dx-chart>\n  </div>\n\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/report/general-report.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GeneralReportComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_spesa_service__ = __webpack_require__("../../../../../src/app/_services/spesa.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var GeneralReportComponent = (function () {
+    function GeneralReportComponent(_spesaService) {
+        this._spesaService = _spesaService;
+    }
+    GeneralReportComponent.prototype.ngOnInit = function () {
+        this.getList();
+        // this.chartData = JSON.stringify(this.costList);
+    };
+    GeneralReportComponent.prototype.getList = function () {
+        var _this = this;
+        /* Lo user sarà selezionato dai filtri */
+        var usr = JSON.parse(localStorage.getItem('currUser'));
+        this._spesaService.getTodaySpesaList(usr.store._id)
+            .then(function (spese) { _this.costList = spese; _this.costListJSON = JSON.stringify(spese); })
+            .catch(function (err) { return console.log(err); });
+    };
+    return GeneralReportComponent;
+}());
+GeneralReportComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-general-report',
+        template: __webpack_require__("../../../../../src/app/report/general-report.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/report/general-report.component.css")],
+        encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object])
+], GeneralReportComponent);
+
+var _a;
+//# sourceMappingURL=general-report.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/spese/spese-list/spese-list.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2356,8 +2461,8 @@ var SpeseNewComponent = (function () {
         this._spesaService = _spesaService;
         this.dialogRef = dialogRef;
         this.data = data;
-        this.descrizioneFormControl = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]('', [
-            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required,
+        this.descrizioneFormControl = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormControl"]('', [
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required,
         ]);
         this.categoryTypes = __WEBPACK_IMPORTED_MODULE_4_app_entity_cost_type__["b" /* CostTypeCategories */];
         this.loading = false;
@@ -2427,7 +2532,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/spese/spese.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n    <div class=\"alert alert-danger\">{{message}}</div>\r\n  <md-card>\r\n    <md-card-header>\r\n      <h3 style=\"float:left;\">Spese di oggi: {{today | date: 'dd/MM/y'}}</h3>\r\n\r\n      <div style=\"float:right;\">\r\n        <button (click)=\"openDialog()\" class=\"btn BKHBrandedButton Ccm-Button-Primary \">Aggiungi</button>\r\n      </div>\r\n    </md-card-header>\r\n    <md-card-content>\r\n      <app-spese-list (reloadEvent)=\"getList()\" [spesaList]=\"spesaList\"></app-spese-list>\r\n    </md-card-content>\r\n  </md-card>\r\n<!-- </div> -->\r\n"
+module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n<div class=\"alert alert-danger\">{{message}}</div>\r\n<md-card>\r\n  <md-card-header>\r\n    <h3 style=\"float:left;\">Spese di oggi: {{today | date: 'dd/MM/y'}}</h3>\r\n\r\n    <div style=\"float:right;\">\r\n      <button (click)=\"openDialog()\" class=\"btn BKHBrandedButton Ccm-Button-Primary \">Aggiungi</button>\r\n    </div>\r\n  </md-card-header>\r\n  <md-card-content>\r\n    <div fxLayout=\"column\" fxFill>\r\n      <app-spese-list (reloadEvent)=\"getList()\" [spesaList]=\"spesaList\"></app-spese-list>\r\n    </div>\r\n  </md-card-content>\r\n</md-card>\r\n<!-- </div> -->\r\n"
 
 /***/ }),
 
@@ -2568,6 +2673,13 @@ Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* pl
 
 module.exports = __webpack_require__("../../../../../src/main.ts");
 
+
+/***/ }),
+
+/***/ 1:
+/***/ (function(module, exports) {
+
+/* (ignored) */
 
 /***/ })
 

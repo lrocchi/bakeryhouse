@@ -35,9 +35,23 @@ import { StoreService } from 'app/_services/store.service';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { ChiusureComponent } from './chiusure/chiusure.component';
 import { BalanceService } from 'app/_services/balance.service';
+import { GeneralReportComponent } from './report/general-report.component';
+import { DxChartModule, DxDataGridModule } from 'devextreme-angular';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
+
+
+
+/*   import { LayoutModule } from '../../modules/layout.module';
+   import { TreeModule } from '../../modules/tree.module';
+    import { ListBoxModule } from '../../modules/listbox.module';
+     import { DataTableModule } from '../../modules/datatable.module';
+      import { ChartModule } from '../../modules/chart.module';
+       import { MenuModule } from '../../modules/menu.module';
+
+ */
 
 /**
  * NgModule that includes all Material modules that are required to serve the demo-app.
@@ -58,7 +72,9 @@ import { BalanceService } from 'app/_services/balance.service';
     MatFormFieldModule,
     BrowserAnimationsModule,
 
-  ]
+
+  ],
+  declarations: []
 })
 export class DemoMaterialModule { }
 
@@ -82,12 +98,13 @@ export class DemoMaterialModule { }
     GestioneStoreComponent,
     StoreAddComponent,
     EditDialogComponent,
-    ChiusureComponent
+    ChiusureComponent,
+    GeneralReportComponent,
+
 
   ],
 
   imports: [
-
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -95,8 +112,10 @@ export class DemoMaterialModule { }
     CdkTableModule,
     MatDialogModule,
     AppRoutingModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    DxChartModule,
+    DxDataGridModule,
+    FlexLayoutModule,
   ],
   providers: [
     AuthGuard,

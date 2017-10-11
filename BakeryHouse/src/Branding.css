@@ -4,18 +4,22 @@ body {
   font-size: 14px;
 }
 
-body.Ccm-LoginBody {
+.Ccm-MainContent {
   background: url("./assets/images/Landscape.jpg") repeat center center
 }
 
 @media (max-width: 1024px) {
-  body.Ccm-LoginBody {
+  /* body.Ccm-LoginBody {
+    background: url("./assets/images/PadPortrait.jpg") repeat center center
+  } */
+  .Ccm-MainContent {
     background: url("./assets/images/PadPortrait.jpg") repeat center center
   }
 }
 
 @media (max-width: 768px) {
-  body.Ccm-LoginBody {
+
+  .Ccm-MainContent {
     background: url("./assets/images/Mobile.jpg") repeat center center
   }
   .table-responsive {
@@ -28,7 +32,8 @@ body.Ccm-LoginBody {
 }
 
 @media (max-width: 450px) {
-  body.Ccm-LoginBody {
+
+  .Ccm-MainContent {
     background: url("./assets/images/MobileSmall.jpg") repeat center center
   }
   .Ccm-LoginContainer {
@@ -524,7 +529,8 @@ table td[class*=col-], table th[class*=col-] {
   width: calc(100% - 256px);
   height: calc(100% - 56px);
   left: 256px;
-  overflow: hidden
+  overflow: hidden;
+
 }
 .Ccm-MainContent:not(.Ccm-LoginMainContent) .CoreViewContainer {
   height: calc(100% - 56px);

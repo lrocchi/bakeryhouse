@@ -1,0 +1,24 @@
+<div fxLayout="row" flexLayout.xs="column" fxLayoutAlign="start start">
+
+  <div fxLayout fxFlex fxFlexOrder.xs="1">
+    <dx-chart [dataSource]="costList">
+      <dxi-series argumentField="descrizione" valueField="valore" type="bar"></dxi-series>
+    </dx-chart>
+  </div>
+  <div fxLayout fxFlex fxFlexOrder.xs="2">
+    <dx-data-grid id="gridContainer" [dataSource]="costList" [columns]="['descrizione', 'valore','utente.surname', 'tipo.nome']">
+    </dx-data-grid>
+  </div>
+
+</div>
+<div fxLayout="row" flexLayout.xs="column" fxLayoutAlign="start start">
+  <div fxLayout fxFlex fxFlexOrder.xs="3">
+    FFFFFFFFFFFF
+  </div>
+  <div fxLayout fxFlex fxFlexOrder.xs="4">
+    <dx-chart [dataSource]="costList">
+      <dxi-series argumentField="descrizione" valueField="valore" type="spline"></dxi-series>
+    </dx-chart>
+  </div>
+
+</div>

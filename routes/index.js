@@ -10,6 +10,11 @@ router.get('/manage', function(req, res, next){
     res.redirect("/");
 });
 
+router.get('/report', function(req, res, next){
+    
+    res.redirect("/");
+});
+
 router.get('/login', function(req, res, next){
     
     res.redirect("/");
