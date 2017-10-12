@@ -223,6 +223,8 @@ mat-radio-button .md-on {
 }
 
 .btn-primary {
+  border-radius: 5px;
+  min-width: 60px;
   background: linear-gradient(#b7cbb0, #7fa372) !important
 }
 
@@ -632,7 +634,7 @@ table td[class*=col-], table th[class*=col-] {
 .Ccm-LoginHelpOther-Container {
   padding: 0px
 }
-.Ccm-Login-UserNameContainer>span, Ccm-GeneralFielContainer>span, .Ccm-Login-PasswordContainer>span, .Ccm-ForgotPassword-Container>span {
+.Ccm-Login-UserNameContainer>span, .Ccm-Login-PasswordContainer>span, .Ccm-ForgotPassword-Container>span {
   border-right: 1px solid #ccc
 }
 .Ccm-Login-UserNameContainer .Ccm-SearchField, Ccm-GeneralFielContainer .Ccm-SearchField, .Ccm-Login-PasswordContainer .Ccm-SearchField {
@@ -738,7 +740,7 @@ body.Ccm-LoginBody .Ccm-LoginContainer:before {
 }
 .Ccm-SearchField {
   border: none;
-  padding: 0px;
+  padding: 0px 0px 0px 5px;
   margin: 0px;
   width: 170px;
   line-height: normal
@@ -756,3 +758,20 @@ body.Ccm-LoginBody .Ccm-LoginContainer:before {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
+
+[class$="CcmIcon"]:before, [class*="CcmIcon "]:before, [class^="icon-"]:before, [class*=" icon-"]:before, [class$="CcmIcon"]:after, [class*="CcmIcon "]:after, [class^="icon-"]:after, [class*=" icon-"]:after {
+
+  font-style: normal;
+  font-weight: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: .2em;
+}
+
+

@@ -1,10 +1,12 @@
 <!-- <div class="Ccm-MainContent ng-scope Ccm-LoginMainContent"> -->
-    <div class="Ccm-MainContent Ccm-LoginMainContent">
+<div class="Ccm-MainContent Ccm-LoginMainContent">
 
 
   <div class="Ccm-LoginContainer">
 
-    <div class="Ccm-LoginImage"><img alt="LOGO" src="./assets/images/Logo.png"></div>
+    <div class="Ccm-LoginImage">
+      <img alt="LOGO" src="./assets/images/Logo.png">
+    </div>
 
 
     <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
@@ -12,8 +14,10 @@
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
           <div class="Ccm-Login-UserNameContainer">
             <!-- <mat-icon>person</mat-icon> -->
-            <span><mat-icon>person</mat-icon></span>
-            <input class="Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" [(ngModel)]="model.username" placeholder="Nome Utente"
+            <span>
+              <mat-icon>person</mat-icon>
+            </span>
+            <input class="Ccm-SearchField ng-dirty ng-valid-parse ng-touched" [(ngModel)]="model.username" placeholder="Nome Utente"
               autocomplete="off" #username="ngModel" name="username" required>
             <div *ngIf="f.submitted && !username.valid" class="help-block">Username &eacute; obbligatorio</div>
           </div>
@@ -22,7 +26,9 @@
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
 
           <div class="Ccm-Login-PasswordContainer">
-            <span><mat-icon>lock</mat-icon></span>
+            <span>
+              <mat-icon>lock</mat-icon>
+            </span>
             <input id="Password" type="password" class="Ccm-SearchField ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" [(ngModel)]="model.password"
               placeholder="Password" #password="ngModel" name="password" required>
             <div *ngIf="f.submitted && !password.valid" class="help-block">Password &eacute; obbligatorio</div>
@@ -30,10 +36,10 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <div class="ProceedContainer ng-scope">
 
-          <button [disabled]="loading" class="btn btn-primary Ccm-Button-Primary btn btn-default BrandedBackgroundGradientImage LoginButton ng-binding">Accedi</button>
+      <div class="ProceedContainer .Ccm-LoginContainer ">
+        <div class="form-group">
+          <button [disabled]="loading" class=" btn BKHBrandedButton Ccm-Button-Primary LoginButton">Accedi</button>
         </div>
 
         <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
