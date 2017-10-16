@@ -10,10 +10,13 @@ var stores = require('./routes/store');
 var costType = require('./routes/costType');
 var balance = require('./routes/balance');
 
+var BalanceSchedule = require('./scheduler');
+
 var config = require('./config/config')
 var port = 3000;
 
 var app = express();
+
 
 //View Engine
 
@@ -42,6 +45,9 @@ app.use('/api/users', users);
 app.use('/api/stores', stores);
 app.use('/api/costtype', costType);
 
+BalanceSchedule.start();
+
 app.listen(process.env.PORT || port, function(){
     console.log('Server started on port ' + port);
 })
+

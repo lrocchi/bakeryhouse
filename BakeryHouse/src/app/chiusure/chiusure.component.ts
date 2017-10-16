@@ -60,7 +60,7 @@ export class ChiusureComponent implements OnInit {
 
   getList() {
 
-    console.log('usr -->' + JSON.stringify(this.usr));
+    // console.log('usr -->' + JSON.stringify(this.usr));
     this._balanceService.getTodayBalanceList(this.usr.store._id)
       .then(balance => {
         this.balance = balance;
@@ -194,6 +194,14 @@ export class ChiusureComponent implements OnInit {
       minutes = 60 - minutes;
       seconds = t % 60;
       seconds = 60 - seconds;
+
+    }
+    /*
+    Se ho passato da 30 minuti l'orario stabilito:
+      - Inserisco un bilancio a zero;
+      - mando email informativa allo store manager
+    */
+    if (minutes > -30) {
 
     }
     return [

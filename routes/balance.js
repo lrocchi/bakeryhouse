@@ -40,6 +40,7 @@ var Balance = require('../models/Balance');
     
       // Attempt to save the spesa
       Balance.create(req.body,function(err, data) {
+        console.log("REST:" + JSON.stringify(data));
         if (err) {
           console.log(err);
           return res.json({
