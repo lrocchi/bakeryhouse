@@ -16,17 +16,19 @@ var Client = require('node-rest-client').Client;
 var client = new Client();
 
 var BalanceSchedule = new Object();
-
+var ip = process.env.IP || 'http://localhost';
+var port = process.env.PORT || 3000;
+var adress = ip + ":" +  port;
 
 BalanceSchedule.start = function () {
     var schedPranzo = schedule.scheduleJob('* 30 12 * * *', function () {
         console.log('The answer to life, the universe, and everything!');
         var stores = [];
-        client.get('http://localhost:3000/api/stores/active', function (data, response) {
+        client.get(adress + '/api/stores/active', function (data, response) {
             stores = data;
             date = new Date().getUTCDate();
             stores.forEach(function (element) {
-                client.get("http://localhost:3000/api/balance/" + date + '/' + element._id, function (data, response) {
+                client.get(adress + "/api/balance/" + date + '/' + element._id, function (data, response) {
                     if (Object.keys(data).length < 1) {
                         var args_js = {
                             headers: { 'Content-Type': 'application/json' },
@@ -42,7 +44,7 @@ BalanceSchedule.start = function () {
                                 "prevCapital": 0
                             }
                         };
-                        client.post("http://localhost:3000/api/balance/", args_js, function (data, response) {
+                        client.post(adress + "/api/balance/", args_js, function (data, response) {
                             console.log(data);
                         });
                     }
@@ -57,11 +59,11 @@ BalanceSchedule.start = function () {
     var schedPomeriggio = schedule.scheduleJob('* 30 16 * * *', function () {
         console.log('The answer to life, the universe, and everything!');
         var stores = [];
-        client.get('http://localhost:3000/api/stores/active', function (data, response) {
+        client.get(adress + '/api/stores/active', function (data, response) {
             stores = data;
             date = new Date().getUTCDate();
             stores.forEach(function (element) {
-                client.get("http://localhost:3000/api/balance/" + date + '/' + element._id, function (data, response) {
+                client.get(adress + "/api/balance/" + date + '/' + element._id, function (data, response) {
                     if (Object.keys(data).length < 2) {
                         var args_js = {
                             headers: { 'Content-Type': 'application/json' },
@@ -77,7 +79,7 @@ BalanceSchedule.start = function () {
                                 "prevCapital": data[Object.keys(data).length -1].prevCapital
                             }
                         };
-                        client.post("http://localhost:3000/api/balance/", args_js, function (data, response) {
+                        client.post(adress + "/api/balance/", args_js, function (data, response) {
                             console.log(data);
                         });
                     }
@@ -90,11 +92,11 @@ BalanceSchedule.start = function () {
     var schedPomeriggio = schedule.scheduleJob('* 30 20 * * *', function () {
         console.log('The answer to life, the universe, and everything!');
         var stores = [];
-        client.get('http://localhost:3000/api/stores/active', function (data, response) {
+        client.get(adress + '/api/stores/active', function (data, response) {
             stores = data;
             date = new Date().getUTCDate();
             stores.forEach(function (element) {
-                client.get("http://localhost:3000/api/balance/" + date + '/' + element._id, function (data, response) {
+                client.get(adress + "/api/balance/" + date + '/' + element._id, function (data, response) {
                     if (Object.keys(data).length < 3) {
                         var args_js = {
                             headers: { 'Content-Type': 'application/json' },
@@ -110,7 +112,7 @@ BalanceSchedule.start = function () {
                                 "prevCapital": data[Object.keys(data).length -1].prevCapital
                             }
                         };
-                        client.post("http://localhost:3000/api/balance/", args_js, function (data, response) {
+                        client.post(adress + "/api/balance/", args_js, function (data, response) {
                             console.log(data);
                         });
                     }
@@ -123,13 +125,13 @@ BalanceSchedule.start = function () {
     var schedChiusura = schedule.scheduleJob('* 30 04 * * *', function () {
         console.log('The answer to life, the universe, and everything!');
         var stores = [];
-        client.get('http://localhost:3000/api/stores/active', function (data, response) {
+        client.get(adress + '/api/stores/active', function (data, response) {
             stores = data;
             date = new Date();
             date.setDate(d.getDate()-1);
             date.getUTCDate();
             stores.forEach(function (element) {
-                client.get("http://localhost:3000/api/balance/" + date + '/' + element._id, function (data, response) {
+                client.get(adress + "/api/balance/" + date + '/' + element._id, function (data, response) {
                     if (Object.keys(data).length < 3) {
                         var args_js = {
                             headers: { 'Content-Type': 'application/json' },
@@ -145,7 +147,7 @@ BalanceSchedule.start = function () {
                                 "prevCapital": data[Object.keys(data).length -1].prevCapital
                             }
                         };
-                        client.post("http://localhost:3000/api/balance/", args_js, function (data, response) {
+                        client.post(adress + "/api/balance/", args_js, function (data, response) {
                             console.log(data);
                         });
                     }
