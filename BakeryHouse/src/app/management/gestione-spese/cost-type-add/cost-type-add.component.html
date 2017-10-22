@@ -5,7 +5,7 @@
   <div mat-dialog-content>
     <mat-input-container class="example-full-width">
       <mat-select placeholder="Categoria" [(ngModel)]="costType.nome" #nome="ngModel" name="nome" required>
-        <mat-option *ngFor="let types of categoryTypes | keys" value="types.value">
+        <mat-option *ngFor="let types of categoryTypes | keys" [value]="types.value">
           {{types.value}}
         </mat-option>
       </mat-select>

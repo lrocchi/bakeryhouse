@@ -41,9 +41,7 @@ export class GestioneUtenteComponent implements OnInit {
 
   }
   create(user: User) {
-
     this._userService.addUser(user);
-
   }
 
   getActiveStoresList() {

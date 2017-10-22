@@ -28,14 +28,14 @@
 
     <mat-form-field class="example-full-width">
       <mat-select placeholder="Ruolo" [(ngModel)]="user.ruolo" #role="ngModel" name="role" required>
-        <mat-option *ngFor="let ruolo of ruoli | keys" value="ruolo.value">
+        <mat-option *ngFor="let ruolo of ruoli | keys" [value]="ruolo.value">
           {{ruolo.value}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-select placeholder="Punto Vendita" [(ngModel)]="user.store" #nome="ngModel" name="store" required>
-        <mat-option *ngFor="let store of stores" value="store">
+        <mat-option *ngFor="let store of stores" [value]="store">
           {{store.nome}} - {{store.indirizzo}}
         </mat-option>
       </mat-select>

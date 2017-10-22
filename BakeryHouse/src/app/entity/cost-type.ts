@@ -21,8 +21,9 @@ export enum CostTypeCategories {
   Food = 10,
   Delivery = 20,
   Ticket = 30,
-  Fatture = 100,
+  Stipendi = 100,
   Manutenzione = 120,
+  Utility = 140,
   Varie = 200
 
 }
