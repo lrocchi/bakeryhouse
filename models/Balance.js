@@ -16,7 +16,9 @@ var balanceSchema = new mongoose.Schema({
     ticket: {type: Number, require: true},
     memoCredit: {type: Number},
     capital: {type: Number},
-    prevCapital: {type: Number}
+    prevCapital: {type: Number},
+    flash: {type: Number},
+    riserva: {type: Number}
 
 })
 

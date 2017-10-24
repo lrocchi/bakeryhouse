@@ -18,6 +18,8 @@ export class Balance {
 
   public prevCapital: number;
   public capital: number;
+  public flash: number;
+  public riserva: number;
 
 
 

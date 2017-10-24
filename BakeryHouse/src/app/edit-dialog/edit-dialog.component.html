@@ -85,7 +85,7 @@
   </form>
 </div>
 
-
+<!-- BALANCE EDIT -->
 <div *ngIf="balanceObj != null">
   <form name="form" (ngSubmit)="f.form.valid" novalidate>
     <div mat-dialog-content>
@@ -103,11 +103,18 @@
         <input matInput type="number" [(ngModel)]="balanceObj.ticket" placeholder="Ticket" autocomplete="off" #ticket="ngModel" name="ticket"
           required>
       </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" [(ngModel)]="balanceObj.flash" placeholder="Flash" autocomplete="off" #ticket="ngModel" name="flash"
+          required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" [(ngModel)]="balanceObj.riserva" placeholder="Riserva Monete" autocomplete="off" #ticket="ngModel" name="riserva"
+          required>
+      </mat-form-field>
 
     </div>
   </form>
 </div>
-
 
 
 <div mat-dialog-actions>
