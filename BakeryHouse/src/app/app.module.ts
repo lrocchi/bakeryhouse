@@ -38,6 +38,7 @@ import { BalanceService } from 'app/_services/balance.service';
 import { GeneralReportComponent } from './report/general-report.component';
 import { DxChartModule, DxDataGridModule } from 'devextreme-angular';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LogoutComponent } from 'app/logout.component';
 
 
 
@@ -100,6 +101,7 @@ export class DemoMaterialModule { }
     EditDialogComponent,
     ChiusureComponent,
     GeneralReportComponent,
+    LogoutComponent,
 
 
   ],

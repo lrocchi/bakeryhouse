@@ -8,7 +8,7 @@ import { AuthService } from '../_services/auth.service';
 
 
 @Component({
-   selector: 'body',
+  selector: 'app-root',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

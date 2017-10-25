@@ -6,9 +6,11 @@ import { HomeComponent } from 'app/home/home.component';
 
 import { ManagementComponent } from 'app/management/management.component';
 import { GeneralReportComponent } from 'app/report/general-report.component';
+import { LogoutComponent } from 'app/logout.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   {
     path: 'manage',
@@ -32,7 +34,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(appRoutes, { enableTracing: true } // <-- debugging purposes only
+    RouterModule.forRoot(appRoutes, { enableTracing: false } // <-- debugging purposes only
     )],
   providers: [],
   bootstrap: [],

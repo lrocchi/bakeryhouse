@@ -1,13 +1,14 @@
 
-import { Component, HostListener, OnInit, HostBinding } from '@angular/core';
+import { Component, HostListener, OnInit, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 
 
 
 
 @Component({
-  selector: 'body',
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 

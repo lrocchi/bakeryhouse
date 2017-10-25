@@ -1,9 +1,13 @@
+<meta http-equiv='cache-control' content='no-cache'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
 <mat-toolbar *ngIf="auth.loggedIn()" class="BrandedBackgroundGradientImage" style="text-align: center; padding: 0 5px;">
 
   <!--The whole content below can be removed with the new code.-->
 
   <div mat-card-avatar class="example-header-image"></div>
-  <h3 style="color: white">{{title}}</h3>
+  <h3 style="color: white">{{user.store.nome}}</h3>
+
 
   <span class="span-fill-remaining"></span>
   <button mat-button [matMenuTriggerFor]="menu" style="color: white; padding: 0 0px;">{{user.name}}
@@ -28,8 +32,11 @@
     Report
   </a>
 
-  <button mat-menu-item (click)="logout()">
+  <!-- <btton mat-menu-item (click)="logout()"> -->
+  <a mat-menu-item routerLink="/logout" routerLinkActive="active">
     <mat-icon class="md-18|md-24|md-36|md-48">exit_to_app</mat-icon>
+
     Esci
-  </button>
+  </a>
+  <!-- </button> -->
 </mat-menu>

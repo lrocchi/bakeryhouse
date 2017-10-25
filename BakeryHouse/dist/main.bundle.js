@@ -105,16 +105,21 @@ var AuthService = (function () {
     }
     AuthService.prototype.login = function (uname, pwd) {
         var _this = this;
-        return this.http.post('api/users/auth', { username: uname, password: pwd }).map(function (response) {
+        return this.http
+            .post('api/users/auth', { username: uname, password: pwd })
+            .map(function (response) {
             // login successful if there's a jwt token in the response
             var jresponse = response.json();
             if (jresponse) {
                 if (jresponse.success) {
-                    console.log(_this.jwtHelper.decodeToken(jresponse.token), _this.jwtHelper.isTokenExpired(jresponse.token));
+                    /* console.log(
+                      this.jwtHelper.decodeToken(jresponse.token),
+                      this.jwtHelper.isTokenExpired(jresponse.token)
+                    ); */
                     // store username and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('token', jresponse.token);
                     var user = _this.jwtHelper.decodeToken(localStorage.getItem('token'))._doc;
-                    console.log(JSON.stringify(user));
+                    // console.log(JSON.stringify(user));
                     localStorage.setItem('currUser', JSON.stringify(user));
                 }
                 return jresponse.success;
@@ -425,6 +430,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_home_home_component__ = __webpack_require__("../../../../../src/app/home/home.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_management_management_component__ = __webpack_require__("../../../../../src/app/management/management.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_report_general_report_component__ = __webpack_require__("../../../../../src/app/report/general-report.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_app_logout_component__ = __webpack_require__("../../../../../src/app/logout.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -438,8 +444,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var appRoutes = [
     { path: 'login', component: __WEBPACK_IMPORTED_MODULE_2_app_login_login_component__["a" /* LoginComponent */] },
+    { path: 'logout', component: __WEBPACK_IMPORTED_MODULE_7_app_logout_component__["a" /* LogoutComponent */] },
     { path: '', component: __WEBPACK_IMPORTED_MODULE_4_app_home_home_component__["a" /* HomeComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_3_app_guards_auth_guard__["a" /* AuthGuard */]] },
     {
         path: 'manage',
@@ -467,7 +475,7 @@ AppRoutingModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forRoot(appRoutes, { enableTracing: true } // <-- debugging purposes only
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forRoot(appRoutes, { enableTracing: false } // <-- debugging purposes only
             )
         ],
         providers: [],
@@ -542,9 +550,10 @@ __decorate([
 ], AppComponent.prototype, "someField", void 0);
 AppComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'body',
+        selector: 'app-root',
         template: __webpack_require__("../../../../../src/app/app.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/app.component.css")]
+        styles: [__webpack_require__("../../../../../src/app/app.component.css")],
+        changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
     }),
     __metadata("design:paramtypes", [])
 ], AppComponent);
@@ -596,6 +605,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34_devextreme_angular__ = __webpack_require__("../../../../devextreme-angular/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34_devextreme_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_34_devextreme_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__angular_flex_layout__ = __webpack_require__("../../../flex-layout/@angular/flex-layout.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36_app_logout_component__ = __webpack_require__("../../../../../src/app/logout.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -605,6 +615,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -711,6 +722,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_30__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */],
             __WEBPACK_IMPORTED_MODULE_31__chiusure_chiusure_component__["a" /* ChiusureComponent */],
             __WEBPACK_IMPORTED_MODULE_33__report_general_report_component__["a" /* GeneralReportComponent */],
+            __WEBPACK_IMPORTED_MODULE_36_app_logout_component__["a" /* LogoutComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1232,7 +1244,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar *ngIf=\"auth.loggedIn()\" class=\"BrandedBackgroundGradientImage\" style=\"text-align: center; padding: 0 5px;\">\r\n\r\n  <!--The whole content below can be removed with the new code.-->\r\n\r\n  <div mat-card-avatar class=\"example-header-image\"></div>\r\n  <h3 style=\"color: white\">{{title}}</h3>\r\n\r\n  <span class=\"span-fill-remaining\"></span>\r\n  <button mat-button [matMenuTriggerFor]=\"menu\" style=\"color: white; padding: 0 0px;\">{{user.name}}\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n</mat-toolbar>\r\n<!-- main app container -->\r\n\r\n<mat-menu #menu=\"matMenu\" yPosition=\"below\" xPosition=\"after\">\r\n\r\n  <a mat-menu-item routerLink=\"/\" routerLinkActive=\"active\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">home</mat-icon>\r\n    Home</a>\r\n\r\n  <a mat-menu-item routerLink=\"/manage\" routerLinkActive=\"active\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">format_list_bulleted</mat-icon>\r\n    Gestione\r\n  </a>\r\n\r\n  <a mat-menu-item routerLink=\"/report\" routerLinkActive=\"active\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">trending_up</mat-icon>\r\n    Report\r\n  </a>\r\n\r\n  <button mat-menu-item (click)=\"logout()\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">exit_to_app</mat-icon>\r\n    Esci\r\n  </button>\r\n</mat-menu>\r\n"
+module.exports = "<meta http-equiv='cache-control' content='no-cache'>\r\n<meta http-equiv='expires' content='0'>\r\n<meta http-equiv='pragma' content='no-cache'>\r\n<mat-toolbar *ngIf=\"auth.loggedIn()\" class=\"BrandedBackgroundGradientImage\" style=\"text-align: center; padding: 0 5px;\">\r\n\r\n  <!--The whole content below can be removed with the new code.-->\r\n\r\n  <div mat-card-avatar class=\"example-header-image\"></div>\r\n  <h3 style=\"color: white\">{{user.store.nome}}</h3>\r\n\r\n\r\n  <span class=\"span-fill-remaining\"></span>\r\n  <button mat-button [matMenuTriggerFor]=\"menu\" style=\"color: white; padding: 0 0px;\">{{user.name}}\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n</mat-toolbar>\r\n<!-- main app container -->\r\n\r\n<mat-menu #menu=\"matMenu\" yPosition=\"below\" xPosition=\"after\">\r\n\r\n  <a mat-menu-item routerLink=\"/\" routerLinkActive=\"active\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">home</mat-icon>\r\n    Home</a>\r\n\r\n  <a mat-menu-item routerLink=\"/manage\" routerLinkActive=\"active\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">format_list_bulleted</mat-icon>\r\n    Gestione\r\n  </a>\r\n\r\n  <a mat-menu-item routerLink=\"/report\" routerLinkActive=\"active\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">trending_up</mat-icon>\r\n    Report\r\n  </a>\r\n\r\n  <!-- <btton mat-menu-item (click)=\"logout()\"> -->\r\n  <a mat-menu-item routerLink=\"/logout\" routerLinkActive=\"active\">\r\n    <mat-icon class=\"md-18|md-24|md-36|md-48\">exit_to_app</mat-icon>\r\n\r\n    Esci\r\n  </a>\r\n  <!-- </button> -->\r\n</mat-menu>\r\n"
 
 /***/ }),
 
@@ -1242,10 +1254,7 @@ module.exports = "<mat-toolbar *ngIf=\"auth.loggedIn()\" class=\"BrandedBackgrou
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeaderComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular2_jwt_angular2_jwt__ = __webpack_require__("../../../../angular2-jwt/angular2-jwt.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular2_jwt_angular2_jwt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angular2_jwt_angular2_jwt__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_services_auth_service__ = __webpack_require__("../../../../../src/app/_services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_auth_service__ = __webpack_require__("../../../../../src/app/_services/auth.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1256,28 +1265,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
-
+// import { JwtHelper } from 'angular2-jwt/angular2-jwt';
 
 var HeaderComponent = (function () {
-    function HeaderComponent(route, router, auth
-        // private localStorage: LocalStorageService,
-    ) {
-        this.route = route;
-        this.router = router;
+    // private jwtHelper: JwtHelper = new JwtHelper();
+    function HeaderComponent(
+        // private route: ActivatedRoute,
+        auth) {
         this.auth = auth;
-        this.title = 'BakeryHouse!';
-        this.jwtHelper = new __WEBPACK_IMPORTED_MODULE_2_angular2_jwt_angular2_jwt__["JwtHelper"]();
-        this.user = JSON.parse(localStorage.getItem('currUser'));
     }
     HeaderComponent.prototype.ngOnInit = function () {
+        this.user = JSON.parse(localStorage.getItem('currUser'));
     };
-    HeaderComponent.prototype.logout = function () {
-        console.log('logout...');
-        // remove user from local storage to log user out
-        this.auth.logout();
-        this.router.navigate(['login']);
+    HeaderComponent.prototype.ngOnDestroy = function () {
     };
+    HeaderComponent.prototype.ngDoCheck = function () {
+        this.user = JSON.parse(localStorage.getItem('currUser'));
+    };
+    /* logout() {
+      console.log('logout...');
+  
+      // remove user from local storage to log user out
+      this.auth.logout();
+      this.router.navigate(['login']);
+    } */
     HeaderComponent.prototype.loggedIn = function () {
         this.auth.loggedIn();
     };
@@ -1289,10 +1300,10 @@ HeaderComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/header/header.component.html"),
         styles: [__webpack_require__("../../../../../src/app/header/header.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_auth_service__["a" /* AuthService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_auth_service__["a" /* AuthService */]) === "function" && _a || Object])
 ], HeaderComponent);
 
-var _a, _b, _c;
+var _a;
 //# sourceMappingURL=header.component.js.map
 
 /***/ }),
@@ -1491,7 +1502,7 @@ __decorate([
 ], LoginComponent.prototype, "someField", void 0);
 LoginComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'body',
+        selector: 'app-root',
         template: __webpack_require__("../../../../../src/app/login/login.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login/login.component.css")]
     }),
@@ -1500,6 +1511,49 @@ LoginComponent = __decorate([
 
 var _a, _b, _c;
 //# sourceMappingURL=login.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/logout.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogoutComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_auth_service__ = __webpack_require__("../../../../../src/app/_services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var LogoutComponent = (function () {
+    function LogoutComponent(_authService, router) {
+        this._authService = _authService;
+        this.router = router;
+    }
+    LogoutComponent.prototype.ngOnInit = function () {
+        this._authService.logout();
+        this.router.navigate(['login']);
+    };
+    return LogoutComponent;
+}());
+LogoutComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        template: ''
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_auth_service__["a" /* AuthService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object])
+], LogoutComponent);
+
+var _a, _b;
+//# sourceMappingURL=logout.component.js.map
 
 /***/ }),
 
