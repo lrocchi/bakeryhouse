@@ -6,14 +6,12 @@ import { MatDialogRef, MatDialog } from '@angular/material';
 import { EditDialogComponent } from 'app/edit-dialog/edit-dialog.component';
 import { Observable, Subscription } from 'rxjs/Rx';
 
-
 @Component({
   selector: 'app-chiusure',
   templateUrl: './chiusure.component.html',
   styleUrls: ['./chiusure.component.css']
 })
 export class ChiusureComponent implements OnInit {
-
   message: string;
   spinnerColor = 'normal';
   spinnerMode = 'determinate';
@@ -31,37 +29,73 @@ export class ChiusureComponent implements OnInit {
   lastBalance: Balance;
   prevCapital: number;
   usr: User;
+  isChiusura = false;
+
+  private _pranzo: Date;
+  private _pomeriggio: Date;
+  private _sera: Date;
+  private _chiusura: Date;
+  private _nextDay: Date;
 
   balance: Array<Balance>;
-
 
   // confirmDialog: MatDialogRef<ConfirmationDialog>;
   editDialog: MatDialogRef<EditDialogComponent>;
 
-  constructor(private _balanceService: BalanceService, public dialog: MatDialog) {
+  constructor(
+    private _balanceService: BalanceService,
+    public dialog: MatDialog
+  ) {
     this.usr = JSON.parse(localStorage.getItem('currUser'));
   }
 
   ngOnInit() {
+    this._pranzo = new Date();
+    this._pranzo.setHours(12);
+    this._pranzo.setMinutes(30);
+    this._pranzo.setSeconds(0);
+    this._pomeriggio = new Date();
+    this._pomeriggio.setHours(16);
+    this._pomeriggio.setMinutes(30);
+    this._pomeriggio.setSeconds(0);
+
+    this._sera = new Date();
+    this._sera.setHours(20);
+    this._sera.setMinutes(30);
+    this._sera.setSeconds(0);
+
+    this._chiusura = new Date();
+    this._chiusura.setHours(23);
+    this._chiusura.setMinutes(59);
+    this._chiusura.setSeconds(59);
+
+    this._nextDay = new Date();
+    this._nextDay.setHours(2);
+    this._nextDay.setMinutes(59);
+    this._nextDay.setSeconds(59);
+
     this.getList();
 
     /* TIMER */
     // this.future = new Date(this.futureString);
-    this.$counter = Observable.interval(1000).map((x) => {
-      this.diff = Math.floor((this.future.getTime() - new Date().getTime()) / 1000);
+    this.$counter = Observable.interval(1000).map(x => {
+      this.diff = Math.floor(
+        (this.future.getTime() - new Date().getTime()) / 1000
+      );
 
       return x;
     });
 
-    this.subscription = this.$counter.subscribe((x) => this.timerMessage = this.dhms(this.diff));
+    this.subscription = this.$counter.subscribe(
+      x => (this.timerMessage = this.dhms(this.diff))
+    );
     /* FINE TIMER */
-
   }
 
   getList() {
-
     // console.log('usr -->' + JSON.stringify(this.usr));
-    this._balanceService.getTodayBalanceList(this.usr.store._id)
+    this._balanceService
+      .getTodayBalanceList(this.usr.store._id)
       .then(balance => {
         this.balance = balance;
         this.lastBalance = balance[0];
@@ -69,9 +103,25 @@ export class ChiusureComponent implements OnInit {
       .catch(err => console.log(err));
 
     const oDate = new Date();
+
+    if (oDate > this._nextDay) {
+      oDate.setHours(12);
+      if (oDate > this._pranzo) {
+        oDate.setHours(16);
+      } else if (oDate > this._pomeriggio) {
+        oDate.setHours(20);
+      } else if (oDate > this._sera) {
+        oDate.setHours(24);
+      }
+    } else {
+      if (oDate > this._chiusura) {
+        this.isChiusura = true;
+      }
+    }
     oDate.setMinutes(0);
     oDate.setSeconds(0);
-    if (this.lastBalance) {
+    this.future = oDate;
+    /* if (this.lastBalance) {
 
       switch (this.lastBalance.value) {
         case 25:
@@ -101,36 +151,31 @@ export class ChiusureComponent implements OnInit {
       oDate.setHours(12);
 
       this.future = oDate;
-    }
+    } */
   }
-
 
   getPrevCapital() {
     const date = new Date();
     date.setDate(date.getDate() - 1);
-    this._balanceService.getBalanceList(this.usr.store._id, date)
+    this._balanceService
+      .getBalanceList(this.usr.store._id, date)
       .then(balance => {
         const tmp: Balance = balance[0];
         if (tmp) {
-
           this.prevCapital = tmp.capital;
         }
-
       })
       .catch(err => console.log(err));
   }
-
 
   openEditDialog() {
     /**
      * get Store from db
      */
 
-
     this.editDialog = this.dialog.open(EditDialogComponent, {
       disableClose: false
     });
-
 
     const balance = new Balance();
     balance.giorno = new Date().toString();
@@ -141,8 +186,8 @@ export class ChiusureComponent implements OnInit {
     }else {
       balance.type = BalanceType[25];
     } */
-    if ( this.lastBalance) {
-    balance.value = this.lastBalance.value + 25;
+    if (this.lastBalance) {
+      balance.value = this.lastBalance.value + 25;
     } else {
       balance.value = 25;
     }
@@ -156,12 +201,13 @@ export class ChiusureComponent implements OnInit {
       if (result) {
         const tmpBal = this.editDialog.componentInstance.balanceObj;
 
-
         console.log('opeEditDialog result: ' + result);
-        this._balanceService.addBalance(tmpBal)
+        this._balanceService
+          .addBalance(tmpBal)
           .then(value => this.getList())
           .catch(err => {
-            console.log(err.message); this.message = err.message;
+            console.log(err.message);
+            this.message = err.message;
           });
       }
       this.editDialog.componentInstance.balanceObj = null;
@@ -170,8 +216,6 @@ export class ChiusureComponent implements OnInit {
       this.getList();
     });
   }
-
-
 
   dhms(t) {
     let days, hours, minutes, seconds;
@@ -188,13 +232,12 @@ export class ChiusureComponent implements OnInit {
       t -= days * 86400;
       hours = Math.floor(t / 3600) % 24;
       t -= hours * 3600;
-      hours = 24 - hours
+      hours = 24 - hours;
       minutes = Math.floor(t / 60) % 60;
       t -= minutes * 60;
       minutes = 60 - minutes;
       seconds = t % 60;
       seconds = 60 - seconds;
-
     }
     /*
     Se ho passato da 30 minuti l'orario stabilito:
@@ -202,12 +245,7 @@ export class ChiusureComponent implements OnInit {
       - mando email informativa allo store manager
     */
     if (minutes > -30) {
-
     }
-    return [
-      hours + 'h',
-      minutes + 'm',
-      seconds + 's'
-    ].join(' ');
+    return [hours + 'h', minutes + 'm', seconds + 's'].join(' ');
   }
 }

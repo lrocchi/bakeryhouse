@@ -128,7 +128,7 @@ router.post('/', function(req, res, next ) {
 router.put('/:id', function (req, res) {
   var id = req.params.id;
   var obj = req.body;
-  User.findByIdAndUpdate(id, obj, function (err, data) {
+  /* User.findByIdAndUpdate(id, obj, function (err, data) {
     if (err) {
       console.log(err);
       return res.json({
@@ -142,6 +142,26 @@ router.put('/:id', function (req, res) {
       message: 'Utente aggiornato con successo',
       data: data
     });
+  }); */
+
+  User.findById(id, function(err, doc) {
+    if (err){
+      console.log(err);
+      return res.json({
+        success: false,
+        message: 'Utente non aggiornato.',
+        data: data
+      });
+    }
+    doc.name = obj.name;
+    doc.surname = obj.surname;
+    doc.username = obj.username;
+    doc.password = obj.password;
+    doc.email = obj.email;
+    doc.ruolo = obj.ruolo;
+    doc.store = obj.store;
+    doc.active = obj.active;
+    doc.save();
   });
 
 });

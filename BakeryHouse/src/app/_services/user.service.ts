@@ -1,8 +1,8 @@
 
 
-import { Injectable } from "@angular/core";
-import { Http, RequestOptions, Headers } from "@angular/http";
-import { User } from "app/entity/user";
+import { Injectable } from '@angular/core';
+import { Http, RequestOptions, Headers } from '@angular/http';
+import { User } from 'app/entity/user';
 
 @Injectable()
 export class UserService {
@@ -25,7 +25,7 @@ export class UserService {
 
   }
 
-  public delete(id:string){
+  public delete(id: string) {
     return this._http.delete('api/users/' + id).map(data => data.json()).toPromise();
   }
 

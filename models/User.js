@@ -38,6 +38,8 @@ UserSchema.pre('save', function(next) {
   }
 });
 
+
+
 // Compare password input to password saved in database
 UserSchema.methods.comparePassword = function(pw, cb) {
   bcrypt.compare(pw, this.password, function(err, isMatch) {

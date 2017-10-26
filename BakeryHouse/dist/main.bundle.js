@@ -777,7 +777,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/chiusure/chiusure.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n<div class=\"alert alert-danger\">{{message}}</div>\r\n<mat-card>\r\n  <mat-card-header>\r\n\r\n    <h3 *ngIf=\"diff>0\" style=\"float:left; max-width:50%\">Prossimo resoconto tra <p>{{timerMessage}}</p></h3>\r\n    <h3 *ngIf=\"diff<0\" style=\"float:left; max-width:50%; color: red\" >Resoconto in ritardo di {{timerMessage}}</h3>\r\n\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div style=\"float:right;\" class=\"ProceedContainer ng-scope\" *ngIf=\"diff<0\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\" *ngIf=\"lastBalance?.type!=='Chiusura'\">Aggiungi</button></div>\r\n  </mat-card-header>\r\n  <mat-card-content>\r\n    <mat-card *ngIf=\"lastBalance\">\r\n      <mat-card-title-group>\r\n        <mat-progress-spinner  [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\">0</mat-progress-spinner>\r\n        <mat-card-title>Resoconto {{lastBalance.type}}</mat-card-title>\r\n        <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n      </mat-card-title-group>\r\n      <mat-card-content class=\"md-content\">\r\n\r\n\r\n        <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\r\n        <p><span>In cassa: </span><span><strong>{{lastBalance.cassa}} &euro;</strong></span></p>\r\n        <p><span>POS:</span><span> <strong>{{lastBalance.pos}} &euro;</strong></span></p>\r\n        <p><span>Ticket:</span><span> <strong>{{lastBalance.ticket}} &euro;</strong></span></p>\r\n      </mat-card-content>\r\n      <!-- <mat-card-actions>\r\n        <button md-button disabled=\"true\">SEGNALA</button>\r\n      </mat-card-actions> -->\r\n    </mat-card>\r\n  </mat-card-content>\r\n</mat-card>\r\n<!-- </div> -->\r\n\r\n\r\n<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n  <div class=\"alert alert-danger\">{{message}}</div>\r\n  <div>\r\n    <h3>Resoconto</h3>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\r\n  </div>\r\n\r\n  <mat-card *ngFor=\"let lastBalance of balance\">\r\n    <mat-card-title-group>\r\n      <md-progress-spinner class=\"example-margin\" color=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\"></md-progress-spinner>\r\n      <mat-card-title>Resoconto {{lastBalance.tipo}}</mat-card-title>\r\n      <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n    </mat-card-title-group>\r\n    <mat-card-content class=\"md-content\">\r\n\r\n\r\n      <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\r\n      <p><span>In cassa: </span><span>{{lastBalance.cassa}} &euro;</span></p>\r\n      <p><span>POS:</span><span>{{lastBalance.pos}}</span></p>\r\n      <p><span>Ticket:</span><span>{{lastBalance.ticket}}</span></p>\r\n    </mat-card-content>\r\n    <mat-card-actions>\r\n      <button md-button disabled=\"true\">INSERISCI</button>\r\n    </mat-card-actions>\r\n  </mat-card>\r\n\r\n</div> -->\r\n"
+module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n<div class=\"alert alert-danger\">{{message}}</div>\r\n<mat-card>\r\n  <mat-card-header>\r\n\r\n    <h3 *ngIf=\"diff>0\" style=\"float:left; max-width:50%\">Prossimo resoconto tra <p>{{timerMessage}} ({{diff}})</p></h3>\r\n    <h3 *ngIf=\"diff<0\" style=\"float:left; max-width:50%; color: red\" >Resoconto in ritardo di {{timerMessage}}  ({{isChiusura}})</h3>\r\n\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div style=\"float:right;\" class=\"ProceedContainer ng-scope\" *ngIf=\"((diff<0) && (diff>-1800)) || (diff<0) && (isChiusura == true)\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\" *ngIf=\"lastBalance?.type!=='Chiusura'\">Aggiungi</button></div>\r\n  </mat-card-header>\r\n  <mat-card-content>\r\n    <mat-card *ngIf=\"lastBalance\">\r\n      <mat-card-title-group>\r\n        <mat-progress-spinner  [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\">0</mat-progress-spinner>\r\n        <mat-card-title>Resoconto {{lastBalance.type}}</mat-card-title>\r\n        <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n      </mat-card-title-group>\r\n      <mat-card-content class=\"md-content\">\r\n\r\n\r\n        <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\r\n        <p><span>In cassa: </span><span><strong>{{lastBalance.cassa}} &euro;</strong></span></p>\r\n        <p><span>POS:</span><span> <strong>{{lastBalance.pos}} &euro;</strong></span></p>\r\n        <p><span>Ticket:</span><span> <strong>{{lastBalance.ticket}} &euro;</strong></span></p>\r\n      </mat-card-content>\r\n      <!-- <mat-card-actions>\r\n        <button md-button disabled=\"true\">SEGNALA</button>\r\n      </mat-card-actions> -->\r\n    </mat-card>\r\n  </mat-card-content>\r\n</mat-card>\r\n<!-- </div> -->\r\n\r\n\r\n<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n  <div class=\"alert alert-danger\">{{message}}</div>\r\n  <div>\r\n    <h3>Resoconto</h3>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\r\n  </div>\r\n\r\n  <mat-card *ngFor=\"let lastBalance of balance\">\r\n    <mat-card-title-group>\r\n      <md-progress-spinner class=\"example-margin\" color=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\"></md-progress-spinner>\r\n      <mat-card-title>Resoconto {{lastBalance.tipo}}</mat-card-title>\r\n      <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n    </mat-card-title-group>\r\n    <mat-card-content class=\"md-content\">\r\n\r\n\r\n      <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\r\n      <p><span>In cassa: </span><span>{{lastBalance.cassa}} &euro;</span></p>\r\n      <p><span>POS:</span><span>{{lastBalance.pos}}</span></p>\r\n      <p><span>Ticket:</span><span>{{lastBalance.ticket}}</span></p>\r\n    </mat-card-content>\r\n    <mat-card-actions>\r\n      <button md-button disabled=\"true\">INSERISCI</button>\r\n    </mat-card-actions>\r\n  </mat-card>\r\n\r\n</div> -->\r\n"
 
 /***/ }),
 
@@ -814,10 +814,31 @@ var ChiusureComponent = (function () {
         this.dialog = dialog;
         this.spinnerColor = 'normal';
         this.spinnerMode = 'determinate';
+        this.isChiusura = false;
         this.usr = JSON.parse(localStorage.getItem('currUser'));
     }
     ChiusureComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this._pranzo = new Date();
+        this._pranzo.setHours(12);
+        this._pranzo.setMinutes(30);
+        this._pranzo.setSeconds(0);
+        this._pomeriggio = new Date();
+        this._pomeriggio.setHours(16);
+        this._pomeriggio.setMinutes(30);
+        this._pomeriggio.setSeconds(0);
+        this._sera = new Date();
+        this._sera.setHours(20);
+        this._sera.setMinutes(30);
+        this._sera.setSeconds(0);
+        this._chiusura = new Date();
+        this._chiusura.setHours(23);
+        this._chiusura.setMinutes(59);
+        this._chiusura.setSeconds(59);
+        this._nextDay = new Date();
+        this._nextDay.setHours(2);
+        this._nextDay.setMinutes(59);
+        this._nextDay.setSeconds(59);
         this.getList();
         /* TIMER */
         // this.future = new Date(this.futureString);
@@ -825,55 +846,78 @@ var ChiusureComponent = (function () {
             _this.diff = Math.floor((_this.future.getTime() - new Date().getTime()) / 1000);
             return x;
         });
-        this.subscription = this.$counter.subscribe(function (x) { return _this.timerMessage = _this.dhms(_this.diff); });
+        this.subscription = this.$counter.subscribe(function (x) { return (_this.timerMessage = _this.dhms(_this.diff)); });
         /* FINE TIMER */
     };
     ChiusureComponent.prototype.getList = function () {
         var _this = this;
         // console.log('usr -->' + JSON.stringify(this.usr));
-        this._balanceService.getTodayBalanceList(this.usr.store._id)
+        this._balanceService
+            .getTodayBalanceList(this.usr.store._id)
             .then(function (balance) {
             _this.balance = balance;
             _this.lastBalance = balance[0];
         })
             .catch(function (err) { return console.log(err); });
         var oDate = new Date();
-        oDate.setMinutes(0);
-        oDate.setSeconds(0);
-        if (this.lastBalance) {
-            switch (this.lastBalance.value) {
-                case 25:
-                    oDate.setHours(16);
-                    break;
-                case 50:
-                    oDate.setHours(20);
-                    break;
-                case 75:
-                    oDate.setHours(24);
-                    break;
-                case 100:
-                    oDate.setDate(oDate.getDate() + 1);
-                    oDate.setHours(12);
-                    oDate.setMinutes(0);
-                    oDate.setSeconds(0);
-                    break;
-                default:
-                    oDate.setHours(12);
-                    this.future = oDate;
-                    break;
+        if (oDate > this._nextDay) {
+            oDate.setHours(12);
+            if (oDate > this._pranzo) {
+                oDate.setHours(16);
             }
-            this.future = oDate;
+            else if (oDate > this._pomeriggio) {
+                oDate.setHours(20);
+            }
+            else if (oDate > this._sera) {
+                oDate.setHours(24);
+            }
         }
         else {
-            oDate.setHours(12);
-            this.future = oDate;
+            if (oDate > this._chiusura) {
+                this.isChiusura = true;
+            }
         }
+        oDate.setMinutes(0);
+        oDate.setSeconds(0);
+        this.future = oDate;
+        /* if (this.lastBalance) {
+    
+          switch (this.lastBalance.value) {
+            case 25:
+              oDate.setHours(16);
+              break;
+            case 50:
+              oDate.setHours(20);
+              break;
+            case 75:
+              oDate.setHours(24);
+              break;
+            case 100:
+              oDate.setDate(oDate.getDate() + 1);
+              oDate.setHours(12);
+              oDate.setMinutes(0);
+              oDate.setSeconds(0);
+              break;
+            default:
+    
+              oDate.setHours(12);
+    
+              this.future = oDate;
+              break;
+          }
+          this.future = oDate;
+        } else {
+          oDate.setHours(12);
+    
+          this.future = oDate;
+        } */
     };
     ChiusureComponent.prototype.getPrevCapital = function () {
         var _this = this;
         var date = new Date();
         date.setDate(date.getDate() - 1);
-        this._balanceService.getBalanceList(this.usr.store._id, date)
+        this._balanceService
+            .getBalanceList(this.usr.store._id, date)
             .then(function (balance) {
             var tmp = balance[0];
             if (tmp) {
@@ -913,7 +957,8 @@ var ChiusureComponent = (function () {
             if (result) {
                 var tmpBal = _this.editDialog.componentInstance.balanceObj;
                 console.log('opeEditDialog result: ' + result);
-                _this._balanceService.addBalance(tmpBal)
+                _this._balanceService
+                    .addBalance(tmpBal)
                     .then(function (value) { return _this.getList(); })
                     .catch(function (err) {
                     console.log(err.message);
@@ -955,11 +1000,7 @@ var ChiusureComponent = (function () {
         */
         if (minutes > -30) {
         }
-        return [
-            hours + 'h',
-            minutes + 'm',
-            seconds + 's'
-        ].join(' ');
+        return [hours + 'h', minutes + 'm', seconds + 's'].join(' ');
     };
     return ChiusureComponent;
 }());
