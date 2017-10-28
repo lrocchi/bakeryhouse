@@ -17,7 +17,7 @@
 
 
     <!-- <mat-form-field *ngIf="tmpCategory=='Food' || tmpCategory=='Delivery' || tmpCategory=='Ticket'"> -->
-    <mat-form-field class="example-full-width" *ngIf="tmpCategory!='Manutenzione' && tmpCategory!='Varie'">
+    <mat-form-field class="example-full-width" *ngIf="tmpCategory!='Manutenzione' && tmpCategory!='Varie' && tmpCategory!='Stipendi'">
       <mat-select placeholder="Spesa" [(ngModel)]="spesa.tipo" name="tipo" [required]="true" (change)="setDescription()">
         <mat-option *ngFor="let types of costTypes" [value]="types">
           {{types.subCategory}}
@@ -27,7 +27,7 @@
 
 
 
-    <mat-form-field class="example-full-width" *ngIf="tmpCategory=='Manutenzione' || tmpCategory=='Varie'">
+    <mat-form-field class="example-full-width" *ngIf="tmpCategory=='Manutenzione' || tmpCategory=='Varie' || tmpCategory=='Stipendi'">
       <input matInput placeholder="Spesa" [(ngModel)]="spesa.descrizione" name="descrizione" [required]="true">
     </mat-form-field>
 

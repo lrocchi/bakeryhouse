@@ -47,7 +47,7 @@ export class SpeseNewComponent implements OnInit {
     this._spesaService.getSubTypeList(this.tmpCategory)
       .then(costType => {
         this.costTypes = costType;
-        if ((this.tmpCategory === 'Manutenzione') || (this.tmpCategory === 'Varie')) {
+        if ((this.tmpCategory === 'Manutenzione') || (this.tmpCategory === 'Varie') || (this.tmpCategory === 'Stipendi')) {
           console.log('tmpCategory=' + this.tmpCategory);
           console.log(JSON.stringify(costType));
 
