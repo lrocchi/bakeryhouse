@@ -4,7 +4,7 @@
   <mat-card-header>
 
     <h3 *ngIf="diff>0" style="float:left; max-width:50%">Prossimo resoconto tra <p>{{timerMessage}} ({{diff}})</p></h3>
-    <h3 *ngIf="diff<0" style="float:left; max-width:50%; color: red" >Resoconto in ritardo di {{timerMessage}}  ({{isChiusura}})</h3>
+    <h3 *ngIf="diff<0" style="float:left; max-width:50%; color: red" >Resoconto in ritardo di {{timerMessage}}</h3>
     <span class="span-fill-remaining"></span>
     <div style="float:right;" class="ProceedContainer ng-scope"><button class="btn BKHBrandedButton Ccm-Button-Primary" (click)="openEditDialog()" *ngIf="lastBalance?.type!=='Chiusura'">Aggiungi</button></div>
   </mat-card-header>

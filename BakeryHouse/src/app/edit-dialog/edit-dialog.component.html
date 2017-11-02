@@ -44,7 +44,8 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput [(ngModel)]="userObj.surname" placeholder="Cognome" autocomplete="off" #surname="ngModel" name="surname" required>
+        <input matInput [(ngModel)]="userObj.surname" placeholder="Cognome" autocomplete="off" #surname="ngModel" name="surname"
+          required>
       </mat-form-field>
 
       <mat-form-field>
@@ -61,7 +62,7 @@
         <input matInput [(ngModel)]="userObj.email" placeholder="Email" autocomplete="off" #email="ngModel" name="email" required>
       </mat-form-field>
 
-      <div >
+      <div>
         <mat-select placeholder="Ruolo" [(ngModel)]="userObj.ruolo" #ruolo="ngModel" name="role" required>
           <mat-option *ngFor="let ruolo of roles | keys" value="ruolo.value">
             {{ruolo.value}}
@@ -69,7 +70,7 @@
         </mat-select>
       </div>
       <span></span>
-      <div >
+      <div>
         <mat-select placeholder="Punto Vendita" [(ngModel)]="userObj.store._id" #store="ngModel" name="store" required>
           <mat-option *ngFor="let store of stores" value="store._id">{{store.nome}}</mat-option>
         </mat-select>
@@ -89,35 +90,70 @@
 <div *ngIf="balanceObj != null">
   <form name="form" (ngSubmit)="f.form.valid" novalidate>
     <div mat-dialog-content>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Calcolatrice
+          </mat-panel-title>
+          <mat-panel-description>
+            Inserisci valori per banconote
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <input matInput type="number" [(ngModel)]="balanceObj.cassa" placeholder="Cassa" autocomplete="off" #cassa="ngModel" name="cassa"
-          required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="number" [(ngModel)]="balanceObj.pos" placeholder="Pos" autocomplete="off" #pos="ngModel" name="pos"
-          required>
-      </mat-form-field>
+        <div>
+          <mat-form-field *ngFor="let item of vItemCurrency">
+            <input matInput type="number" placeholder="{{item.multiplier | currency:'EUR':'symbol-narrow':'1.0-2'}}" autocomplete="off"
+              [(ngModel)]="item.value" (change)="calculateSum()" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="number" [(ngModel)]="balanceObj.ticket" placeholder="Ticket" autocomplete="off" #ticket="ngModel" name="ticket"
-          required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="number" [(ngModel)]="balanceObj.flash" placeholder="Flash" autocomplete="off" #ticket="ngModel" name="flash"
-          required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="number" [(ngModel)]="balanceObj.riserva" placeholder="Riserva Monete" autocomplete="off" #ticket="ngModel" name="riserva"
-          required>
-      </mat-form-field>
+        </div>
+      </mat-expansion-panel>
 
+      <mat-card>
+        <mat-card-title>Resoconto</mat-card-title>
+        <mat-card-content>
+          <div>
+            <mat-form-field>
+              <input matInput type="number" [(ngModel)]="balanceObj.cassa" placeholder="Cassa" autocomplete="off" #cassa="ngModel" name="cassa"
+                required>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="number" [(ngModel)]="balanceObj.pos" placeholder="Pos" autocomplete="off" #pos="ngModel" name="pos"
+                required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput type="number" [(ngModel)]="balanceObj.ticket" placeholder="Ticket" autocomplete="off" #ticket="ngModel" name="ticket"
+                required>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="number" [(ngModel)]="balanceObj.flash" placeholder="Flash" autocomplete="off" #flash="ngModel" name="flash"
+                required>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <input matInput type="number" [(ngModel)]="balanceObj.riserva" placeholder="Riserva Monete" autocomplete="off" #riserva="ngModel"
+                name="riserva">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="number" [(ngModel)]="balanceObj.preconti" placeholder="Preconti" autocomplete="off" #preconti="ngModel"
+                name="preconti">
+            </mat-form-field>
+            <!-- Non deve comparire nella Chiusura -->
+            <mat-form-field>
+              <input matInput type="number" [(ngModel)]="balanceObj.tavoliAperti" placeholder="Tavoli Aperti" autocomplete="off" #tavoliAperti="ngModel"
+                name="tavoliAperti">
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
   </form>
-</div>
 
 
-<div mat-dialog-actions>
-  <button mat-button style="color: #fff;background-color: #7fa372;" (click)="dialogRef.close(true)">Confermo</button>
-  <button mat-button (click)="dialogRef.close(false)">Annulla</button>
-</div>
+
+  <div mat-dialog-actions>
+    <button mat-button style="color: #fff;background-color: #7fa372;" (click)="dialogRef.close(true)">Confermo</button>
+    <button mat-button (click)="dialogRef.close(false)">Annulla</button>
+  </div>

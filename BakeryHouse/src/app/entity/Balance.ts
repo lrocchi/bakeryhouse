@@ -11,15 +11,17 @@ export class Balance {
   public user: User;
   public store: Store;
 
-  public cassa: number;
-  public pos: number;
-  public ticket: number;
-  public memoCredit: number;
+
 
   public prevCapital: number;
   public capital: number;
   public flash: number;
   public riserva: number;
+  public preconti: number;
+  public tavoliAperti: number;
+
+  // tslint:disable-next-line:one-line
+  constructor(public cassa: number = 0, public pos: number = 0, public ticket: number = 0, public memoCredit: number = 0){}
 
 
 

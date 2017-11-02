@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule, MatButtonModule, MatIconModule } from '@angular/material/';
 import { MatMenu, MatProgressSpinnerModule, MatTabsModule } from '@angular/material';
 import { MatMenuModule, MatIconRegistry, MatDialogModule, MatDialogRef, MatSelectModule} from '@angular/material';
-import { MatFormFieldModule, MatInputModule, MatCardModule, MatCheckboxModule} from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatCardModule, MatCheckboxModule, MatExpansionModule} from '@angular/material';
 import { SpeseListComponent } from './spese/spese-list/spese-list.component';
 import { SpeseNewComponent } from './spese/spese-new/spese-new.component';
 import { CdkTableModule } from '@angular/cdk/table';
@@ -71,6 +71,7 @@ import { LogoutComponent } from 'app/logout.component';
     MatCheckboxModule,
     MatCardModule,
     MatFormFieldModule,
+    MatExpansionModule,
     BrowserAnimationsModule,
 
 
