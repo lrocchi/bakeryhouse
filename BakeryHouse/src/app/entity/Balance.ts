@@ -10,9 +10,9 @@ export class Balance {
   public giorno: string = Date.now().toString();
   public user: User;
   public store: Store;
-
-
-
+  public pos: number;
+  public ticket;
+  public memoCredit: number;
   public prevCapital: number;
   public capital: number;
   public flash: number;
@@ -21,7 +21,7 @@ export class Balance {
   public tavoliAperti: number;
 
   // tslint:disable-next-line:one-line
-  constructor(public cassa: number = 0, public pos: number = 0, public ticket: number = 0, public memoCredit: number = 0){}
+  constructor(public cassa: number = 0){}
 
 
 
