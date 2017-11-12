@@ -184,9 +184,9 @@ var BalanceService = (function () {
     function BalanceService(_http) {
         this._http = _http;
     }
-    BalanceService.prototype.getTodayBalanceList = function (id_store) {
-        var date = new Date();
-        return this._http.get('api/balance/' + date.getUTCSeconds() + '/' + id_store).map(function (data) { return data.json(); }).toPromise();
+    BalanceService.prototype.getTodayBalanceList = function (store) {
+        var date = new Date(store.ref_date);
+        return this._http.get('api/balance/' + date.getUTCSeconds() + '/' + store._id).map(function (data) { return data.json(); }).toPromise();
     };
     BalanceService.prototype.getBalanceList = function (id_store, date) {
         return this._http.get('api/balance/' + date.getUTCSeconds() + '/' + id_store).map(function (data) { return data.json(); }).toPromise();
@@ -857,7 +857,7 @@ var ChiusureComponent = (function () {
         var _this = this;
         // console.log('usr -->' + JSON.stringify(this.usr));
         this._balanceService
-            .getTodayBalanceList(this.usr.store._id)
+            .getTodayBalanceList(this.usr.store)
             .then(function (balance) {
             _this.balance = balance;
             _this.lastBalance = balance[0];
@@ -939,7 +939,7 @@ var ChiusureComponent = (function () {
             disableClose: false
         });
         var balance = new __WEBPACK_IMPORTED_MODULE_2_app_entity_Balance__["a" /* Balance */]();
-        balance.giorno = new Date().toString();
+        balance.ref_date = this.usr.store.ref_date; // new Date().toString();
         balance.user = this.usr;
         balance.store = this.usr.store;
         /* if (this.lastBalance) {
@@ -1178,7 +1178,7 @@ var Balance = (function () {
     function Balance(cassa) {
         if (cassa === void 0) { cassa = 0; }
         this.cassa = cassa;
-        this.giorno = Date.now().toString();
+        this.create_on = Date.now().toString();
     }
     return Balance;
 }());

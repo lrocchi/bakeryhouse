@@ -95,7 +95,7 @@ export class ChiusureComponent implements OnInit {
   getList() {
     // console.log('usr -->' + JSON.stringify(this.usr));
     this._balanceService
-      .getTodayBalanceList(this.usr.store._id)
+      .getTodayBalanceList(this.usr.store)
       .then(balance => {
         this.balance = balance;
         this.lastBalance = balance[0];
@@ -178,7 +178,7 @@ export class ChiusureComponent implements OnInit {
     });
 
     const balance = new Balance();
-    balance.giorno = new Date().toString();
+    balance.ref_date = this.usr.store.ref_date; // new Date().toString();
     balance.user = this.usr;
     balance.store = this.usr.store;
     /* if (this.lastBalance) {

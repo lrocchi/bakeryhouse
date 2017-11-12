@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Balance } from 'app/entity/Balance';
+import { Store } from 'app/entity/store';
 
 @Injectable()
 export class BalanceService {
@@ -8,10 +9,10 @@ export class BalanceService {
   constructor(private _http: Http) { }
 
 
-  public getTodayBalanceList(id_store: string) {
-    const date = new Date();
+  public getTodayBalanceList(store: Store) {
+    const date = new Date(store.ref_date);
 
-    return this._http.get('api/balance/' + date.getUTCSeconds() + '/' + id_store).map(data => data.json()).toPromise();
+    return this._http.get('api/balance/' + date.getUTCSeconds() + '/' + store._id).map(data => data.json()).toPromise();
 
   }
 

@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var config = require('../config/config')
 var Balance = require('../models/Balance');
-
+var Store = require("../models/Store");
 
 // GET today balances by id_store, ordered by date descending so it is possible get only the last one
 /* router.get('/today/:id_store', function(req, res, next){
@@ -23,13 +23,13 @@ var Balance = require('../models/Balance');
     var today = new Date();
     today.setUTCSeconds(req.params.epoch);
     Balance.find({
-         date: { $gte : new Date(today.getFullYear(), today.getMonth(), today.getDate())}
-       }).where('store').equals(req.params.id_store).sort({date: 'desc'}).populate('user').populate('store').exec(function(err, balanceDocs){
+         ref_date: { $gte : new Date(today.getFullYear(), today.getMonth(), today.getDate())}
+       }).where('store').equals(req.params.id_store).sort({value: 'desc'}).populate('user').populate('store').exec(function(err, balanceDocs){
                if(err){ 
                  console.log(err);
                    res.send(err);
                }
-               res.json(balanceDocs);
+                res.json(balanceDocs);
        });
    });
 
@@ -37,10 +37,19 @@ var Balance = require('../models/Balance');
 
    router.post('/', function(req, res, next ) {
     
-    
+    var storeObj = Store.findById(req.body.store._id, function(err, storeData) {
+      if (err) {
+        console.log(err);
+        return null;
+      }
+      // console.log("STORE:" + JSON.stringify(storeData));
+      var balance = req.body;
+      balance.store = storeData;
+      balance.ref_date = storeData.ref_date;
+      // console.log("BALANCE:" + JSON.stringify(balance));
       // Attempt to save the spesa
-      Balance.create(req.body,function(err, data) {
-        console.log("REST:" + JSON.stringify(data));
+      Balance.create(balance,function(err, data) {
+        // console.log("REST:" + JSON.stringify(data));
         if (err) {
           console.log(err);
           return res.json({
@@ -55,6 +64,30 @@ var Balance = require('../models/Balance');
           data: data
         });
       });
+      console.log("balance.type:" + balance.type);
+      if(balance.type === 'Chiusura') {
+        var myDate = new Date(balance.ref_date);
+        var newRefDate = new Date(myDate.setTime( myDate.getTime() + 1 * 86400000 ));
+        //storeData.ref_date = newRefDate;
+        
+        Store.findById(storeData._id, function (err, data) {
+          if (err) {
+            console.log(err);
+           
+          }
+          data.ref_date = newRefDate;
+          // console.log("NEW STORE:" + JSON.stringify(data));
+          data.save();
+          /* res.json({
+            success: true,
+            message: 'Punto vendita aggiunto con successo',
+            data: data
+          }); */
+        });
+      }
+
+    });
+      
     // }
   });
 

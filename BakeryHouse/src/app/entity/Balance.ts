@@ -7,7 +7,8 @@ export class Balance {
   public _id: string;
   public type: string;
   public value: number;
-  public giorno: string = Date.now().toString();
+  public create_on: string = Date.now().toString();
+  public ref_date: string ;
   public user: User;
   public store: Store;
   public pos: number;

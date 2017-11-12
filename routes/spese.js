@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require("mongoose");
 var config = require("../config/config");
 var Spese = require("../models/Cost");
-var Store = require("../models/Store")
+var Store = require("../models/Store");
 var CostType = require("../models/CostType");
 
 var CommonUtils = require("../utils/common");
@@ -21,18 +21,6 @@ router.get("/", function(req, res, next) {
       return res.json(speseDocs);
     }
   });
-  /*  if (req.query) {
-     Spese.find( req.query, (err, speseDocs) => {
-       console.log(speseDocs);
-       return res.json(speseDocs);
-     });
-   } else {
-     Spese.find({}, (err, speseDocs) => {
-       console.log(speseDocs);
-       return res.json(speseDocs);
-     });
- 
-   } */
 });
 
 // GET today costs by id_store
@@ -41,22 +29,30 @@ router.get("/today", function(req, res, next) {
   *Il giorno deve essere preso dal campo "giorno di riferimento dello store"
   */
   var today = new Date();
+  var storeObj = Store.findById(req.query.store, function(err, storeData) {
+    if (err) {
+      console.log(err);
+      return null;
+    }
+    // var refDate = storeData.ref_date;
+    Spese.find()
+      .where("store")
+      .equals(req.query.store)
+      .where("ref_date")
+      // .gte(new Date(refDate.getFullYear(), refDate.getMonth(), refDate.getDate()))
+      .gte(storeData.ref_date)
+      .populate("utente")
+      .populate("tipo")
+      .populate("store")
+      .exec(function(err, speseDocs) {
+        if (err) {
+          console.log(err);
+          res.send(err);
+        }
+        res.json(speseDocs);
+      });
+  });
   // console.log("SPESE Request Query:" + JSON.stringify(req.query));
-  Spese.find()
-    .where("store")
-    .equals(req.query.store)
-    .where("create_on")
-    .gte(new Date(today.getFullYear(), today.getMonth(), today.getDate()))
-    .populate("utente")
-    .populate("tipo")
-    .populate("store")
-    .exec(function(err, speseDocs) {
-      if (err) {
-        console.log(err);
-        res.send(err);
-      }
-      res.json(speseDocs);
-    });
 });
 
 router.post("/", function(req, res, next) {
@@ -69,14 +65,12 @@ router.post("/", function(req, res, next) {
     // console.log("SPESA  DA AGGIUNGERE: " + JSON.stringify(req.body));
     // Attempt to save the spesa
     var spesa = req.body;
-    var storeObj = Store.findById(spesa.store._id,function(err, storeData){
-      if(err){
+    var storeObj = Store.findById(spesa.store._id, function(err, storeData) {
+      if (err) {
         console.log(err);
         return null;
       }
-      console.log("STORE:" + storeData.ref_date)
       spesa.ref_date = storeData.ref_date;
-      console.log("SPESA CON REF_DATE = " + JSON.stringify(spesa));
       Spese.create(spesa, function(err, data) {
         if (err) {
           console.log(err);
@@ -93,7 +87,6 @@ router.post("/", function(req, res, next) {
         });
       });
     });
-    
   }
 });
 
