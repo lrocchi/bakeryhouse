@@ -10,6 +10,9 @@
 └───────────────────────── second (0 - 59, OPTIONAL)
  */
 
+var querystring = require('querystring');
+var http = require('http');
+
 var schedule = require("node-schedule");
 var nodemailer = require("nodemailer");
 var Client = require("node-rest-client").Client;
@@ -19,17 +22,18 @@ var client = new Client();
 var BalanceSchedule = new Object();
 var ip = process.env.IP || "http://localhost";
 var port = process.env.PORT || 3000;
-var adress = ip + ":" + port;
+var address = ip + ":" + port;
 
 BalanceSchedule.start = function() {
-  var schedPranzo = schedule.scheduleJob("* 30 12 * * *", function() {
+  var schedPranzo = schedule.scheduleJob("* 0 10 * * *", function() {
     console.log("The answer to life, the universe, and everything!");
     var stores = [];
-    client.get(adress + "/api/stores/active", function(data, response) {
+    client.get(address + "/api/stores/active", function(data, response) {
       stores = data;
-      date = new Date().getUTCDate();
+      today = new Date();
+      today.setUTCHours(0, 0, 0, 1);
       stores.forEach(function(element) {
-        client.get(
+        /* client.get(
           adress + "/api/balance/" + date + "/" + element._id,
           function(data, response) {
             if (Object.keys(data).length < 1) {
@@ -43,110 +47,70 @@ BalanceSchedule.start = function() {
               });
             }
           }
-        );
+        ); */
+        element.ref_date = today;
+        /* var args = {
+          path: { id: element._id },
+          data: JSON.stringify(element)
+        };
+
+        client.put(address + "/api/stores/${id}", args, function(data, response) {
+          // parsed response body as js object
+          console.log(data);
+          // raw response
+          console.log(response);
+        }); */
+
+        var endpoint = "/api/stores/" + element._id;
+        BalanceSchedule.performRequest(endpoint, 'PUT', element,function(dataSuccess) {
+          console.log("Aggiornato giorno di riferimento nello store " + element.nome);
+        });
+
       });
     });
   });
+};
 
-  var schedPomeriggio = schedule.scheduleJob("* 30 16 * * *", function() {
-    console.log("The answer to life, the universe, and everything!");
-    var stores = [];
-    client.get(adress + "/api/stores/active", function(data, response) {
-      stores = data;
-      date = new Date().getUTCDate();
-      stores.forEach(function(element) {
-        client.get(
-          adress + "/api/balance/" + date + "/" + element._id,
-          function(data, response) {
-            if (Object.keys(data).length < 2) {
-                
-              mailOptions.text =
-                "Non è stato inserito il bilancio del pomeriggio!";
-              transporter.sendMail(mailOptions, function(error, info) {
-                if (error) {
-                  console.log(error);
-                } else {
-                  console.log("Email sent: " + info.response);
-                }
-              });
-            }
-          }
-        );
-      });
-    });
-  });
 
-  var schedPomeriggio = schedule.scheduleJob("* 30 20 * * *", function() {
-    console.log("The answer to life, the universe, and everything!");
-    var stores = [];
-    client.get(adress + "/api/stores/active", function(data, response) {
-      stores = data;
-      date = new Date().getUTCDate();
-      stores.forEach(function(element) {
-        client.get(
-          adress + "/api/balance/" + date + "/" + element._id,
-          function(data, response) {
-            if (Object.keys(data).length < 3) {
-              mailOptions.text = "Non è stato inserito il bilancio di cena!";
-              transporter.sendMail(mailOptions, function(error, info) {
-                if (error) {
-                  console.log(error);
-                } else {
-                  console.log("Email sent: " + info.response);
-                }
-              });
-            }
-          }
-        );
-      });
-    });
-  });
-
-  var schedChiusura = schedule.scheduleJob("* 30 04 * * *", function() {
-    console.log("The answer to life, the universe, and everything!");
-    var stores = [];
-    client.get(adress + "/api/stores/active", function(data, response) {
-      stores = data;
-      date = new Date();
-      date.setDate(d.getDate() - 1);
-      date.getUTCDate();
-      stores.forEach(function(element) {
-        client.get(
-          adress + "/api/balance/" + date + "/" + element._id,
-          function(data, response) {
-            if (Object.keys(data).length < 3) {
-              mailOptions.text = "Non è stato inserita la chiusura!";
-              transporter.sendMail(mailOptions, function(error, info) {
-                if (error) {
-                  console.log(error);
-                } else {
-                  console.log("Email sent: " + info.response);
-                }
-              });
-            }
-          }
-        );
-      });
-    });
-  });
-
-  var transporter = nodemailer.createTransport({
-    host: "authsmtp.securemail.pro",
-    port: 465,
-    secure: true, // true for 465, false for other ports
-    auth: {
-      user: "app_bakery@lrocchi.it",
-      pass: "Zaq12wsx$1234"
-    }
-  });
-
-  var mailOptions = {
-    from: "app_bakery@lrocchi.it",
-    to: "stefano.rocchi@bakeryhouse.it",
-    subject: "Verifica inserimento bilanci e chiusure",
-    text:
-      "Non è stato inserito il bilancio o la chiusura all'orario prestabilito!"
+BalanceSchedule.performRequest = function(endpoint, method, data, success) {
+  var dataString = JSON.stringify(data);
+  var headers = {};
+  
+  if (method == 'GET') {
+    endpoint += '?' + querystring.stringify(data);
+  }
+  else {
+    headers = {
+      'Content-Type': 'application/json',
+      'Content-Length': dataString.length
+    };
+  }
+  var options = {
+    host: process.env.IP || 'localhost',
+    path: endpoint,
+    port: 3000,
+    method: method,
+    headers: headers
   };
+
+  var req = http.request(options, function(res) {
+    res.setEncoding('utf-8');
+
+    var responseString = '';
+
+    res.on('data', function(data) {
+      responseString += data;
+    });
+
+    res.on('end', function() {
+      console.log(responseString);
+      var responseObject = JSON.parse(responseString);
+      success(responseObject);
+    });
+  });
+
+  req.write(dataString);
+  req.end();
 };
 
 module.exports = BalanceSchedule;

@@ -6,5 +6,6 @@ export class Store {
   indirizzo: string;
   piva: string;
   active = true;
+  ref_date: string;
 
 }

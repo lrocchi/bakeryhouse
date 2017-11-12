@@ -247,12 +247,13 @@ var SpesaService = (function () {
         /* today.setMinutes(0);
         today.setSeconds(1) */
         var stringToday = today.toISOString();
-        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json' });
-        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: headers,
-            params: {
-                'store': id_store,
-            } });
-        return this._http.get('api/spese/today/', options).map(function (data) { return data.json(); }).toPromise();
+        var myHeaders = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
+        var myParams = new URLSearchParams();
+        // myParams.set('store', id_store);
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: myHeaders, params: myParams });
+        var sUrl = 'api/spese/today';
+        sUrl += '?store=' + id_store;
+        return this._http.get(sUrl, options).map(function (data) { return data.json(); }).toPromise();
         // return this._http.get('api/spese?store=' + id_store + '&create_on={ "$gte" : ' + stringToday + ' }')
         // return this._http.get('api/spese', options).map(data => data.json()).toPromise();
     };
@@ -673,19 +674,21 @@ var DemoMaterialModule = (function () {
 DemoMaterialModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["NgModule"])({
         exports: [
-            __WEBPACK_IMPORTED_MODULE_12__angular_material___["q" /* MatToolbarModule */],
+            __WEBPACK_IMPORTED_MODULE_12__angular_material___["s" /* MatToolbarModule */],
             __WEBPACK_IMPORTED_MODULE_12__angular_material___["b" /* MatButtonModule */],
-            __WEBPACK_IMPORTED_MODULE_12__angular_material___["j" /* MatIconModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["m" /* MatMenuModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["f" /* MatDialogModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["n" /* MatProgressSpinnerModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["p" /* MatTabsModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["o" /* MatSelectModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["l" /* MatInputModule */],
+            __WEBPACK_IMPORTED_MODULE_12__angular_material___["k" /* MatIconModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["n" /* MatMenuModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["g" /* MatDialogModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["o" /* MatProgressSpinnerModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["r" /* MatTabsModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["p" /* MatSelectModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["m" /* MatInputModule */],
             __WEBPACK_IMPORTED_MODULE_13__angular_material__["d" /* MatCheckboxModule */],
             __WEBPACK_IMPORTED_MODULE_13__angular_material__["c" /* MatCardModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["i" /* MatFormFieldModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["h" /* MatExpansionModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["j" /* MatFormFieldModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["i" /* MatExpansionModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["q" /* MatSidenavModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["e" /* MatChipsModule */],
             __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
         ],
         declarations: []
@@ -731,7 +734,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_10__angular_http__["HttpModule"],
             DemoMaterialModule,
             __WEBPACK_IMPORTED_MODULE_16__angular_cdk_table__["m" /* CdkTableModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["f" /* MatDialogModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["g" /* MatDialogModule */],
             __WEBPACK_IMPORTED_MODULE_18_app_app_routes_component__["a" /* AppRoutingModule */],
             __WEBPACK_IMPORTED_MODULE_11__angular_forms__["ReactiveFormsModule"],
             __WEBPACK_IMPORTED_MODULE_34_devextreme_angular__["DxChartModule"],
@@ -749,7 +752,7 @@ AppModule = __decorate([
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]],
         entryComponents: [__WEBPACK_IMPORTED_MODULE_15__spese_spese_new_spese_new_component__["a" /* SpeseNewComponent */], __WEBPACK_IMPORTED_MODULE_20__management_gestione_spese_cost_type_add_cost_type_add_component__["a" /* CostTypeAddComponent */], __WEBPACK_IMPORTED_MODULE_26__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */], __WEBPACK_IMPORTED_MODULE_30__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */], __WEBPACK_IMPORTED_MODULE_22__confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], __WEBPACK_IMPORTED_MODULE_28__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */]]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_13__angular_material__["k" /* MatIconRegistry */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__angular_material__["k" /* MatIconRegistry */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_13__angular_material__["l" /* MatIconRegistry */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__angular_material__["l" /* MatIconRegistry */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _b || Object])
 ], AppModule);
 
 var _a, _b;
@@ -1011,7 +1014,7 @@ ChiusureComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/chiusure/chiusure.component.html"),
         styles: [__webpack_require__("../../../../../src/app/chiusure/chiusure.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["e" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["e" /* MatDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["f" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["f" /* MatDialog */]) === "function" && _b || Object])
 ], ChiusureComponent);
 
 var _a, _b;
@@ -1057,7 +1060,7 @@ ConfirmationDialog = __decorate([
     })
     // tslint:disable-next-line:component-class-suffix
     ,
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["g" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["g" /* MatDialogRef */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialogRef */]) === "function" && _a || Object])
 ], ConfirmationDialog);
 
 var _a;
@@ -1156,7 +1159,7 @@ EditDialogComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.css")]
     }),
     __param(2, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MAT_DIALOG_DATA */])),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["g" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["g" /* MatDialogRef */]) === "function" && _b || Object, Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialogRef */]) === "function" && _b || Object, Object])
 ], EditDialogComponent);
 
 var _a, _b;
@@ -1703,7 +1706,7 @@ CostTypeAddComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-spese/cost-type-add/cost-type-add.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-spese/cost-type-add/cost-type-add.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["g" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["g" /* MatDialogRef */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatDialogRef */]) === "function" && _b || Object])
 ], CostTypeAddComponent);
 
 var _a, _b;
@@ -1840,7 +1843,7 @@ GestioneSpeseComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-spese/gestione-spese.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-spese/gestione-spese.component.scss")]
     }),
-    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatDialog */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatDialog */]) === "function" && _d || Object])
 ], GestioneSpeseComponent);
 
 var _a, _b, _c, _d;
@@ -1972,7 +1975,7 @@ GestioneStoreComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-store/gestione-store.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-store/gestione-store.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["e" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["e" /* MatDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["f" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["f" /* MatDialog */]) === "function" && _b || Object])
 ], GestioneStoreComponent);
 
 var _a, _b;
@@ -2045,7 +2048,7 @@ StoreAddComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["g" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["g" /* MatDialogRef */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatDialogRef */]) === "function" && _a || Object])
 ], StoreAddComponent);
 
 var _a;
@@ -2192,7 +2195,7 @@ GestioneUtenteComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["e" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["e" /* MatDialog */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["f" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["f" /* MatDialog */]) === "function" && _c || Object])
 ], GestioneUtenteComponent);
 
 var _a, _b, _c;
@@ -2274,7 +2277,7 @@ UserAddComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["g" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["g" /* MatDialogRef */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatDialogRef */]) === "function" && _b || Object])
 ], UserAddComponent);
 
 var _a, _b;
@@ -2350,7 +2353,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".jqx-layout-group-auto-hide-content-vertical {\r\n  width: 200px;\r\n}\r\n\r\n.example-container {\r\n  width: 500px;\r\n  height: 300px;\r\n  border: 1px solid rgba(0, 0, 0, 0.5);\r\n}\r\n\r\n.example-sidenav-content {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  height: 100%;\r\n  -webkit-box-align: center;\r\n      -ms-flex-align: center;\r\n          align-items: center;\r\n  -webkit-box-pack: center;\r\n      -ms-flex-pack: center;\r\n          justify-content: center;\r\n}\r\n\r\n.example-sidenav {\r\n  padding: 20px;\r\n}\r\n", ""]);
+exports.push([module.i, "html, body, material-app, mat-sidenav-container, .my-content {\r\n  margin: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n", ""]);
 
 // exports
 
@@ -2363,7 +2366,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/report/general-report.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<mat-sidenav-container class=\"example-container\">\n    <mat-sidenav #sidenav class=\"example-sidenav\">\n        <a mat-menu-item routerLink=\"/report\" routerLinkActive=\"active\">\n          <mat-icon class=\"md-18|md-24|md-36|md-48\">trending_up</mat-icon>\n          Report\n        </a>\n    </mat-sidenav>\n\n\n    <div fxLayout=\"row\" flexLayout.xs=\"column\" fxLayoutAlign=\"start start\">\n\n          <div fxLayout fxFlex fxFlexOrder.xs=\"1\">\n            <dx-chart [dataSource]=\"costList\">\n              <dxi-series argumentField=\"descrizione\" valueField=\"valore\" type=\"bar\"></dxi-series>\n            </dx-chart>\n          </div>\n          <div fxLayout fxFlex fxFlexOrder.xs=\"2\">\n            <dx-data-grid id=\"gridContainer\" [dataSource]=\"costList\" [columns]=\"['descrizione', 'valore','utente.surname', 'tipo.nome']\">\n            </dx-data-grid>\n          </div>\n\n        </div>\n        <div fxLayout=\"row\" flexLayout.xs=\"column\" fxLayoutAlign=\"start start\">\n          <div fxLayout fxFlex fxFlexOrder.xs=\"3\">\n            FFFFFFFFFFFF\n          </div>\n          <div fxLayout fxFlex fxFlexOrder.xs=\"4\">\n            <dx-chart [dataSource]=\"costList\">\n              <dxi-series argumentField=\"descrizione\" valueField=\"valore\" type=\"spline\"></dxi-series>\n            </dx-chart>\n          </div>\n\n        </div>\n\n\n    <div class=\"example-sidenav-content\">\n      <button type=\"button\" md-button (click)=\"sidenav.open()\">\n        Open sidenav\n      </button>\n    </div>\n\n  </mat-sidenav-container>\n"
+module.exports = "<mat-sidenav-container>\n  <mat-sidenav #sidenav mode=\"side\" opened=\"true\">\n    <mat-chip-list class=\"mat-chip-list-stacked\">\n      <mat-chip selected=\"true\">\n        Andamento Giornaliero\n      </mat-chip>\n      <mat-chip selected=\"true\">\n\n      </mat-chip>\n    </mat-chip-list>\n  </mat-sidenav>\n\n  <dx-chart [dataSource]=\"costList\">\n    <dxi-series argumentField=\"descrizione\" valueField=\"valore\" type=\"bar\"></dxi-series>\n  </dx-chart>\n</mat-sidenav-container>\n"
 
 /***/ }),
 
@@ -2408,7 +2411,8 @@ GeneralReportComponent = __decorate([
         selector: 'app-general-report',
         template: __webpack_require__("../../../../../src/app/report/general-report.component.html"),
         styles: [__webpack_require__("../../../../../src/app/report/general-report.component.css")],
-        encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None
+        encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
+        preserveWhitespaces: false,
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object])
 ], GeneralReportComponent);
@@ -2513,7 +2517,7 @@ SpeseListComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/spese/spese-list/spese-list.component.html"),
         styles: [__webpack_require__("../../../../../src/app/spese/spese-list/spese-list.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatDialog */]) === "function" && _b || Object])
 ], SpeseListComponent);
 
 var _a, _b;
@@ -2622,7 +2626,7 @@ SpeseNewComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/spese/spese-new/spese-new.component.css")]
     }),
     __param(2, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MAT_DIALOG_DATA */])),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["g" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["g" /* MatDialogRef */]) === "function" && _b || Object, Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialogRef */]) === "function" && _b || Object, Object])
 ], SpeseNewComponent);
 
 var _a, _b;
@@ -2739,7 +2743,7 @@ SpeseComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/spese/spese.component.html"),
         styles: [__webpack_require__("../../../../../src/app/spese/spese.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatDialog */]) === "function" && _b || Object])
 ], SpeseComponent);
 
 var _a, _b;

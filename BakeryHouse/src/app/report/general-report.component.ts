@@ -12,11 +12,14 @@ import CustomStore from 'devextreme/data/custom_store';
   selector: 'app-general-report',
   templateUrl: './general-report.component.html',
   styleUrls: ['./general-report.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
 })
 export class GeneralReportComponent implements OnInit {
   public costList: Array<Cost>;
 public costListJSON: string;
+
+
 
 
 constructor(  private _spesaService: SpesaService) { }

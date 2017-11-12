@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var costSchema = new mongoose.Schema({
     descrizione: {type: String, require: true},
     valore: {type: Number, require: true},
+    ref_date: {type: Date},
     create_on: {type: Date, default: Date.now},
     update_on: {type: Date, default: Date.now},
     utente: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

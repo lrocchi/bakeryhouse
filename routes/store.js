@@ -14,9 +14,9 @@ router.get('/', function (req, res) {
 
 // GET ONLY active Store
 router.get('/active', function (req, res, next) {
-  Store.where("active").equals(true).exec(function (err, costTypeDoc) {
-    console.log(costTypeDoc);
-    return res.json(costTypeDoc);
+  Store.where("active").equals(true).exec(function (err, storeDoc) {
+    // console.log(costTypeDoc);
+    return res.json(storeDoc);
   });
 });
 
@@ -48,6 +48,12 @@ router.post('/', function (req, res, next) {
       });
     });
   }
+});
+
+router.get('/:id', function (req, res) {
+  Store.findById( req.params.id, function (err, store) {
+    res.json(store);
+  });
 });
 
 router.put('/:id', function (req, res) {

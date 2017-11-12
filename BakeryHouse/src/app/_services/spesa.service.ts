@@ -37,15 +37,15 @@ export class SpesaService {
 
     const stringToday = today.toISOString();
 
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers,
-      params: {
-        'store' : id_store,
-        // 'create_on' : { '$gte' : { '$date': stringToday } }  }
-    } });
+    const myHeaders = new Headers({ 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
+    const myParams = new URLSearchParams();
+    // myParams.set('store', id_store);
+    const options = new RequestOptions({ headers: myHeaders,  params: myParams});
 
+    let sUrl = 'api/spese/today';
+    sUrl += '?store=' + id_store;
 
-    return this._http.get('api/spese/today/', options).map(data => data.json()).toPromise();
+    return this._http.get(sUrl, options).map(data => data.json()).toPromise();
     // return this._http.get('api/spese?store=' + id_store + '&create_on={ "$gte" : ' + stringToday + ' }')
     // return this._http.get('api/spese', options).map(data => data.json()).toPromise();
 

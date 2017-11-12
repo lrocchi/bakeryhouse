@@ -10,6 +10,7 @@ export class Cost {
   public utente: User;
   public tipo: CostType;
   public store: Store;
+  public ref_date: string;
 
   constructor(
     public descrizione: string = '',

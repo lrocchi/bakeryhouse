@@ -1,43 +1,16 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <mat-chip-list class="mat-chip-list-stacked">
+      <mat-chip selected="true">
+        Andamento Giornaliero
+      </mat-chip>
+      <mat-chip selected="true">
 
-<mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav class="example-sidenav">
-        <a mat-menu-item routerLink="/report" routerLinkActive="active">
-          <mat-icon class="md-18|md-24|md-36|md-48">trending_up</mat-icon>
-          Report
-        </a>
-    </mat-sidenav>
+      </mat-chip>
+    </mat-chip-list>
+  </mat-sidenav>
 
-
-    <div fxLayout="row" flexLayout.xs="column" fxLayoutAlign="start start">
-
-          <div fxLayout fxFlex fxFlexOrder.xs="1">
-            <dx-chart [dataSource]="costList">
-              <dxi-series argumentField="descrizione" valueField="valore" type="bar"></dxi-series>
-            </dx-chart>
-          </div>
-          <div fxLayout fxFlex fxFlexOrder.xs="2">
-            <dx-data-grid id="gridContainer" [dataSource]="costList" [columns]="['descrizione', 'valore','utente.surname', 'tipo.nome']">
-            </dx-data-grid>
-          </div>
-
-        </div>
-        <div fxLayout="row" flexLayout.xs="column" fxLayoutAlign="start start">
-          <div fxLayout fxFlex fxFlexOrder.xs="3">
-            FFFFFFFFFFFF
-          </div>
-          <div fxLayout fxFlex fxFlexOrder.xs="4">
-            <dx-chart [dataSource]="costList">
-              <dxi-series argumentField="descrizione" valueField="valore" type="spline"></dxi-series>
-            </dx-chart>
-          </div>
-
-        </div>
-
-
-    <div class="example-sidenav-content">
-      <button type="button" md-button (click)="sidenav.open()">
-        Open sidenav
-      </button>
-    </div>
-
-  </mat-sidenav-container>
+  <dx-chart [dataSource]="costList">
+    <dxi-series argumentField="descrizione" valueField="valore" type="bar"></dxi-series>
+  </dx-chart>
+</mat-sidenav-container>
