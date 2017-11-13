@@ -13,6 +13,8 @@
 var querystring = require('querystring');
 var http = require('http');
 
+
+
 var schedule = require("node-schedule");
 var nodemailer = require("nodemailer");
 var Client = require("node-rest-client").Client;
@@ -60,7 +62,7 @@ BalanceSchedule.start = function() {
           // raw response
           console.log(response);
         }); */
-
+        
         var endpoint = "/api/stores/" + element._id;
         BalanceSchedule.performRequest(endpoint, 'PUT', element,function(dataSuccess) {
           console.log("Aggiornato giorno di riferimento nello store " + element.nome);

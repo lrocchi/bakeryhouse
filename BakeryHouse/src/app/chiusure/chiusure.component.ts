@@ -155,8 +155,9 @@ export class ChiusureComponent implements OnInit {
   }
 
   getPrevCapital() {
-    const date = new Date();
-    date.setDate(date.getDate() - 1);
+    const myDate = new Date(this.usr.store.ref_date);
+    const date = new Date(myDate.setTime( myDate.getTime() - 1 * 86400000 ));
+
     this._balanceService
       .getBalanceList(this.usr.store._id, date)
       .then(balance => {

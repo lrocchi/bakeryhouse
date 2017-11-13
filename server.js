@@ -47,9 +47,12 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'BakeryHouse/dist/index.html'));
   });
 
- BalanceSchedule.start();
+ 
 
-app.listen(process.env.PORT || port, function(){
+var listener = app.listen(process.env.PORT || port, function(){
     console.log('Server started on port ' + port);
 })
 
+
+
+BalanceSchedule.start();
