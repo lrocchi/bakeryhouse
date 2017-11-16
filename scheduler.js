@@ -12,12 +12,16 @@
 
 var querystring = require('querystring');
 var http = require('http');
-
-
-
 var schedule = require("node-schedule");
 var nodemailer = require("nodemailer");
 var Client = require("node-rest-client").Client;
+var Logger = require('le_node');
+
+
+var log = new Logger({
+  token:'6c122f92-c9b1-48bb-8ea6-c92c72e4ece2'
+});
+
 
 var client = new Client();
 
@@ -29,6 +33,7 @@ var address = ip + ":" + port;
 BalanceSchedule.start = function() {
   var schedPranzo = schedule.scheduleJob("* 0 10 * * *", function() {
     console.log("The answer to life, the universe, and everything!");
+    log.info("Inizio batch");
     var stores = [];
     client.get(address + "/api/stores/active", function(data, response) {
       stores = data;
@@ -64,10 +69,16 @@ BalanceSchedule.start = function() {
         }); */
         
         var endpoint = "/api/stores/" + element._id;
-        BalanceSchedule.performRequest(endpoint, 'PUT', element,function(dataSuccess) {
-          console.log("Aggiornato giorno di riferimento nello store " + element.nome);
-        });
-
+        try {
+          BalanceSchedule.performRequest(endpoint, 'PUT', element,function(dataSuccess) {
+            console.log("Aggiornato giorno di riferimento nello store " + element.nome);
+          });
+          
+        } catch (error) {
+          log.err("ERRORE BATCH: " + error);
+        }
+        
+        log.info("BATCH Ultimato");
       });
     });
   });

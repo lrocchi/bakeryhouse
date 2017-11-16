@@ -1,0 +1,19 @@
+Aggiunto componente per Logentries, addon di Heroku
+
+npm install le_node --save
+
+Add the following at the top of the files you wish to log from:
+
+var Logger = require('le_node');
+var log = new Logger({
+  token:'6c122f92-c9b1-48bb-8ea6-c92c72e4ece2'
+});
+
+
+Then: Insert Logging Code
+
+// level specific methods like 'info', 'debug', etc.
+log.info("I'm a Lumberjack and I'm OK")
+
+// generic log method, also accepts JSON entries
+log.log("debug", {sleep:"all night", work:"all day"})
