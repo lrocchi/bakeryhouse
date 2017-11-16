@@ -12,7 +12,13 @@ var balance = require('./routes/balance');
 
 var BalanceSchedule = require('./scheduler');
 
-var config = require('./config/config')
+var config = require('./config/config');
+var Logger = require('le_node');
+
+
+var log = new Logger({
+  token:'6c122f92-c9b1-48bb-8ea6-c92c72e4ece2'
+});
 var port = 3000;
 
 var app = express();
@@ -51,6 +57,7 @@ app.get('*', (req, res) => {
 
 var listener = app.listen(process.env.PORT || port, function(){
     console.log('Server started on port ' + port);
+    log.info('Server started on port ' + port);
 })
 
 
