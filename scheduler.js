@@ -17,6 +17,10 @@ var nodemailer = require("nodemailer");
 var Client = require("node-rest-client").Client;
 var Logger = require("le_node");
 
+var mongoose = require("mongoose");
+var config = require("./config/config");
+var Store = require("./models/Store");
+
 var log = new Logger({
   token: "6c122f92-c9b1-48bb-8ea6-c92c72e4ece2"
 });
@@ -29,65 +33,41 @@ var port = process.env.PORT || 3000;
 var address = ip + ":" + port;
 
 BalanceSchedule.start = function() {
-  var schedPranzo = schedule.scheduleJob("5 * * * * *", function() {
+  var schedPranzo = schedule.scheduleJob("* 0 10 * * *", function() {
     console.log("The answer to life, the universe, and everything!");
     log.info("Inizio batch");
     var stores = [];
-    client.get(address + "/api/stores/active", function(data, response) {
-      stores = data;
-      today = new Date();
-      today.setUTCHours(0, 0, 0, 1);
-      stores.forEach(function(element) {
-        /* client.get(
-          adress + "/api/balance/" + date + "/" + element._id,
-          function(data, response) {
-            if (Object.keys(data).length < 1) {
-              mailOptions.text = "Non è stato inserito il bilancio di pranzo!";
-              transporter.sendMail(mailOptions, function(error, info) {
-                if (error) {
-                  console.log(error);
-                } else {
-                  console.log("Email sent: " + info.response);
-                }
-              });
+    // client.get(address + "/api/stores/active", function(data, response) {
+    //stores = data;
+    stores = Store.where("active")
+      .equals(true)
+      .exec(function(err, storeDoc) {
+        // console.log(costTypeDoc);
+        
+
+        today = new Date();
+        today.setUTCHours(0, 0, 0, 1);
+
+        console.log("STORES:" + JSON.stringify(stores));
+        storeDoc.forEach(function(element) {
+          element.ref_date = today;
+
+          var id = element._id;
+          var obj = element;
+          Store.findByIdAndUpdate(id, obj, function(err, data) {
+            if (err) {
+              console.log(err);
             }
-          }
-        ); */
-        element.ref_date = today;
-        /* var args = {
-          path: { id: element._id },
-          data: JSON.stringify(element)
-        };
-
-        client.put(address + "/api/stores/${id}", args, function(data, response) {
-          // parsed response body as js object
-          console.log(data);
-          // raw response
-          console.log(response);
-        }); */
-        var client2 = new Client();
-        var endpoint = "/api/stores/" + element._id;
-        var args = {
-          data: element,
-          headers: { "Content-Type": "application/json" }
-      };
-        try {
-          /*  BalanceSchedule.performRequest(endpoint, 'PUT', element,function(dataSuccess) {
-            console.log("Aggiornato giorno di riferimento nello store " + element.nome);
-          }); */
-
-          client2.put(endpoint, args, function(data, response) {
-            console.log("Aggiornato giorno di riferimento nello store " + element.nome);
-            log.info("Aggiornato giorno di riferimento nello store " + element.nome);
+            console.log("Aggiornato store: " + data.nome);
           });
-        } catch (error) {
-          console.log("ERRORE BATCH: ");
-          // log.err("ERRORE BATCH: " + error);
-        }
 
+          
+        });
+        console.log("BATCH Ultimato");
         log.info("BATCH Ultimato");
       });
-    });
+      
+    // });
   });
 };
 

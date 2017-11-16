@@ -62,4 +62,4 @@ var listener = app.listen(process.env.PORT || port, function(){
 
 
 
-// BalanceSchedule.start();
+BalanceSchedule.start();
