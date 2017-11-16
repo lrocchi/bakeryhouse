@@ -10,18 +10,16 @@
 └───────────────────────── second (0 - 59, OPTIONAL)
  */
 
-var querystring = require('querystring');
-var http = require('http');
+var querystring = require("querystring");
+var http = require("http");
 var schedule = require("node-schedule");
 var nodemailer = require("nodemailer");
 var Client = require("node-rest-client").Client;
-var Logger = require('le_node');
-
+var Logger = require("le_node");
 
 var log = new Logger({
-  token:'6c122f92-c9b1-48bb-8ea6-c92c72e4ece2'
+  token: "6c122f92-c9b1-48bb-8ea6-c92c72e4ece2"
 });
-
 
 var client = new Client();
 
@@ -31,7 +29,7 @@ var port = process.env.PORT || 3000;
 var address = ip + ":" + port;
 
 BalanceSchedule.start = function() {
-  var schedPranzo = schedule.scheduleJob("* 0 10 * * *", function() {
+  var schedPranzo = schedule.scheduleJob("5 * * * * *", function() {
     console.log("The answer to life, the universe, and everything!");
     log.info("Inizio batch");
     var stores = [];
@@ -67,55 +65,62 @@ BalanceSchedule.start = function() {
           // raw response
           console.log(response);
         }); */
-        
+        var client2 = new Client();
         var endpoint = "/api/stores/" + element._id;
+        var args = {
+          data: element,
+          headers: { "Content-Type": "application/json" }
+      };
         try {
-          BalanceSchedule.performRequest(endpoint, 'PUT', element,function(dataSuccess) {
+          /*  BalanceSchedule.performRequest(endpoint, 'PUT', element,function(dataSuccess) {
             console.log("Aggiornato giorno di riferimento nello store " + element.nome);
+          }); */
+
+          client2.put(endpoint, args, function(data, response) {
+            console.log("Aggiornato giorno di riferimento nello store " + element.nome);
+            log.info("Aggiornato giorno di riferimento nello store " + element.nome);
           });
-          
         } catch (error) {
-          log.err("ERRORE BATCH: " + error);
+          console.log("ERRORE BATCH: ");
+          // log.err("ERRORE BATCH: " + error);
         }
-        
+
         log.info("BATCH Ultimato");
       });
     });
   });
 };
 
-
-BalanceSchedule.performRequest = function(endpoint, method, data, success) {
+/* BalanceSchedule.performRequest = function(endpoint, method, data, success) {
   var dataString = JSON.stringify(data);
   var headers = {};
-  
-  if (method == 'GET') {
-    endpoint += '?' + querystring.stringify(data);
-  }
-  else {
+
+  if (method == "GET") {
+    endpoint += "?" + querystring.stringify(data);
+  } else {
     headers = {
-      'Content-Type': 'application/json',
-      'Content-Length': dataString.length
+      "Content-Type": "application/json",
+      "Content-Length": dataString.length
     };
   }
   var options = {
-    host: process.env.IP || 'localhost',
+    // host: process.env.IP || 'localhost',
     path: endpoint,
-    port: 3000,
+    // port: 3000,
     method: method,
     headers: headers
   };
 
   var req = http.request(options, function(res) {
-    res.setEncoding('utf-8');
+    res.setEncoding("utf-8");
 
-    var responseString = '';
+    var responseString = "";
 
-    res.on('data', function(data) {
+    res.on("data", function(data) {
       responseString += data;
     });
 
-    res.on('end', function() {
+    res.on("end", function() {
       console.log(responseString);
       var responseObject = JSON.parse(responseString);
       success(responseObject);
@@ -124,6 +129,6 @@ BalanceSchedule.performRequest = function(endpoint, method, data, success) {
 
   req.write(dataString);
   req.end();
-};
+}; */
 
 module.exports = BalanceSchedule;
