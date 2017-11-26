@@ -1,39 +1,54 @@
 <div style="display: inline-block; text-align: left; width: 100%;">
-    <div class="alert alert-danger">{{message}}</div>
-    <mat-card class="example-card">
-      <mat-card-header>
-          <h3>Punti Vendita</h3>
-        <span class="span-fill-remaining"></span>
-        <div class="ProceedContainer"><button class="btn BKHBrandedButton Ccm-Button-Primary" (click)="openDialog()">Aggiungi</button></div>
-      </mat-card-header>
-      <mat-card-content>
-        <div style="overflow:auto">
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <td style="text-align : center"><strong>Nome</strong></td>
-                <td style="text-align : center"><strong>Indirizzo</strong></td>
-                <td style="text-align : center"><strong>P.iva</strong></td>
-                <td colspan="2"></td>
+  <div class="alert alert-danger">{{message}}</div>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <h3>Punti Vendita</h3>
+      <span class="span-fill-remaining"></span>
+      <div class="ProceedContainer">
+        <button mat-fab (click)="openDialog()" color="primary" style="color:white">
+          <mat-icon>add</mat-icon>
+        </button>
+        <!-- <button class="btn BKHBrandedButton Ccm-Button-Primary" (click)="openDialog()">Aggiungi</button> -->
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div style="overflow:auto">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <td style="text-align : center">
+                <strong>Nome</strong>
+              </td>
+              <td style="text-align : center">
+                <strong>Indirizzo</strong>
+              </td>
+              <td style="text-align : center">
+                <strong>P.iva</strong>
+              </td>
+              <td colspan="2"></td>
 
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let store of stores">
-                <td>{{store.nome}}</td>
-                <td>{{store.indirizzo}}</td>
-                <td>{{store.piva}}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let store of stores">
+              <td>{{store.nome}}</td>
+              <td>{{store.indirizzo}}</td>
+              <td>{{store.piva}}</td>
 
 
-                <td style="text-align : center; align-items: center; padding: 0px;">
-                    <button mat-icon-button (click)="openEditDialog(store)"><mat-icon class="mat-24">mode_edit</mat-icon></button>
-                  </td>
-                  <td style="text-align : center; padding: 0px;" >
-                    <button mat-icon-button (click)="openConfirmationDelete(store._id)"><mat-icon class="mat-24" >delete</mat-icon></button>
-                  </td>
+              <td style="text-align : center; align-items: center; padding: 0px;">
+                <button mat-icon-button (click)="openEditDialog(store)">
+                  <mat-icon class="mat-24">mode_edit</mat-icon>
+                </button>
+              </td>
+              <td style="text-align : center; padding: 0px;">
+                <button mat-icon-button (click)="openConfirmationDelete(store._id)">
+                  <mat-icon class="mat-24">delete</mat-icon>
+                </button>
+              </td>
 
-                </tr>
-                <!-- <td style="text-align : center; align-items: center; padding: 0px;">
+            </tr>
+            <!-- <td style="text-align : center; align-items: center; padding: 0px;">
                   <button mat-icon-button><mat-icon class="mat-24">mode_edit</mat-icon></button>
                 </td>
                 <td style="text-align : center; padding: 0px;" colspan="2">
@@ -42,10 +57,10 @@
 
               </tr> -->
 
-            </tbody>
-          </table>
-        </div>
-      </mat-card-content>
-    </mat-card>
-    <div>{{statusMessage}}</div>
-  </div>
+          </tbody>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div>{{statusMessage}}</div>
+</div>

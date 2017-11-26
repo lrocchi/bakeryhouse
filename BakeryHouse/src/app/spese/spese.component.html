@@ -5,7 +5,10 @@
     <h3 style="float:left;">Spese di oggi: {{today | date: 'dd/MM/y'}}</h3>
 
     <div style="float:right;">
-      <button (click)="openDialog()" class="btn BKHBrandedButton Ccm-Button-Primary ">Aggiungi</button>
+        <button mat-fab (click)="openDialog()" color="primary" style="color:white">
+            <mat-icon>add</mat-icon>
+          </button>
+      <!-- <button (click)="openDialog()" class="btn BKHBrandedButton Ccm-Button-Primary ">Aggiungi</button> -->
     </div>
   </md-card-header>
   <md-card-content>

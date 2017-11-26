@@ -39,6 +39,7 @@ import { GeneralReportComponent } from './report/general-report.component';
 import { DxChartModule, DxDataGridModule } from 'devextreme-angular';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LogoutComponent } from 'app/logout.component';
+import { IncidenzaReportComponent } from './report/incidenza-report/incidenza-report.component';
 
 
 
@@ -74,11 +75,11 @@ import { LogoutComponent } from 'app/logout.component';
     MatExpansionModule,
     MatSidenavModule,
     MatChipsModule,
+
     BrowserAnimationsModule,
 
 
-  ],
-  declarations: []
+  ]
 })
 export class DemoMaterialModule { }
 
@@ -104,6 +105,7 @@ export class DemoMaterialModule { }
     EditDialogComponent,
     ChiusureComponent,
     GeneralReportComponent,
+    IncidenzaReportComponent,
     LogoutComponent,
 
 

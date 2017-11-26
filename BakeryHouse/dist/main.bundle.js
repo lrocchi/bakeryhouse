@@ -607,6 +607,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34_devextreme_angular___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_34_devextreme_angular__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__angular_flex_layout__ = __webpack_require__("../../../flex-layout/@angular/flex-layout.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36_app_logout_component__ = __webpack_require__("../../../../../src/app/logout.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__report_incidenza_report_incidenza_report_component__ = __webpack_require__("../../../../../src/app/report/incidenza-report/incidenza-report.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -616,6 +617,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -690,8 +692,7 @@ DemoMaterialModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_13__angular_material__["q" /* MatSidenavModule */],
             __WEBPACK_IMPORTED_MODULE_13__angular_material__["e" /* MatChipsModule */],
             __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
-        ],
-        declarations: []
+        ]
     })
 ], DemoMaterialModule);
 
@@ -726,6 +727,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_30__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */],
             __WEBPACK_IMPORTED_MODULE_31__chiusure_chiusure_component__["a" /* ChiusureComponent */],
             __WEBPACK_IMPORTED_MODULE_33__report_general_report_component__["a" /* GeneralReportComponent */],
+            __WEBPACK_IMPORTED_MODULE_37__report_incidenza_report_incidenza_report_component__["a" /* IncidenzaReportComponent */],
             __WEBPACK_IMPORTED_MODULE_36_app_logout_component__["a" /* LogoutComponent */],
         ],
         imports: [
@@ -781,7 +783,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/chiusure/chiusure.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n<div class=\"alert alert-danger\">{{message}}</div>\r\n<mat-card>\r\n  <mat-card-header>\r\n\r\n    <h3 *ngIf=\"diff>0\" style=\"float:left; max-width:50%\">Prossimo resoconto tra <p>{{timerMessage}} ({{diff}})</p></h3>\r\n    <h3 *ngIf=\"diff<0\" style=\"float:left; max-width:50%; color: red\" >Resoconto in ritardo di {{timerMessage}}</h3>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div style=\"float:right;\" class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\" *ngIf=\"lastBalance?.type!=='Chiusura'\">Aggiungi</button></div>\r\n  </mat-card-header>\r\n  <mat-card-content>\r\n    <mat-card *ngIf=\"lastBalance\">\r\n      <mat-card-title-group>\r\n        <mat-progress-spinner  [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\">0</mat-progress-spinner>\r\n        <mat-card-title>Resoconto {{lastBalance.type}}</mat-card-title>\r\n        <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n      </mat-card-title-group>\r\n      <mat-card-content class=\"md-content\">\r\n\r\n\r\n        <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\r\n        <p><span>In cassa: </span><span><strong>{{lastBalance.cassa}} &euro;</strong></span></p>\r\n        <p><span>POS:</span><span> <strong>{{lastBalance.pos}} &euro;</strong></span></p>\r\n        <p><span>Ticket:</span><span> <strong>{{lastBalance.ticket}} &euro;</strong></span></p>\r\n      </mat-card-content>\r\n      <!-- <mat-card-actions>\r\n        <button md-button disabled=\"true\">SEGNALA</button>\r\n      </mat-card-actions> -->\r\n    </mat-card>\r\n  </mat-card-content>\r\n</mat-card>\r\n<!-- </div> -->\r\n\r\n\r\n<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n  <div class=\"alert alert-danger\">{{message}}</div>\r\n  <div>\r\n    <h3>Resoconto</h3>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\r\n  </div>\r\n\r\n  <mat-card *ngFor=\"let lastBalance of balance\">\r\n    <mat-card-title-group>\r\n      <md-progress-spinner class=\"example-margin\" color=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\"></md-progress-spinner>\r\n      <mat-card-title>Resoconto {{lastBalance.tipo}}</mat-card-title>\r\n      <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n    </mat-card-title-group>\r\n    <mat-card-content class=\"md-content\">\r\n\r\n\r\n      <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\r\n      <p><span>In cassa: </span><span>{{lastBalance.cassa}} &euro;</span></p>\r\n      <p><span>POS:</span><span>{{lastBalance.pos}}</span></p>\r\n      <p><span>Ticket:</span><span>{{lastBalance.ticket}}</span></p>\r\n    </mat-card-content>\r\n    <mat-card-actions>\r\n      <button md-button disabled=\"true\">INSERISCI</button>\r\n    </mat-card-actions>\r\n  </mat-card>\r\n\r\n</div> -->\r\n"
+module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n<div class=\"alert alert-danger\">{{message}}</div>\r\n<mat-card>\r\n  <mat-card-header>\r\n\r\n    <h3 *ngIf=\"diff>0\" style=\"float:left; max-width:50%\">Prossimo resoconto tra\r\n      <p>{{timerMessage}} ({{diff}})</p>\r\n    </h3>\r\n    <h3 *ngIf=\"diff<0\" style=\"float:left; max-width:50%; color: red\">Resoconto in ritardo di {{timerMessage}}</h3>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div style=\"float:right;\" class=\"ProceedContainer ng-scope\">\r\n      <button mat-fab (click)=\"openEditDialog()\" color=\"primary\" style=\"color:white\" *ngIf=\"lastBalance?.type!=='Chiusura'\">\r\n        <mat-icon>add</mat-icon>\r\n      </button>\r\n      <!-- <button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\" *ngIf=\"lastBalance?.type!=='Chiusura'\">Aggiungi</button> -->\r\n    </div>\r\n  </mat-card-header>\r\n  <mat-card-content>\r\n    <mat-card *ngIf=\"lastBalance\">\r\n      <mat-card-title-group>\r\n        <mat-progress-spinner [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\">0</mat-progress-spinner>\r\n        <mat-card-title>Resoconto {{lastBalance.type}}</mat-card-title>\r\n        <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n      </mat-card-title-group>\r\n      <mat-card-content class=\"md-content\">\r\n\r\n\r\n        <p>\r\n          <span>\r\n            <i>Resoconto eseguito da:</i>\r\n          </span>\r\n          <span>\r\n            <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong>\r\n          </span>\r\n        </p>\r\n        <p>\r\n          <span>In cassa: </span>\r\n          <span>\r\n            <strong>{{lastBalance.cassa}} &euro;</strong>\r\n          </span>\r\n        </p>\r\n        <p>\r\n          <span>POS:</span>\r\n          <span>\r\n            <strong>{{lastBalance.pos}} &euro;</strong>\r\n          </span>\r\n        </p>\r\n        <p>\r\n          <span>Ticket:</span>\r\n          <span>\r\n            <strong>{{lastBalance.ticket}} &euro;</strong>\r\n          </span>\r\n        </p>\r\n      </mat-card-content>\r\n      <!-- <mat-card-actions>\r\n        <button md-button disabled=\"true\">SEGNALA</button>\r\n      </mat-card-actions> -->\r\n    </mat-card>\r\n  </mat-card-content>\r\n</mat-card>\r\n<!-- </div> -->\r\n\r\n\r\n<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n  <div class=\"alert alert-danger\">{{message}}</div>\r\n  <div>\r\n    <h3>Resoconto</h3>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\r\n  </div>\r\n\r\n  <mat-card *ngFor=\"let lastBalance of balance\">\r\n    <mat-card-title-group>\r\n      <md-progress-spinner class=\"example-margin\" color=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\"></md-progress-spinner>\r\n      <mat-card-title>Resoconto {{lastBalance.tipo}}</mat-card-title>\r\n      <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n    </mat-card-title-group>\r\n    <mat-card-content class=\"md-content\">\r\n\r\n\r\n      <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\r\n      <p><span>In cassa: </span><span>{{lastBalance.cassa}} &euro;</span></p>\r\n      <p><span>POS:</span><span>{{lastBalance.pos}}</span></p>\r\n      <p><span>Ticket:</span><span>{{lastBalance.ticket}}</span></p>\r\n    </mat-card-content>\r\n    <mat-card-actions>\r\n      <button md-button disabled=\"true\">INSERISCI</button>\r\n    </mat-card-actions>\r\n  </mat-card>\r\n\r\n</div> -->\r\n"
 
 /***/ }),
 
@@ -1717,7 +1719,7 @@ var _a, _b;
 /***/ "../../../../../src/app/management/gestione-spese/gestione-spese.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n  <div class=\"alert alert-danger\">{{message}}</div>\r\n  <mat-card class=\"example-card\">\r\n    <mat-card-header>\r\n        <h3>Categorie di spesa</h3>\r\n      <span class=\"span-fill-remaining\"></span>\r\n      <div class=\"ProceedContainer ng-scope\"><button (click)=\"openDialog()\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button></div>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n      <div style=\"overflow:auto\">\r\n        <table class=\"table table-bordered table-striped\">\r\n          <thead>\r\n            <tr>\r\n              <td style=\"text-align : center\"><strong>Categoria</strong></td>\r\n              <td style=\"text-align : center\"><strong>SottoCategoria</strong></td>\r\n              <td style=\"text-align : center\"><strong>Descrittivo</strong></td>\r\n              <td style=\"text-align : center\"><strong>Attivo</strong></td>\r\n              <td colspan=\"2\"></td>\r\n\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let cat of costTypes\">\r\n              <td>{{cat.nome}}</td>\r\n              <td>{{cat.subCategory}}</td>\r\n              <td style=\"text-align : center\">\r\n                <mat-icon *ngIf=\"cat.hasDescription==false\">check_box_outline_blank</mat-icon>\r\n                <mat-icon *ngIf=\"cat.hasDescription==true\">check_box</mat-icon>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <mat-icon *ngIf=\"cat.active==false\">check_box_outline_blank</mat-icon>\r\n                <mat-icon *ngIf=\"cat.active==true\">check_box</mat-icon>\r\n              </td>\r\n              <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                <button mat-icon-button><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n              </td> -->\r\n              <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\r\n                <button mat-icon-button (click)=\"openConfirmationDelete(cat._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n              </td>\r\n\r\n            </tr>\r\n\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </mat-card-content>\r\n  </mat-card>\r\n  <div>{{statusMessage}}</div>\r\n</div>\r\n"
+module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n  <div class=\"alert alert-danger\">{{message}}</div>\r\n  <mat-card class=\"example-card\">\r\n    <mat-card-header>\r\n      <h3>Categorie di spesa</h3>\r\n      <span class=\"span-fill-remaining\"></span>\r\n      <div class=\"ProceedContainer ng-scope\">\r\n        <button mat-fab (click)=\"openDialog()\" color=\"primary\" style=\"color:white\">\r\n          <mat-icon>add</mat-icon>\r\n        </button>\r\n        <!-- <button (click)=\"openDialog()\" class=\"btn BKHBrandedButton Ccm-Button-Primary\">Aggiungi</button> -->\r\n      </div>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n      <div style=\"overflow:auto\">\r\n        <table class=\"table table-bordered table-striped\">\r\n          <thead>\r\n            <tr>\r\n              <td style=\"text-align : center\">\r\n                <strong>Categoria</strong>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <strong>SottoCategoria</strong>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <strong>Descrittivo</strong>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <strong>Attivo</strong>\r\n              </td>\r\n              <td colspan=\"2\"></td>\r\n\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let cat of costTypes\">\r\n              <td>{{cat.nome}}</td>\r\n              <td>{{cat.subCategory}}</td>\r\n              <td style=\"text-align : center\">\r\n                <mat-icon *ngIf=\"cat.hasDescription==false\">check_box_outline_blank</mat-icon>\r\n                <mat-icon *ngIf=\"cat.hasDescription==true\">check_box</mat-icon>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <mat-icon *ngIf=\"cat.active==false\">check_box_outline_blank</mat-icon>\r\n                <mat-icon *ngIf=\"cat.active==true\">check_box</mat-icon>\r\n              </td>\r\n              <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                <button mat-icon-button><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n              </td> -->\r\n              <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\r\n                <button mat-icon-button (click)=\"openConfirmationDelete(cat._id)\">\r\n                  <mat-icon class=\"mat-24\">delete</mat-icon>\r\n                </button>\r\n              </td>\r\n\r\n            </tr>\r\n\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </mat-card-content>\r\n  </mat-card>\r\n  <div>{{statusMessage}}</div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1872,7 +1874,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-store/gestione-store.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n    <div class=\"alert alert-danger\">{{message}}</div>\r\n    <mat-card class=\"example-card\">\r\n      <mat-card-header>\r\n          <h3>Punti Vendita</h3>\r\n        <span class=\"span-fill-remaining\"></span>\r\n        <div class=\"ProceedContainer\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\r\n      </mat-card-header>\r\n      <mat-card-content>\r\n        <div style=\"overflow:auto\">\r\n          <table class=\"table table-bordered table-striped\">\r\n            <thead>\r\n              <tr>\r\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\r\n                <td style=\"text-align : center\"><strong>Indirizzo</strong></td>\r\n                <td style=\"text-align : center\"><strong>P.iva</strong></td>\r\n                <td colspan=\"2\"></td>\r\n\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr *ngFor=\"let store of stores\">\r\n                <td>{{store.nome}}</td>\r\n                <td>{{store.indirizzo}}</td>\r\n                <td>{{store.piva}}</td>\r\n\r\n\r\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                    <button mat-icon-button (click)=\"openEditDialog(store)\"><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n                  </td>\r\n                  <td style=\"text-align : center; padding: 0px;\" >\r\n                    <button mat-icon-button (click)=\"openConfirmationDelete(store._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n                  </td>\r\n\r\n                </tr>\r\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                  <button mat-icon-button><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n                </td>\r\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\r\n                  <button mat-icon-button (click)=\"openConfirmationDelete(cat._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n                </td>\r\n\r\n              </tr> -->\r\n\r\n            </tbody>\r\n          </table>\r\n        </div>\r\n      </mat-card-content>\r\n    </mat-card>\r\n    <div>{{statusMessage}}</div>\r\n  </div>\r\n"
+module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n  <div class=\"alert alert-danger\">{{message}}</div>\r\n  <mat-card class=\"example-card\">\r\n    <mat-card-header>\r\n      <h3>Punti Vendita</h3>\r\n      <span class=\"span-fill-remaining\"></span>\r\n      <div class=\"ProceedContainer\">\r\n        <button mat-fab (click)=\"openDialog()\" color=\"primary\" style=\"color:white\">\r\n          <mat-icon>add</mat-icon>\r\n        </button>\r\n        <!-- <button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button> -->\r\n      </div>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n      <div style=\"overflow:auto\">\r\n        <table class=\"table table-bordered table-striped\">\r\n          <thead>\r\n            <tr>\r\n              <td style=\"text-align : center\">\r\n                <strong>Nome</strong>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <strong>Indirizzo</strong>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <strong>P.iva</strong>\r\n              </td>\r\n              <td colspan=\"2\"></td>\r\n\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let store of stores\">\r\n              <td>{{store.nome}}</td>\r\n              <td>{{store.indirizzo}}</td>\r\n              <td>{{store.piva}}</td>\r\n\r\n\r\n              <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                <button mat-icon-button (click)=\"openEditDialog(store)\">\r\n                  <mat-icon class=\"mat-24\">mode_edit</mat-icon>\r\n                </button>\r\n              </td>\r\n              <td style=\"text-align : center; padding: 0px;\">\r\n                <button mat-icon-button (click)=\"openConfirmationDelete(store._id)\">\r\n                  <mat-icon class=\"mat-24\">delete</mat-icon>\r\n                </button>\r\n              </td>\r\n\r\n            </tr>\r\n            <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                  <button mat-icon-button><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n                </td>\r\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\r\n                  <button mat-icon-button (click)=\"openConfirmationDelete(cat._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n                </td>\r\n\r\n              </tr> -->\r\n\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </mat-card-content>\r\n  </mat-card>\r\n  <div>{{statusMessage}}</div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2077,7 +2079,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/management/gestione-utente/gestione-utente.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n    <div class=\"alert alert-danger\">{{message}}</div>\r\n    <mat-card class=\"example-card\">\r\n      <mat-card-header>\r\n          <h3>Utenti</h3>\r\n        <span class=\"span-fill-remaining\"></span>\r\n        <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button></div>\r\n      </mat-card-header>\r\n      <mat-card-content>\r\n        <div style=\"overflow:auto\">\r\n          <table class=\"table table-bordered table-striped\">\r\n            <thead>\r\n              <tr>\r\n                <td style=\"text-align : center\"><strong>User ID</strong></td>\r\n                <td style=\"text-align : center\"><strong>Nome</strong></td>\r\n                <td style=\"text-align : center\"><strong>Cognome</strong></td>\r\n                <td style=\"text-align : center\"><strong>Ruolo</strong></td>\r\n                <td style=\"text-align : center\"><strong>e-mail</strong></td>\r\n                <td style=\"text-align : center\"><strong>Punto Vendita</strong></td>\r\n                <td colspan=\"2\"></td>\r\n\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr *ngFor=\"let user of users\">\r\n                <td>{{user.username}}</td>\r\n                <td>{{user.name}}</td>\r\n                <td>{{user.surname}}</td>\r\n                <td>{{user.ruolo}}</td>\r\n                <td>{{user.email}}</td>\r\n                <td>{{user.store.nome}}</td>\r\n\r\n                <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                    <button mat-icon-button (click)=\"openEditDialog(user)\"><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n                  </td>\r\n                  <td style=\"text-align : center; padding: 0px;\" >\r\n                    <button mat-icon-button (click)=\"openConfirmationDelete(user._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n                  </td>\r\n\r\n                </tr>\r\n                <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                  <button mat-icon-button><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n                </td>\r\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\r\n                  <button mat-icon-button (click)=\"openConfirmationDelete(cat._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n                </td>\r\n\r\n              </tr> -->\r\n\r\n            </tbody>\r\n          </table>\r\n        </div>\r\n      </mat-card-content>\r\n    </mat-card>\r\n    <div>{{statusMessage}}</div>\r\n  </div>\r\n"
+module.exports = "<div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n  <div class=\"alert alert-danger\">{{message}}</div>\r\n  <mat-card class=\"example-card\">\r\n    <mat-card-header>\r\n      <h3>Utenti</h3>\r\n      <span class=\"span-fill-remaining\"></span>\r\n      <div class=\"ProceedContainer ng-scope\">\r\n        <button mat-fab (click)=\"openDialog()\" color=\"primary\" style=\"color:white\">\r\n          <mat-icon>add</mat-icon>\r\n        </button>\r\n        <!-- <button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openDialog()\">Aggiungi</button> -->\r\n      </div>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n      <div style=\"overflow:auto\">\r\n        <table class=\"table table-bordered table-striped\">\r\n          <thead>\r\n            <tr>\r\n              <td style=\"text-align : center\">\r\n                <strong>User ID</strong>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <strong>Nome</strong>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <strong>Cognome</strong>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <strong>Ruolo</strong>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <strong>e-mail</strong>\r\n              </td>\r\n              <td style=\"text-align : center\">\r\n                <strong>Punto Vendita</strong>\r\n              </td>\r\n              <td colspan=\"2\"></td>\r\n\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let user of users\">\r\n              <td>{{user.username}}</td>\r\n              <td>{{user.name}}</td>\r\n              <td>{{user.surname}}</td>\r\n              <td>{{user.ruolo}}</td>\r\n              <td>{{user.email}}</td>\r\n              <td>{{user.store.nome}}</td>\r\n\r\n              <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                <button mat-icon-button (click)=\"openEditDialog(user)\">\r\n                  <mat-icon class=\"mat-24\">mode_edit</mat-icon>\r\n                </button>\r\n              </td>\r\n              <td style=\"text-align : center; padding: 0px;\">\r\n                <button mat-icon-button (click)=\"openConfirmationDelete(user._id)\">\r\n                  <mat-icon class=\"mat-24\">delete</mat-icon>\r\n                </button>\r\n              </td>\r\n\r\n            </tr>\r\n            <!-- <td style=\"text-align : center; align-items: center; padding: 0px;\">\r\n                  <button mat-icon-button><mat-icon class=\"mat-24\">mode_edit</mat-icon></button>\r\n                </td>\r\n                <td style=\"text-align : center; padding: 0px;\" colspan=\"2\">\r\n                  <button mat-icon-button (click)=\"openConfirmationDelete(cat._id)\"><mat-icon class=\"mat-24\" >delete</mat-icon></button>\r\n                </td>\r\n\r\n              </tr> -->\r\n\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n    </mat-card-content>\r\n  </mat-card>\r\n  <div>{{statusMessage}}</div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2366,7 +2368,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/report/general-report.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container>\n  <mat-sidenav #sidenav mode=\"side\" opened=\"true\">\n    <mat-chip-list class=\"mat-chip-list-stacked\">\n      <mat-chip selected=\"true\">\n        Andamento Giornaliero\n      </mat-chip>\n      <mat-chip selected=\"true\">\n\n      </mat-chip>\n    </mat-chip-list>\n  </mat-sidenav>\n\n  <dx-chart [dataSource]=\"costList\">\n    <dxi-series argumentField=\"descrizione\" valueField=\"valore\" type=\"bar\"></dxi-series>\n  </dx-chart>\n</mat-sidenav-container>\n"
+module.exports = "<mat-toolbar>\n    <button mat-icon-button (click)=\"sidenav.open()\">\n        <mat-icon class=\"md-24\">menu</mat-icon>\n      </button>\n  </mat-toolbar>\n<mat-sidenav-container>\n  <mat-sidenav #sidenav mode=\"over\" opened=\"false\">\n    <mat-expansion-panel>\n      <mat-expansion-panel-header class=\"primary\">\n        <mat-panel-title>\n          Costi\n        </mat-panel-title>\n        <mat-panel-description></mat-panel-description>\n      </mat-expansion-panel-header>\n      link report1\n    </mat-expansion-panel>\n    <mat-expansion-panel>\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Ricavi\n        </mat-panel-title>\n        <mat-panel-description></mat-panel-description>\n      </mat-expansion-panel-header>\n      link report2\n    </mat-expansion-panel>\n    <mat-expansion-panel>\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Incidenza\n        </mat-panel-title>\n        <mat-panel-description></mat-panel-description>\n      </mat-expansion-panel-header>\n      link report3\n    </mat-expansion-panel>\n\n  </mat-sidenav>\n\n  <mat-expansion-panel>\n    <mat-expansion-panel-header>\n      <mat-panel-title>\n        Filtri\n      </mat-panel-title>\n      <mat-panel-description>\n        inserisci i filtri qui\n      </mat-panel-description>\n    </mat-expansion-panel-header>\n\n    <mat-form-field>\n      <input matInput placeholder=\"First name\">\n    </mat-form-field>\n\n    <mat-form-field>\n      <input matInput placeholder=\"Age\">\n    </mat-form-field>\n  </mat-expansion-panel>\n\n  <app-reports></app-reports>\n\n</mat-sidenav-container>\n"
 
 /***/ }),
 
@@ -2375,6 +2377,61 @@ module.exports = "<mat-sidenav-container>\n  <mat-sidenav #sidenav mode=\"side\"
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GeneralReportComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var GeneralReportComponent = (function () {
+    function GeneralReportComponent() {
+    }
+    return GeneralReportComponent;
+}());
+GeneralReportComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-general-report',
+        template: __webpack_require__("../../../../../src/app/report/general-report.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/report/general-report.component.css")]
+    })
+], GeneralReportComponent);
+
+//# sourceMappingURL=general-report.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/report/incidenza-report/incidenza-report.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/report/incidenza-report/incidenza-report.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  incidenza-report works!\n</p>\n<dx-chart [dataSource]=\"costList\">\n  <dxi-series argumentField=\"descrizione\" valueField=\"valore\" type=\"bar\"></dxi-series>\n</dx-chart>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/report/incidenza-report/incidenza-report.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IncidenzaReportComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_spesa_service__ = __webpack_require__("../../../../../src/app/_services/spesa.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2388,15 +2445,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var GeneralReportComponent = (function () {
-    function GeneralReportComponent(_spesaService) {
+// import CustomStore from 'devextreme/data/custom_store';
+var IncidenzaReportComponent = (function () {
+    function IncidenzaReportComponent(_spesaService) {
         this._spesaService = _spesaService;
     }
-    GeneralReportComponent.prototype.ngOnInit = function () {
+    IncidenzaReportComponent.prototype.ngOnInit = function () {
         this.getList();
         // this.chartData = JSON.stringify(this.costList);
     };
-    GeneralReportComponent.prototype.getList = function () {
+    IncidenzaReportComponent.prototype.getList = function () {
         var _this = this;
         /* Lo user sarà selezionato dai filtri */
         var usr = JSON.parse(localStorage.getItem('currUser'));
@@ -2404,21 +2462,21 @@ var GeneralReportComponent = (function () {
             .then(function (spese) { _this.costList = spese; _this.costListJSON = JSON.stringify(spese); })
             .catch(function (err) { return console.log(err); });
     };
-    return GeneralReportComponent;
+    return IncidenzaReportComponent;
 }());
-GeneralReportComponent = __decorate([
+IncidenzaReportComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'app-general-report',
-        template: __webpack_require__("../../../../../src/app/report/general-report.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/report/general-report.component.css")],
+        selector: 'app-reports',
+        template: __webpack_require__("../../../../../src/app/report/incidenza-report/incidenza-report.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/report/incidenza-report/incidenza-report.component.css")],
         encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
         preserveWhitespaces: false,
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object])
-], GeneralReportComponent);
+], IncidenzaReportComponent);
 
 var _a;
-//# sourceMappingURL=general-report.component.js.map
+//# sourceMappingURL=incidenza-report.component.js.map
 
 /***/ }),
 
@@ -2655,7 +2713,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/spese/spese.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n<div class=\"alert alert-danger\">{{message}}</div>\r\n<md-card>\r\n  <md-card-header>\r\n    <h3 style=\"float:left;\">Spese di oggi: {{today | date: 'dd/MM/y'}}</h3>\r\n\r\n    <div style=\"float:right;\">\r\n      <button (click)=\"openDialog()\" class=\"btn BKHBrandedButton Ccm-Button-Primary \">Aggiungi</button>\r\n    </div>\r\n  </md-card-header>\r\n  <md-card-content>\r\n    <div fxLayout=\"column\" fxFill>\r\n      <app-spese-list (reloadEvent)=\"getList()\" [spesaList]=\"spesaList\"></app-spese-list>\r\n    </div>\r\n  </md-card-content>\r\n</md-card>\r\n<!-- </div> -->\r\n"
+module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n<div class=\"alert alert-danger\">{{message}}</div>\r\n<md-card>\r\n  <md-card-header>\r\n    <h3 style=\"float:left;\">Spese di oggi: {{today | date: 'dd/MM/y'}}</h3>\r\n\r\n    <div style=\"float:right;\">\r\n        <button mat-fab (click)=\"openDialog()\" color=\"primary\" style=\"color:white\">\r\n            <mat-icon>add</mat-icon>\r\n          </button>\r\n      <!-- <button (click)=\"openDialog()\" class=\"btn BKHBrandedButton Ccm-Button-Primary \">Aggiungi</button> -->\r\n    </div>\r\n  </md-card-header>\r\n  <md-card-content>\r\n    <div fxLayout=\"column\" fxFill>\r\n      <app-spese-list (reloadEvent)=\"getList()\" [spesaList]=\"spesaList\"></app-spese-list>\r\n    </div>\r\n  </md-card-content>\r\n</md-card>\r\n<!-- </div> -->\r\n"
 
 /***/ }),
 

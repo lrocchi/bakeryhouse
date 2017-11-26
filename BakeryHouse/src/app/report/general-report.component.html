@@ -1,16 +1,59 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="sidenav.open()">
+        <mat-icon class="md-24">menu</mat-icon>
+      </button>
+  </mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav #sidenav mode="side" opened="true">
-    <mat-chip-list class="mat-chip-list-stacked">
-      <mat-chip selected="true">
-        Andamento Giornaliero
-      </mat-chip>
-      <mat-chip selected="true">
+  <mat-sidenav #sidenav mode="over" opened="false">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="primary">
+        <mat-panel-title>
+          Costi
+        </mat-panel-title>
+        <mat-panel-description></mat-panel-description>
+      </mat-expansion-panel-header>
+      link report1
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Ricavi
+        </mat-panel-title>
+        <mat-panel-description></mat-panel-description>
+      </mat-expansion-panel-header>
+      link report2
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Incidenza
+        </mat-panel-title>
+        <mat-panel-description></mat-panel-description>
+      </mat-expansion-panel-header>
+      link report3
+    </mat-expansion-panel>
 
-      </mat-chip>
-    </mat-chip-list>
   </mat-sidenav>
 
-  <dx-chart [dataSource]="costList">
-    <dxi-series argumentField="descrizione" valueField="valore" type="bar"></dxi-series>
-  </dx-chart>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filtri
+      </mat-panel-title>
+      <mat-panel-description>
+        inserisci i filtri qui
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input matInput placeholder="First name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Age">
+    </mat-form-field>
+  </mat-expansion-panel>
+
+  <app-reports></app-reports>
+
 </mat-sidenav-container>
