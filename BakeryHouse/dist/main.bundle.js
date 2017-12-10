@@ -209,6 +209,57 @@ var _a;
 
 /***/ }),
 
+/***/ "../../../../../src/app/_services/reports.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReportsService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ReportsService = (function () {
+    function ReportsService(_http) {
+        this._http = _http;
+    }
+    ReportsService.prototype.getTodayIncidenza = function (id_store) {
+        // const today = new Date();
+        // today.setHours(0 , 0 - today.getTimezoneOffset(), 0);
+        var myHeaders = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+        });
+        var myParams = new URLSearchParams();
+        // myParams.set('store', id_store);
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["RequestOptions"]({ headers: myHeaders, params: myParams });
+        var sUrl = 'api/report/today';
+        sUrl += '?store=' + id_store;
+        return this._http
+            .get(sUrl, options)
+            .map(function (data) { return data.json(); })
+            .toPromise();
+    };
+    return ReportsService;
+}());
+ReportsService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["Http"]) === "function" && _a || Object])
+], ReportsService);
+
+var _a;
+//# sourceMappingURL=reports.service.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/_services/spesa.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -242,11 +293,8 @@ var SpesaService = (function () {
         return this._http.get('api/spese').map(function (data) { return data.json(); }).toPromise();
     };
     SpesaService.prototype.getTodaySpesaList = function (id_store) {
-        var today = new Date();
-        today.setHours(0, 0 - today.getTimezoneOffset(), 0);
-        /* today.setMinutes(0);
-        today.setSeconds(1) */
-        var stringToday = today.toISOString();
+        // const today = new Date();
+        // today.setHours(0 , 0 - today.getTimezoneOffset(), 0);
         var myHeaders = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]({ 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
         var myParams = new URLSearchParams();
         // myParams.set('store', id_store);
@@ -254,8 +302,6 @@ var SpesaService = (function () {
         var sUrl = 'api/spese/today';
         sUrl += '?store=' + id_store;
         return this._http.get(sUrl, options).map(function (data) { return data.json(); }).toPromise();
-        // return this._http.get('api/spese?store=' + id_store + '&create_on={ "$gte" : ' + stringToday + ' }')
-        // return this._http.get('api/spese', options).map(data => data.json()).toPromise();
     };
     SpesaService.prototype.addSpesa = function (spesa) {
         console.log(JSON.stringify(spesa));
@@ -432,12 +478,14 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_management_management_component__ = __webpack_require__("../../../../../src/app/management/management.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_report_general_report_component__ = __webpack_require__("../../../../../src/app/report/general-report.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_app_logout_component__ = __webpack_require__("../../../../../src/app/logout.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_app_report_incidenza_report_incidenza_report_component__ = __webpack_require__("../../../../../src/app/report/incidenza-report/incidenza-report.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -453,15 +501,15 @@ var appRoutes = [
     {
         path: 'manage',
         canActivate: [__WEBPACK_IMPORTED_MODULE_3_app_guards_auth_guard__["a" /* AuthGuard */]],
-        children: [
-            { path: '', component: __WEBPACK_IMPORTED_MODULE_5_app_management_management_component__["a" /* ManagementComponent */] },
-        ]
+        component: __WEBPACK_IMPORTED_MODULE_5_app_management_management_component__["a" /* ManagementComponent */],
+        children: []
     },
     {
         path: 'report',
         canActivate: [__WEBPACK_IMPORTED_MODULE_3_app_guards_auth_guard__["a" /* AuthGuard */]],
+        component: __WEBPACK_IMPORTED_MODULE_6_app_report_general_report_component__["a" /* GeneralReportComponent */],
         children: [
-            { path: '', component: __WEBPACK_IMPORTED_MODULE_6_app_report_general_report_component__["a" /* GeneralReportComponent */] },
+            { path: 'incidenza', component: __WEBPACK_IMPORTED_MODULE_8_app_report_incidenza_report_incidenza_report_component__["a" /* IncidenzaReportComponent */] },
         ]
     },
     // otherwise redirect to home
@@ -608,6 +656,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__angular_flex_layout__ = __webpack_require__("../../../flex-layout/@angular/flex-layout.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36_app_logout_component__ = __webpack_require__("../../../../../src/app/logout.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__report_incidenza_report_incidenza_report_component__ = __webpack_require__("../../../../../src/app/report/incidenza-report/incidenza-report.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38_app_services_reports_service__ = __webpack_require__("../../../../../src/app/_services/reports.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -617,6 +666,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -676,21 +726,23 @@ var DemoMaterialModule = (function () {
 DemoMaterialModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["NgModule"])({
         exports: [
-            __WEBPACK_IMPORTED_MODULE_12__angular_material___["s" /* MatToolbarModule */],
+            __WEBPACK_IMPORTED_MODULE_12__angular_material___["u" /* MatToolbarModule */],
             __WEBPACK_IMPORTED_MODULE_12__angular_material___["b" /* MatButtonModule */],
-            __WEBPACK_IMPORTED_MODULE_12__angular_material___["k" /* MatIconModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["n" /* MatMenuModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["g" /* MatDialogModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["o" /* MatProgressSpinnerModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["r" /* MatTabsModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["p" /* MatSelectModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["m" /* MatInputModule */],
+            __WEBPACK_IMPORTED_MODULE_12__angular_material___["l" /* MatIconModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["o" /* MatMenuModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["h" /* MatDialogModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["q" /* MatProgressSpinnerModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["t" /* MatTabsModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["r" /* MatSelectModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["n" /* MatInputModule */],
             __WEBPACK_IMPORTED_MODULE_13__angular_material__["d" /* MatCheckboxModule */],
             __WEBPACK_IMPORTED_MODULE_13__angular_material__["c" /* MatCardModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["j" /* MatFormFieldModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["i" /* MatExpansionModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["q" /* MatSidenavModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["e" /* MatChipsModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["k" /* MatFormFieldModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["j" /* MatExpansionModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["s" /* MatSidenavModule */],
+            __WEBPACK_IMPORTED_MODULE_12__angular_material___["e" /* MatChipsModule */],
+            __WEBPACK_IMPORTED_MODULE_12__angular_material___["f" /* MatDatepickerModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["p" /* MatNativeDateModule */],
             __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
         ]
     })
@@ -736,7 +788,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_10__angular_http__["HttpModule"],
             DemoMaterialModule,
             __WEBPACK_IMPORTED_MODULE_16__angular_cdk_table__["m" /* CdkTableModule */],
-            __WEBPACK_IMPORTED_MODULE_13__angular_material__["g" /* MatDialogModule */],
+            __WEBPACK_IMPORTED_MODULE_13__angular_material__["h" /* MatDialogModule */],
             __WEBPACK_IMPORTED_MODULE_18_app_app_routes_component__["a" /* AppRoutingModule */],
             __WEBPACK_IMPORTED_MODULE_11__angular_forms__["ReactiveFormsModule"],
             __WEBPACK_IMPORTED_MODULE_34_devextreme_angular__["DxChartModule"],
@@ -749,12 +801,13 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_21_app_services_spesa_service__["a" /* SpesaService */],
             __WEBPACK_IMPORTED_MODULE_25_app_services_user_service__["a" /* UserService */],
             __WEBPACK_IMPORTED_MODULE_29_app_services_store_service__["a" /* StoreService */],
-            __WEBPACK_IMPORTED_MODULE_32_app_services_balance_service__["a" /* BalanceService */]
+            __WEBPACK_IMPORTED_MODULE_32_app_services_balance_service__["a" /* BalanceService */],
+            __WEBPACK_IMPORTED_MODULE_38_app_services_reports_service__["a" /* ReportsService */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]],
         entryComponents: [__WEBPACK_IMPORTED_MODULE_15__spese_spese_new_spese_new_component__["a" /* SpeseNewComponent */], __WEBPACK_IMPORTED_MODULE_20__management_gestione_spese_cost_type_add_cost_type_add_component__["a" /* CostTypeAddComponent */], __WEBPACK_IMPORTED_MODULE_26__management_gestione_utente_user_add_user_add_component__["a" /* UserAddComponent */], __WEBPACK_IMPORTED_MODULE_30__edit_dialog_edit_dialog_component__["a" /* EditDialogComponent */], __WEBPACK_IMPORTED_MODULE_22__confirmation_dialog_confirmation_dialog_component__["a" /* ConfirmationDialog */], __WEBPACK_IMPORTED_MODULE_28__management_gestione_store_store_add_store_add_component__["a" /* StoreAddComponent */]]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_13__angular_material__["l" /* MatIconRegistry */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__angular_material__["l" /* MatIconRegistry */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_13__angular_material__["m" /* MatIconRegistry */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__angular_material__["m" /* MatIconRegistry */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _b || Object])
 ], AppModule);
 
 var _a, _b;
@@ -1016,7 +1069,7 @@ ChiusureComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/chiusure/chiusure.component.html"),
         styles: [__webpack_require__("../../../../../src/app/chiusure/chiusure.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["f" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["f" /* MatDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_balance_service__["a" /* BalanceService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialog */]) === "function" && _b || Object])
 ], ChiusureComponent);
 
 var _a, _b;
@@ -1062,7 +1115,7 @@ ConfirmationDialog = __decorate([
     })
     // tslint:disable-next-line:component-class-suffix
     ,
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialogRef */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["i" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["i" /* MatDialogRef */]) === "function" && _a || Object])
 ], ConfirmationDialog);
 
 var _a;
@@ -1091,7 +1144,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/edit-dialog/edit-dialog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1 mat-dialog-title>{{title}}</h1>\r\n\r\n\r\n<!-- STORE EDIT -->\r\n<div *ngIf=\"storeObj != null\">\r\n\r\n\r\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\r\n\r\n    <div mat-dialog-content>\r\n\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"storeObj.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required value=\"storeObj.nome\">\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"storeObj.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\"\r\n          value=\"storeObj.indirizzo\" required>\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"storeObj.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" value=\"storeObj.piva\"\r\n          required>\r\n      </mat-form-field>\r\n\r\n\r\n      <mat-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"storeObj.active\" checked=\"storeObj.active\">Attivo</mat-checkbox>\r\n\r\n    </div>\r\n\r\n\r\n\r\n  </form>\r\n\r\n</div>\r\n\r\n\r\n<!-- USER EDIT -->\r\n<div *ngIf=\"userObj != null\">\r\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\r\n\r\n    <div mat-dialog-content>\r\n\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"userObj.name\" placeholder=\"Nome\" autocomplete=\"off\" #name=\"ngModel\" name=\"name\" required>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"userObj.surname\" placeholder=\"Cognome\" autocomplete=\"off\" #surname=\"ngModel\" name=\"surname\"\r\n          required>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"userObj.username\" placeholder=\"Username\" autocomplete=\"off\" #username=\"ngModel\" name=\"username\"\r\n          required>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"userObj.password\" type=\"password\" placeholder=\"Password\" autocomplete=\"off\" #password=\"ngModel\"\r\n          name=\"password\" required>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"userObj.email\" placeholder=\"Email\" autocomplete=\"off\" #email=\"ngModel\" name=\"email\" required>\r\n      </mat-form-field>\r\n\r\n      <div>\r\n        <mat-select placeholder=\"Ruolo\" [(ngModel)]=\"userObj.ruolo\" #ruolo=\"ngModel\" name=\"role\" required>\r\n          <mat-option *ngFor=\"let ruolo of roles | keys\" value=\"ruolo.value\">\r\n            {{ruolo.value}}\r\n          </mat-option>\r\n        </mat-select>\r\n      </div>\r\n      <span></span>\r\n      <div>\r\n        <mat-select placeholder=\"Punto Vendita\" [(ngModel)]=\"userObj.store._id\" #store=\"ngModel\" name=\"store\" required>\r\n          <mat-option *ngFor=\"let store of stores\" value=\"store._id\">{{store.nome}}</mat-option>\r\n        </mat-select>\r\n      </div>\r\n\r\n\r\n\r\n      <mat-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"active\" [(ngModel)]=\"userObj.active\" checked=\"userObj.active\"\r\n        value=\"userObj.active\">Attivo</mat-checkbox>\r\n\r\n    </div>\r\n\r\n  </form>\r\n</div>\r\n\r\n<!-- BALANCE EDIT -->\r\n<div *ngIf=\"balanceObj != null\">\r\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\r\n    <div mat-dialog-content>\r\n      <mat-expansion-panel>\r\n        <mat-expansion-panel-header>\r\n          <mat-panel-title>\r\n            Calcolatrice\r\n          </mat-panel-title>\r\n          <mat-panel-description>\r\n            Inserisci valori per banconote\r\n          </mat-panel-description>\r\n        </mat-expansion-panel-header>\r\n\r\n        <div>\r\n          <mat-form-field *ngFor=\"let item of vItemCurrency\">\r\n            <input matInput type=\"number\" placeholder=\"{{item.multiplier | currency:'EUR':'symbol-narrow':'1.0-2'}}\" autocomplete=\"off\"\r\n              [(ngModel)]=\"item.value\" (change)=\"calculateSum()\" [ngModelOptions]=\"{standalone: true}\">\r\n          </mat-form-field>\r\n\r\n        </div>\r\n      </mat-expansion-panel>\r\n\r\n      <mat-card>\r\n        <mat-card-title>Resoconto</mat-card-title>\r\n        <mat-card-content>\r\n          <div>\r\n            <mat-form-field>\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.cassa\" placeholder=\"Cassa\" autocomplete=\"off\" #cassa=\"ngModel\" name=\"cassa\"\r\n                required>\r\n            </mat-form-field>\r\n            <mat-form-field>\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.pos\" placeholder=\"Pos\" autocomplete=\"off\" #pos=\"ngModel\" name=\"pos\"\r\n                required>\r\n            </mat-form-field>\r\n\r\n            <mat-form-field>\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.ticket\" placeholder=\"Ticket\" autocomplete=\"off\" #ticket=\"ngModel\" name=\"ticket\"\r\n                required>\r\n            </mat-form-field>\r\n            <mat-form-field>\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.flash\" placeholder=\"Flash\" autocomplete=\"off\" #flash=\"ngModel\" name=\"flash\"\r\n                required>\r\n            </mat-form-field>\r\n          </div>\r\n          <div>\r\n              <mat-form-field *ngIf=\"balanceObj.value==100\">\r\n                  <input matInput type=\"number\" [(ngModel)]=\"balanceObj.capital\" placeholder=\"Fondo Cassa\" autocomplete=\"off\" #flash=\"ngModel\" name=\"capital\"\r\n                    required>\r\n                </mat-form-field>\r\n            <mat-form-field>\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.riserva\" placeholder=\"Riserva Monete\" autocomplete=\"off\" #riserva=\"ngModel\"\r\n                name=\"riserva\">\r\n            </mat-form-field>\r\n            <mat-form-field>\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.preconti\" placeholder=\"Preconti\" autocomplete=\"off\" #preconti=\"ngModel\"\r\n                name=\"preconti\">\r\n            </mat-form-field>\r\n            <!-- Non deve comparire nella Chiusura -->\r\n            <mat-form-field *ngIf=\"balanceObj.value<100\">\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.tavoliAperti\" placeholder=\"Tavoli Aperti\" autocomplete=\"off\" #tavoliAperti=\"ngModel\"\r\n                name=\"tavoliAperti\">\r\n            </mat-form-field>\r\n          </div>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n\r\n<div mat-dialog-actions>\r\n  <button mat-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\r\n  <button mat-button (click)=\"dialogRef.close(false)\">Annulla</button>\r\n</div>\r\n"
+module.exports = "<h1 mat-dialog-title>{{title}}</h1>\r\n\r\n\r\n<!-- STORE EDIT -->\r\n<div *ngIf=\"storeObj != null\">\r\n\r\n\r\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\r\n\r\n    <div mat-dialog-content>\r\n\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"storeObj.nome\" placeholder=\"Nome\" autocomplete=\"off\" #nome=\"ngModel\" name=\"nome\" required value=\"storeObj.nome\">\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"storeObj.indirizzo\" placeholder=\"Indirizzo\" autocomplete=\"off\" #indirizzo=\"ngModel\" name=\"indirizzo\"\r\n          value=\"storeObj.indirizzo\" required>\r\n      </mat-form-field>\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"storeObj.piva\" placeholder=\"Partita Iva\" autocomplete=\"off\" #piva=\"ngModel\" name=\"piva\" value=\"storeObj.piva\"\r\n          required>\r\n      </mat-form-field>\r\n\r\n\r\n      <mat-checkbox class=\"example-margin\" #active=\"ngModel\" name=\"active\" [(ngModel)]=\"storeObj.active\" checked=\"storeObj.active\">Attivo</mat-checkbox>\r\n\r\n    </div>\r\n\r\n\r\n\r\n  </form>\r\n\r\n</div>\r\n\r\n\r\n<!-- USER EDIT -->\r\n<div *ngIf=\"userObj != null\">\r\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\r\n\r\n    <div mat-dialog-content>\r\n\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"userObj.name\" placeholder=\"Nome\" autocomplete=\"off\" #name=\"ngModel\" name=\"name\" required>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"userObj.surname\" placeholder=\"Cognome\" autocomplete=\"off\" #surname=\"ngModel\" name=\"surname\"\r\n          required>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"userObj.username\" placeholder=\"Username\" autocomplete=\"off\" #username=\"ngModel\" name=\"username\"\r\n          required>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"userObj.password\" type=\"password\" placeholder=\"Password\" autocomplete=\"off\" #password=\"ngModel\"\r\n          name=\"password\" required>\r\n      </mat-form-field>\r\n\r\n      <mat-form-field>\r\n        <input matInput [(ngModel)]=\"userObj.email\" placeholder=\"Email\" autocomplete=\"off\" #email=\"ngModel\" name=\"email\" required>\r\n      </mat-form-field>\r\n\r\n      <div>\r\n        <mat-select placeholder=\"Ruolo\" [(ngModel)]=\"userObj.ruolo\" #ruolo=\"ngModel\" name=\"role\" required>\r\n          <mat-option *ngFor=\"let ruolo of roles | keys\" value=\"ruolo.value\">\r\n            {{ruolo.value}}\r\n          </mat-option>\r\n        </mat-select>\r\n      </div>\r\n      <span></span>\r\n      <div>\r\n        <mat-select placeholder=\"Punto Vendita\" [(ngModel)]=\"userObj.store._id\" #store=\"ngModel\" name=\"store\" required>\r\n          <mat-option *ngFor=\"let store of stores\" value=\"store._id\">{{store.nome}}</mat-option>\r\n        </mat-select>\r\n      </div>\r\n\r\n\r\n\r\n      <mat-checkbox class=\"example-margin\" #subCategory=\"ngModel\" name=\"active\" [(ngModel)]=\"userObj.active\" checked=\"userObj.active\"\r\n        value=\"userObj.active\">Attivo</mat-checkbox>\r\n\r\n    </div>\r\n\r\n  </form>\r\n</div>\r\n\r\n<!-- BALANCE EDIT -->\r\n<div *ngIf=\"balanceObj != null\">\r\n  <form name=\"form\" (ngSubmit)=\"f.form.valid\" novalidate>\r\n    <div mat-dialog-content>\r\n      <mat-expansion-panel>\r\n        <mat-expansion-panel-header>\r\n          <mat-panel-title>\r\n            Calcolatrice\r\n          </mat-panel-title>\r\n          <mat-panel-description>\r\n            Inserisci valori per banconote\r\n          </mat-panel-description>\r\n        </mat-expansion-panel-header>\r\n\r\n        <div>\r\n          <mat-form-field *ngFor=\"let item of vItemCurrency\">\r\n            <input matInput type=\"number\" placeholder=\"{{item.multiplier | currency:'EUR':'symbol-narrow':'1.0-2'}}\" autocomplete=\"off\"\r\n              [(ngModel)]=\"item.value\" (change)=\"calculateSum()\" [ngModelOptions]=\"{standalone: true}\">\r\n          </mat-form-field>\r\n\r\n        </div>\r\n      </mat-expansion-panel>\r\n\r\n      <mat-card>\r\n        <mat-card-title>Resoconto</mat-card-title>\r\n        <mat-card-content>\r\n          <div>\r\n            <mat-form-field>\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.cassa\" placeholder=\"Cassa\" autocomplete=\"off\" #cassa=\"ngModel\" name=\"cassa\"\r\n                required>\r\n            </mat-form-field>\r\n            <mat-form-field>\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.pos\" placeholder=\"Pos\" autocomplete=\"off\" #pos=\"ngModel\" name=\"pos\"\r\n                required>\r\n            </mat-form-field>\r\n\r\n            <mat-form-field>\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.ticket\" placeholder=\"Ticket\" autocomplete=\"off\" #ticket=\"ngModel\" name=\"ticket\"\r\n                required>\r\n            </mat-form-field>\r\n            <mat-form-field>\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.flash\" placeholder=\"Flash\" autocomplete=\"off\" #flash=\"ngModel\" name=\"flash\"\r\n                required>\r\n            </mat-form-field>\r\n          </div>\r\n          <div>\r\n              <mat-form-field *ngIf=\"balanceObj.value==100\">\r\n                  <input matInput type=\"number\" [(ngModel)]=\"balanceObj.capital\" placeholder=\"Fondo Cassa\" autocomplete=\"off\" #flash=\"ngModel\" name=\"capital\"\r\n                    required>\r\n                </mat-form-field>\r\n            <mat-form-field>\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.riserva\" placeholder=\"Riserva Monete\" autocomplete=\"off\" #riserva=\"ngModel\"\r\n                name=\"riserva\">\r\n            </mat-form-field>\r\n            <!-- <mat-form-field>\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.preconti\" placeholder=\"Preconti\" autocomplete=\"off\" #preconti=\"ngModel\"\r\n                name=\"preconti\">\r\n            </mat-form-field> -->\r\n            <!-- Non deve comparire nella Chiusura -->\r\n            <mat-form-field *ngIf=\"balanceObj.value<100\">\r\n              <input matInput type=\"number\" [(ngModel)]=\"balanceObj.tavoliAperti\" placeholder=\"Tavoli Aperti\" autocomplete=\"off\" #tavoliAperti=\"ngModel\"\r\n                name=\"tavoliAperti\">\r\n            </mat-form-field>\r\n          </div>\r\n        </mat-card-content>\r\n      </mat-card>\r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n\r\n<div mat-dialog-actions>\r\n  <button mat-button style=\"color: #fff;background-color: #7fa372;\" (click)=\"dialogRef.close(true)\">Confermo</button>\r\n  <button mat-button (click)=\"dialogRef.close(false)\">Annulla</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1161,7 +1214,7 @@ EditDialogComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/edit-dialog/edit-dialog.component.css")]
     }),
     __param(2, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MAT_DIALOG_DATA */])),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialogRef */]) === "function" && _b || Object, Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["i" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["i" /* MatDialogRef */]) === "function" && _b || Object, Object])
 ], EditDialogComponent);
 
 var _a, _b;
@@ -1708,7 +1761,7 @@ CostTypeAddComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-spese/cost-type-add/cost-type-add.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-spese/cost-type-add/cost-type-add.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatDialogRef */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["i" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["i" /* MatDialogRef */]) === "function" && _b || Object])
 ], CostTypeAddComponent);
 
 var _a, _b;
@@ -1845,7 +1898,7 @@ GestioneSpeseComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-spese/gestione-spese.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-spese/gestione-spese.component.scss")]
     }),
-    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatDialog */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["g" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["g" /* MatDialog */]) === "function" && _d || Object])
 ], GestioneSpeseComponent);
 
 var _a, _b, _c, _d;
@@ -1977,7 +2030,7 @@ GestioneStoreComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-store/gestione-store.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-store/gestione-store.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["f" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["f" /* MatDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialog */]) === "function" && _b || Object])
 ], GestioneStoreComponent);
 
 var _a, _b;
@@ -2050,7 +2103,7 @@ StoreAddComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-store/store-add/store-add.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatDialogRef */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["i" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["i" /* MatDialogRef */]) === "function" && _a || Object])
 ], StoreAddComponent);
 
 var _a;
@@ -2197,7 +2250,7 @@ GestioneUtenteComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-utente/gestione-utente.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["f" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["f" /* MatDialog */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_user_service__["a" /* UserService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["g" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["g" /* MatDialog */]) === "function" && _c || Object])
 ], GestioneUtenteComponent);
 
 var _a, _b, _c;
@@ -2279,7 +2332,7 @@ UserAddComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.html"),
         styles: [__webpack_require__("../../../../../src/app/management/gestione-utente/user-add/user-add.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["h" /* MatDialogRef */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_store_service__["a" /* StoreService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_material__["i" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_material__["i" /* MatDialogRef */]) === "function" && _b || Object])
 ], UserAddComponent);
 
 var _a, _b;
@@ -2368,7 +2421,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/report/general-report.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar>\n    <button mat-icon-button (click)=\"sidenav.open()\">\n        <mat-icon class=\"md-24\">menu</mat-icon>\n      </button>\n  </mat-toolbar>\n<mat-sidenav-container>\n  <mat-sidenav #sidenav mode=\"over\" opened=\"false\">\n    <mat-expansion-panel>\n      <mat-expansion-panel-header class=\"primary\">\n        <mat-panel-title>\n          Costi\n        </mat-panel-title>\n        <mat-panel-description></mat-panel-description>\n      </mat-expansion-panel-header>\n      link report1\n    </mat-expansion-panel>\n    <mat-expansion-panel>\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Ricavi\n        </mat-panel-title>\n        <mat-panel-description></mat-panel-description>\n      </mat-expansion-panel-header>\n      link report2\n    </mat-expansion-panel>\n    <mat-expansion-panel>\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Incidenza\n        </mat-panel-title>\n        <mat-panel-description></mat-panel-description>\n      </mat-expansion-panel-header>\n      link report3\n    </mat-expansion-panel>\n\n  </mat-sidenav>\n\n  <mat-expansion-panel>\n    <mat-expansion-panel-header>\n      <mat-panel-title>\n        Filtri\n      </mat-panel-title>\n      <mat-panel-description>\n        inserisci i filtri qui\n      </mat-panel-description>\n    </mat-expansion-panel-header>\n\n    <mat-form-field>\n      <input matInput placeholder=\"First name\">\n    </mat-form-field>\n\n    <mat-form-field>\n      <input matInput placeholder=\"Age\">\n    </mat-form-field>\n  </mat-expansion-panel>\n\n  <app-reports></app-reports>\n\n</mat-sidenav-container>\n"
+module.exports = "<mat-toolbar>\n  <button mat-icon-button (click)=\"sidenav.open()\">\n    <mat-icon class=\"md-24\">menu</mat-icon>\n  </button>\n</mat-toolbar>\n<div style=\"height: 100%\">\n  <mat-sidenav-container class=\"sidenav-container\">\n    <mat-sidenav #sidenav mode=\"over\" opened=\"true\">\n      <mat-expansion-panel>\n        <mat-expansion-panel-header class=\"primary\">\n          <mat-panel-title>\n            Costi\n          </mat-panel-title>\n          <mat-panel-description></mat-panel-description>\n        </mat-expansion-panel-header>\n        link report1\n      </mat-expansion-panel>\n      <mat-expansion-panel>\n        <mat-expansion-panel-header>\n          <mat-panel-title>\n            Ricavi\n          </mat-panel-title>\n          <mat-panel-description></mat-panel-description>\n        </mat-expansion-panel-header>\n        link report2\n      </mat-expansion-panel>\n      <mat-expansion-panel>\n        <mat-expansion-panel-header>\n          <mat-panel-title>\n            Incidenza\n          </mat-panel-title>\n          <mat-panel-description></mat-panel-description>\n        </mat-expansion-panel-header>\n        <mat-nav-list>\n          <a md-list-item [routerLink]=\"['incidenza']\">\n            <div md-line>Intervallo</div>\n          </a>\n          <a md-list-item>\n            <div md-line>Giorno</div>\n          </a>\n        </mat-nav-list>\n\n\n\n      </mat-expansion-panel>\n\n    </mat-sidenav>\n\n\n\n    <div style=\"min-height: 200px;\">\n      <router-outlet></router-outlet>\n    </div>\n  </mat-sidenav-container>\n</div>\n"
 
 /***/ }),
 
@@ -2423,7 +2476,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/report/incidenza-report/incidenza-report.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  incidenza-report works!\n</p>\n<dx-chart [dataSource]=\"costList\">\n  <dxi-series argumentField=\"descrizione\" valueField=\"valore\" type=\"bar\"></dxi-series>\n</dx-chart>\n"
+module.exports = "<mat-expansion-panel>\n  <mat-expansion-panel-header>\n    <mat-panel-title>\n      Filtri\n    </mat-panel-title>\n    <mat-panel-description>\n      inserisci i filtri qui\n    </mat-panel-description>\n  </mat-expansion-panel-header>\n\n  <mat-form-field>\n    <input matInput [matDatepicker]=\"picker1\" placeholder=\"Dal\" [formControl]=\"dateFrom\">\n    <mat-datepicker-toggle matSuffix [for]=\"picker1\"></mat-datepicker-toggle>\n    <mat-datepicker #picker1></mat-datepicker>\n  </mat-form-field>\n\n  <mat-form-field>\n    <input matInput [matDatepicker]=\"picker2\" placeholder=\"A tutto il\"\n           [formControl]=\"dateTo\">\n    <mat-datepicker-toggle matSuffix [for]=\"picker2\"></mat-datepicker-toggle>\n    <mat-datepicker #picker2></mat-datepicker>\n  </mat-form-field>\n</mat-expansion-panel>\n<dx-chart [dataSource]=\"costList\">\n  <dxi-series argumentField=\"descrizione\" valueField=\"valore\" type=\"bar\"></dxi-series>\n</dx-chart>\n"
 
 /***/ }),
 
@@ -2433,7 +2486,8 @@ module.exports = "<p>\n  incidenza-report works!\n</p>\n<dx-chart [dataSource]=\
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IncidenzaReportComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_services_spesa_service__ = __webpack_require__("../../../../../src/app/_services/spesa.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_services_reports_service__ = __webpack_require__("../../../../../src/app/_services/reports.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2445,34 +2499,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 // import CustomStore from 'devextreme/data/custom_store';
 var IncidenzaReportComponent = (function () {
-    function IncidenzaReportComponent(_spesaService) {
-        this._spesaService = _spesaService;
+    function IncidenzaReportComponent(_reportsService) {
+        this._reportsService = _reportsService;
     }
     IncidenzaReportComponent.prototype.ngOnInit = function () {
         this.getList();
+        this.dateFrom = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"](new Date());
+        this.dateTo = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"](new Date());
         // this.chartData = JSON.stringify(this.costList);
     };
     IncidenzaReportComponent.prototype.getList = function () {
         var _this = this;
         /* Lo user sarà selezionato dai filtri */
         var usr = JSON.parse(localStorage.getItem('currUser'));
-        this._spesaService.getTodaySpesaList(usr.store._id)
+        this._reportsService.getTodayIncidenza(usr.store._id)
             .then(function (spese) { _this.costList = spese; _this.costListJSON = JSON.stringify(spese); })
             .catch(function (err) { return console.log(err); });
+    };
+    IncidenzaReportComponent.prototype.getReport = function (from, to, store) {
     };
     return IncidenzaReportComponent;
 }());
 IncidenzaReportComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'app-reports',
         template: __webpack_require__("../../../../../src/app/report/incidenza-report/incidenza-report.component.html"),
         styles: [__webpack_require__("../../../../../src/app/report/incidenza-report/incidenza-report.component.css")],
         encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewEncapsulation"].None,
         preserveWhitespaces: false,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_app_services_reports_service__["a" /* ReportsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_app_services_reports_service__["a" /* ReportsService */]) === "function" && _a || Object])
 ], IncidenzaReportComponent);
 
 var _a;
@@ -2575,7 +2633,7 @@ SpeseListComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/spese/spese-list/spese-list.component.html"),
         styles: [__webpack_require__("../../../../../src/app/spese/spese-list/spese-list.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["g" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["g" /* MatDialog */]) === "function" && _b || Object])
 ], SpeseListComponent);
 
 var _a, _b;
@@ -2684,7 +2742,7 @@ SpeseNewComponent = __decorate([
         styles: [__webpack_require__("../../../../../src/app/spese/spese-new/spese-new.component.css")]
     }),
     __param(2, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MAT_DIALOG_DATA */])),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialogRef */]) === "function" && _b || Object, Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["i" /* MatDialogRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["i" /* MatDialogRef */]) === "function" && _b || Object, Object])
 ], SpeseNewComponent);
 
 var _a, _b;
@@ -2801,7 +2859,7 @@ SpeseComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/spese/spese.component.html"),
         styles: [__webpack_require__("../../../../../src/app/spese/spese.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatDialog */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_services_spesa_service__["a" /* SpesaService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_material__["g" /* MatDialog */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_material__["g" /* MatDialog */]) === "function" && _b || Object])
 ], SpeseComponent);
 
 var _a, _b;

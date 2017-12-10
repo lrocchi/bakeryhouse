@@ -9,6 +9,7 @@ export class Cost {
   public valore: number ;
   public utente: User;
   public tipo: CostType;
+  public fullType: CostType;
   public store: Store;
   public ref_date: string;
 

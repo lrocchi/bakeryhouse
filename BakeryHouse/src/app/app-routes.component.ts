@@ -7,6 +7,7 @@ import { HomeComponent } from 'app/home/home.component';
 import { ManagementComponent } from 'app/management/management.component';
 import { GeneralReportComponent } from 'app/report/general-report.component';
 import { LogoutComponent } from 'app/logout.component';
+import { IncidenzaReportComponent } from 'app/report/incidenza-report/incidenza-report.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,15 +16,15 @@ const appRoutes: Routes = [
   {
     path: 'manage',
     canActivate: [AuthGuard],
-    children: [
-      { path: '', component: ManagementComponent },
-    ]
+    component: ManagementComponent,
+    children: []
   },
   {
     path: 'report',
     canActivate: [AuthGuard],
+    component: GeneralReportComponent,
     children: [
-      { path: '', component: GeneralReportComponent },
+      { path: 'incidenza', component: IncidenzaReportComponent },
     ]
   },
   // otherwise redirect to home

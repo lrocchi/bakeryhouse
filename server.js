@@ -9,6 +9,7 @@ var users = require('./routes/users');
 var stores = require('./routes/store');
 var costType = require('./routes/costType');
 var balance = require('./routes/balance');
+var report = require('./routes/report');
 
 var BalanceSchedule = require('./scheduler');
 
@@ -47,6 +48,7 @@ app.use('/api/balance', balance);
 app.use('/api/users', users);
 app.use('/api/stores', stores);
 app.use('/api/costtype', costType);
+app.use('/api/report', report);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

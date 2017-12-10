@@ -30,25 +30,15 @@ export class SpesaService {
   public getTodaySpesaList(id_store: string) {
 
 
-    const today = new Date();
-    today.setHours(0 , 0 - today.getTimezoneOffset(), 0);
-    /* today.setMinutes(0);
-    today.setSeconds(1) */
-
-    const stringToday = today.toISOString();
-
+    // const today = new Date();
+    // today.setHours(0 , 0 - today.getTimezoneOffset(), 0);
     const myHeaders = new Headers({ 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
     const myParams = new URLSearchParams();
     // myParams.set('store', id_store);
     const options = new RequestOptions({ headers: myHeaders,  params: myParams});
-
     let sUrl = 'api/spese/today';
     sUrl += '?store=' + id_store;
-
     return this._http.get(sUrl, options).map(data => data.json()).toPromise();
-    // return this._http.get('api/spese?store=' + id_store + '&create_on={ "$gte" : ' + stringToday + ' }')
-    // return this._http.get('api/spese', options).map(data => data.json()).toPromise();
-
   }
 
   public addSpesa(spesa: Cost) {

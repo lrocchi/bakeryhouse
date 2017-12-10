@@ -23,12 +23,15 @@ router.get("/", function(req, res, next) {
   });
 });
 
+
+
+
 // GET today costs by id_store
 router.get("/today", function(req, res, next) {
   /*
   *Il giorno deve essere preso dal campo "giorno di riferimento dello store"
   */
-  var today = new Date();
+  // var today = new Date();
   var storeObj = Store.findById(req.query.store, function(err, storeData) {
     if (err) {
       console.log(err);
@@ -65,6 +68,7 @@ router.post("/", function(req, res, next) {
     // console.log("SPESA  DA AGGIUNGERE: " + JSON.stringify(req.body));
     // Attempt to save the spesa
     var spesa = req.body;
+    spesa.fullType = spesa.tipo;
     var storeObj = Store.findById(spesa.store._id, function(err, storeData) {
       if (err) {
         console.log(err);

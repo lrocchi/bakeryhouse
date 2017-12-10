@@ -12,10 +12,10 @@ import { SpeseComponent } from 'app/spese/spese.component';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatToolbarModule, MatButtonModule, MatIconModule } from '@angular/material/';
-import { MatMenu, MatProgressSpinnerModule, MatTabsModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatChipsModule } from '@angular/material/';
+import { MatMenu, MatProgressSpinnerModule, MatTabsModule, MatSidenavModule, MatNativeDateModule } from '@angular/material';
 import { MatMenuModule, MatIconRegistry, MatDialogModule, MatDialogRef, MatSelectModule} from '@angular/material';
-import { MatFormFieldModule, MatInputModule, MatCardModule, MatCheckboxModule, MatExpansionModule, MatSidenavModule, MatChipsModule} from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatCardModule, MatCheckboxModule, MatExpansionModule} from '@angular/material';
 import { SpeseListComponent } from './spese/spese-list/spese-list.component';
 import { SpeseNewComponent } from './spese/spese-new/spese-new.component';
 import { CdkTableModule } from '@angular/cdk/table';
@@ -40,6 +40,7 @@ import { DxChartModule, DxDataGridModule } from 'devextreme-angular';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LogoutComponent } from 'app/logout.component';
 import { IncidenzaReportComponent } from './report/incidenza-report/incidenza-report.component';
+import { ReportsService } from 'app/_services/reports.service';
 
 
 
@@ -75,6 +76,8 @@ import { IncidenzaReportComponent } from './report/incidenza-report/incidenza-re
     MatExpansionModule,
     MatSidenavModule,
     MatChipsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 
     BrowserAnimationsModule,
 
@@ -130,7 +133,8 @@ export class DemoMaterialModule { }
     SpesaService,
     UserService,
     StoreService,
-    BalanceService
+    BalanceService,
+    ReportsService
 
   ],
   bootstrap: [AppComponent],

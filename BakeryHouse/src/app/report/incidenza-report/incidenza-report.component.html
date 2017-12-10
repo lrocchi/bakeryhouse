@@ -1,6 +1,26 @@
-<p>
-  incidenza-report works!
-</p>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Filtri
+    </mat-panel-title>
+    <mat-panel-description>
+      inserisci i filtri qui
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker1" placeholder="Dal" [formControl]="dateFrom">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker2" placeholder="A tutto il"
+           [formControl]="dateTo">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+</mat-expansion-panel>
 <dx-chart [dataSource]="costList">
   <dxi-series argumentField="descrizione" valueField="valore" type="bar"></dxi-series>
 </dx-chart>
