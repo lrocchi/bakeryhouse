@@ -11,7 +11,7 @@ export class BalanceService {
 
   public getTodayBalanceList(store: Store) {
     const date = new Date(store.ref_date);
-
+    console.log('store.ref_date: ' + store.ref_date);
     return this._http.get('api/balance/' + date.getUTCSeconds() + '/' + store._id).map(data => data.json()).toPromise();
 
   }

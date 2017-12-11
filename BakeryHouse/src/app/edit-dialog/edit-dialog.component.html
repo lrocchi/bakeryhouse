@@ -132,10 +132,10 @@
             </mat-form-field>
           </div>
           <div>
-              <mat-form-field *ngIf="balanceObj.value==100">
-                  <input matInput type="number" [(ngModel)]="balanceObj.capital" placeholder="Fondo Cassa" autocomplete="off" #flash="ngModel" name="capital"
-                    required>
-                </mat-form-field>
+            <mat-form-field *ngIf="balanceObj.value === 100">
+              <input matInput type="number" [(ngModel)]="balanceObj.capital" placeholder="Fondo Cassa" autocomplete="off" #flash="ngModel"
+                name="capital" required>
+            </mat-form-field>
             <mat-form-field>
               <input matInput type="number" [(ngModel)]="balanceObj.riserva" placeholder="Riserva Monete" autocomplete="off" #riserva="ngModel"
                 name="riserva">
@@ -145,7 +145,7 @@
                 name="preconti">
             </mat-form-field> -->
             <!-- Non deve comparire nella Chiusura -->
-            <mat-form-field *ngIf="balanceObj.value<100">
+            <mat-form-field *ngIf="balanceObj.value < 100">
               <input matInput type="number" [(ngModel)]="balanceObj.tavoliAperti" placeholder="Tavoli Aperti" autocomplete="off" #tavoliAperti="ngModel"
                 name="tavoliAperti">
             </mat-form-field>
