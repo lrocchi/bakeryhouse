@@ -192,7 +192,9 @@ export class ChiusureComponent implements OnInit {
     } else {
       balance.value = 25;
     }
+    console.log('balance.value:' + balance.value);
     balance.type = BalanceType[balance.value];
+    console.log('balance.type:' + balance.type);
     // balance.prevCapital = this.lastBalance.prevCapital;
 
     this.editDialog.componentInstance.balanceObj = balance;
