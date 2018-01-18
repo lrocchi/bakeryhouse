@@ -2,9 +2,9 @@
 <div class="alert alert-danger">{{message}}</div>
 <md-card>
   <md-card-header>
-    <h3 style="float:left;">Spese di oggi: {{today | date: 'dd/MM/y'}}</h3>
+    <h3 style="float:left;">Spese del giorno: {{today | date: 'dd/MM/y'}}</h3>
 
-    <div style="float:right;">
+    <div style="float:right; margin: 10px">
         <button mat-fab (click)="openDialog()" color="primary" style="color:white">
             <mat-icon>add</mat-icon>
           </button>

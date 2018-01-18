@@ -837,7 +837,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/chiusure/chiusure.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n<div class=\"alert alert-danger\">{{message}}</div>\r\n<mat-card>\r\n  <mat-card-header>\r\n\r\n    <h3 *ngIf=\"diff>0\" style=\"float:left; max-width:50%\">Prossimo resoconto tra\r\n      <p>{{timerMessage}} ({{diff}})</p>\r\n    </h3>\r\n    <h3 *ngIf=\"diff<0\" style=\"float:left; max-width:50%; color: red\">Resoconto in ritardo di {{timerMessage}}</h3>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div style=\"float:right;\" class=\"ProceedContainer ng-scope\">\r\n      <button mat-fab (click)=\"openEditDialog()\" color=\"primary\" style=\"color:white\" *ngIf=\"lastBalance?.type!=='Chiusura'\">\r\n        <mat-icon>add</mat-icon>\r\n      </button>\r\n      <!-- <button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\" *ngIf=\"lastBalance?.type!=='Chiusura'\">Aggiungi</button> -->\r\n    </div>\r\n  </mat-card-header>\r\n  <mat-card-content>\r\n    <mat-card *ngIf=\"lastBalance\">\r\n      <mat-card-title-group>\r\n        <mat-progress-spinner [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\">0</mat-progress-spinner>\r\n        <mat-card-title>Resoconto {{lastBalance.type}}</mat-card-title>\r\n        <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n      </mat-card-title-group>\r\n      <mat-card-content class=\"md-content\">\r\n\r\n\r\n        <p>\r\n          <span>\r\n            <i>Resoconto eseguito da:</i>\r\n          </span>\r\n          <span>\r\n            <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong>\r\n          </span>\r\n        </p>\r\n        <p>\r\n          <span>In cassa: </span>\r\n          <span>\r\n            <strong>{{lastBalance.cassa}} &euro;</strong>\r\n          </span>\r\n        </p>\r\n        <p>\r\n          <span>POS:</span>\r\n          <span>\r\n            <strong>{{lastBalance.pos}} &euro;</strong>\r\n          </span>\r\n        </p>\r\n        <p>\r\n          <span>Ticket:</span>\r\n          <span>\r\n            <strong>{{lastBalance.ticket}} &euro;</strong>\r\n          </span>\r\n        </p>\r\n      </mat-card-content>\r\n      <!-- <mat-card-actions>\r\n        <button md-button disabled=\"true\">SEGNALA</button>\r\n      </mat-card-actions> -->\r\n    </mat-card>\r\n  </mat-card-content>\r\n</mat-card>\r\n<!-- </div> -->\r\n\r\n\r\n<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n  <div class=\"alert alert-danger\">{{message}}</div>\r\n  <div>\r\n    <h3>Resoconto</h3>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\r\n  </div>\r\n\r\n  <mat-card *ngFor=\"let lastBalance of balance\">\r\n    <mat-card-title-group>\r\n      <md-progress-spinner class=\"example-margin\" color=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\"></md-progress-spinner>\r\n      <mat-card-title>Resoconto {{lastBalance.tipo}}</mat-card-title>\r\n      <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n    </mat-card-title-group>\r\n    <mat-card-content class=\"md-content\">\r\n\r\n\r\n      <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\r\n      <p><span>In cassa: </span><span>{{lastBalance.cassa}} &euro;</span></p>\r\n      <p><span>POS:</span><span>{{lastBalance.pos}}</span></p>\r\n      <p><span>Ticket:</span><span>{{lastBalance.ticket}}</span></p>\r\n    </mat-card-content>\r\n    <mat-card-actions>\r\n      <button md-button disabled=\"true\">INSERISCI</button>\r\n    </mat-card-actions>\r\n  </mat-card>\r\n\r\n</div> -->\r\n"
+module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n<div class=\"alert alert-danger\">{{message}}</div>\r\n<mat-card>\r\n  <mat-card-header>\r\n\r\n    <!-- <h3 *ngIf=\"diff>0\" style=\"float:left; max-width:50%\">Prossimo resoconto tra\r\n      <p>{{timerMessage}} ({{diff}})</p>\r\n    </h3>\r\n    <h3 *ngIf=\"diff<0\" style=\"float:left; max-width:50%; color: red\">Resoconto in ritardo di {{timerMessage}}</h3> -->\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div style=\"float:right;\" class=\"ProceedContainer ng-scope\">\r\n      <button mat-fab (click)=\"openEditDialog()\" color=\"primary\" style=\"color:white\" *ngIf=\"lastBalance?.type!=='Chiusura'\">\r\n        <mat-icon>add</mat-icon>\r\n      </button>\r\n      <!-- <button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\" *ngIf=\"lastBalance?.type!=='Chiusura'\">Aggiungi</button> -->\r\n    </div>\r\n  </mat-card-header>\r\n  <mat-card-content>\r\n    <mat-card *ngIf=\"lastBalance\">\r\n      <mat-card-title-group>\r\n        <mat-progress-spinner [color]=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\">0</mat-progress-spinner>\r\n        <mat-card-title>Resoconto {{lastBalance.type}}</mat-card-title>\r\n        <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n      </mat-card-title-group>\r\n      <mat-card-content class=\"md-content\">\r\n\r\n\r\n        <p>\r\n          <span>\r\n            <i>Resoconto eseguito da:</i>\r\n          </span>\r\n          <span>\r\n            <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong>\r\n          </span>\r\n        </p>\r\n        <p>\r\n          <span>In cassa: </span>\r\n          <span>\r\n            <strong>{{lastBalance.cassa}} &euro;</strong>\r\n          </span>\r\n        </p>\r\n        <p>\r\n          <span>POS:</span>\r\n          <span>\r\n            <strong>{{lastBalance.pos}} &euro;</strong>\r\n          </span>\r\n        </p>\r\n        <p>\r\n          <span>Ticket:</span>\r\n          <span>\r\n            <strong>{{lastBalance.ticket}} &euro;</strong>\r\n          </span>\r\n        </p>\r\n      </mat-card-content>\r\n      <!-- <mat-card-actions>\r\n        <button md-button disabled=\"true\">SEGNALA</button>\r\n      </mat-card-actions> -->\r\n    </mat-card>\r\n  </mat-card-content>\r\n</mat-card>\r\n<!-- </div> -->\r\n\r\n\r\n<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\">\r\n  <div class=\"alert alert-danger\">{{message}}</div>\r\n  <div>\r\n    <h3>Resoconto</h3>\r\n    <span class=\"span-fill-remaining\"></span>\r\n    <div class=\"ProceedContainer ng-scope\"><button class=\"btn BKHBrandedButton Ccm-Button-Primary\" (click)=\"openEditDialog()\">Aggiungi</button></div>\r\n  </div>\r\n\r\n  <mat-card *ngFor=\"let lastBalance of balance\">\r\n    <mat-card-title-group>\r\n      <md-progress-spinner class=\"example-margin\" color=\"spinnerColor\" [mode]=\"spinnerMode\" [value]=\"lastBalance.value\"></md-progress-spinner>\r\n      <mat-card-title>Resoconto {{lastBalance.tipo}}</mat-card-title>\r\n      <mat-card-subtitle>stato: inserito</mat-card-subtitle>\r\n    </mat-card-title-group>\r\n    <mat-card-content class=\"md-content\">\r\n\r\n\r\n      <p><span><i>Resoconto eseguito da:</i></span><span> <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong></span></p>\r\n      <p><span>In cassa: </span><span>{{lastBalance.cassa}} &euro;</span></p>\r\n      <p><span>POS:</span><span>{{lastBalance.pos}}</span></p>\r\n      <p><span>Ticket:</span><span>{{lastBalance.ticket}}</span></p>\r\n    </mat-card-content>\r\n    <mat-card-actions>\r\n      <button md-button disabled=\"true\">INSERISCI</button>\r\n    </mat-card-actions>\r\n  </mat-card>\r\n\r\n</div> -->\r\n"
 
 /***/ }),
 
@@ -2774,7 +2774,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/spese/spese.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n<div class=\"alert alert-danger\">{{message}}</div>\r\n<md-card>\r\n  <md-card-header>\r\n    <h3 style=\"float:left;\">Spese di oggi: {{today | date: 'dd/MM/y'}}</h3>\r\n\r\n    <div style=\"float:right;\">\r\n        <button mat-fab (click)=\"openDialog()\" color=\"primary\" style=\"color:white\">\r\n            <mat-icon>add</mat-icon>\r\n          </button>\r\n      <!-- <button (click)=\"openDialog()\" class=\"btn BKHBrandedButton Ccm-Button-Primary \">Aggiungi</button> -->\r\n    </div>\r\n  </md-card-header>\r\n  <md-card-content>\r\n    <div fxLayout=\"column\" fxFill>\r\n      <app-spese-list (reloadEvent)=\"getList()\" [spesaList]=\"spesaList\"></app-spese-list>\r\n    </div>\r\n  </md-card-content>\r\n</md-card>\r\n<!-- </div> -->\r\n"
+module.exports = "<!-- <div style=\"display: inline-block; text-align: left; width: 100%;\"> -->\r\n<div class=\"alert alert-danger\">{{message}}</div>\r\n<md-card>\r\n  <md-card-header>\r\n    <h3 style=\"float:left;\">Spese del giorno: {{today | date: 'dd/MM/y'}}</h3>\r\n\r\n    <div style=\"float:right; margin: 10px\">\r\n        <button mat-fab (click)=\"openDialog()\" color=\"primary\" style=\"color:white\">\r\n            <mat-icon>add</mat-icon>\r\n          </button>\r\n      <!-- <button (click)=\"openDialog()\" class=\"btn BKHBrandedButton Ccm-Button-Primary \">Aggiungi</button> -->\r\n    </div>\r\n  </md-card-header>\r\n  <md-card-content>\r\n    <div fxLayout=\"column\" fxFill>\r\n      <app-spese-list (reloadEvent)=\"getList()\" [spesaList]=\"spesaList\"></app-spese-list>\r\n    </div>\r\n  </md-card-content>\r\n</md-card>\r\n<!-- </div> -->\r\n"
 
 /***/ }),
 
@@ -2808,12 +2808,13 @@ var SpeseComponent = (function () {
         this.today = Date.now();
     }
     SpeseComponent.prototype.ngOnInit = function () {
+        this.usr = JSON.parse(localStorage.getItem('currUser'));
+        this.today = new Date(this.usr.store.ref_date).getTime();
         this.getList();
     };
     SpeseComponent.prototype.getList = function () {
         var _this = this;
-        var usr = JSON.parse(localStorage.getItem('currUser'));
-        this._spesaService.getTodaySpesaList(usr.store._id)
+        this._spesaService.getTodaySpesaList(this.usr.store._id)
             .then(function (spese) { _this.spesaList = spese; })
             .catch(function (err) { return console.log(err); });
     };
@@ -2821,10 +2822,9 @@ var SpeseComponent = (function () {
         var _this = this;
         // console.log("ECCO");
         var tmpSpesa = spesa;
-        var usr = JSON.parse(localStorage.getItem('currUser'));
         this.message = '';
-        tmpSpesa.utente = usr;
-        tmpSpesa.store = usr.store;
+        tmpSpesa.utente = this.usr;
+        tmpSpesa.store = this.usr.store;
         // console.log("tmpSpesa -->" + JSON.stringify(tmpSpesa));
         this._spesaService.addSpesa(tmpSpesa)
             .then(function (data) {
@@ -2898,10 +2898,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__("../../../platform-browser-dynamic/@angular/platform-browser-dynamic.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__("../../../../../src/app/app.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_fastclick__ = __webpack_require__("../../../../fastclick/lib/fastclick.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_fastclick___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_fastclick__);
 
 
 
 
+
+__WEBPACK_IMPORTED_MODULE_4_fastclick__["attach"](document.body);
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["enableProdMode"])();
 }

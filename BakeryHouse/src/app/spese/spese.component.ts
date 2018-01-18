@@ -16,6 +16,7 @@ import { SpesaService } from 'app/_services/spesa.service';
   styleUrls: ['spese.component.css']
 })
 export class SpeseComponent implements OnInit {
+  usr: User;
 
   public message: string;
   public visible = false;
@@ -28,12 +29,14 @@ export class SpeseComponent implements OnInit {
   constructor(private _spesaService: SpesaService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.usr = JSON.parse(localStorage.getItem('currUser'));
+    this.today = new Date(this.usr.store.ref_date).getTime();
     this.getList();
   }
 
   getList() {
-    const usr: User = JSON.parse(localStorage.getItem('currUser'));
-    this._spesaService.getTodaySpesaList(usr.store._id)
+
+    this._spesaService.getTodaySpesaList(this.usr.store._id)
       .then(spese => { this.spesaList = spese; })
       .catch(err => console.log(err));
 
@@ -42,10 +45,9 @@ export class SpeseComponent implements OnInit {
   create(spesa: Cost) {
     // console.log("ECCO");
     const tmpSpesa: Cost = spesa;
-    const usr: User = JSON.parse(localStorage.getItem('currUser'));
-    this.message = '';
-    tmpSpesa.utente = usr;
-    tmpSpesa.store = usr.store;
+   this.message = '';
+    tmpSpesa.utente = this.usr;
+    tmpSpesa.store = this.usr.store;
     // console.log("tmpSpesa -->" + JSON.stringify(tmpSpesa));
     this._spesaService.addSpesa(tmpSpesa)
       .then((data) => {
