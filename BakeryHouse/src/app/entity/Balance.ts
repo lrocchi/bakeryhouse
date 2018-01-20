@@ -20,6 +20,8 @@ export class Balance {
   public riserva: number;
   public preconti: number;
   public tavoliAperti: number;
+  public rafa: number;
+  public speseTotali: number;
 
   // tslint:disable-next-line:one-line
   constructor(public cassa: number = 0){}
