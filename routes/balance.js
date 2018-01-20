@@ -4,6 +4,7 @@ var mongoose = require("mongoose");
 var config = require("../config/config");
 var Balance = require("../models/Balance");
 var Store = require("../models/Store");
+var Spese = require("../models/Cost");
 
 // GET today balances by id_store, ordered by date descending so it is possible get only the last one
 /* router.get('/today/:id_store', function(req, res, next){
@@ -24,13 +25,14 @@ router.get("/:epoch/:id_store", function(req, res, next) {
   today.setUTCSeconds(req.params.epoch);
   console.log("req.params.epoch: " + req.params.epoch); */
   var storeObj = Store.findById(req.params.id_store, function(err, storeData) {
-    Balance.find(
-     /*  {
+    Balance
+      .find
+      /*  {
       ref_date: {
         $gte: new Date(today.getFullYear(), today.getMonth(), today.getDate())
       }
     } */
-  )
+      ()
       .where("store")
       .equals(req.params.id_store)
       .where("ref_date")
@@ -60,42 +62,89 @@ router.post("/", function(req, res, next) {
     balance.ref_date = storeData.ref_date;
     // console.log("BALANCE:" + JSON.stringify(balance));
     // Attempt to save the spesa
-    Balance.create(balance, function(err, data) {
-      // console.log("REST:" + JSON.stringify(data));
-      if (err) {
-        console.log(err);
-        return res.json({
-          success: false,
-          message: "Rendiconto non aggiunto.",
-          data: data
+
+    /** calcoloincasso rafa */
+    var refDate = new Date(balance.ref_date);
+    
+    Spese.aggregate(
+      [
+        {
+          $match: {
+            "store": balance.store._id,
+            "ref_date": refDate
+          }
+        },
+
+        {
+          $group: {
+            _id: "$store",
+            total: { $sum: "$valore" }
+          }
+        }
+      ],
+      function(err, results) {
+       if (err) {
+          return res.json({
+            success: false,
+            message: "Errore: Rendiconto non cancellato!",
+            data: data
+          });
+          return;
+        }
+        balance.speseTotali= results.total;
+        var nRafa = balance.cassa;
+        if(balance.riserva){
+          nRafa += balance.riserva; 
+        }
+        if( balance.capital){
+          nRafa -=  balance.capital;
+        }
+
+        if( balance.speseTotali){
+          nRafa -=  balance.speseTotali;
+        }
+
+        if( balance.pos){
+          nRafa +=  balance.pos;
+        }
+        if( balance.flash){
+          nRafa -=  balance.flash;
+        }
+
+        balance.rafa = nRafa; 
+        
+        Balance.create(balance, function(err, data) {
+          // console.log("REST:" + JSON.stringify(data));
+          if (err) {
+            console.log(err);
+            return res.json({
+              success: false,
+              message: "Rendiconto non aggiunto.",
+              data: data
+            });
+          }
+          res.json({
+            success: true,
+            message: "Rendiconto aggiunto con successo",
+            data: data
+          });
         });
       }
-      res.json({
-        success: true,
-        message: "Rendiconto aggiunto con successo",
-        data: data
-      });
-    });
-    console.log("balance.type:" + balance.type);
+    );
+    /*
+    *Se è chiususa avanza la ref_date nello Store
+    */
     if (balance.type === "Chiusura") {
       var myDate = new Date(balance.ref_date);
       var newRefDate = new Date(
         myDate.setTime(myDate.getTime() + 1 * 86400000)
       );
-      //storeData.ref_date = newRefDate;
-
       Store.findById(storeData._id, function(err, data) {
         if (err) {
           console.log(err);
         }
         data.ref_date = newRefDate;
-        // console.log("NEW STORE:" + JSON.stringify(data));
         data.save();
-        /* res.json({
-            success: true,
-            message: 'Punto vendita aggiunto con successo',
-            data: data
-          }); */
       });
     }
   });
