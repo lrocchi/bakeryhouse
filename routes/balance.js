@@ -63,74 +63,94 @@ router.post("/", function(req, res, next) {
     // console.log("BALANCE:" + JSON.stringify(balance));
     // Attempt to save the spesa
 
-    /** calcoloincasso rafa */
-    var refDate = new Date(balance.ref_date);
-    
-    Spese.aggregate(
-      [
-        {
-          $match: {
-            "store": balance.store._id,
-            "ref_date": refDate
-          }
-        },
+    var myDate = new Date(balance.ref_date);
+    var prevRefDate = new Date(myDate.setTime(myDate.getTime() - 1 * 86400000));
 
-        {
-          $group: {
-            _id: "$store",
-            total: { $sum: "$valore" }
-          }
+    Balance.find()
+      .where("store")
+      .equals(balance.store)
+      .where("ref_date")
+      .gte(prevRefDate)
+      .sort({ value: "desc" })
+      .exec(function(err, balanceDocs) {
+        if (err) {
+          console.log(err);
+          res.send(err);
         }
-      ],
-      function(err, results) {
-       if (err) {
-          return res.json({
-            success: false,
-            message: "Errore: Rendiconto non cancellato!",
-            data: data
-          });
-          return;
+        if (balanceDocs[0].capital) {
+          balance.prevCapital = balanceDocs[0].capital;
+        }else{
+          balance.prevCapital = 0;
         }
-        balance.speseTotali= results.total;
-        var nRafa = balance.cassa;
-        if(balance.riserva){
-          nRafa += balance.riserva; 
-        }
-        if( balance.capital){
-          nRafa -=  balance.capital;
-        }
+        /** calcoloincasso rafa */
+        var refDate = new Date(balance.ref_date);
 
-        if( balance.speseTotali){
-          nRafa -=  balance.speseTotali;
-        }
+        Spese.aggregate(
+          [
+            {
+              $match: {
+                store: balance.store._id,
+                ref_date: refDate
+              }
+            },
 
-        if( balance.pos){
-          nRafa +=  balance.pos;
-        }
-        if( balance.flash){
-          nRafa -=  balance.flash;
-        }
+            {
+              $group: {
+                _id: "$store",
+                total: { $sum: "$valore" }
+              }
+            }
+          ],
+          function(err, results) {
+            if (err) {
+              return res.json({
+                success: false,
+                message: "Errore: Rendiconto non cancellato!",
+                data: data
+              });
+              return;
+            }
+            balance.speseTotali = results.total;
+            var nRafa = balance.cassa;
+            if (balance.riserva) {
+              nRafa += balance.riserva;
+            }
+            if (balance.prevCapital) {
+              nRafa -= balance.prevCapital;
+            }
 
-        balance.rafa = nRafa; 
-        
-        Balance.create(balance, function(err, data) {
-          // console.log("REST:" + JSON.stringify(data));
-          if (err) {
-            console.log(err);
-            return res.json({
-              success: false,
-              message: "Rendiconto non aggiunto.",
-              data: data
+            if (balance.speseTotali) {
+              nRafa -= balance.speseTotali;
+            }
+
+            if (balance.pos) {
+              nRafa += balance.pos;
+            }
+            if (balance.flash) {
+              nRafa -= balance.flash;
+            }
+
+            balance.rafa = nRafa;
+
+            Balance.create(balance, function(err, data) {
+              // console.log("REST:" + JSON.stringify(data));
+              if (err) {
+                console.log(err);
+                return res.json({
+                  success: false,
+                  message: "Rendiconto non aggiunto.",
+                  data: data
+                });
+              }
+              res.json({
+                success: true,
+                message: "Rendiconto aggiunto con successo",
+                data: data
+              });
             });
           }
-          res.json({
-            success: true,
-            message: "Rendiconto aggiunto con successo",
-            data: data
-          });
-        });
-      }
-    );
+        );
+      });
     /*
     *Se è chiususa avanza la ref_date nello Store
     */
