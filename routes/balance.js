@@ -79,7 +79,7 @@ router.post("/", function(req, res, next) {
         }
         if (balanceDocs[0].capital) {
           balance.prevCapital = balanceDocs[0].capital;
-        }else{
+        } else {
           balance.prevCapital = 0;
         }
         /** calcoloincasso rafa */
@@ -120,12 +120,17 @@ router.post("/", function(req, res, next) {
             }
 
             if (balance.speseTotali) {
-              nRafa -= balance.speseTotali;
+              nRafa += balance.speseTotali;
             }
 
             if (balance.pos) {
               nRafa += balance.pos;
             }
+
+            if (balance.ticket) {
+              nRafa += balance.ticket;
+            }
+
             if (balance.flash) {
               nRafa -= balance.flash;
             }
