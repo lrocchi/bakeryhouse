@@ -97,7 +97,7 @@ router.post("/", function(req, res, next) {
       .exec(function(err, balanceDocs) {
         if (err) {
           console.log(err);
-          res.send(err);
+          return res.send(err);
         }
         if (balanceDocs[0].capital) {
           balance.prevCapital = balanceDocs[0].capital;
@@ -109,9 +109,8 @@ router.post("/", function(req, res, next) {
           [
             {
               $match: {
-                ref_date: {"$eq": myDate},
-                store: {"$eq": balance.store._id}
-
+                ref_date: { $eq: balance.ref_date },
+                store: { $eq: balance.store._id }
               }
             },
 
@@ -126,10 +125,10 @@ router.post("/", function(req, res, next) {
             if (err) {
               return res.json({
                 success: false,
-                message: "Errore: Rendiconto non cancellato!",
+                message: "Errore: Rendiconto non inserito!",
                 data: data
               });
-              return;
+              
             }
             console.log("RESULTS->" + JSON.stringify(results));
             balance.speseTotali = results[0].total;
@@ -157,7 +156,7 @@ router.post("/", function(req, res, next) {
               nRafa -= balance.flash;
             }
 
-            balance.rafa = nRafa;
+            balance.rafa = Number.parseFloat(nRafa).toFixed(2);
 
             Balance.create(balance, function(err, data) {
               // console.log("REST:" + JSON.stringify(data));
@@ -169,31 +168,35 @@ router.post("/", function(req, res, next) {
                   data: data
                 });
               }
-              res.json({
-                success: true,
-                message: "Rendiconto aggiunto con successo",
-                data: data
-              });
+              
+              /* Se è chiususa avanza la ref_date nello Store  */
+              if (balance.type === "Chiusura") {
+                var myDate = new Date(balance.ref_date);
+                var newmyDate = new Date(
+                  myDate.setTime(myDate.getTime() + 1 * 86400000)
+                );
+                Store.findById(storeData._id, function(err, data) {
+                  if (err) {
+                    console.log(err);
+                    return res.json({
+                      success: true,
+                      message: "Data riferimento non aggiornata!",
+                      data: data
+                    });
+                  }
+                  data.ref_date = newmyDate;
+                  data.save();
+                  return res.json({
+                    success: true,
+                    message: "Rendiconto aggiunto con successo",
+                    data: data
+                  });
+                });
+              }
             });
           }
         );
       });
-    /*
-    *Se è chiususa avanza la ref_date nello Store
-    */
-    if (balance.type === "Chiusura") {
-      var myDate = new Date(balance.ref_date);
-      var newmyDate = new Date(
-        myDate.setTime(myDate.getTime() + 1 * 86400000)
-      );
-      Store.findById(storeData._id, function(err, data) {
-        if (err) {
-          console.log(err);
-        }
-        data.ref_date = newmyDate;
-        data.save();
-      });
-    }
   });
 
   // }
