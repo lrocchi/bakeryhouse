@@ -50,6 +50,28 @@ router.get("/:epoch/:id_store", function(req, res, next) {
   });
 });
 
+router.get("/lastOne/:id_store", function(req, res, next) {
+  /* var today = new Date();
+  today.setUTCSeconds(req.params.epoch);
+  console.log("req.params.epoch: " + req.params.epoch); */
+  var storeObj = Store.findById(req.params.id_store, function(err, storeData) {
+    Balance.findOne()
+      .where("store")
+      .equals(req.params.id_store)
+      .sort({ create_on: -1 })
+      .populate("user")
+      .populate("store")
+      .exec(function(err, balanceDocs) {
+        if (err) {
+          console.log(err);
+          res.send(err);
+        }
+        console.log("balanceDocs" + JSON.stringify(balanceDocs));
+        res.json(balanceDocs);
+      });
+  });
+});
+
 router.post("/", function(req, res, next) {
   var storeObj = Store.findById(req.body.store._id, function(err, storeData) {
     if (err) {
@@ -83,14 +105,13 @@ router.post("/", function(req, res, next) {
           balance.prevCapital = 0;
         }
         /** calcoloincasso rafa */
-        console.log("myDate->" + myDate);
-        console.log("balance.store._id->" + balance.store._id);
         Spese.aggregate(
           [
             {
               $match: {
-                store: balance.store._id,
-                ref_date: myDate
+                ref_date: {"$eq": myDate},
+                store: {"$eq": balance.store._id}
+
               }
             },
 
@@ -110,9 +131,8 @@ router.post("/", function(req, res, next) {
               });
               return;
             }
+            console.log("RESULTS->" + JSON.stringify(results));
             balance.speseTotali = results[0].total;
-            console.log("results -> " + JSON.stringify(results));
-            console.log("balance.speseTotali->" + balance.speseTotali);
             var nRafa = balance.cassa;
             if (balance.riserva) {
               nRafa += balance.riserva;
