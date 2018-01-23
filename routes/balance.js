@@ -64,13 +64,13 @@ router.post("/", function(req, res, next) {
     // Attempt to save the spesa
 
     var myDate = new Date(balance.ref_date);
-    var prevRefDate = new Date(myDate.setTime(myDate.getTime() - 1 * 86400000));
+    var prevmyDate = new Date(myDate.setTime(myDate.getTime() - 1 * 86400000));
 
     Balance.find()
       .where("store")
       .equals(balance.store)
       .where("ref_date")
-      .gte(prevRefDate)
+      .gte(prevmyDate)
       .sort({ value: "desc" })
       .exec(function(err, balanceDocs) {
         if (err) {
@@ -83,14 +83,14 @@ router.post("/", function(req, res, next) {
           balance.prevCapital = 0;
         }
         /** calcoloincasso rafa */
-        var refDate = new Date(balance.ref_date);
-
+        console.log("myDate->" + myDate);
+        console.log("balance.store._id->" + balance.store._id);
         Spese.aggregate(
           [
             {
               $match: {
                 store: balance.store._id,
-                ref_date: refDate
+                ref_date: myDate
               }
             },
 
@@ -110,7 +110,9 @@ router.post("/", function(req, res, next) {
               });
               return;
             }
-            balance.speseTotali = results.total;
+            balance.speseTotali = results[0].total;
+            console.log("results -> " + JSON.stringify(results));
+            console.log("balance.speseTotali->" + balance.speseTotali);
             var nRafa = balance.cassa;
             if (balance.riserva) {
               nRafa += balance.riserva;
@@ -161,14 +163,14 @@ router.post("/", function(req, res, next) {
     */
     if (balance.type === "Chiusura") {
       var myDate = new Date(balance.ref_date);
-      var newRefDate = new Date(
+      var newmyDate = new Date(
         myDate.setTime(myDate.getTime() + 1 * 86400000)
       );
       Store.findById(storeData._id, function(err, data) {
         if (err) {
           console.log(err);
         }
-        data.ref_date = newRefDate;
+        data.ref_date = newmyDate;
         data.save();
       });
     }
