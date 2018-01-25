@@ -1,0 +1,24 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules"
+  ],
+  "verbose": true,
+  "execMap": {
+    "js": "node --harmony"
+  },
+  "events": {
+    
+  },
+  "watch": [
+    "BakeryHouse/dist",
+    "modules",
+    "routes",
+    "utils"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js json html"
+}
