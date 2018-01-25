@@ -6,33 +6,30 @@ var Balance = require("../models/Balance");
 var Store = require("../models/Store");
 var Spese = require("../models/Cost");
 
-// GET today balances by id_store, ordered by date descending so it is possible get only the last one
-/* router.get('/today/:id_store', function(req, res, next){
-    var today = new Date();
-    Balance.find({
-         date: { $gte : new Date(today.getFullYear(), today.getMonth(), today.getDate())}
-       }).where('store').equals(req.params.id_store).sort({day: -1}) .populate('user').populate('store').exec(function(err, balanceDocs){
-               if(err){ 
-                 console.log(err);
-                   res.send(err);
-               }
-               res.json(balanceDocs);
-       });
-   }); */
+router.get("/lastone/:id_store", function(req, res, next) {
+  Balance.findOne()
+    .where("store")
+    .equals(req.params.id_store)
+    .sort({ create_on: -1 })
+    .populate("user")
+    .populate("store")
+    .exec(function(err, balanceDocs) {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      }
+      console.log(JSON.stringify(balanceDocs));
+      res.json(balanceDocs);
+    });
+});
 
 router.get("/:epoch/:id_store", function(req, res, next) {
   /* var today = new Date();
   today.setUTCSeconds(req.params.epoch);
   console.log("req.params.epoch: " + req.params.epoch); */
+  console.log("req.params.epoch: " + req.params.epoch);
   var storeObj = Store.findById(req.params.id_store, function(err, storeData) {
-    Balance
-      .find
-      /*  {
-      ref_date: {
-        $gte: new Date(today.getFullYear(), today.getMonth(), today.getDate())
-      }
-    } */
-      ()
+    Balance.find()
       .where("store")
       .equals(req.params.id_store)
       .where("ref_date")
@@ -42,31 +39,8 @@ router.get("/:epoch/:id_store", function(req, res, next) {
       .populate("store")
       .exec(function(err, balanceDocs) {
         if (err) {
-          console.log(err);
           res.send(err);
         }
-        res.json(balanceDocs);
-      });
-  });
-});
-
-router.get("/lastOne/:id_store", function(req, res, next) {
-  /* var today = new Date();
-  today.setUTCSeconds(req.params.epoch);
-  console.log("req.params.epoch: " + req.params.epoch); */
-  var storeObj = Store.findById(req.params.id_store, function(err, storeData) {
-    Balance.findOne()
-      .where("store")
-      .equals(req.params.id_store)
-      .sort({ create_on: -1 })
-      .populate("user")
-      .populate("store")
-      .exec(function(err, balanceDocs) {
-        if (err) {
-          console.log(err);
-          res.send(err);
-        }
-        console.log("balanceDocs" + JSON.stringify(balanceDocs));
         res.json(balanceDocs);
       });
   });
@@ -128,10 +102,13 @@ router.post("/", function(req, res, next) {
                 message: "Errore: Rendiconto non inserito!",
                 data: data
               });
-              
             }
-            console.log("RESULTS->" + JSON.stringify(results));
-            balance.speseTotali = results[0].total;
+            
+            if (results.length > 0) {
+              balance.speseTotali = results[0].total;
+            } else {
+              balance.speseTotali = 0;
+            }
             var nRafa = balance.cassa;
             if (balance.riserva) {
               nRafa += balance.riserva;
@@ -168,7 +145,7 @@ router.post("/", function(req, res, next) {
                   data: data
                 });
               }
-              
+
               /* Se è chiususa avanza la ref_date nello Store  */
               if (balance.type === "Chiusura") {
                 var myDate = new Date(balance.ref_date);

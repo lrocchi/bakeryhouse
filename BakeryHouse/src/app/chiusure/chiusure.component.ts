@@ -93,12 +93,19 @@ export class ChiusureComponent implements OnInit {
   }
 
   getList() {
-    // console.log('usr -->' + JSON.stringify(this.usr));
     this._balanceService
       .getTodayBalanceList(this.usr.store)
-      .then(balance => {
-        this.balance = balance;
-        this.lastBalance = balance[0];
+      .then(balanceDoc => {
+        this.balance = balanceDoc;
+        if (balanceDoc.length > 0) {
+          this.lastBalance = balanceDoc[0];
+        } else {
+          this._balanceService
+            .getLastBalance(this.usr.store)
+            .then(lastBalanceDoc => {
+              this.lastBalance = lastBalanceDoc;
+            });
+        }
       })
       .catch(err => console.log(err));
 
@@ -156,7 +163,7 @@ export class ChiusureComponent implements OnInit {
 
   getPrevCapital() {
     const myDate = new Date(this.usr.store.ref_date);
-    const date = new Date(myDate.setTime( myDate.getTime() - 1 * 86400000 ));
+    const date = new Date(myDate.setTime(myDate.getTime() - 1 * 86400000));
 
     this._balanceService
       .getBalanceList(this.usr.store._id, date)
@@ -187,11 +194,12 @@ export class ChiusureComponent implements OnInit {
     }else {
       balance.type = BalanceType[25];
     } */
-    if (this.lastBalance) {
-      balance.value = this.lastBalance.value + 25;
+    if (this.balance[0]) {
+      balance.value = this.balance[0].value + 25;
     } else {
       balance.value = 25;
     }
+
     console.log('balance.value:' + balance.value);
     balance.type = BalanceType[balance.value];
     console.log('balance.type:' + balance.type);

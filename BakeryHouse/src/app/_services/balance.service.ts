@@ -9,6 +9,11 @@ export class BalanceService {
   constructor(private _http: Http) { }
 
 
+  public getLastBalance(store: Store) {
+    return this._http.get('api/balance/lastone/' + store._id).map(data => data.json()).toPromise();
+
+  }
+
   public getTodayBalanceList(store: Store) {
     const date = new Date(store.ref_date);
     console.log('store.ref_date: ' + store.ref_date);
