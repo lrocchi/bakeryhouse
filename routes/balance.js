@@ -18,7 +18,7 @@ router.get("/lastone/:id_store", function(req, res, next) {
         console.log(err);
         res.send(err);
       }
-      console.log(JSON.stringify(balanceDocs));
+      // console.log(JSON.stringify(balanceDocs));
       res.json(balanceDocs);
     });
 });
@@ -27,7 +27,7 @@ router.get("/:epoch/:id_store", function(req, res, next) {
   /* var today = new Date();
   today.setUTCSeconds(req.params.epoch);
   console.log("req.params.epoch: " + req.params.epoch); */
-  console.log("req.params.epoch: " + req.params.epoch);
+  // console.log("req.params.epoch: " + req.params.epoch);
   var storeObj = Store.findById(req.params.id_store, function(err, storeData) {
     Balance.find()
       .where("store")

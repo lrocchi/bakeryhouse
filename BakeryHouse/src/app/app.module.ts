@@ -41,6 +41,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { LogoutComponent } from 'app/logout.component';
 import { IncidenzaReportComponent } from './report/incidenza-report/incidenza-report.component';
 import { ReportsService } from 'app/_services/reports.service';
+import { ShowErrorsComponent } from './management/gestione-utente/show-error/show-errors.component';
+
 
 
 
@@ -82,7 +84,8 @@ import { ReportsService } from 'app/_services/reports.service';
     BrowserAnimationsModule,
 
 
-  ]
+  ],
+  declarations: []
 })
 export class DemoMaterialModule { }
 
@@ -110,7 +113,7 @@ export class DemoMaterialModule { }
     GeneralReportComponent,
     IncidenzaReportComponent,
     LogoutComponent,
-
+    ShowErrorsComponent
 
   ],
 

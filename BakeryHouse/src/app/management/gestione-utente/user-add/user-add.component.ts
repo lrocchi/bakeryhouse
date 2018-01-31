@@ -4,6 +4,7 @@ import { Store } from 'app/entity/store';
 import { MatDialogRef } from '@angular/material';
 import { StoreService } from 'app/_services/store.service';
 import { UserService } from 'app/_services/user.service';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class UserAddComponent implements OnInit {
   }
 
 
-  create() {
+  create(myForm: NgForm) {
     console.log('UserAddComponent=' + JSON.stringify(this.user));
     this.dialogRef.close();
   }

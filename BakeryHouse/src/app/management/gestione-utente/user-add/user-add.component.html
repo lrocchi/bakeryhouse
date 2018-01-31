@@ -1,11 +1,12 @@
 <h3 mat-dialog-title>
   Aggiungi</h3>
-<form name="form" (ngSubmit)="create()" novalidate>
-
+<form #userForm="ngForm" (ngSubmit)="create(userForm)" novalidate>
+<pre></pre>
   <div mat-dialog-content>
 
     <mat-form-field class="example-full-width">
       <input matInput [(ngModel)]="user.name" placeholder="Nome" autocomplete="off" #name="ngModel" name="name" required>
+      <app-show-errors [control]="name"></app-show-errors>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
@@ -54,9 +55,10 @@
     </div>
     <span class="span-fill-remaining"></span>
     <div class="ProceedContainer ng-scope">
-      <button class="btn BKHBrandedButton Ccm-Button-Primary">Aggiungi</button>
+      <button class="btn BKHBrandedButton Ccm-Button-Primary" [disabled]="userForm.invalid || userForm.pending">Aggiungi</button>
     </div>
 
   </div>
 
+  <pre>{{userForm.value | json}}</pre>
 </form>
