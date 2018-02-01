@@ -1,6 +1,6 @@
 <h3 mat-dialog-title>
     Aggiungi</h3>
-  <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
+  <form #storeForm="ngForm" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
 
     <div mat-dialog-content>
 
@@ -26,7 +26,7 @@
       </div>
       <span class="span-fill-remaining"></span>
       <div class="ProceedContainer ng-scope">
-        <button class="btn BKHBrandedButton Ccm-Button-Primary">Aggiungi</button>
+        <button class="btn BKHBrandedButton Ccm-Button-Primary" [disabled]="storeForm.invalid || storeForm.pending">Aggiungi</button>
       </div>
 
     </div>

@@ -22,9 +22,9 @@ export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
 
   constructor(
     // private route: ActivatedRoute,
-    public auth: AuthService,
-    // private _serviceStore: StoreService
+    public auth: AuthService
   ) {
+    this.user = JSON.parse(localStorage.getItem('currUser'))
 
   }
 

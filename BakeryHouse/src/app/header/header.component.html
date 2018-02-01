@@ -21,17 +21,17 @@
   <a mat-menu-item routerLink="/" routerLinkActive="active">
     <mat-icon class="md-18|md-24|md-36|md-48">home</mat-icon>
     Home</a>
-
-  <a mat-menu-item routerLink="/manage" routerLinkActive="active">
+<div *ngIf="user">
+  <a mat-menu-item routerLink="/manage" routerLinkActive="active" *ngIf="user.ruolo !== 'Dipendente'">
     <mat-icon class="md-18|md-24|md-36|md-48">format_list_bulleted</mat-icon>
     Gestione
   </a>
 
-  <a mat-menu-item routerLink="/report" routerLinkActive="active">
+  <a mat-menu-item routerLink="/report" routerLinkActive="active" *ngIf="user.ruolo !== 'Dipendente'">
     <mat-icon class="md-18|md-24|md-36|md-48">trending_up</mat-icon>
     Report
   </a>
-
+</div>
   <!-- <btton mat-menu-item (click)="logout()"> -->
   <a mat-menu-item routerLink="/logout" routerLinkActive="active">
     <mat-icon class="md-18|md-24|md-36|md-48">exit_to_app</mat-icon>
