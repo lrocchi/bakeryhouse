@@ -16,6 +16,7 @@ import { SpesaService } from 'app/_services/spesa.service';
   styleUrls: ['spese.component.css']
 })
 export class SpeseComponent implements OnInit {
+
   usr: User;
 
   public message: string;
