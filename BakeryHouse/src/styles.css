@@ -24,7 +24,7 @@ button .mat-button-wrapper {
 
 
 
-.Ccm-MainContentView md-tab-group md-tab-header .mat-tab-label-container .mat-tab-list .mat-ink-bar{
+.Ccm-MainContentView mat-tab-group mat-tab-header .mat-tab-label-container .mat-tab-list .mat-ink-bar{
 
   position: absolute;
   bottom: 0;
@@ -37,12 +37,12 @@ button .mat-button-wrapper {
   overflow: auto;
 }
 
-form .mat-dialog-content md-input-container .mat-input-wrapper .mat-input-infix .mat-input-element{
+form .mat-dialog-content mat-input-container .mat-input-wrapper .mat-input-infix .mat-input-element{
 
   color: black;
 }
 
-form .mat-dialog-content md-input-container .mat-input-wrapper .mat-input-infix .mat-input-placeholder-wrapper{
+form .mat-dialog-content mat-input-container .mat-input-wrapper .mat-input-infix .mat-input-placeholder-wrapper{
   overflow: visible;
 }
 

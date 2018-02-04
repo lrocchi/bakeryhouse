@@ -9,6 +9,7 @@ import 'rxjs/add/operator/map';
 import { Cost } from 'app/entity/cost';
 import { SpesaService } from 'app/_services/spesa.service';
 import { ConfirmationDialog } from 'app/confirmation-dialog/confirmation-dialog.component';
+import { SharedService } from 'app/_services/shared.service';
 
 
 @Component({
@@ -20,11 +21,16 @@ export class SpeseListComponent {
 
   confirmDialog: MatDialogRef<ConfirmationDialog>;
 
-  @Input() spesaList: Array<Cost> = [];
+  // @Input() spesaList: Array<Cost> = [];
+  spesaList: Array<Cost> = [];
 
   @Output() reloadEvent = new EventEmitter();
 
-  constructor(private _spesaService: SpesaService, public dialog: MatDialog) { }
+  constructor(private _spesaService: SpesaService, private sharedService: SharedService, public dialog: MatDialog) {
+    this.sharedService.SpesaList.subscribe(value => {
+      this.spesaList = value;
+    });
+   }
 
   openConfirmationDelete(id: string) {
     this.confirmDialog = this.dialog.open(ConfirmationDialog, {

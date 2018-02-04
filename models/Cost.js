@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var CostType = require("./CostType");
+var Store = require("./Store");
 
 var costSchema = new mongoose.Schema({
     descrizione: {type: String, require: true},
@@ -11,7 +12,8 @@ var costSchema = new mongoose.Schema({
     utente: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     tipo: { type: mongoose.Schema.Types.ObjectId, ref: 'CostType' },
     fullType: [CostType.schema],
-    store: { type: mongoose.Schema.Types.ObjectId, ref: 'Store' }
+    store: { type: mongoose.Schema.Types.ObjectId, ref: 'Store' },
+    fullStore: [Store.schema]
 })
 
 

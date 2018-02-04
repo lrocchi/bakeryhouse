@@ -42,6 +42,7 @@ import { LogoutComponent } from 'app/logout.component';
 import { IncidenzaReportComponent } from './report/incidenza-report/incidenza-report.component';
 import { ReportsService } from 'app/_services/reports.service';
 import { ShowErrorsComponent } from './management/gestione-utente/show-error/show-errors.component';
+import { SharedService } from 'app/_services/shared.service';
 
 
 
@@ -137,7 +138,8 @@ export class DemoMaterialModule { }
     UserService,
     StoreService,
     BalanceService,
-    ReportsService
+    ReportsService,
+    SharedService
 
   ],
   bootstrap: [AppComponent],

@@ -31,7 +31,18 @@ var app = express();
 // app.set('view engine', 'ejs');
 // app.engine('html', require('ejs').renderFile);
 
-mongoose.connect(config.database.mLab, {useMongoClient: true, /* other options */});
+//SVILUPPO
+//=======================================================================================
+mongoose.connect(config.database.mLabDev, {useMongoClient: true, /* other options */});
+//=======================================================================================
+
+//ESERCIZIO
+//=======================================================================================
+// mongoose.connect(config.database.mLab, {useMongoClient: true, /* other options */});
+//=======================================================================================
+
+
+
 // Set Static Folder
 
 app.use(express.static(path.join(__dirname,'BakeryHouse/dist')));

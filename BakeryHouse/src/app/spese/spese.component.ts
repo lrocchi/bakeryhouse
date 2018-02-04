@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { SpeseNewComponent } from 'app/spese/spese-new/spese-new.component';
 import { LocalStorageService } from 'ng2-webstorage';
@@ -9,6 +8,7 @@ import { NgForm } from '@angular/forms';
 import { User } from 'app/entity/user';
 import { Cost } from 'app/entity/cost';
 import { SpesaService } from 'app/_services/spesa.service';
+import { SharedService } from 'app/_services/shared.service';
 
 @Component({
   selector: 'app-spese',
@@ -16,7 +16,6 @@ import { SpesaService } from 'app/_services/spesa.service';
   styleUrls: ['spese.component.css']
 })
 export class SpeseComponent implements OnInit {
-
   usr: User;
 
   public message: string;
@@ -25,9 +24,15 @@ export class SpeseComponent implements OnInit {
   dialogRef: MatDialogRef<SpeseNewComponent>;
   spesaList: Array<Cost>;
 
-
-
-  constructor(private _spesaService: SpesaService, public dialog: MatDialog) { }
+  constructor(
+    private _spesaService: SpesaService,
+    private sharedService: SharedService,
+    public dialog: MatDialog
+  ) {
+    this.sharedService.SpesaList.subscribe(value => {
+      this.spesaList = value;
+    });
+  }
 
   ngOnInit(): void {
     this.usr = JSON.parse(localStorage.getItem('currUser'));
@@ -36,36 +41,35 @@ export class SpeseComponent implements OnInit {
   }
 
   getList() {
-
-    this._spesaService.getTodaySpesaList(this.usr.store._id)
-      .then(spese => { this.spesaList = spese; })
+    this._spesaService
+      .getTodaySpesaList(this.usr.store._id)
+      .then(spese => {
+        // this.spesaList = spese;
+        this.sharedService.SpesaList.next(spese);
+      })
       .catch(err => console.log(err));
-
   }
 
   create(spesa: Cost) {
     // console.log("ECCO");
     const tmpSpesa: Cost = spesa;
-   this.message = '';
+    this.message = '';
     tmpSpesa.utente = this.usr;
     tmpSpesa.store = this.usr.store;
     // console.log("tmpSpesa -->" + JSON.stringify(tmpSpesa));
-    this._spesaService.addSpesa(tmpSpesa)
-      .then((data) => {
+    this._spesaService
+      .addSpesa(tmpSpesa)
+      .then(data => {
         if (data.success) {
           this.getList();
-
         } else {
           console.log(data.message);
           this.message = data.message;
         }
-
       })
       .catch(err => console.log(err));
     this.closeDialog();
-
   }
-
 
   openDialog() {
     // this.visible = !this.visible;
@@ -77,18 +81,10 @@ export class SpeseComponent implements OnInit {
         // console.log(dialogRef.componentInstance.spesa);
         this.create(dialogRef.componentInstance.spesa);
       }
-
     });
-
   }
 
   closeDialog() {
     this.dialog.closeAll();
   }
-
-
-
-
 }
-
-

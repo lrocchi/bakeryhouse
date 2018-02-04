@@ -1,20 +1,26 @@
 <!-- <div style="display: inline-block; text-align: left; width: 100%;"> -->
 <div class="alert alert-danger">{{message}}</div>
-<md-card>
-  <md-card-header>
-    <h3 style="float:left;">Spese del giorno: {{today | date: 'dd/MM/y'}}</h3>
 
-    <div style="float:right; margin: 10px">
-        <button mat-fab (click)="openDialog()" color="primary" style="color:white">
-            <mat-icon>add</mat-icon>
-          </button>
-      <!-- <button (click)="openDialog()" class="btn BKHBrandedButton Ccm-Button-Primary ">Aggiungi</button> -->
-    </div>
-  </md-card-header>
-  <md-card-content>
-    <div fxLayout="column" fxFill>
-      <app-spese-list (reloadEvent)="getList()" [spesaList]="spesaList"></app-spese-list>
-    </div>
-  </md-card-content>
-</md-card>
-<!-- </div> -->
+<h3 style="float:left;">Spese del giorno: {{today | date: 'dd/MM/y'}}</h3>
+
+<div style="float:right; margin: 10px">
+  <button mat-fab (click)="openDialog()" color="primary" style="color:white">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+
+<div fxLayout="column" fxFill>
+  <!-- <app-spese-list (reloadEvent)="getList()" [spesaList]="spesaList"></app-spese-list> -->
+  <app-spese-list (reloadEvent)="getList()"></app-spese-list>
+</div>
+
+
+<!-- <mat-card>
+  <mat-card-header>
+
+  </mat-card-header>
+  <mat-card-content>
+
+  </mat-card-content>
+</mat-card> -->

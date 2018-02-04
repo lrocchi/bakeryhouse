@@ -69,6 +69,7 @@ router.post("/", function(req, res, next) {
     // Attempt to save the spesa
     var spesa = req.body;
     spesa.fullType = spesa.tipo;
+    spesa.fullStore = spesa.store;
     var storeObj = Store.findById(spesa.store._id, function(err, storeData) {
       if (err) {
         console.log(err);

@@ -8,8 +8,8 @@ var Store = require("../models/Store");
 
 // Report
 router.get("/", function(req, res, next) {
-  console.log("from: " + req.query.from);
-  console.log("to: " + req.query.to);
+  // console.log("from: " + req.query.from);
+  // console.log("to: " + req.query.to);
   if (req.query.store) {
     console.log("store: " + req.query.store);
     Spese.find()
@@ -60,20 +60,8 @@ router.get("/today", function(req, res, next) {
       return null;
     }
     // var refDate = storeData.ref_date;
-    console.log("store: " + req.query.store);
+    // console.log("store: " + req.query.store);
 
-   /*  Spese.aggregate([
-      {
-        $match: {
-          ref_date: {$gte: storeData.ref_date}
-        }
-      },
-      {
-        $group: {
-
-        }
-      }
-    ]); */
 
 
     Spese.find()

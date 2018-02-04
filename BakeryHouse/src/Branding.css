@@ -5,7 +5,8 @@ body {
 }
 
 .Ccm-MainContent {
-  background: url("./assets/images/Landscape.jpg") repeat center center
+  background: url("./assets/images/Landscape.jpg") repeat center center;
+  z-index: -2;
 }
 
 @media (max-width: 1024px) {
@@ -13,14 +14,16 @@ body {
     background: url("./assets/images/PadPortrait.jpg") repeat center center
   } */
   .Ccm-MainContent {
-    background: url("./assets/images/PadPortrait.jpg") repeat center center
+    background: url("./assets/images/PadPortrait.jpg") repeat center center;
+    z-index: -2;
   }
 }
 
 @media (max-width: 768px) {
 
   .Ccm-MainContent {
-    background: url("./assets/images/Mobile.jpg") repeat center center
+    background: url("./assets/images/Mobile.jpg") repeat center center;
+    z-index: -2;
   }
   .table-responsive {
     width: 100%;
@@ -34,28 +37,15 @@ body {
 @media (max-width: 450px) {
 
   .Ccm-MainContent {
-    background: url("./assets/images/MobileSmall.jpg") repeat center center
+    background: url("./assets/images/MobileSmall.jpg") repeat center center;
+    z-index: -2;
   }
   .Ccm-LoginContainer {
     margin-top: 100px
   }
 }
 
-body.Ccm-LoginBody .Ccm-LoginContainer:before {
-  content: '';
-  position: absolute;
-  z-index: -2;
-  background: #ffffff;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 2px #ffffff
-}
+
 
 ::-webkit-scrollbar {
   width: 12px
@@ -704,18 +694,8 @@ table td[class*=col-], table th[class*=col-] {
   margin-top: 10px
 }
 
-/* .Ccm-Login-Footer {
-  margin: 10px auto;
-  width: 290px;
-  text-align: center;
-  color: #9C9C9C;
-  font-size: 12px
-}
 
-.Ccm-Login-Footer>p {
-  margin: 0px
-} */
-body.Ccm-LoginBody .Ccm-LoginContainer:before {
+ .Ccm-LoginContainer:before {
   content: '';
   position: absolute;
   z-index: -2;

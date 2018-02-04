@@ -48,7 +48,7 @@ BalanceSchedule.start = function() {
         today = new Date();
         today.setUTCHours(0, 0, 0, 1);
 
-        console.log("STORES:" + JSON.stringify(stores));
+        // console.log("STORES:" + JSON.stringify(stores));
         storeDoc.forEach(function(element) {
           element.ref_date = today;
 
@@ -58,13 +58,13 @@ BalanceSchedule.start = function() {
             if (err) {
               console.log(err);
             }
-            console.log("Aggiornato store: " + data.nome);
+            // console.log("Aggiornato store: " + data.nome);
           });
 
           
         });
-        console.log("BATCH Ultimato");
-        log.info("BATCH Ultimato");
+        // console.log("BATCH Ultimato");
+        // log.info("BATCH Ultimato");
       });
       
     // });
