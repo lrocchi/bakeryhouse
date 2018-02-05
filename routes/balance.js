@@ -18,9 +18,35 @@ router.get("/lastone/:id_store", function(req, res, next) {
         console.log(err);
         res.send(err);
       }
-      // console.log(JSON.stringify(balanceDocs));
+      console.log(JSON.stringify(balanceDocs));
       res.json(balanceDocs);
     });
+});
+
+router.get("/last/:id_store", function(req, res, next) {
+  /* var today = new Date();
+  today.setUTCSeconds(req.params.epoch);
+  console.log("req.params.epoch: " + req.params.epoch); */
+  // console.log("req.params.epoch: " + req.params.epoch);
+  var storeObj = Store.findById(req.params.id_store, function(err, storeData) {
+    var myDate = new Date(storeData.ref_date);
+    var prevmyDate = new Date(myDate.setTime(myDate.getTime() - 1 * 86400000));
+    Balance.find()
+      .where("store")
+      .equals(req.params.id_store)
+      .where("ref_date")
+      .gte(prevmyDate)
+      .sort({ ref_date: -1 })
+      .sort({ value: "desc" })
+      .populate("user")
+      .populate("store")
+      .exec(function(err, balanceDocs) {
+        if (err) {
+          res.send(err);
+        }
+        res.json(balanceDocs);
+      });
+  });
 });
 
 router.get("/:epoch/:id_store", function(req, res, next) {
@@ -73,9 +99,13 @@ router.post("/", function(req, res, next) {
           console.log(err);
           return res.send(err);
         }
-        if (balanceDocs[0].capital) {
-          balance.prevCapital = balanceDocs[0].capital;
-        } else {
+        if (balanceDocs[0]) {
+          if (balanceDocs[0].capital) {
+            balance.prevCapital = balanceDocs[0].capital;
+          } else {
+            balance.prevCapital = 0;
+          }
+        }else{
           balance.prevCapital = 0;
         }
         /** calcoloincasso rafa */
@@ -103,7 +133,7 @@ router.post("/", function(req, res, next) {
                 data: data
               });
             }
-            
+
             if (results.length > 0) {
               balance.speseTotali = results[0].total;
             } else {

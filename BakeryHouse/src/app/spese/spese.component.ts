@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { SpeseNewComponent } from 'app/spese/spese-new/spese-new.component';
@@ -9,6 +9,8 @@ import { User } from 'app/entity/user';
 import { Cost } from 'app/entity/cost';
 import { SpesaService } from 'app/_services/spesa.service';
 import { SharedService } from 'app/_services/shared.service';
+import { ConfirmationDialog } from 'app/confirmation-dialog/confirmation-dialog.component';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-spese',
@@ -16,29 +18,40 @@ import { SharedService } from 'app/_services/shared.service';
   styleUrls: ['spese.component.css']
 })
 export class SpeseComponent implements OnInit {
+
   usr: User;
 
   public message: string;
   public visible = false;
   today: number = Date.now();
   dialogRef: MatDialogRef<SpeseNewComponent>;
-  spesaList: Array<Cost>;
+   confirmDialog: MatDialogRef<ConfirmationDialog>;
+
+  // @Input() spesaList: Array<Cost> = [];
+  spesaList: Array<Cost> = [];
 
   constructor(
     private _spesaService: SpesaService,
     private sharedService: SharedService,
+    private ref: ChangeDetectorRef,
     public dialog: MatDialog
   ) {
     this.sharedService.SpesaList.subscribe(value => {
       this.spesaList = value;
     });
+
+
   }
 
   ngOnInit(): void {
     this.usr = JSON.parse(localStorage.getItem('currUser'));
     this.today = new Date(this.usr.store.ref_date).getTime();
     this.getList();
+    const timer = Observable.timer(2000, 5000);
+    timer.subscribe(() => this.getList());
   }
+
+
 
   getList() {
     this._spesaService
@@ -46,6 +59,7 @@ export class SpeseComponent implements OnInit {
       .then(spese => {
         // this.spesaList = spese;
         this.sharedService.SpesaList.next(spese);
+        this.ref.detectChanges();
       })
       .catch(err => console.log(err));
   }
@@ -86,5 +100,23 @@ export class SpeseComponent implements OnInit {
 
   closeDialog() {
     this.dialog.closeAll();
+  }
+
+  openConfirmationDelete(id: string) {
+    this.confirmDialog = this.dialog.open(ConfirmationDialog, {
+      disableClose: false
+    });
+    this.confirmDialog.componentInstance.confirmMessage = 'Sei sicuro di voler cancellare questo elemento?'
+
+    this.confirmDialog.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('CANCELLA');
+        this._spesaService.deleteCost(id)
+          .then(types => { })
+          .catch(err => console.log(err));
+      }
+      this.confirmDialog = null;
+    });
+
   }
 }

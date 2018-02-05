@@ -64,7 +64,7 @@ BalanceSchedule.start = function() {
           
         });
         // console.log("BATCH Ultimato");
-        // log.info("BATCH Ultimato");
+        log.info("BATCH Ultimato");
       });
       
     // });

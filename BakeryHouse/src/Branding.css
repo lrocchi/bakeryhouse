@@ -10,9 +10,7 @@ body {
 }
 
 @media (max-width: 1024px) {
-  /* body.Ccm-LoginBody {
-    background: url("./assets/images/PadPortrait.jpg") repeat center center
-  } */
+
   .Ccm-MainContent {
     background: url("./assets/images/PadPortrait.jpg") repeat center center;
     z-index: -2;

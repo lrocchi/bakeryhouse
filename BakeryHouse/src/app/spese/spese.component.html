@@ -1,3 +1,4 @@
+<div style="overflow-y: hidden;">
 <!-- <div style="display: inline-block; text-align: left; width: 100%;"> -->
 <div class="alert alert-danger">{{message}}</div>
 
@@ -10,17 +11,34 @@
 </div>
 
 
-<div fxLayout="column" fxFill>
-  <!-- <app-spese-list (reloadEvent)="getList()" [spesaList]="spesaList"></app-spese-list> -->
-  <app-spese-list (reloadEvent)="getList()"></app-spese-list>
+<!-- <div fxLayout="column" fxFill> -->
+
+  <div style="float:left; width:100%; height:100%; padding:1em 0.5em; border: 0px solid black">
+    <mat-list>
+      <mat-list-item *ngFor="let spesa of spesaList" >
+        <div class="note red rounded">
+          <span style='float:left; background-color: none; text-align: left;'>
+            <h3 style="text-align: left;">
+              <strong>{{spesa.descrizione}}</strong>
+            </h3>
+            <h6 mat-line>({{spesa.tipo.nome}})</h6>
+            <p style="font-size: 8px;text-align: left;" mat-line>{{spesa.update_on | date : 'H:mm:ss'}}</p>
+          </span>
+
+
+          <span style="float: right; background-color: none; text-align: right;">
+            <h3>
+              <strong>{{spesa.valore}}&euro;</strong>
+            </h3>
+            <button mat-icon-button (click)="openConfirmationDelete(spesa._id)">
+              <mat-icon class="mat-24">delete</mat-icon>
+            </button>
+          </span>
+        </div>
+
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+
 </div>
-
-
-<!-- <mat-card>
-  <mat-card-header>
-
-  </mat-card-header>
-  <mat-card-content>
-
-  </mat-card-content>
-</mat-card> -->

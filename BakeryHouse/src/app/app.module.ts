@@ -16,7 +16,6 @@ import { MatToolbarModule, MatButtonModule, MatIconModule, MatDatepickerModule, 
 import { MatMenu, MatProgressSpinnerModule, MatTabsModule, MatSidenavModule, MatNativeDateModule } from '@angular/material';
 import { MatMenuModule, MatIconRegistry, MatDialogModule, MatDialogRef, MatSelectModule} from '@angular/material';
 import { MatFormFieldModule, MatInputModule, MatCardModule, MatCheckboxModule, MatExpansionModule} from '@angular/material';
-import { SpeseListComponent } from './spese/spese-list/spese-list.component';
 import { SpeseNewComponent } from './spese/spese-new/spese-new.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { GestioneSpeseComponent } from 'app/management/gestione-spese/gestione-spese.component';
@@ -98,7 +97,6 @@ export class DemoMaterialModule { }
     HeaderComponent,
     HeaderComponent,
     SpeseComponent,
-    SpeseListComponent,
     SpeseNewComponent,
     GestioneSpeseComponent,
     ManagementComponent,
