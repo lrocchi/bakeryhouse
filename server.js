@@ -33,12 +33,12 @@ var app = express();
 
 //SVILUPPO
 //=======================================================================================
-mongoose.connect(config.database.mLabDev, {useMongoClient: true, /* other options */});
+// mongoose.connect(config.database.mLabDev, {useMongoClient: true, /* other options */});
 //=======================================================================================
 
 //ESERCIZIO
 //=======================================================================================
-// mongoose.connect(config.database.mLab, {useMongoClient: true, /* other options */});
+mongoose.connect(config.database.mLab, {useMongoClient: true, /* other options */});
 //=======================================================================================
 
 
