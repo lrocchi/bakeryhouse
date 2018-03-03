@@ -10,8 +10,10 @@ var stores = require('./routes/store');
 var costType = require('./routes/costType');
 var balance = require('./routes/balance');
 var report = require('./routes/report');
+var message = require('./routes/message');
 
 var BalanceSchedule = require('./scheduler');
+var ExcelManager = require('./utils/excel');
 
 var config = require('./config/config');
 var Logger = require('le_node');
@@ -60,6 +62,7 @@ app.use('/api/users', users);
 app.use('/api/stores', stores);
 app.use('/api/costtype', costType);
 app.use('/api/report', report);
+app.use('/api/message', message);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
@@ -76,3 +79,5 @@ var listener = app.listen(process.env.PORT || port, function(){
 
 
 BalanceSchedule.start();
+
+// ExcelManager.create();

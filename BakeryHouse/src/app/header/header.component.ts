@@ -1,13 +1,18 @@
-import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
+import { Component, OnInit, OnDestroy, DoCheck, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageService } from 'ng2-webstorage';
-import { MatMenu } from '@angular/material';
+import { MatMenu, MatSnackBar } from '@angular/material';
 
 // import { JwtHelper } from 'angular2-jwt/angular2-jwt';
 import { AuthService } from 'app/_services/auth.service';
 import { User, Ruolo } from 'app/entity/user';
 // import { StoreService } from 'app/_services/store.service';
 import { Store } from 'app/entity/store';
+import { Message } from '../entity/message';
+import { AlertService } from '../_services/alert.service';
+// tslint:disable-next-line:import-blacklist
+import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-header',
@@ -15,36 +20,40 @@ import { Store } from 'app/entity/store';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
-
   public user: User;
+  public alertList: Array<Message> = [];
+  subscription: Subscription;
 
   // private jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(
-    // private route: ActivatedRoute,
-    public auth: AuthService
-  ) {
-    this.user = JSON.parse(localStorage.getItem('currUser'))
+  constructor(public snackBar: MatSnackBar, private alertService: AlertService, private ref: ChangeDetectorRef, public auth: AuthService) {
+    this.user = JSON.parse(localStorage.getItem('currUser'));
 
+
+  }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
+  getAlerts() {
+    this.alertService.loadUnreadAlert().subscribe(value => {
+      this.alertList = value;
+      this.ref.detectChanges();
+    });
   }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currUser'));
+
+    const timer = Observable.timer(2000, 60000);
+    timer.subscribe(() => this.getAlerts());
   }
 
-  ngOnDestroy(): void {
-  }
+  ngOnDestroy(): void {}
   ngDoCheck(): void {
     this.user = JSON.parse(localStorage.getItem('currUser'));
   }
-
-  /* logout() {
-    console.log('logout...');
-
-    // remove user from local storage to log user out
-    this.auth.logout();
-    this.router.navigate(['login']);
-  } */
 
 
 

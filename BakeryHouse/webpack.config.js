@@ -6,7 +6,7 @@ module.exports =
 {
     entry:
     {
-        main: './app/src/main.ts'
+        main: './src/app/main.ts'
     },
 
     output:

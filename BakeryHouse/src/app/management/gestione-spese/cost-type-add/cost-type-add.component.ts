@@ -29,7 +29,7 @@ export class CostTypeAddComponent implements OnInit {
     .catch(err => console.log(err));
   }
 
-  create(){
+  create() {
     // this.loading = true;
     console.log('CREATE ' + this.costType.nome);
     // this.createNewSpesaEvent.emit(this.spesa);

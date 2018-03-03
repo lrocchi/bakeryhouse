@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatChipsModule } from '@angular/material/';
+import {  MatTooltipModule , MatSnackBarModule} from '@angular/material/';
 import { MatMenu, MatProgressSpinnerModule, MatTabsModule, MatSidenavModule, MatNativeDateModule } from '@angular/material';
 import { MatMenuModule, MatIconRegistry, MatDialogModule, MatDialogRef, MatSelectModule} from '@angular/material';
 import { MatFormFieldModule, MatInputModule, MatCardModule, MatCheckboxModule, MatExpansionModule} from '@angular/material';
@@ -42,21 +43,11 @@ import { IncidenzaReportComponent } from './report/incidenza-report/incidenza-re
 import { ReportsService } from 'app/_services/reports.service';
 import { ShowErrorsComponent } from './management/gestione-utente/show-error/show-errors.component';
 import { SharedService } from 'app/_services/shared.service';
+import { AlertService } from './_services/alert.service';
 
 
+import { FlashMessagesModule } from 'ngx-flash-messages';
 
-
-
-
-
-/*   import { LayoutModule } from '../../modules/layout.module';
-   import { TreeModule } from '../../modules/tree.module';
-    import { ListBoxModule } from '../../modules/listbox.module';
-     import { DataTableModule } from '../../modules/datatable.module';
-      import { ChartModule } from '../../modules/chart.module';
-       import { MenuModule } from '../../modules/menu.module';
-
- */
 
 /**
  * NgModule that includes all Material modules that are required to serve the demo-app.
@@ -80,12 +71,13 @@ import { SharedService } from 'app/_services/shared.service';
     MatChipsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-
+    MatTooltipModule,
     BrowserAnimationsModule,
+    MatSnackBarModule
 
 
   ],
-  declarations: []
+  // declarations: [FlashMessagesComponent]
 })
 export class DemoMaterialModule { }
 
@@ -112,7 +104,8 @@ export class DemoMaterialModule { }
     GeneralReportComponent,
     IncidenzaReportComponent,
     LogoutComponent,
-    ShowErrorsComponent
+    ShowErrorsComponent,
+
 
   ],
 
@@ -128,7 +121,8 @@ export class DemoMaterialModule { }
     DxChartModule,
     DxDataGridModule,
     FlexLayoutModule,
-  ],
+    FlashMessagesModule
+    ],
   providers: [
     AuthGuard,
     AuthService,
@@ -137,10 +131,12 @@ export class DemoMaterialModule { }
     StoreService,
     BalanceService,
     ReportsService,
-    SharedService
+    SharedService,
+    AlertService,
 
   ],
   bootstrap: [AppComponent],
+  // tslint:disable-next-line:max-line-length
   entryComponents: [SpeseNewComponent, CostTypeAddComponent, UserAddComponent, EditDialogComponent, ConfirmationDialog, StoreAddComponent]
 
 })

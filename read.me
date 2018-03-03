@@ -114,3 +114,10 @@ db.getCollection('costs').aggregate( [
     {$match: {ref_date:{$gte : ISODate("2017-12-01T00:00:00.000Z"), $lte: ISODate("2018-01-01T00:00:00.000Z")}, "fullType.nome":"Food"}},
     {$group: { _id: {"ref_date" : "$ref_date","descrizione":"$descrizione"}, "totale": {$sum: "$valore"}}}    
 ])
+
+
+
+db.getCollection('costs').aggregate( [
+    {$match: {ref_date:{$gte : ISODate("2017-12-01T00:00:00.000Z"), $lte: ISODate("2018-01-01T00:00:00.000Z")}, "fullType.nome":"Food"}},
+    {$group: { _id: "$descrizione", "totale": {$sum: "$valore"}}}    
+])
