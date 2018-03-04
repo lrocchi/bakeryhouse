@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, DoCheck, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, DoCheck, ChangeDetectorRef, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageService } from 'ng2-webstorage';
 import { MatMenu, MatSnackBar } from '@angular/material';
@@ -26,15 +26,22 @@ export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
 
   // private jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(public snackBar: MatSnackBar, private alertService: AlertService, private ref: ChangeDetectorRef, public auth: AuthService) {
+  constructor(public vc: ViewContainerRef, public snackBar: MatSnackBar, private alertService: AlertService, private ref: ChangeDetectorRef, public auth: AuthService) {
     this.user = JSON.parse(localStorage.getItem('currUser'));
 
 
   }
   openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 5000,
+
+    let snackBarRef = this.snackBar.open(message, action, {
+      //duration: 5000,
     });
+
+    snackBarRef.onAction().subscribe(() => {
+      console.log('The snack-bar action was triggered!');
+      snackBarRef.dismiss();
+    });
+
   }
   getAlerts() {
     this.alertService.loadUnreadAlert().subscribe(value => {
