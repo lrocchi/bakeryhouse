@@ -5,6 +5,7 @@ var config = require("../config/config");
 var Balance = require("../models/Balance");
 var Store = require("../models/Store");
 var Spese = require("../models/Cost");
+var CommonUtils = require("../utils/common");
 
 router.get("/lastone/:id_store", function(req, res, next) {
   Balance.findOne()
@@ -193,6 +194,7 @@ router.post("/", function(req, res, next) {
                   }
                   data.ref_date = newmyDate;
                   data.save();
+                  
                   return res.json({
                     success: true,
                     message: "Rendiconto aggiunto con successo",
@@ -200,6 +202,7 @@ router.post("/", function(req, res, next) {
                   });
                 });
               }
+              CommonUtils.getBalanceAlert(data);
             });
           }
         );

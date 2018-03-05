@@ -27,6 +27,7 @@ const appRoutes: Routes = [
       { path: 'incidenza', component: IncidenzaReportComponent },
     ]
   },
+
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];

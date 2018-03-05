@@ -1,67 +1,112 @@
 var querystring = require("querystring");
 var http = require("http");
 
+var Balance = require("../models/Balance");
+var User = require("../models/User");
+var Message = require("../models/Message");
+
+var moment = require('moment');
+
+var nodemailer = require('nodemailer');
+/* nodemailer.SMTP = {
+    host: 'smtp.gmail.com', 
+    port:587,
+    use_authentication: true, 
+    user: 'lrocchi73@gmail.com', 
+    pass: 'Init$111'
+}; */
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.ethereal.email',
+  port: 587,
+  auth: {
+    user: 'cngcba4h3o6w2nyu@ethereal.email',
+    pass: 'By9b8cFxau2BxxYvEm'
+  }
+});
+
+
+
 var CommonUtils = new Object();
 
-CommonUtils.performRequest = function(endpoint, method, data, success) {
-  var dataString = JSON.stringify(data);
-  var headers = {};
+CommonUtils.getBalanceAlert = function (balance) {
+  if (balance) {
+    var currRafa = balance.rafa;
+    var balanceType = balance.type;
+    if (balance.value > 25) {
+      Balance.find()
+        .where("store")
+        .equals(balance.store)
+        .where("ref_date")
+        .equals(balance.ref_date)
+        .sort({ value: "desc" })
+        .where("value")
+        .equals(balance.value - 25)
+        .populate("store")
+        .populate("user")
+        .exec(function (err, balanceDocs) {
+          if (balanceDocs[0].rafa > currRafa) {
+            User.find()
+              .where("ruolo")
+              .in(["SuperAdmin", "Admin"])
+              .exec(function (err, userDocs) {
+                userDocs.forEach(function (element) {
+                  var messaggio = {};
+                  var dateFormat = new Date(balance.ref_date);
+                  messaggio["to"] = element;
+                  messaggio["subject"] = "Alert: controllo del blu";
+                  messaggio["message"] =
+                    "Nel redinconto di " +
+                    balanceType +
+                    " dello store: " + balance.store.nome + " del giorno: " + moment(dateFormat).format('MM/DD/YYYY') + " il blu è minore rispetto al rendiconto precedente."
+                    ;
+                  messaggio["type"] = "alert";
+                  messaggio["store"] = balance.store;
 
-  if (method == "GET") {
-    endpoint += "?" + querystring.stringify(data);
-  } else {
-    headers = {
-      "Content-Type": "application/json",
-      "Content-Length": dataString.length
-    };
-  }
-  var options = {
-    host: process.env.IP || "localhost",
-    path: endpoint,
-    port: 3000,
-    method: method,
-    headers: headers
-  };
-  console.log(JSON.stringify(options));
+                  Message.create(messaggio, function (err, data) {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      console.log(data);
+                    }
 
-  var req = http.request(options, function(res) {
-    res.setEncoding("utf-8");
-    console.log("UNO");
-    var responseString = "";
-
-    if (("" + req.statusCode).match(/^2\d\d$/)) {
-      console.log("STATUSCODE = " + req.statusCode);
-    } else if (("" + req.statusCode).match(/^5\d\d$/)) {
-      // Server error, I have no idea what happend in the backend
-      // but server at least returned correctly (in a HTTP protocol
-      // sense) formatted response
-      console.log("STATUSCODE = " + req.statusCode);
+                  });
+                  // Sand Email a elemet.email
+                  CommonUtils.sendEmail(element.email, messaggio.message, messaggio.subject);
+                });
+              });
+            // Salve messaggio
+          }
+        });
     }
+  }
+};
 
-    res.on("data", function(data) {
-      responseString += data;
-    });
-    console.log("DUE");
-    res.on("end", function() {
-      console.log(responseString);
-      if (data.length > 0) {
-        try {
-          var responseObject = JSON.parse(responseString);
-          success(responseObject);
-        } catch (e) {
-          return;
-        }
-      }
-    });
+
+
+CommonUtils.sendEmail = function (sEmail, sMessage, sSubject) {
+
+  // setup email data with unicode symbols
+  let mailOptions = {
+    from: '"Sistema BakeryHouseMgmt 👻" <foo@example.com>', // sender address
+    to: sEmail, // list of receivers
+    subject: sSubject, // Subject line
+    text: sMessage, // plain text body
+    html: '<p>' + sMessage + '</p>' // html body
+  };
+
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log('Message sent: %s', info.messageId);
+    // Preview only available when sending through an Ethereal account
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   });
-
-  req.on("error", function(err) {
-    console.log("GET request error:" + err);
-  });
-
-  req.write(dataString);
-
-  req.end();
 };
 
 module.exports = CommonUtils;

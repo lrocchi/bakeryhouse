@@ -18,8 +18,7 @@ export class AppComponent implements OnInit {
    @HostBinding('class.Ccm-LoginBody') someField = false;
 /*
   @HostListener('window:beforeunload', ['$event'])
-  beforeunloadHandler(event) {
-    // Gestione dello scarico pagina, compresi i refresh
+  beforeunloadHandler(event) {x
 
   } */
 

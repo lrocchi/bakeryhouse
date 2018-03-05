@@ -10,6 +10,17 @@
 
 
   <span class="span-fill-remaining"></span>
+  <div class="notif" [matMenuTriggerFor]="alertMenu">
+    <span class="num" *ngIf="alertList.length >0">{{alertList.length}}</span>
+  </div>
+  <mat-menu #alertMenu="matMenu">
+    <ul class="bkspeselist">
+      <li *ngFor="let msg of alertList" (click)="openSnackBar(msg.message, 'letto')">
+        <span class="badge" >-</span><span  class="text">{{msg.subject}}</span>
+
+    </ul>
+  </mat-menu>
+
   <button mat-button [matMenuTriggerFor]="menu" style="color: white; padding: 0 0px;">{{user.name}}
     <mat-icon>more_vert</mat-icon>
   </button>
@@ -21,17 +32,17 @@
   <a mat-menu-item routerLink="/" routerLinkActive="active">
     <mat-icon class="md-18|md-24|md-36|md-48">home</mat-icon>
     Home</a>
-<div *ngIf="user">
-  <a mat-menu-item routerLink="/manage" routerLinkActive="active" *ngIf="user.ruolo !== 'Dipendente'">
-    <mat-icon class="md-18|md-24|md-36|md-48">format_list_bulleted</mat-icon>
-    Gestione
-  </a>
+  <div *ngIf="user">
+    <a mat-menu-item routerLink="/manage" routerLinkActive="active" *ngIf="user.ruolo !== 'Dipendente'">
+      <mat-icon class="md-18|md-24|md-36|md-48">format_list_bulleted</mat-icon>
+      Gestione
+    </a>
 
-  <a mat-menu-item routerLink="/report" routerLinkActive="active" *ngIf="user.ruolo !== 'Dipendente'">
-    <mat-icon class="md-18|md-24|md-36|md-48">trending_up</mat-icon>
-    Report
-  </a>
-</div>
+    <a mat-menu-item routerLink="/report" routerLinkActive="active" *ngIf="user.ruolo !== 'Dipendente'">
+      <mat-icon class="md-18|md-24|md-36|md-48">trending_up</mat-icon>
+      Report
+    </a>
+  </div>
   <!-- <btton mat-menu-item (click)="logout()"> -->
   <a mat-menu-item routerLink="/logout" routerLinkActive="active">
     <mat-icon class="md-18|md-24|md-36|md-48">exit_to_app</mat-icon>

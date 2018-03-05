@@ -6,6 +6,7 @@ import { SpesaService } from 'app/_services/spesa.service';
 import { ConfirmationDialog } from 'app/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'speseMngmt',
   templateUrl: 'gestione-spese.component.html',
   styleUrls: ['gestione-spese.component.scss']
