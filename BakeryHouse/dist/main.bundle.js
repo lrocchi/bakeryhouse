@@ -910,6 +910,18 @@ var ChiusureComponent = (function () {
         })
             .catch(function (err) { return console.log(err); });
     };
+    ChiusureComponent.prototype.addBalance = function (bal) {
+        var _this = this;
+        this._balanceService
+            .addBalance(bal)
+            .then(function (value) {
+            // console.log("AddBalance" + JSON.stringify(value));
+        })
+            .catch(function (err) {
+            console.log(err.message);
+            _this.message = err.message;
+        });
+    };
     ChiusureComponent.prototype.openEditDialog = function () {
         /**
          * get Store from db
@@ -938,17 +950,9 @@ var ChiusureComponent = (function () {
         this.editDialog.componentInstance.title = 'Aggiungi resoconto';
         this.editDialog.afterClosed().subscribe(function (result) {
             if (result) {
-                var tmpBal = _this.editDialog.componentInstance.balanceObj;
                 console.log('opeEditDialog result: ' + result);
-                _this._balanceService
-                    .addBalance(tmpBal)
-                    .then(function (value) {
-                    _this.getList();
-                })
-                    .catch(function (err) {
-                    console.log(err.message);
-                    _this.message = err.message;
-                });
+                _this.addBalance(_this.editDialog.componentInstance.balanceObj);
+                console.log('opeEditDialog result fatto: ' + result);
             }
             _this.editDialog.componentInstance.balanceObj = null;
             _this.editDialog = null;

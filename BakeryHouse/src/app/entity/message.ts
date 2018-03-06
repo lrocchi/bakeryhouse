@@ -7,6 +7,7 @@ export class Message {
   public from: User;
   public subject: string;
   public message: string;
+  public htmlmessage: string;
   public unread: boolean;
   public type: messageType;
   public store: Store;

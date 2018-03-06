@@ -6,6 +6,7 @@ var messageSchema = new mongoose.Schema({
     
     subject: {type: String, require: true},
     message: {type: String, require: true},
+    htmlmessage: {type: String, require: true},
     to: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     from: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     store: { type: mongoose.Schema.Types.ObjectId, ref: 'Store', required: true },

@@ -64,11 +64,11 @@ export class ChiusureComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getList();
-    
+
 
     TimerObservable.create(0, 5000)
       .takeWhile(() => this.alive)
-      .subscribe(() =>  this.getList());
+      .subscribe(() => this.getList());
   }
 
   ngOnDestroy(): void {
@@ -87,7 +87,7 @@ export class ChiusureComponent implements OnInit, OnDestroy {
           this._balanceService
             .getLastBalance(this.usr.store)
             .then(lastBalanceDoc => {
-               this.lastBalance = lastBalanceDoc;
+              this.lastBalance = lastBalanceDoc;
               // this.sharedService.lastBalance.next(lastBalanceDoc);
             });
         }
@@ -96,6 +96,19 @@ export class ChiusureComponent implements OnInit, OnDestroy {
       .catch(err => console.log(err));
   }
 
+  addBalance(bal:Balance){
+    this._balanceService
+          .addBalance(bal)
+          .then(value => {
+           
+            // console.log("AddBalance" + JSON.stringify(value));
+          })
+          .catch(err => {
+            console.log(err.message);
+            this.message = err.message;
+
+          });
+  }
   openEditDialog() {
     /**
      * get Store from db
@@ -127,18 +140,12 @@ export class ChiusureComponent implements OnInit, OnDestroy {
 
     this.editDialog.afterClosed().subscribe(result => {
       if (result) {
-        const tmpBal = this.editDialog.componentInstance.balanceObj;
-
         console.log('opeEditDialog result: ' + result);
-        this._balanceService
-          .addBalance(tmpBal)
-          .then(value => {
-            this.getList()}
-          )
-          .catch(err => {
-            console.log(err.message);
-            this.message = err.message;
-          });
+        this.addBalance(this.editDialog.componentInstance.balanceObj);
+
+        console.log('opeEditDialog result fatto: ' + result);
+        
+
       }
       this.editDialog.componentInstance.balanceObj = null;
       this.editDialog = null;
