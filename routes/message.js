@@ -33,4 +33,24 @@ router.post("/", function(req, res, next) {
   });
 });
 
+
+router.delete("/:id", function(req, res) {
+  var id = req.params.id;
+  Message.findByIdAndRemove(id, function(err, data) {
+    if (err) {
+      return res.json({
+        success: false,
+        message: "Errore: Messaggio non cancellato!",
+        data: data
+      });
+      return;
+    }
+    res.json({
+      success: true,
+      message: "Messaggio cancellato con successo",
+      data: data
+    });
+  });
+});
+
 module.exports = router;

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { SpeseNewComponent } from 'app/spese/spese-new/spese-new.component';
@@ -11,14 +11,17 @@ import { SpesaService } from 'app/_services/spesa.service';
 import { SharedService } from 'app/_services/shared.service';
 import { ConfirmationDialog } from 'app/confirmation-dialog/confirmation-dialog.component';
 import { Observable } from 'rxjs/Observable';
+import { TimerObservable } from 'rxjs/observable/TimerObservable';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-spese',
   templateUrl: 'spese.component.html',
   styleUrls: ['spese.component.css']
 })
-export class SpeseComponent implements OnInit {
+export class SpeseComponent implements OnInit, OnDestroy {
 
+  private alive: boolean;
   usr: User;
 
   public message: string;
@@ -36,6 +39,7 @@ export class SpeseComponent implements OnInit {
     private ref: ChangeDetectorRef,
     public dialog: MatDialog
   ) {
+    this.alive = true;
     this.sharedService.SpesaList.subscribe(value => {
       this.spesaList = value;
     });
@@ -47,11 +51,17 @@ export class SpeseComponent implements OnInit {
     this.usr = JSON.parse(localStorage.getItem('currUser'));
     this.today = new Date(this.usr.store.ref_date).getTime();
     this.getList();
-    const timer = Observable.timer(2000, 5000);
-    timer.subscribe(() => this.getList());
+    /* const timer = Observable.timer(2000, 5000);
+    timer.subscribe(() => this.getList()); */
+
+    TimerObservable.create(0, 5000)
+      .takeWhile(() => this.alive)
+      .subscribe(() =>  this.getList());
   }
 
-
+  ngOnDestroy(): void {
+    this.alive = false;
+  }
 
   getList() {
     this._spesaService

@@ -8,23 +8,25 @@ var Message = require("../models/Message");
 var moment = require('moment');
 
 var nodemailer = require('nodemailer');
-/* nodemailer.SMTP = {
-    host: 'smtp.gmail.com', 
-    port:587,
-    use_authentication: true, 
-    user: 'lrocchi73@gmail.com', 
-    pass: 'Init$111'
-}; */
 
-const transporter = nodemailer.createTransport({
+
+/* const transporter = nodemailer.createTransport({
   host: 'smtp.ethereal.email',
   port: 587,
   auth: {
     user: 'cngcba4h3o6w2nyu@ethereal.email',
     pass: 'By9b8cFxau2BxxYvEm'
   }
-});
+}); */
 
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  auth: {
+    user: 'info@bakeryhouse.it',
+    pass: 'Iuiutree1981'
+  }
+});
 
 
 var CommonUtils = new Object();
@@ -49,6 +51,7 @@ CommonUtils.getBalanceAlert = function (balance) {
             User.find()
               .where("ruolo")
               .in(["SuperAdmin", "Admin"])
+              // .in(["SuperAdmin"])
               .exec(function (err, userDocs) {
                 userDocs.forEach(function (element) {
                   var messaggio = {};
@@ -58,7 +61,13 @@ CommonUtils.getBalanceAlert = function (balance) {
                   messaggio["message"] =
                     "Nel redinconto di " +
                     balanceType +
-                    " dello store: " + balance.store.nome + " del giorno: " + moment(dateFormat).format('MM/DD/YYYY') + " il blu è minore rispetto al rendiconto precedente."
+                    " dello store: " + balance.store.nome + " del giorno: " + moment(dateFormat).format('DD/MM/YYYY') + " il blu è minore rispetto al rendiconto precedente."
+                    ;
+
+                  messaggio["htmlmessage"] =
+                    "Nel redinconto di <b>" +
+                    balanceType +
+                    "</b><br/>dello store: <b>" + balance.store.nome + "</b><br/>del giorno: <b>" + moment(dateFormat).format('DD/MM/YYYY') + "</b><br/>il blu è minore rispetto al rendiconto precedente."
                     ;
                   messaggio["type"] = "alert";
                   messaggio["store"] = balance.store;
@@ -72,7 +81,7 @@ CommonUtils.getBalanceAlert = function (balance) {
 
                   });
                   // Sand Email a elemet.email
-                  CommonUtils.sendEmail(element.email, messaggio.message, messaggio.subject);
+                  return CommonUtils.sendEmail(element.email, messaggio.htmlmessage, messaggio.subject);
                 });
               });
             // Salve messaggio
@@ -88,7 +97,7 @@ CommonUtils.sendEmail = function (sEmail, sMessage, sSubject) {
 
   // setup email data with unicode symbols
   let mailOptions = {
-    from: '"Sistema BakeryHouseMgmt 👻" <foo@example.com>', // sender address
+    from: '"Sistema BakeryHouseMgmt 👻" <info@bakeryhouse.it>', // sender address
     to: sEmail, // list of receivers
     subject: sSubject, // Subject line
     text: sMessage, // plain text body
@@ -96,13 +105,13 @@ CommonUtils.sendEmail = function (sEmail, sMessage, sSubject) {
   };
 
 
-  transporter.sendMail(mailOptions, (error, info) => {
+  return transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       return console.log(error);
     }
-    console.log('Message sent: %s', info.messageId);
+    // console.log('Message sent: %s', info.messageId);
     // Preview only available when sending through an Ethereal account
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
