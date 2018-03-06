@@ -8,23 +8,25 @@ var Message = require("../models/Message");
 var moment = require('moment');
 
 var nodemailer = require('nodemailer');
-/* nodemailer.SMTP = {
-    host: 'smtp.gmail.com', 
-    port:587,
-    use_authentication: true, 
-    user: 'lrocchi73@gmail.com', 
-    pass: 'Init$111'
-}; */
 
-const transporter = nodemailer.createTransport({
+
+/* const transporter = nodemailer.createTransport({
   host: 'smtp.ethereal.email',
   port: 587,
   auth: {
     user: 'cngcba4h3o6w2nyu@ethereal.email',
     pass: 'By9b8cFxau2BxxYvEm'
   }
-});
+}); */
 
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  auth: {
+    user: 'info@bakeryhouse.it',
+    pass: 'Iuiutree1981'
+  }
+});
 
 
 var CommonUtils = new Object();

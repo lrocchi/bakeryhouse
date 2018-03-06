@@ -10,9 +10,9 @@ import { User, Ruolo } from 'app/entity/user';
 import { Store } from 'app/entity/store';
 import { Message } from '../entity/message';
 import { AlertService } from '../_services/alert.service';
-// tslint:disable-next-line:import-blacklist
-import { Subscription } from 'rxjs';
-import { Observable } from 'rxjs/Observable';
+import { TimerObservable } from 'rxjs/observable/TimerObservable';
+import 'rxjs/add/operator/takeWhile';
+import { JSONP_HOME } from '@angular/http/src/backends/browser_jsonp';
 
 @Component({
   selector: 'app-header',
@@ -20,25 +20,44 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
+  private alive: boolean;
   public user: User;
   public alertList: Array<Message> = [];
-  subscription: Subscription;
+  // subscription: Subscription;
 
   // private jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(public vc: ViewContainerRef, public snackBar: MatSnackBar, private alertService: AlertService, private ref: ChangeDetectorRef, public auth: AuthService) {
     this.user = JSON.parse(localStorage.getItem('currUser'));
-
+    this.alive = true;
 
   }
-  openSnackBar(message: string, action: string) {
 
-    let snackBarRef = this.snackBar.open(message, action, {
+  ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('currUser'));
+
+    TimerObservable.create(0,5000)
+      .takeWhile(() => this.alive)
+      .subscribe(() => this.getAlerts());
+  }
+
+  ngOnDestroy(): void { this.alive = false; }
+
+  ngDoCheck(): void {
+    this.user = JSON.parse(localStorage.getItem('currUser'));
+  }
+
+
+
+  openSnackBar(message: Message, action: string) {
+
+    let snackBarRef = this.snackBar.open(message.message, action, {
       //duration: 5000,
     });
 
     snackBarRef.onAction().subscribe(() => {
-      console.log('The snack-bar action was triggered!');
+      
+      this.alertService.removeMessage(message);
       snackBarRef.dismiss();
     });
 
@@ -46,21 +65,11 @@ export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
   getAlerts() {
     this.alertService.loadUnreadAlert().subscribe(value => {
       this.alertList = value;
+      
       this.ref.detectChanges();
     });
   }
 
-  ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('currUser'));
-
-    const timer = Observable.timer(2000, 60000);
-    timer.subscribe(() => this.getAlerts());
-  }
-
-  ngOnDestroy(): void {}
-  ngDoCheck(): void {
-    this.user = JSON.parse(localStorage.getItem('currUser'));
-  }
 
 
 

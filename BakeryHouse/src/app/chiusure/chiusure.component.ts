@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { BalanceService } from 'app/_services/balance.service';
 import { Balance, BalanceType } from 'app/entity/Balance';
 import { User } from 'app/entity/user';
@@ -6,6 +6,8 @@ import { MatDialogRef, MatDialog } from '@angular/material';
 import { EditDialogComponent } from 'app/edit-dialog/edit-dialog.component';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { timer } from 'rxjs/observable/timer';
+import { TimerObservable } from 'rxjs/observable/TimerObservable';
+import { takeWhile } from 'rxjs/operators';
 // import { SharedService } from "app/_services/shared.service";
 
 
@@ -14,7 +16,9 @@ import { timer } from 'rxjs/observable/timer';
   templateUrl: './chiusure.component.html',
   styleUrls: ['./chiusure.component.css']
 })
-export class ChiusureComponent implements OnInit {
+export class ChiusureComponent implements OnInit, OnDestroy {
+
+  private alive: boolean;
   message: string;
   spinnerColor = 'normal';
   spinnerMode = 'determinate';
@@ -51,6 +55,7 @@ export class ChiusureComponent implements OnInit {
     private ref: ChangeDetectorRef,
     public dialog: MatDialog
   ) {
+    this.alive = true;
     this.usr = JSON.parse(localStorage.getItem('currUser'));
     /* this.sharedService.lastBalance.subscribe(value => {
       this.lastBalance = value;
@@ -59,8 +64,15 @@ export class ChiusureComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
-    const timer = Observable.timer(2000, 5000);
-    timer.subscribe(() => this.getList());
+    
+
+    TimerObservable.create(0, 5000)
+      .takeWhile(() => this.alive)
+      .subscribe(() =>  this.getList());
+  }
+
+  ngOnDestroy(): void {
+    this.alive = false;
   }
 
   getList() {

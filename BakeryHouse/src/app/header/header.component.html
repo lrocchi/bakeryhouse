@@ -15,7 +15,7 @@
   </div>
   <mat-menu #alertMenu="matMenu">
     <ul class="bkspeselist">
-      <li *ngFor="let msg of alertList" (click)="openSnackBar(msg.message, 'letto')">
+      <li *ngFor="let msg of alertList" (click)="openSnackBar(msg, 'letto')">
         <span class="badge" >-</span><span  class="text">{{msg.subject}}</span>
 
     </ul>
