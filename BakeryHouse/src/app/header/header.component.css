@@ -10,6 +10,8 @@
 .example-header-image {
   background-image: url('../../assets/images/Logo.png');
   background-size: cover;
+  height: 64px;
+  width: 64px;
 }
 
 .notif:before {
