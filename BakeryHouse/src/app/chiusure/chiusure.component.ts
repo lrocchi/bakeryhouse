@@ -140,11 +140,7 @@ export class ChiusureComponent implements OnInit, OnDestroy {
 
     this.editDialog.afterClosed().subscribe(result => {
       if (result) {
-        console.log('opeEditDialog result: ' + result);
-        this.addBalance(this.editDialog.componentInstance.balanceObj);
-
-        console.log('opeEditDialog result fatto: ' + result);
-        
+       this.addBalance(this.editDialog.componentInstance.balanceObj);
 
       }
       this.editDialog.componentInstance.balanceObj = null;

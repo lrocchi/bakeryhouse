@@ -33,60 +33,107 @@ var CommonUtils = new Object();
 
 CommonUtils.getBalanceAlert = function (balance) {
   if (balance) {
-    var currRafa = balance.rafa;
-    var balanceType = balance.type;
-    if (balance.value > 25) {
-      Balance.find()
-        .where("store")
-        .equals(balance.store)
-        .where("ref_date")
-        .equals(balance.ref_date)
-        .sort({ value: "desc" })
-        .where("value")
-        .equals(balance.value - 25)
-        .populate("store")
-        .populate("user")
-        .exec(function (err, balanceDocs) {
-          if (balanceDocs[0].rafa > currRafa) {
-            User.find()
-              .where("ruolo")
-              .in(["SuperAdmin", "Admin"])
-              // .in(["SuperAdmin"])
-              .exec(function (err, userDocs) {
-                userDocs.forEach(function (element) {
-                  var messaggio = {};
-                  var dateFormat = new Date(balance.ref_date);
-                  messaggio["to"] = element;
-                  messaggio["subject"] = "Alert: controllo del blu";
-                  messaggio["message"] =
-                    "Nel redinconto di " +
-                    balanceType +
-                    " dello store: " + balance.store.nome + " del giorno: " + moment(dateFormat).format('DD/MM/YYYY') + " il blu è minore rispetto al rendiconto precedente."
-                    ;
+    console.log("balance.rafa: " + balance.rafa);
+    if (balance.rafa < 0) {
 
-                  messaggio["htmlmessage"] =
-                    "Nel redinconto di <b>" +
-                    balanceType +
-                    "</b><br/>dello store: <b>" + balance.store.nome + "</b><br/>del giorno: <b>" + moment(dateFormat).format('DD/MM/YYYY') + "</b><br/>il blu è minore rispetto al rendiconto precedente."
-                    ;
-                  messaggio["type"] = "alert";
-                  messaggio["store"] = balance.store;
+      User.find()
+        .where("ruolo")
+        // .in(["SuperAdmin", "Admin"])
+        .in(["SuperAdmin"])
+        .exec(function (err, userDocs) {
+          userDocs.forEach(function (element) {
+            var messaggio = {};
+            var dateFormat = new Date(balance.ref_date);
+            messaggio["to"] = element;
+            messaggio["subject"] = "Alert: controllo del blu";
+            messaggio["message"] =
+              "Nel redinconto di: " +
+              balance.type +
+              " dello store: " + balance.store.nome + " del giorno: " + moment(dateFormat).format('DD/MM/YYYY') + " il blu ha un valore negativo."
+              ;
 
-                  Message.create(messaggio, function (err, data) {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      console.log(data);
-                    }
+            messaggio["htmlmessage"] =
+              "Nel redinconto di: <b>" +
+              balance.type +
+              "</b><br/>dello store: <b>" + balance.store.nome + "</b><br/>del giorno: <b>" + moment(dateFormat).format('DD/MM/YYYY') + "</b><br/>il blu ha un valore negativo."
+              ;
+            messaggio["type"] = "alert";
+            messaggio["store"] = balance.store;
 
-                  });
-                  // Sand Email a elemet.email
-                  return CommonUtils.sendEmail(element.email, messaggio.htmlmessage, messaggio.subject);
-                });
-              });
-            // Salve messaggio
-          }
+            Message.create(messaggio, function (err, data) {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log(data);
+              }
+
+            });
+            // Sand Email a elemet.email
+            return CommonUtils.sendEmail(element.email, messaggio.htmlmessage, messaggio.subject);
+          });
         });
+
+
+
+
+
+
+    } else {
+      var currRafa = balance.rafa;
+      var balanceType = balance.type;
+      if (balance.value > 25) {
+        Balance.find()
+          .where("store")
+          .equals(balance.store)
+          .where("ref_date")
+          .equals(balance.ref_date)
+          .sort({ value: "desc" })
+          .where("value")
+          .equals(balance.value - 25)
+          .populate("store")
+          .populate("user")
+          .exec(function (err, balanceDocs) {
+            if (balanceDocs[0].rafa > currRafa) {
+              User.find()
+                .where("ruolo")
+                // .in(["SuperAdmin", "Admin"])
+                .in(["SuperAdmin"])
+                .exec(function (err, userDocs) {
+                  userDocs.forEach(function (element) {
+                    var messaggio = {};
+                    var dateFormat = new Date(balance.ref_date);
+                    messaggio["to"] = element;
+                    messaggio["subject"] = "Alert: controllo del blu";
+                    messaggio["message"] =
+                      "Nel redinconto di " +
+                      balanceType +
+                      " dello store: " + balance.store.nome + " del giorno: " + moment(dateFormat).format('DD/MM/YYYY') + " il blu è minore rispetto al rendiconto precedente."
+                      ;
+
+                    messaggio["htmlmessage"] =
+                      "Nel redinconto di <b>" +
+                      balanceType +
+                      "</b><br/>dello store: <b>" + balance.store.nome + "</b><br/>del giorno: <b>" + moment(dateFormat).format('DD/MM/YYYY') + "</b><br/>il blu è minore rispetto al rendiconto precedente."
+                      ;
+                    messaggio["type"] = "alert";
+                    messaggio["store"] = balance.store;
+
+                    Message.create(messaggio, function (err, data) {
+                      if (err) {
+                        console.log(err);
+                      } else {
+                        console.log(data);
+                      }
+
+                    });
+                    // Sand Email a elemet.email
+                    return CommonUtils.sendEmail(element.email, messaggio.htmlmessage, messaggio.subject);
+                  });
+                });
+              // Salve messaggio
+            }
+          });
+      }
     }
   }
 };
