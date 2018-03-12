@@ -1,31 +1,33 @@
-<mat-toolbar>
-  <button mat-icon-button (click)="sidenav.open()">
-    <mat-icon class="md-24">menu</mat-icon>
-  </button>
-</mat-toolbar>
-<div style="height: 100%">
-  <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #sidenav mode="over" opened="true">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header class="primary">
+<div class="Ccm-MainContentView ng-scope">
+  <mat-toolbar>
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon class="md-24">menu</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-drawer-container autosize style="height: 100%">
+    <mat-drawer #sidenav class="example-sidenav" mode="side" mode="over" opened="true">
+
+      <mat-expansion-panel class="bkExpansionPanel">
+        <mat-expansion-panel-header class="bkExpansionPanelHeader">
           <mat-panel-title>
-            Costi
+            Dati
           </mat-panel-title>
           <mat-panel-description></mat-panel-description>
         </mat-expansion-panel-header>
-        link report1
+        <mat-nav-list>
+        <a md-list-item [routerLink]="['rendiconti']">
+          <div md-line>Rendiconti</div>
+        </a>
+        <a md-list-item [routerLink]="['spese']">
+          <div md-line>Spese</div>
+        </a>
+        
+      </mat-nav-list>
       </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Ricavi
-          </mat-panel-title>
-          <mat-panel-description></mat-panel-description>
-        </mat-expansion-panel-header>
-        link report2
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
+      
+      <mat-expansion-panel class="bkExpansionPanel">
+        <mat-expansion-panel-header class="bkExpansionPanelHeader">
           <mat-panel-title>
             Incidenza
           </mat-panel-title>
@@ -40,16 +42,14 @@
           </a>
         </mat-nav-list>
 
-
-
       </mat-expansion-panel>
 
-    </mat-sidenav>
+    </mat-drawer>
 
 
 
-    <div style="min-height: 200px;">
+    <div class="reportContainer">
       <router-outlet></router-outlet>
     </div>
-  </mat-sidenav-container>
+  </mat-drawer-container>
 </div>
