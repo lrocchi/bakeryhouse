@@ -37,4 +37,10 @@ export class BalanceService {
 
   }
 
+  public getBalances( id_store: string = '59b1a3f62d55461228642108', from: Date, to:Date){
+    const sUrl = 'api/balance/' + id_store + '?from=' + from + '&to=' + to ;
+    return this._http.get(sUrl).map(data => data.json()); // .toPromise();
+
+  }
+
 }

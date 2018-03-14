@@ -21,6 +21,6 @@
     <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
 </mat-expansion-panel>
-<dx-chart [dataSource]="costList">
+<dx-chart [dataSource]="costList" style="width: 100%">
   <dxi-series argumentField="descrizione" valueField="valore" type="bar"></dxi-series>
 </dx-chart>

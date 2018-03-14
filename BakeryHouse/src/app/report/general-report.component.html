@@ -16,12 +16,12 @@
           <mat-panel-description></mat-panel-description>
         </mat-expansion-panel-header>
         <mat-nav-list>
-        <a md-list-item [routerLink]="['rendiconti']">
+        <a md-list-item [routerLink]="['datirendiconti']" (click)="sidenav.close()">
           <div md-line>Rendiconti</div>
         </a>
-        <a md-list-item [routerLink]="['spese']">
+        <!-- <a md-list-item [routerLink]="['spese']">
           <div md-line>Spese</div>
-        </a>
+        </a> -->
         
       </mat-nav-list>
       </mat-expansion-panel>
@@ -34,12 +34,12 @@
           <mat-panel-description></mat-panel-description>
         </mat-expansion-panel-header>
         <mat-nav-list>
-          <a md-list-item [routerLink]="['incidenza']">
+          <!-- <a md-list-item [routerLink]="['incidenza']">
             <div md-line>Intervallo</div>
           </a>
           <a md-list-item>
             <div md-line>Giorno</div>
-          </a>
+          </a> -->
         </mat-nav-list>
 
       </mat-expansion-panel>

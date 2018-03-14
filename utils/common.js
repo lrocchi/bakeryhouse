@@ -96,8 +96,8 @@ CommonUtils.getBalanceAlert = function (balance) {
             if (balanceDocs[0].rafa > currRafa) {
               User.find()
                 .where("ruolo")
-                // .in(["SuperAdmin", "Admin"])
-                .in(["SuperAdmin"])
+                .in(["SuperAdmin", "Admin"])
+                // .in(["SuperAdmin"])
                 .exec(function (err, userDocs) {
                   userDocs.forEach(function (element) {
                     var messaggio = {};

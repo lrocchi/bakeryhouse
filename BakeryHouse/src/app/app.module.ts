@@ -12,11 +12,11 @@ import { SpeseComponent } from 'app/spese/spese.component';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatToolbarModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatChipsModule } from '@angular/material/';
-import {  MatTooltipModule , MatSnackBarModule} from '@angular/material/';
+import { MatToolbarModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatChipsModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material/';
+import { MatTooltipModule, MatSnackBarModule } from '@angular/material/';
 import { MatMenu, MatProgressSpinnerModule, MatTabsModule, MatSidenavModule, MatNativeDateModule } from '@angular/material';
-import { MatMenuModule, MatIconRegistry, MatDialogModule, MatDialogRef, MatSelectModule} from '@angular/material';
-import { MatFormFieldModule, MatInputModule, MatCardModule, MatCheckboxModule, MatExpansionModule} from '@angular/material';
+import { MatMenuModule, MatIconRegistry, MatDialogModule, MatDialogRef, MatSelectModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatCardModule, MatCheckboxModule, MatExpansionModule } from '@angular/material';
 import { SpeseNewComponent } from './spese/spese-new/spese-new.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { GestioneSpeseComponent } from 'app/management/gestione-spese/gestione-spese.component';
@@ -47,6 +47,7 @@ import { AlertService } from './_services/alert.service';
 
 
 import { FlashMessagesModule } from 'ngx-flash-messages';
+import { ReportRendicontiComponent } from './report/report-rendiconti/report-rendiconti.component';
 
 
 /**
@@ -73,10 +74,12 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
     MatNativeDateModule,
     MatTooltipModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
-
-
+    MatSnackBarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
+  declarations: [],
   // declarations: [FlashMessagesComponent]
 })
 export class DemoMaterialModule { }
@@ -103,6 +106,7 @@ export class DemoMaterialModule { }
     ChiusureComponent,
     GeneralReportComponent,
     IncidenzaReportComponent,
+    ReportRendicontiComponent,
     LogoutComponent,
     ShowErrorsComponent,
 
@@ -122,7 +126,7 @@ export class DemoMaterialModule { }
     DxDataGridModule,
     FlexLayoutModule,
     FlashMessagesModule
-    ],
+  ],
   providers: [
     AuthGuard,
     AuthService,
