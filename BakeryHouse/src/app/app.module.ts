@@ -12,7 +12,7 @@ import { SpeseComponent } from 'app/spese/spese.component';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatToolbarModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatChipsModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material/';
+import { MatToolbarModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatChipsModule, MatTableModule, MatPaginatorModule, MatSortModule, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/';
 import { MatTooltipModule, MatSnackBarModule } from '@angular/material/';
 import { MatMenu, MatProgressSpinnerModule, MatTabsModule, MatSidenavModule, MatNativeDateModule } from '@angular/material';
 import { MatMenuModule, MatIconRegistry, MatDialogModule, MatDialogRef, MatSelectModule } from '@angular/material';
@@ -48,6 +48,7 @@ import { AlertService } from './_services/alert.service';
 
 import { FlashMessagesModule } from 'ngx-flash-messages';
 import { ReportRendicontiComponent } from './report/report-rendiconti/report-rendiconti.component';
+import { MyDateAdapter, MY_DATE_FORMATS } from './MyDateAdapter';
 
 
 /**
@@ -137,7 +138,8 @@ export class DemoMaterialModule { }
     ReportsService,
     SharedService,
     AlertService,
-
+    {provide: DateAdapter, useClass: MyDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
   ],
   bootstrap: [AppComponent],
   // tslint:disable-next-line:max-line-length

@@ -23,7 +23,10 @@ export class ReportRendicontiComponent implements OnInit {
   public dateFrom: FormControl;
   public dateTo: FormControl;
 
-  constructor(private _balanceService: BalanceService, private _storeService: StoreService) { }
+  constructor(private _balanceService: BalanceService, private _storeService: StoreService) { 
+    let user = JSON.parse(localStorage.getItem('currUser'));
+    this.selectedStoreId = user.store._id;
+  }
 
   ngOnInit() {
     this.getStoreList();

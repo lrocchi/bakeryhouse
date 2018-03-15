@@ -79,9 +79,7 @@ router.get("/:id_store", function (req, res, next) {
       }
       // let balances = Object.values(balanceDocs).filter(bal => bal.store._id == queryParams.id_store).sort((l1, l2) => l1.id - l2.id);
 
-      
-      console.log("BALANCES: " + JSON.stringify(balanceDocs));
-      res.status(200).json(balanceDocs);
+       res.status(200).json(balanceDocs);
     });
 
 });
@@ -120,7 +118,7 @@ router.post("/", function (req, res, next) {
     var balance = req.body;
     balance.store = storeData;
     balance.ref_date = storeData.ref_date;
-    console.log("BALANCE: Post()");
+    // console.log("BALANCE: Post()");
     // Attempt to save the spesa
 
     var myDate = new Date(balance.ref_date);
@@ -173,7 +171,7 @@ router.post("/", function (req, res, next) {
             }
 
             if (results.length > 0) {
-              balance.speseTotali = results[0].total.toFixed(2);
+              balance.speseTotali = results[0].total;
             } else {
               balance.speseTotali = 0;
             }
@@ -200,8 +198,9 @@ router.post("/", function (req, res, next) {
             if (balance.flash) {
               nRafa -= balance.flash;
             }
-
+            
             balance.rafa = Number.parseFloat(nRafa).toFixed(2);
+            
 
             Balance.create(balance, function (err, data) {
               // console.log("REST:" + JSON.stringify(data));
@@ -222,7 +221,7 @@ router.post("/", function (req, res, next) {
                 );
                 Store.findById(storeData._id, function (err, data2) {
                   if (err) {
-                    console.log(err);
+                    console.log("Bakery Error" + err);
                     res.json({
                       success: true,
                       message: "Data riferimento non aggiornata!",
@@ -232,11 +231,11 @@ router.post("/", function (req, res, next) {
                   data2.ref_date = newmyDate;
                   data2.save();
 
-                  res.json({
+                  /* res.json({
                     success: true,
                     message: "Rendiconto aggiunto con successo",
                     data: data2
-                  });
+                  }); */
                 });
               }
               CommonUtils.getBalanceAlert(data);
