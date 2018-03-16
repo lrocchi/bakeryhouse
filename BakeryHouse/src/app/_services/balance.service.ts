@@ -43,4 +43,9 @@ export class BalanceService {
 
   }
 
+
+  public deleteBalance(id: string) {
+    return this._http.delete('api/balance/' + id).map(data => data.json()).toPromise();
+  }
+
 }

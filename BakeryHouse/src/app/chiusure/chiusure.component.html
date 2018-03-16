@@ -7,98 +7,14 @@
     </button>
   </div>
   <div class="note red rounded" *ngIf="lastBalance">
-
+    <div>
       <span style='float:left; background-color: none; text-align: left;'>
         <h3 style="text-align: left; font-size: 24px; font-weight: 400; display: block;
-        margin-bottom: 16px;" >
+        margin-bottom: 16px;">
           <strong>Resoconto {{lastBalance.type}}</strong>
         </h3>
         <h6 mat-line class="mat-card-subtitle">data riferimento: {{lastBalance.ref_date | date: 'dd/MM/yyyy'}}</h6>
         <!-- <span style='float:left; background-color: none; text-align: left;'> -->
-            <p>
-              <span>
-                <i>Resoconto eseguito da:</i>
-              </span>
-              <span>
-                <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong>
-              </span>
-            </p>
-            <p>
-              <span>In cassa: </span>
-              <span>
-                <strong>{{lastBalance.cassa}} &euro;</strong>
-              </span>
-            </p>
-            <p>
-              <span>POS:</span>
-              <span>
-                <strong>{{lastBalance.pos}} &euro;</strong>
-              </span>
-            </p>
-            <p>
-              <span>Ticket:</span>
-              <span>
-                <strong>{{lastBalance.ticket}} &euro;</strong>
-              </span>
-            </p>
-            <p>
-              <span>Blu:</span>
-              <span>
-                <strong>{{lastBalance.rafa}} &euro;</strong>
-              </span>
-            </p>
-            <p>
-              <span>flash:</span>
-              <span>
-                <strong>{{lastBalance.flash}} &euro;</strong>
-              </span>
-            </p>
-            <p>
-              <span>Tavoli:</span>
-              <span>
-                <strong>{{lastBalance.tavoliAperti}} &euro;</strong>
-              </span>
-            </p>
-
-      </span>
-      <span style="float: right; background-color: none; text-align: right;">
-        <mat-progress-spinner [color]="spinnerColor" [mode]="spinnerMode" [value]="lastBalance.value">0</mat-progress-spinner>
-      </span>
-
-
-
-
-  </div>
-
-</div>
-
-
-
-
-
-
-
-<!--
-<mat-card>
-  <mat-card-header>
-
-    <span class="span-fill-remaining"></span>
-    <div style="float:right;" class="ProceedContainer ng-scope">
-      <button mat-fab (click)="openEditDialog()" color="primary" style="color:white">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-card *ngIf="lastBalance">
-      <mat-card-title-group>
-        <mat-progress-spinner [color]="spinnerColor" [mode]="spinnerMode" [value]="lastBalance.value">0</mat-progress-spinner>
-        <mat-card-title>Resoconto {{lastBalance.type}}</mat-card-title>
-        <mat-card-subtitle>data riferimento: {{lastBalance.ref_date | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
-      </mat-card-title-group>
-      <mat-card-content class="md-content">
-
-
         <p>
           <span>
             <i>Resoconto eseguito da:</i>
@@ -131,9 +47,33 @@
             <strong>{{lastBalance.rafa}} &euro;</strong>
           </span>
         </p>
-      </mat-card-content>
+        <p>
+          <span>flash:</span>
+          <span>
+            <strong>{{lastBalance.flash}} &euro;</strong>
+          </span>
+        </p>
+        <p>
+          <span>Tavoli:</span>
+          <span>
+            <strong>{{lastBalance.tavoliAperti}} &euro;</strong>
+          </span>
+        </p>
 
-    </mat-card>
-  </mat-card-content>
-</mat-card>
- -->
+      </span>
+
+      <span style="float: right; background-color: none; text-align: right;">
+        <mat-progress-spinner [color]="spinnerColor" [mode]="spinnerMode" [value]="lastBalance.value">0</mat-progress-spinner>
+      </span>
+    </div>
+
+
+    <div style="clear:both;" *ngIf="user">
+      <span style="float: right; background-color: none; text-align: right;" *ngIf="user.ruolo !== 'Dipendente'">
+        <button mat-icon-button (click)="openConfirmationDelete(lastBalance._id)">
+          <mat-icon class="mat-24">delete</mat-icon>
+        </button>
+      </span>
+    </div>
+  </div>
+</div>

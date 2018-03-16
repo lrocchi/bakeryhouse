@@ -8,6 +8,7 @@ import { Observable, Subscription } from 'rxjs/Rx';
 import { timer } from 'rxjs/observable/timer';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import { takeWhile } from 'rxjs/operators';
+import { ConfirmationDialog } from 'app/confirmation-dialog/confirmation-dialog.component';
 // import { SharedService } from "app/_services/shared.service";
 
 
@@ -18,6 +19,7 @@ import { takeWhile } from 'rxjs/operators';
 })
 export class ChiusureComponent implements OnInit, OnDestroy {
 
+  user: any;
   private alive: boolean;
   message: string;
   spinnerColor = 'normal';
@@ -48,7 +50,7 @@ export class ChiusureComponent implements OnInit, OnDestroy {
 
   // confirmDialog: MatDialogRef<ConfirmationDialog>;
   editDialog: MatDialogRef<EditDialogComponent>;
-
+  confirmDialog: MatDialogRef<ConfirmationDialog>;
   constructor(
     private _balanceService: BalanceService,
     /* private sharedService: SharedService,*/
@@ -63,6 +65,7 @@ export class ChiusureComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('currUser'));
     this.getList();
 
 
@@ -147,5 +150,23 @@ export class ChiusureComponent implements OnInit, OnDestroy {
       this.editDialog = null;
 
     });
+  }
+
+  openConfirmationDelete(id: string) {
+    this.confirmDialog = this.dialog.open(ConfirmationDialog, {
+      disableClose: false
+    });
+    this.confirmDialog.componentInstance.confirmMessage = 'Sei sicuro di voler eliminare questo rendiconto?'
+
+    this.confirmDialog.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('CANCELLA');
+        this._balanceService.deleteBalance(id)
+          .then(types => { })
+          .catch(err => console.log(err));
+      }
+      this.confirmDialog = null;
+    });
+
   }
 }
