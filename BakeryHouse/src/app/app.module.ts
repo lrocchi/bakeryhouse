@@ -49,6 +49,7 @@ import { AlertService } from './_services/alert.service';
 import { FlashMessagesModule } from 'ngx-flash-messages';
 import { ReportRendicontiComponent } from './report/report-rendiconti/report-rendiconti.component';
 import { MyDateAdapter, MY_DATE_FORMATS } from './MyDateAdapter';
+import { HttpClientModule } from '@angular/common/http';
 
 
 /**
@@ -126,7 +127,8 @@ export class DemoMaterialModule { }
     DxChartModule,
     DxDataGridModule,
     FlexLayoutModule,
-    FlashMessagesModule
+    FlashMessagesModule,
+    HttpClientModule
   ],
   providers: [
     AuthGuard,

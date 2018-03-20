@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Balance } from 'app/entity/Balance';
 import { Store } from 'app/entity/store';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { HttpParams } from '@angular/common/http';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class BalanceService {
 
-  constructor(private _http: Http) { }
+  constructor(private _http: Http, private httpClient: HttpClient) { }
 
 
   public getLastBalance(store: Store) {
@@ -37,9 +41,34 @@ export class BalanceService {
 
   }
 
-  public getBalances( id_store: string,  from: Date, to:Date){
+  /* public getBalances( id_store: string,  from: Date, to:Date){
     const sUrl = 'api/balance/' + id_store + '?from=' + from + '&to=' + to ;
     return this._http.get(sUrl).map(data => data.json()); // .toPromise();
+
+  } */
+  public searchBalanceSize;
+
+  getBalances(filter: string = '', pageNumber, pageSize): Observable<Balance[]> {
+    /* return this.httpClient.get('api/balance', {
+      params: new HttpParams()
+        .set('filter', filter)
+        .set('pageNumber', pageNumber.toString())
+        .set('pageSize', pageSize.toString())
+    }).map(res => res["payload"]); */
+
+    return this.httpClient.get('api/balance', {
+      params: new HttpParams()
+        .set('filter', filter)
+        .set('pageNumber', pageNumber.toString())
+        .set('pageSize', pageSize.toString())
+    }).pipe(
+      tap(data => {
+        this.searchBalanceSize = data["size"];
+        // console.log("this.searchBalanceSize:" + this.searchBalanceSize);
+      }),
+      map(res => res["payload"])
+    );
+
 
   }
 

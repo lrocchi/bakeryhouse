@@ -524,7 +524,7 @@ table td[class*=col-], table th[class*=col-] {
 }
 .Ccm-MainContent:not(.Ccm-LoginMainContent) .CoreViewContainer {
   height: calc(100% - 56px);
-  overflow: auto
+  overflow: hidden;
 }
 .Ccm-MainContent:not(.Ccm-LoginMainContent) .CoreViewContainer>ui-view, .Ccm-MainContent:not(.Ccm-LoginMainContent) .CoreViewContainer>[ui-view] {
   display: block;

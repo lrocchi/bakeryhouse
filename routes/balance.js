@@ -7,6 +7,38 @@ var Store = require("../models/Store");
 var Spese = require("../models/Cost");
 var CommonUtils = require("../utils/common");
 
+router.get("/", function (req, res, next) {
+  const queryParams = req.query;
+  const filter = queryParams.filter || '{}',
+    pageNumber = parseInt(queryParams.pageNumber) || 0,
+    pageSize = parseInt(queryParams.pageSize);
+
+  /* console.log("filter=" + filter);
+  console.log("pageNumber=" + pageNumber);
+  console.log("pageSize=" + pageSize); */
+  // const jsonFilter = filster.json;
+  Balance.find(JSON.parse(filter))
+    .sort({ create_on: -1 })
+    .populate("user")
+    .populate("store")
+    .exec(function (err, docs) {
+
+      // console.log('docs:' + docs);
+      const initialPos = pageNumber * pageSize;
+      let BalancePage = {};
+      let fullSize = 0;
+      if (docs) {
+        // console.log('BalancePage (slice):' + docs.length);
+        fullSize = docs.length;
+        BalancePage = docs.slice(initialPos, initialPos + pageSize);
+
+      } else {
+        BalancePage = docs;
+      }
+      res.status(200).json({ payload: BalancePage, size: fullSize });
+    });
+});
+
 router.get("/lastone/:id_store", function (req, res, next) {
   Balance.findOne()
     .where("store")
@@ -59,9 +91,9 @@ router.get("/:id_store", function (req, res, next) {
   const queryParams = req.query;
   var myFromDate = new Date(queryParams.from);
   var myToDate = new Date(queryParams.to);
-  console.log("req.params.id_store: " + req.params.id_store);
+  /* console.log("req.params.id_store: " + req.params.id_store);
   console.log("myFromDate: " + myFromDate);
-  console.log("myToDate: " + myToDate);
+  console.log("myToDate: " + myToDate);*/
   Balance.find()
     .where("store")
     .equals(req.params.id_store)
@@ -79,7 +111,7 @@ router.get("/:id_store", function (req, res, next) {
       }
       // let balances = Object.values(balanceDocs).filter(bal => bal.store._id == queryParams.id_store).sort((l1, l2) => l1.id - l2.id);
 
-       res.status(200).json(balanceDocs);
+      res.status(200).json(balanceDocs);
     });
 
 });
@@ -198,9 +230,9 @@ router.post("/", function (req, res, next) {
             if (balance.flash) {
               nRafa -= balance.flash;
             }
-            
+
             balance.rafa = Number.parseFloat(nRafa).toFixed(2);
-            
+
 
             Balance.create(balance, function (err, data) {
               // console.log("REST:" + JSON.stringify(data));

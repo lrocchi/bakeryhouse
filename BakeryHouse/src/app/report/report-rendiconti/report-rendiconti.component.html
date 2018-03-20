@@ -1,108 +1,111 @@
+<!-- <mat-card style="position: fixed; width: 100%">
+  <mat-card-title>Resoconti</mat-card-title>
+  <mat-card-header> -->
+<!-- <mat-expansion-panel style="position: fixed; width: 100%"> -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Filtri
+    </mat-panel-title>
+    <mat-panel-description>
+      inserisci i filtri qui
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <table style="width: 100%" cellspacing="0">
+    <tr>
+      <td style="width: 34%">
+        <mat-form-field>
+          <mat-select placeholder="Punto Vendita" [(ngModel)]="selectedStoreId" required>
+            <mat-option *ngFor="let store of stores" [value]="store._id">{{store.nome}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td style="width: 33%">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="Dal" [formControl]="dateFrom">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </td>
+      <td style="width: 33%">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker2" placeholder="A tutto il" [formControl]="dateTo">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </td>
 
-  <mat-card style="position: fixed; width: 100%">
-    <mat-card-title>Resoconti</mat-card-title>
-    <mat-card-header>
-      <!-- <mat-expansion-panel style="position: fixed; width: 100%"> -->
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Filtri
-          </mat-panel-title>
-          <mat-panel-description>
-            inserisci i filtri qui
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <table style="width: 100%" cellspacing="0">
-          <tr>
-            <td style="width: 34%">
-              <mat-form-field>
-                <mat-select placeholder="Punto Vendita" [(ngModel)]="selectedStoreId" required>
-                  <mat-option *ngFor="let store of stores" [value]="store._id">{{store.nome}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-            <td style="width: 33%">
-              <mat-form-field>
-                <input matInput [matDatepicker]="picker1" placeholder="Dal" [formControl]="dateFrom">
-                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
-              </mat-form-field>
-            </td>
-            <td style="width: 33%">
-              <mat-form-field>
-                <input matInput [matDatepicker]="picker2" placeholder="A tutto il" [formControl]="dateTo">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
-              </mat-form-field>
-            </td>
+    </tr>
+    <tr>
+      <td style="text-align: right" colspan="3">
+        <button mat-button style="color: #fff;background-color: #7fa372;" (click)="startSearch()">Filtra</button>
+      </td>
+    </tr>
+  </table>
+</mat-expansion-panel>
+<!--  </mat-card-header>
+  <mat-card-content style="overflow: auto"> -->
 
-          </tr>
-          <tr>
-            <td style="text-align: right" colspan="3">
-              <button mat-button style="color: #fff;background-color: #7fa372;" (click)="startSearch()">Filtra</button>
-            </td>
-          </tr>
-        </table>
-      </mat-expansion-panel>
-    </mat-card-header>
-    <mat-card-content>
-      
-      <mat-table #table [dataSource]="dataSource">
-        <ng-container matColumnDef="store">
-          <mat-header-cell *matHeaderCellDef> Punto Vendita </mat-header-cell>git 
-          <mat-cell *matCellDef="let balance"> {{balance.store.nome}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="type">
-          <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
-          <mat-cell *matCellDef="let balance"> {{balance.type}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="ref_date">
-          <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
-          <mat-cell *matCellDef="let balance"> {{balance.ref_date | date: 'dd/MM/y'}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="cassa">
-          <mat-header-cell *matHeaderCellDef> Cassa </mat-header-cell>
-          <mat-cell *matCellDef="let balance"> {{balance.cassa | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="pos">
-          <mat-header-cell *matHeaderCellDef> POS </mat-header-cell>
-          <mat-cell *matCellDef="let balance"> {{balance.pos | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="ticket">
-          <mat-header-cell *matHeaderCellDef> Ticket </mat-header-cell>
-          <mat-cell *matCellDef="let balance"> {{balance.ticket | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="prevCapital">
-          <mat-header-cell *matHeaderCellDef> Fondo </mat-header-cell>
-          <mat-cell *matCellDef="let balance"> {{balance.prevCapital | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="flash">
-          <mat-header-cell *matHeaderCellDef> Flash </mat-header-cell>
-          <mat-cell *matCellDef="let balance"> {{balance.flash | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="riserva">
-          <mat-header-cell *matHeaderCellDef> Riserva </mat-header-cell>
-          <mat-cell *matCellDef="let balance"> {{balance.riserva | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-        </ng-container>
 
-        <ng-container matColumnDef="tavoliAperti">
-          <mat-header-cell *matHeaderCellDef> Tavoli Aperti </mat-header-cell>
-          <mat-cell *matCellDef="let balance"> {{balance.tavoliAperti | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="rafa">
-          <mat-header-cell *matHeaderCellDef> Blu </mat-header-cell>
-          <mat-cell *matCellDef="let balance"> {{balance.rafa | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="speseTotali">
-          <mat-header-cell *matHeaderCellDef> Spese Totali </mat-header-cell>
-          <mat-cell *matCellDef="let balance"> {{balance.speseTotali | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-        </ng-container>
+<mat-table #table [dataSource]="dataSource">
+  <ng-container matColumnDef="store">
+    <mat-header-cell *matHeaderCellDef> Punto Vendita </mat-header-cell>git
+    <mat-cell *matCellDef="let balance"> {{balance.store.nome}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.type}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="ref_date">
+    <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.ref_date | date: 'dd/MM/y'}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="cassa">
+    <mat-header-cell *matHeaderCellDef> Cassa </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.cassa | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="pos">
+    <mat-header-cell *matHeaderCellDef> POS </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.pos | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="ticket">
+    <mat-header-cell *matHeaderCellDef> Ticket </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.ticket | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="prevCapital">
+    <mat-header-cell *matHeaderCellDef> Fondo </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.prevCapital | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="flash">
+    <mat-header-cell *matHeaderCellDef> Flash </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.flash | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="riserva">
+    <mat-header-cell *matHeaderCellDef> Riserva </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.riserva | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <ng-container matColumnDef="tavoliAperti">
+    <mat-header-cell *matHeaderCellDef> Tavoli Aperti </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.tavoliAperti | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="rafa">
+    <mat-header-cell *matHeaderCellDef> Blu </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.rafa | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="speseTotali">
+    <mat-header-cell *matHeaderCellDef> Spese Totali </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.speseTotali | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
 
-        <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)"></mat-row>
-        <!-- '', '', '', '', '', '', '', '', '', '' -->
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
-      </mat-table>
-    </mat-card-content>
-  </mat-card>
+  <!-- <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)"></mat-row> -->
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  <!-- '', '', '', '', '', '', '', '', '', '' -->
+
+</mat-table>
+
+<mat-paginator [length]="dataSource.resultsLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPaginateChange($event)"></mat-paginator>
+<!--   </mat-card-content>
+</mat-card> -->

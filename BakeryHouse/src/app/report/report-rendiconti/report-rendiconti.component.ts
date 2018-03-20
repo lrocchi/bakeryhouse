@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 import { BalanceService } from 'app/_services/balance.service';
 import { StoreService } from 'app/_services/store.service';
 import { Store } from 'app/entity/store';
 import { FormControl } from '@angular/forms';
 import { BalanceDataSource } from './balance.datasource';
+import { PageEvent } from '@angular/material';
+
 
 @Component({
   // selector: 'app-report-rendiconti',
@@ -15,6 +17,9 @@ import { BalanceDataSource } from './balance.datasource';
 })
 export class ReportRendicontiComponent implements OnInit {
 
+
+
+
   public dataSource: BalanceDataSource;
   public displayedColumns = ['store', 'type', 'ref_date', 'cassa', 'pos', 'ticket', 'prevCapital', 'flash', 'riserva', 'tavoliAperti', 'rafa', 'speseTotali'];
   public stores: Array<Store>;
@@ -23,7 +28,20 @@ export class ReportRendicontiComponent implements OnInit {
   public dateFrom: FormControl;
   public dateTo: FormControl;
 
-  constructor(private _balanceService: BalanceService, private _storeService: StoreService) { 
+
+  // @ViewChild(MatPaginator) paginator: MatPaginator;
+
+
+  // MatPaginator Inputs
+  length: number;
+  pageIndex: number = 0;
+  pageSize: number = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 50, 100];
+
+
+
+
+  constructor(private _balanceService: BalanceService, private _storeService: StoreService) {
     let user = JSON.parse(localStorage.getItem('currUser'));
     this.selectedStoreId = user.store._id;
   }
@@ -31,17 +49,29 @@ export class ReportRendicontiComponent implements OnInit {
   ngOnInit() {
     this.getStoreList();
     let today = new Date();
-    today.setHours(23,0,0,0);
+    today.setHours(23, 0, 0, 0);
 
     let yesterday = new Date();
-    yesterday.setHours(-24,0,0,0);
+    yesterday.setHours(-24, 0, 0, 0);
 
     this.dateFrom = new FormControl(yesterday);
     this.dateTo = new FormControl(today);
 
-    this.dataSource = new BalanceDataSource(this._balanceService);
+    this.dataSource = new BalanceDataSource(/* this.paginator, */ this._balanceService);
 
-    this.dataSource.loadBalances(this.selectedStoreId, this.dateFrom.value, this.dateTo.value);
+    this.startSearch();
+  }
+
+
+  onPaginateChange(event?: PageEvent) {
+    
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    /* console.log("[length]:" + event.length);
+    console.log("[pageIndex]:" + event.pageIndex);
+    console.log("[pageSize]:" + event.pageSize); */
+    this.startSearch();
+    event.length = this.length;
   }
 
   getStoreList() {
@@ -52,19 +82,22 @@ export class ReportRendicontiComponent implements OnInit {
 
 
 
-  public startSearch(){
-    console.log("SEARCH: " + this.selectedStoreId + "-" + this.dateFrom.value + "-" + this.dateTo.value);
-    this.dataSource.loadBalances(this.selectedStoreId, this.dateFrom.value, this.dateTo.value);
+  public startSearch() {
+     let filter = {};
+
+    filter['store'] = this.selectedStoreId;
+    filter['ref_date'] = { $gte: this.dateFrom.value.toISOString(), $lte: this.dateTo.value.toISOString() };
+    // console.log('FILTER:' + JSON.stringify(filter));
+
+    this.dataSource.loadBalances(filter, this.pageIndex,
+      this.pageSize);
+      // this.length = this.dataSource.getSize();
   }
 
-  /* public getBalances(id: string, from: Date, to: Date) {
-
-    this.dataSource = this._balanceService.getBalances(id, from, to);
-  } */
 
 
-  onRowClicked(row) {
+  /* onRowClicked(row) {
     console.log('Row clicked: ', row);
-  }
+  } */
 
 }

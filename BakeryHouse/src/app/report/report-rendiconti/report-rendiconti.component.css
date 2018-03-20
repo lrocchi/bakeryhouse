@@ -5,3 +5,8 @@
   .bkExpansionPanel .bkExpansionPanelHeader {
     background-color: white
   } */
+
+  .mat-table {
+    overflow: auto;
+    max-height: 650px;
+  }
