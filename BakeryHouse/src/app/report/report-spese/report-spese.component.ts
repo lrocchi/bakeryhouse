@@ -1,30 +1,27 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-
-import { BalanceService } from 'app/_services/balance.service';
-import { StoreService } from 'app/_services/store.service';
-import { Store } from 'app/entity/store';
+import { Component, OnInit } from '@angular/core';
+import { SpeseDataSource } from './SpeseDataSource';
+import { Cost } from 'app/entity/cost';
 import { FormControl } from '@angular/forms';
-import { BalanceDataSource } from './balance.datasource';
+import { StoreService } from 'app/_services/store.service';
+import { SpesaService } from 'app/_services/spesa.service';
 import { PageEvent } from '@angular/material';
-
+import { Store } from 'app/entity/store';
+import { CostType } from 'app/entity/cost-type';
 
 @Component({
-  // selector: 'app-report-rendiconti',
-  templateUrl: './report-rendiconti.component.html',
-  styleUrls: ['./report-rendiconti.component.css'],
-  encapsulation: ViewEncapsulation.None,
-  preserveWhitespaces: false,
+  selector: 'app-report-spese',
+  templateUrl: './report-spese.component.html',
+  styleUrls: ['./report-spese.component.css']
 })
-export class ReportRendicontiComponent implements OnInit {
+export class ReportSpeseComponent implements OnInit {
 
-
-
-
-  public dataSource: BalanceDataSource;
-  public displayedColumns = ['store', 'type', 'ref_date', 'cassa', 'pos', 'ticket', 'prevCapital', 'flash', 'riserva', 'tavoliAperti', 'rafa', 'speseTotali'];
+  public dataSource: SpeseDataSource;
+  public displayedColumns = ['store', 'descrizione', 'type', 'valore',  'ref_date'];
   public stores: Array<Store>;
+  public costTypes: Array<CostType>;
   public selectedStoreId: string;
-  public selectedTypeValue: number;
+  public selectedTypeName: string;
+
   public dateFrom: FormControl;
   public dateTo: FormControl;
 
@@ -41,13 +38,14 @@ export class ReportRendicontiComponent implements OnInit {
 
 
 
-  constructor(private _balanceService: BalanceService, private _storeService: StoreService) {
+  constructor(private _SpesaService: SpesaService, private _storeService: StoreService) {
     let user = JSON.parse(localStorage.getItem('currUser'));
     this.selectedStoreId = user.store._id;
   }
 
   ngOnInit() {
     this.getStoreList();
+    this.getCostTypeList();
     let today = new Date();
     today.setHours(23, 0, 0, 0);
 
@@ -57,7 +55,7 @@ export class ReportRendicontiComponent implements OnInit {
     this.dateFrom = new FormControl(yesterday);
     this.dateTo = new FormControl(today);
 
-    this.dataSource = new BalanceDataSource(/* this.paginator, */ this._balanceService);
+    this.dataSource = new SpeseDataSource(/* this.paginator, */ this._SpesaService);
 
     this.startSearch();
   }
@@ -80,25 +78,25 @@ export class ReportRendicontiComponent implements OnInit {
       .catch(err => console.log(err));
   }
 
+  getCostTypeList() {
+    this._SpesaService.getCategoriesList()
+      .then(types => { this.costTypes = types; })
+      .catch(err => console.log(err));
+  }
+
 
 
   public startSearch() {
      let filter = {};
 
     filter['store'] = this.selectedStoreId;
-    filter['value'] = this.selectedTypeValue;
+    filter['fullType.nome'] = this.selectedTypeName;
     filter['ref_date'] = { $gte: this.dateFrom.value.toISOString(), $lte: this.dateTo.value.toISOString() };
     // console.log('FILTER:' + JSON.stringify(filter));
 
-    this.dataSource.loadBalances(filter, this.pageIndex,
+    this.dataSource.loadCosts(filter, this.pageIndex,
       this.pageSize);
       // this.length = this.dataSource.getSize();
   }
-
-
-
-  /* onRowClicked(row) {
-    console.log('Row clicked: ', row);
-  } */
 
 }

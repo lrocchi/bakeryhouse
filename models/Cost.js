@@ -14,6 +14,7 @@ var costSchema = new mongoose.Schema({
     fullType: [CostType.schema],
     store: { type: mongoose.Schema.Types.ObjectId, ref: 'Store' },
     fullStore: [Store.schema]
+   
 })
 
 

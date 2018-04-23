@@ -16,12 +16,12 @@
           <mat-panel-description></mat-panel-description>
         </mat-expansion-panel-header>
         <mat-nav-list>
-        <a md-list-item [routerLink]="['datirendiconti']" (click)="sidenav.close()">
+        <a mat-menu-item [routerLink]="['datirendiconti']" (click)="sidenav.close()">
           <div md-line>Rendiconti</div>
         </a>
-        <!-- <a md-list-item [routerLink]="['spese']">
+        <a mat-menu-item [routerLink]="['datispese']" (click)="sidenav.close()">
           <div md-line>Spese</div>
-        </a> -->
+        </a>
         
       </mat-nav-list>
       </mat-expansion-panel>

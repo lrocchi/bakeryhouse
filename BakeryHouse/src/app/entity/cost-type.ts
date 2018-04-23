@@ -7,10 +7,13 @@ export class CostType {
   public active: boolean;
   public hasDescription: boolean;
   public store: Store;
+  public percentage: number;
+
 
   constructor() {
     this.active = true;
     this.hasDescription = true;
+    this.percentage = 1;
   }
 
 

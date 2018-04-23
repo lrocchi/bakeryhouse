@@ -13,21 +13,32 @@
   </mat-expansion-panel-header>
   <table style="width: 100%" cellspacing="0">
     <tr>
-      <td style="width: 34%">
+      <td style="width: 25%">
         <mat-form-field>
           <mat-select placeholder="Punto Vendita" [(ngModel)]="selectedStoreId" required>
             <mat-option *ngFor="let store of stores" [value]="store._id">{{store.nome}}</mat-option>
           </mat-select>
         </mat-form-field>
       </td>
-      <td style="width: 33%">
+      <td style="width: 25%">
+          <mat-form-field>
+            <mat-select placeholder="Tipologia" [(ngModel)]="selectedTypeValue">
+              <mat-option>(Tutte)</mat-option>
+              <mat-option [value]="25">Pranzo</mat-option>
+              <mat-option [value]="50">Pomeriggio</mat-option>
+              <mat-option [value]="75">Cena</mat-option>
+              <mat-option [value]="100">Chiusura</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      <td style="width: 25%">
         <mat-form-field>
           <input matInput [matDatepicker]="picker1" placeholder="Dal" [formControl]="dateFrom">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
       </td>
-      <td style="width: 33%">
+      <td style="width: 25%">
         <mat-form-field>
           <input matInput [matDatepicker]="picker2" placeholder="A tutto il" [formControl]="dateTo">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -37,7 +48,7 @@
 
     </tr>
     <tr>
-      <td style="text-align: right" colspan="3">
+      <td style="text-align: right" colspan="4">
         <button mat-button style="color: #fff;background-color: #7fa372;" (click)="startSearch()">Filtra</button>
       </td>
     </tr>

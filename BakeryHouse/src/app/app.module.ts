@@ -50,6 +50,7 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
 import { ReportRendicontiComponent } from './report/report-rendiconti/report-rendiconti.component';
 import { MyDateAdapter, MY_DATE_FORMATS } from './MyDateAdapter';
 import { HttpClientModule } from '@angular/common/http';
+import { ReportSpeseComponent } from './report/report-spese/report-spese.component';
 
 
 /**
@@ -81,7 +82,6 @@ import { HttpClientModule } from '@angular/common/http';
     MatPaginatorModule,
     MatSortModule
   ],
-  declarations: [],
   // declarations: [FlashMessagesComponent]
 })
 export class DemoMaterialModule { }
@@ -109,6 +109,7 @@ export class DemoMaterialModule { }
     GeneralReportComponent,
     IncidenzaReportComponent,
     ReportRendicontiComponent,
+    ReportSpeseComponent,
     LogoutComponent,
     ShowErrorsComponent,
 

@@ -8,7 +8,8 @@ import { Observable } from 'rxjs'
 import { Cost } from 'app/entity/cost';
 import { CostType } from 'app/entity/cost-type';
 import { User } from 'app/entity/user';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, tap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -16,7 +17,7 @@ export class SpesaService {
 
 
 
-  constructor(private _http: Http) { }
+  constructor(private _http: Http, private httpClient: HttpClient) { }
 
   /**
    * COST SECTION
@@ -106,6 +107,38 @@ export class SpesaService {
     return this._http.put('api/costtype/' + cost._id, cost, options).map(data => data.json()).toPromise();
   }
 
+
+  public searchCostSize;
+  public totalCost;
+
+  getCosts(filter: string = '', pageNumber, pageSize): Observable<Cost[]> {
+    /* return this.httpClient.get('api/balance', {
+      params: new HttpParams()
+        .set('filter', filter)
+        .set('pageNumber', pageNumber.toString())
+        .set('pageSize', pageSize.toString())
+    }).map(res => res["payload"]); */
+
+    return this.httpClient.get('api/spese', {
+      params: new HttpParams()
+        .set('filter', filter)
+        .set('pageNumber', pageNumber.toString())
+        .set('pageSize', pageSize.toString())
+    }).pipe(
+      tap(data => {
+        this.searchCostSize = data["size"];
+        this.totalCost = data["totalCost"];
+        // console.log("this.searchBalanceSize:" + this.searchBalanceSize);
+      }),
+      map(res => res["payload"])
+    );
+
+
+  }
+
 }
+
+
+
 
 

@@ -9,6 +9,7 @@ import { GeneralReportComponent } from 'app/report/general-report.component';
 import { LogoutComponent } from 'app/logout.component';
 import { IncidenzaReportComponent } from 'app/report/incidenza-report/incidenza-report.component';
 import { ReportRendicontiComponent } from './report/report-rendiconti/report-rendiconti.component';
+import { ReportSpeseComponent } from 'app/report/report-spese/report-spese.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
     children: [
       { path: 'incidenza', canActivate: [AuthGuard], component: IncidenzaReportComponent },
       { path: 'datirendiconti', canActivate: [AuthGuard], component: ReportRendicontiComponent },
+      { path: 'datispese', canActivate: [AuthGuard], component: ReportSpeseComponent }
     ]
   },
 

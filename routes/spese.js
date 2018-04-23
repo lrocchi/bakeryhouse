@@ -8,7 +8,7 @@ var CostType = require("../models/CostType");
 
 var CommonUtils = require("../utils/common");
 
-// GET all Spese
+/* // GET all Spese
 router.get("/", function(req, res, next) {
   console.log("REQ.QUERY: " + JSON.stringify(req.query));
 
@@ -21,9 +21,43 @@ router.get("/", function(req, res, next) {
       return res.json(speseDocs);
     }
   });
+}); */
+
+router.get("/", function (req, res, next) {
+  const queryParams = req.query;
+  const filter = queryParams.filter || '{}',
+    pageNumber = parseInt(queryParams.pageNumber) || 0,
+    pageSize = parseInt(queryParams.pageSize);
+
+  /* console.log("filter=" + filter);
+  console.log("pageNumber=" + pageNumber);
+  console.log("pageSize=" + pageSize); */
+  // const jsonFilter = filster.json;
+  Spese.find(JSON.parse(filter))
+    .sort({ create_on: -1 })
+    .populate("store")
+    .populate("tipo")
+    .exec(function (err, docs) {
+
+      // console.log('docs:' + docs);
+      const initialPos = pageNumber * pageSize;
+      let SpesePage = {};
+      let fullSize = 0;
+      let total = 0;
+      if (docs) {
+        // console.log('SpesePage (slice):' + docs.length);
+        fullSize = docs.length;
+        docs.forEach(el=>{
+          total += el.valore;
+        });
+        SpesePage = docs.slice(initialPos, initialPos + pageSize);
+
+      } else {
+        SpesePage = docs; 
+      }
+      res.status(200).json({ payload: SpesePage, size: fullSize, totalCost: total });
+    });
 });
-
-
 
 
 // GET today costs by id_store
