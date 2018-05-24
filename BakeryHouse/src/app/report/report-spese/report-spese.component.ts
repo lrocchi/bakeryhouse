@@ -8,6 +8,7 @@ import { PageEvent } from '@angular/material';
 import { Store } from 'app/entity/store';
 import { CostType } from 'app/entity/cost-type';
 
+
 @Component({
   selector: 'app-report-spese',
   templateUrl: './report-spese.component.html',
@@ -16,12 +17,13 @@ import { CostType } from 'app/entity/cost-type';
 export class ReportSpeseComponent implements OnInit {
 
   public dataSource: SpeseDataSource;
-  public displayedColumns = ['store', 'descrizione', 'type', 'valore',  'ref_date'];
+  public displayedColumns = ['store', 'descrizione', 'type', 'valore', 'ref_date'];
   public stores: Array<Store>;
   public costTypes: Array<CostType>;
+  public costSubTypeList: Array<CostType>;
   public selectedStoreId: string;
   public selectedTypeName: string;
-
+  public selectedCost: CostType;
   public dateFrom: FormControl;
   public dateTo: FormControl;
 
@@ -62,7 +64,7 @@ export class ReportSpeseComponent implements OnInit {
 
 
   onPaginateChange(event?: PageEvent) {
-    
+
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     /* console.log("[length]:" + event.length);
@@ -84,19 +86,32 @@ export class ReportSpeseComponent implements OnInit {
       .catch(err => console.log(err));
   }
 
+  getSubTypeList(type) {
 
+    this._SpesaService.getSubTypeList(type)
+      .then(types => { this.costSubTypeList = types; })
+      .catch(err => console.log(err));
+  }
 
   public startSearch() {
-     let filter = {};
+    let filter = {};
 
     filter['store'] = this.selectedStoreId;
     filter['fullType.nome'] = this.selectedTypeName;
+    if (this.selectedCost) {
+      filter['fullType.subCategory'] = this.selectedCost.subCategory;
+    }
     filter['ref_date'] = { $gte: this.dateFrom.value.toISOString(), $lte: this.dateTo.value.toISOString() };
     // console.log('FILTER:' + JSON.stringify(filter));
 
     this.dataSource.loadCosts(filter, this.pageIndex,
       this.pageSize);
-      // this.length = this.dataSource.getSize();
+    // this.length = this.dataSource.getSize();
+  }
+
+  public onChangeCategory(event) {
+    
+    this.getSubTypeList(event.value);
   }
 
 }

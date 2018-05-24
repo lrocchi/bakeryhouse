@@ -17,12 +17,12 @@ ExcelManager.create = function () {
 
   const monthNames = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
   var storeDoc = new Array();
-  
+
   var storePromise = Store.where("active").equals(true).exec(function (err, stores) {
     storeDoc = stores
   });
-  
-  storePromise.then(function (){
+
+  storePromise.then(function () {
 
     var today = new Date();
     var y = today.getFullYear();
@@ -31,7 +31,7 @@ ExcelManager.create = function () {
 
 
 
-    const startFoodHeaderRowNumber =  4;
+    const startFoodHeaderRowNumber = 4;
 
     var fromDate = new Date(y, m - 1, 1, 0, 0, 0, 0);
     var toDate = new Date(y, m, 1, 0, 0, 0, 0);
@@ -56,7 +56,7 @@ ExcelManager.create = function () {
 
 
 
-      CostType.where("nome")
+      var headerFood = CostType.where("nome")
         .equals("Food")
         .exec(function (err, costTypeDoc) {
           var startJSONstr = '{"headers":[{"header": "", "key": "data", "width": 16}]}';
@@ -103,134 +103,124 @@ ExcelManager.create = function () {
             });
 
           });
-          ExcelManager.getCosts(store._id, "Food", fromDate, toDate, function (costResults) {
-            var currDate;
-            var jsonRow;
-            var curRow;
 
-            /**
-             * Inserisco i valori nella tabella Food
-             */
 
-            costResults.forEach(element => {
-              if (currDate) {
-                if (currDate.getTime() !== element._id.ref_date.getTime()) {
-                  currDate = element._id.ref_date;
-                  // console.log("Nuova Data= " + currDate);
-                  if (jsonRow) {
-                    var totaleRiga = 0.0;
+        });
+      headerFood.then(function () {
+        var FoodCosts = ExcelManager.getCosts(store._id, "Food", fromDate, toDate); //, function (costResults) {
 
-                    curRow = worksheet.addRow(jsonRow);
-                    curRow.eachCell(function (cell, colNumber) {
-                      // Salto la cella della data
-                      if (colNumber > 1) {
-                        totaleRiga += cell.value;
-                      }
-                    });
-                    curRow.getCell("Totale Spese").value = totaleRiga;
-                    curRow.getCell("Totale Spese").fill = {
-                      type: 'pattern',
-                      pattern: 'solid',
-                      fgColor: { argb: 'e2efda' }
-                    };
-                  }
-                  jsonRow = {};
-                  jsonRow["data"] = element._id.ref_date;
-                }
-              } else {
-                // console.log("currDate vuoto");
+        FoodCosts.then(function (costResults) {
+          var currDate;
+          var jsonRow;
+          var curRow;
+
+          /**
+           * Inserisco i valori nella tabella Food
+           */
+
+          costResults.forEach(element => {
+            if (currDate) {
+              if (currDate.getTime() !== element._id.ref_date.getTime()) {
                 currDate = element._id.ref_date;
+                // console.log("Nuova Data= " + currDate);
+                if (jsonRow) {
+                  var totaleRiga = 0.0;
+
+                  curRow = worksheet.addRow(jsonRow);
+                  curRow.eachCell(function (cell, colNumber) {
+                    // Salto la cella della data
+                    if (colNumber > 1) {
+                      totaleRiga += cell.value;
+                    }
+                  });
+                  curRow.getCell("Totale Spese").value = totaleRiga;
+                  curRow.getCell("Totale Spese").fill = {
+                    type: 'pattern',
+                    pattern: 'solid',
+                    fgColor: { argb: 'e2efda' }
+                  };
+                }
                 jsonRow = {};
                 jsonRow["data"] = element._id.ref_date;
               }
-              jsonRow[element._id.descrizione] = element.totale;
+            } else {
+              // console.log("currDate vuoto");
+              currDate = element._id.ref_date;
+              jsonRow = {};
+              jsonRow["data"] = element._id.ref_date;
+            }
+            jsonRow[element._id.descrizione] = element.totale;
 
+          });
 
+          /**
+           * Fine inserimento valori tabella Food
+           */
 
-              //INSERIRE INCASSI QUI
-              // ********************************
+          /**
+           * Calcolo i totali
+           */
+          var totale = 0.0;
+          curRow = worksheet.addRow(jsonRow);
 
-              /* 
-                            db.getCollection('balances').find({
-                              ref_date: {
-                                      $gte: ISODate("2018-03-01T00:00:00.000Z"),
-                                      $lt: ISODate("2018-04-01T00:00:00.000Z")
-                                    },
-                                    value: 100,
-                                    store: ObjectId("59b1a457dc14d315143c43e2")
-                                    
-                                    }).sort({ ref_date: 1 } )
-                                     */
+          curRow.eachCell(function (cell, colNumber) {
+            // Salto la cella della data
+            if (colNumber > 1) {
+              totale += cell.value;
+            }
+          });
+          curRow.getCell("Totale Spese").value = totale;
+          curRow.getCell("Totale Spese").fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'e2efda' }
+          };
 
-              // ********************************
-            });
-
-            /**
-             * Fine inserimento valori tabella Food
-             */
-
-            /**
-             * Calcolo i totali
-             */
-            var totale = 0.0;
-            curRow = worksheet.addRow(jsonRow);
-
-            curRow.eachCell(function (cell, colNumber) {
-              // Salto la cella della data
-              if (colNumber > 1) {
-                totale += cell.value;
-              }
-            });
-            curRow.getCell("Totale Spese").value = totale;
-            curRow.getCell("Totale Spese").fill = {
-              type: 'pattern',
-              pattern: 'solid',
-              fgColor: { argb: 'e2efda' }
-            };
-
-            /**
-             * Calcola e inserisce totale delle colonne
-             */
-            var numCol = 0;
-            var rowValues = [];
-            rowValues[1] = 'Tot periodo';
-            worksheet.columns.forEach(col => {
-              var totaleCol = 0.0;
-              if (numCol > 0) {
-                col.eachCell({ includeEmpty: true }, function (cell, rowNumber) {
-                  if (rowNumber > startFoodHeaderRowNumber) {
-                    if (cell.value) {
-                      totaleCol += cell.value;
-                    }
+          /**
+           * Calcola e inserisce totale delle colonne
+           */
+          var numCol = 0;
+          var rowValues = [];
+          rowValues[1] = 'Tot periodo';
+          worksheet.columns.forEach(col => {
+            var totaleCol = 0.0;
+            if (numCol > 0) {
+              col.eachCell({ includeEmpty: true }, function (cell, rowNumber) {
+                if (rowNumber > startFoodHeaderRowNumber) {
+                  if (cell.value) {
+                    totaleCol += cell.value;
                   }
-                });
-                rowValues[numCol + 1] = totaleCol;
-              }
-              numCol++;
-            });
-            curRow = worksheet.addRow(rowValues);
-            curRow.eachCell({ includeEmpty: true }, function (cell, colNumber) {
-              cell.fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: { argb: 'f8cbad' }
-              };
-
-            });
-            curRow.getCell("Totale Spese").fill = {
+                }
+              });
+              rowValues[numCol + 1] = totaleCol;
+            }
+            numCol++;
+          });
+          curRow = worksheet.addRow(rowValues);
+          curRow.eachCell({ includeEmpty: true }, function (cell, colNumber) {
+            cell.fill = {
               type: 'pattern',
               pattern: 'solid',
-              fgColor: { argb: 'a9d08e' }
-            };
-            curRow.getCell("Totale Spese").font = {
-
-              bold: true
+              fgColor: { argb: 'f8cbad' }
             };
 
-            /**
-             * FINE Calcola e inserisce totale delle colonne
-             */
+          });
+          curRow.getCell("Totale Spese").fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'a9d08e' }
+          };
+          curRow.getCell("Totale Spese").font = {
 
+            bold: true
+          };
+
+          /**
+           * FINE Calcola e inserisce totale delle colonne
+           */
+        })
+
+          .then(function () {
 
             /**
              * Inizio Tabella Delivery
@@ -279,7 +269,8 @@ ExcelManager.create = function () {
                 });
                 var startDeliveryRowNumber = lastRowNumber + 2;
 
-                ExcelManager.getCosts(store._id, "Delivery", fromDate, toDate, function (costResults) {
+                var DeliveryCosts = ExcelManager.getCosts(store._id, "Delivery", fromDate, toDate); //, function (costResults) {
+                DeliveryCosts.then(function (costResults) {
                   var currDate;
                   var jsonRow;
                   totaleRiga = 0.0;
@@ -375,19 +366,21 @@ ExcelManager.create = function () {
                 }); //ExcelManager.getCosts
               }); //CostType.where
           }); //ExcelManager.getCosts
-        }); //CostType.where
+      }); //CostType.where
 
     }) // ForEach Store
-  });
-  // }); // Store
+  }) // StorePromise
+    .then(function () {
+      console.log("=== FINE ===");
+    });
 
 
 
-  console.log("=== FINE ===");
 };
 
-ExcelManager.getCosts = function (storeID, type, from, to, callBack) {
-  Costs.aggregate(
+// ExcelManager.getCosts = function (storeID, type, from, to, callBack) {
+ExcelManager.getCosts = function (storeID, type, from, to) {
+  return Costs.aggregate(
     [
       {
         $match: {
@@ -407,15 +400,42 @@ ExcelManager.getCosts = function (storeID, type, from, to, callBack) {
         }
       },
       { $sort: { _id: 1 } }
-    ],
-    function (err, result) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      //   console.log(result);
-      callBack(result);
-    }
+    ]
+  );
+};
+
+
+ExcelManager.getIncassi = function (storeID, type, from, to) {
+  return Balance.aggregate(
+    [
+      {
+        $match: {
+          ref_date: {
+            $gte: from,
+            $lt: to
+          },
+          "value": 100,
+          "store": storeID
+        }
+      },
+      {
+        $group: {
+          _id: { ref_date: "$ref_date" },
+          
+          cassa: {cassa: "$cassa"},
+          pos: {pos: "$pos"},
+          ticket: {ticket: "$ticket"},
+          capital: {capital: "$capital"},
+          prevCapital: {prevCapital: "$caprevCapitalssa"},
+          flash: {flash: "$flash"},
+          rafa: {rafa: "$rafa"},
+          riserva: {riserva: "$riserva"},
+
+          // totale: { $sum: { $multiply: [ "$valore", "$fullType.percentage" ]} }
+        }
+      },
+      { $sort: { _id: 1 } }
+    ]
   );
 };
 

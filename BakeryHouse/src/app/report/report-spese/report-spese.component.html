@@ -16,7 +16,7 @@
   </mat-expansion-panel-header>
   <table style="width: 100%" cellspacing="0">
     <tr>
-      <td style="width: 25%">
+      <td style="width: 20%">
         <mat-form-field>
           <mat-select placeholder="Punto Vendita" [(ngModel)]="selectedStoreId">
             <mat-option>(Tutti)</mat-option>
@@ -24,22 +24,30 @@
           </mat-select>
         </mat-form-field>
       </td>
-      <td style="width: 25%">
+      <td style="width: 20%">
         <mat-form-field>
-          <mat-select placeholder="Tipologia Costi" [(ngModel)]="selectedTypeName">
+          <mat-select placeholder="Tipologia Costi" [(ngModel)]="selectedTypeName" (change)="onChangeCategory($event)">
             <mat-option>(Tutte)</mat-option>
             <mat-option *ngFor="let type of costTypes" [value]="type">{{type}}</mat-option>
           </mat-select>
         </mat-form-field>
       </td>
-      <td style="width: 25%">
+      <td style="width: 20%">
+        <mat-form-field>
+          <mat-select placeholder="Sottocatergoria" [(ngModel)]="selectedCost">
+            <mat-option>(Tutte)</mat-option>
+            <mat-option *ngFor="let subType of costSubTypeList" [value]="subType">{{subType.subCategory}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td style="width: 20%">
         <mat-form-field>
           <input matInput [matDatepicker]="picker1" placeholder="Dal" [formControl]="dateFrom">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
       </td>
-      <td style="width: 25%">
+      <td style="width: 20%">
         <mat-form-field>
           <input matInput [matDatepicker]="picker2" placeholder="A tutto il" [formControl]="dateTo">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
