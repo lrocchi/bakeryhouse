@@ -7,7 +7,7 @@ var CostType = require("../models/CostType");
 
 // Create a new instance of a Workbook class
 
-var ExcelManager = new Object();
+var ExcelManager = {};
 
 ExcelManager.create = function () {
   var monthITA = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
@@ -15,11 +15,11 @@ ExcelManager.create = function () {
   ];
   var workbook = new Excel.Workbook();
 
-  const monthNames = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
-  var storeDoc = new Array();
+  var monthNames = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
+  var storeDoc = [];
 
   var storePromise = Store.where("active").equals(true).exec(function (err, stores) {
-    storeDoc = stores
+    storeDoc = stores;
   });
 
   storePromise.then(function () {
@@ -31,14 +31,14 @@ ExcelManager.create = function () {
 
 
 
-    const startFoodHeaderRowNumber = 4;
+    var startFoodHeaderRowNumber = 4;
 
     var fromDate = new Date(y, m - 1, 1, 0, 0, 0, 0);
     var toDate = new Date(y, m, 1, 0, 0, 0, 0);
     var month = monthITA[fromDate.getMonth()];
 
 
-    storeDoc.forEach(store => {
+    storeDoc.forEach(function(store) {
       var worksheet = workbook.addWorksheet(store.nome);
 
 
@@ -62,31 +62,31 @@ ExcelManager.create = function () {
           var startJSONstr = '{"headers":[{"header": "", "key": "data", "width": 16}]}';
           var headerJsonObj = JSON.parse(startJSONstr);
           var JsonRowHeaderValue = [''];
-          costTypeDoc.forEach(element => {
+          costTypeDoc.forEach(function(element) {
             JsonRowHeaderValue.push(element.subCategory);
-            headerJsonObj["headers"].push({
+            headerJsonObj.headers.push({
               key: element.subCategory,
               width: 16
             });
           });
           JsonRowHeaderValue.push('Totale Spese');
-          headerJsonObj["headers"].push({
+          headerJsonObj.headers.push({
             key: 'Totale Spese',
             width: 16
           });
 
           JsonRowHeaderValue.push('Incasso');
-          headerJsonObj["headers"].push({
+          headerJsonObj.headers.push({
             key: 'Incasso',
             width: 16
           });
 
           worksheet.getRow(startFoodHeaderRowNumber).values = JsonRowHeaderValue;
-          worksheet.columns = headerJsonObj["headers"];
+          worksheet.columns = headerJsonObj.headers;
 
 
 
-          worksheet.columns.forEach(col => {
+          worksheet.columns.forEach(function(col) {
             col.eachCell({ includeEmpty: true }, function (cell, rowNumber) {
               if (rowNumber == startFoodHeaderRowNumber) {
                 cell.fill = {
@@ -118,7 +118,7 @@ ExcelManager.create = function () {
            * Inserisco i valori nella tabella Food
            */
 
-          costResults.forEach(element => {
+          costResults.forEach(function(element) {
             if (currDate) {
               if (currDate.getTime() !== element._id.ref_date.getTime()) {
                 currDate = element._id.ref_date;
@@ -141,13 +141,13 @@ ExcelManager.create = function () {
                   };
                 }
                 jsonRow = {};
-                jsonRow["data"] = element._id.ref_date;
+                jsonRow.data = element._id.ref_date;
               }
             } else {
               // console.log("currDate vuoto");
               currDate = element._id.ref_date;
               jsonRow = {};
-              jsonRow["data"] = element._id.ref_date;
+              jsonRow.data = element._id.ref_date;
             }
             jsonRow[element._id.descrizione] = element.totale;
 
@@ -182,7 +182,7 @@ ExcelManager.create = function () {
           var numCol = 0;
           var rowValues = [];
           rowValues[1] = 'Tot periodo';
-          worksheet.columns.forEach(col => {
+          worksheet.columns.forEach(function(col) {
             var totaleCol = 0.0;
             if (numCol > 0) {
               col.eachCell({ includeEmpty: true }, function (cell, rowNumber) {
@@ -233,10 +233,10 @@ ExcelManager.create = function () {
                 var JsonRowHeader = [''];
 
                 var deliveryJsonObj = JSON.parse(startDeliveryJSONstr);
-                costTypeDoc.forEach(element => {
+                costTypeDoc.forEach(function(element) {
                   JsonRowHeader.push(element.subCategory);
 
-                  deliveryJsonObj["headers"].push({
+                  deliveryJsonObj.headers.push({
                     key: element.subCategory
                   });
 
@@ -244,14 +244,14 @@ ExcelManager.create = function () {
                 });
 
                 JsonRowHeader.push('Tot.Delivery');
-                deliveryJsonObj["headers"].push({
+                deliveryJsonObj.headers.push({
                   key: "totale_delivery"
                 });
                 var lastRowNumber = worksheet.rowCount;
 
                 worksheet.getRow(lastRowNumber + 2).values = JsonRowHeader;
                 var curFoodRow = worksheet.getRow(lastRowNumber + 2);
-                worksheet.columns = deliveryJsonObj["headers"];
+                worksheet.columns = deliveryJsonObj.headers;
 
                 curFoodRow.eachCell({ includeEmpty: true }, function (cell, colNumber) {
                   cell.fill = {
@@ -274,7 +274,7 @@ ExcelManager.create = function () {
                   var currDate;
                   var jsonRow;
                   totaleRiga = 0.0;
-                  costResults.forEach(element => {
+                  costResults.forEach(function(element) {
                     if (currDate) {
                       if (currDate.getTime() !== element._id.ref_date.getTime()) {
                         currDate = element._id.ref_date;
@@ -296,13 +296,13 @@ ExcelManager.create = function () {
                           };
                         }
                         jsonRow = {};
-                        jsonRow["data_food"] = element._id.ref_date;
+                        jsonRow.data_food = element._id.ref_date;
                       }
                     } else {
                       // console.log("currDate vuoto");
                       currDate = element._id.ref_date;
                       jsonRow = {};
-                      jsonRow["data_food"] = element._id.ref_date;
+                      jsonRow.data_food = element._id.ref_date;
                     }
                     jsonRow[element._id.descrizione] = element.totale;
                   });
@@ -327,7 +327,7 @@ ExcelManager.create = function () {
                   var numCol = 0;
                   var rowValues = [];
                   rowValues[1] = 'Tot periodo';
-                  worksheet.columns.forEach(col => {
+                  worksheet.columns.forEach(function(col) {
                     var totaleCol = 0.0;
                     if (numCol > 0) {
                       col.eachCell({ includeEmpty: true }, function (cell, rowNumber) {
@@ -368,7 +368,7 @@ ExcelManager.create = function () {
           }); //ExcelManager.getCosts
       }); //CostType.where
 
-    }) // ForEach Store
+    }); // ForEach Store
   }) // StorePromise
     .then(function () {
       console.log("=== FINE ===");
