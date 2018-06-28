@@ -21,7 +21,7 @@ export class ReportRendicontiComponent implements OnInit {
 
 
   public dataSource: BalanceDataSource;
-  public displayedColumns = ['store', 'type', 'ref_date', 'cassa', 'pos', 'ticket', 'prevCapital', 'flash', 'riserva', 'tavoliAperti', 'rafa', 'speseTotali'];
+  public displayedColumns = ['store', 'type', 'ref_date', 'flash', 'rafa','bluflash', 'tavoliAperti',  'cassa', 'pos', 'ticket', 'prevCapital', 'riserva', 'speseTotali', 'busta'];
   public stores: Array<Store>;
   public selectedStoreId: string;
   public selectedTypeValue: number;

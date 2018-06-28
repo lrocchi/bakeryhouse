@@ -21,16 +21,16 @@
         </mat-form-field>
       </td>
       <td style="width: 25%">
-          <mat-form-field>
-            <mat-select placeholder="Tipologia" [(ngModel)]="selectedTypeValue">
-              <mat-option>(Tutte)</mat-option>
-              <mat-option [value]="25">Pranzo</mat-option>
-              <mat-option [value]="50">Pomeriggio</mat-option>
-              <mat-option [value]="75">Cena</mat-option>
-              <mat-option [value]="100">Chiusura</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </td>
+        <mat-form-field>
+          <mat-select placeholder="Tipologia" [(ngModel)]="selectedTypeValue">
+            <mat-option>(Tutte)</mat-option>
+            <mat-option [value]="25">Pranzo</mat-option>
+            <mat-option [value]="50">Pomeriggio</mat-option>
+            <mat-option [value]="75">Cena</mat-option>
+            <mat-option [value]="100">Chiusura</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
       <td style="width: 25%">
         <mat-form-field>
           <input matInput [matDatepicker]="picker1" placeholder="Dal" [formControl]="dateFrom">
@@ -71,6 +71,26 @@
     <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
     <mat-cell *matCellDef="let balance"> {{balance.ref_date | date: 'dd/MM/y'}} </mat-cell>
   </ng-container>
+
+
+  <ng-container matColumnDef="flash">
+    <mat-header-cell *matHeaderCellDef> Flash </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.flash | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="rafa">
+    <mat-header-cell *matHeaderCellDef> Blu </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.rafa | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
+  <!-- BLU + FLASH -->
+  <ng-container matColumnDef="bluflash">
+    <mat-header-cell *matHeaderCellDef> Totale </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.flash + balance.rafa | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="tavoliAperti">
+    <mat-header-cell *matHeaderCellDef> Tavoli Aperti </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.tavoliAperti | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
   <ng-container matColumnDef="cassa">
     <mat-header-cell *matHeaderCellDef> Cassa </mat-header-cell>
     <mat-cell *matCellDef="let balance"> {{balance.cassa | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
@@ -83,31 +103,25 @@
     <mat-header-cell *matHeaderCellDef> Ticket </mat-header-cell>
     <mat-cell *matCellDef="let balance"> {{balance.ticket | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
   </ng-container>
-  <ng-container matColumnDef="prevCapital">
-    <mat-header-cell *matHeaderCellDef> Fondo </mat-header-cell>
-    <mat-cell *matCellDef="let balance"> {{balance.prevCapital | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="flash">
-    <mat-header-cell *matHeaderCellDef> Flash </mat-header-cell>
-    <mat-cell *matCellDef="let balance"> {{balance.flash | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-  </ng-container>
   <ng-container matColumnDef="riserva">
     <mat-header-cell *matHeaderCellDef> Riserva </mat-header-cell>
     <mat-cell *matCellDef="let balance"> {{balance.riserva | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="tavoliAperti">
-    <mat-header-cell *matHeaderCellDef> Tavoli Aperti </mat-header-cell>
-    <mat-cell *matCellDef="let balance"> {{balance.tavoliAperti | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="rafa">
-    <mat-header-cell *matHeaderCellDef> Blu </mat-header-cell>
-    <mat-cell *matCellDef="let balance"> {{balance.rafa | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
-  </ng-container>
   <ng-container matColumnDef="speseTotali">
     <mat-header-cell *matHeaderCellDef> Spese Totali </mat-header-cell>
     <mat-cell *matCellDef="let balance"> {{balance.speseTotali | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
   </ng-container>
+  <ng-container matColumnDef="prevCapital">
+    <mat-header-cell *matHeaderCellDef> Fondo </mat-header-cell>
+    <mat-cell *matCellDef="let balance"> {{balance.prevCapital | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+  </ng-container>
+  <!-- Busta (Cassa + Riserva - Fondo d+1)-->
+ <ng-container  matColumnDef="busta">
+    <mat-header-cell *matHeaderCellDef> Busta </mat-header-cell>
+    <mat-cell *matCellDef="let balance"><span *ngIf='balance.capital'>{{balance.cassa + balance.riserva - balance.capital  | currency:'EUR':'symbol-narrow':'1.0-2'}}</span></mat-cell>
+  </ng-container>
+  
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 

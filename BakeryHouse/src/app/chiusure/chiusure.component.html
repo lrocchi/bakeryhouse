@@ -59,6 +59,18 @@
             <strong>{{lastBalance.tavoliAperti}} &euro;</strong>
           </span>
         </p>
+        <p>
+          <span>Riserva:</span>
+          <span>
+            <strong>{{lastBalance.riserva}} &euro;</strong>
+          </span>
+        </p>
+        <p *ngIf="lastBalance.value === 100">
+          <span>Busta:</span>
+          <span>
+            <strong>{{lastBalance.cassa + lastBalance.riserva - lastBalance.capital}} &euro;</strong>
+          </span>
+        </p>
 
       </span>
 
