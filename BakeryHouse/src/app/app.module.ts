@@ -111,9 +111,7 @@ export class DemoMaterialModule { }
     ReportRendicontiComponent,
     ReportSpeseComponent,
     LogoutComponent,
-    ShowErrorsComponent,
-
-
+    ShowErrorsComponent
   ],
 
   imports: [

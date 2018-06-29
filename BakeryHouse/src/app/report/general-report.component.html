@@ -1,4 +1,5 @@
-<div class="Ccm-MainContentView ng-scope">
+<!-- <div class="Ccm-MainContentView ng-scope"> -->
+<div class="Ccm-MainContentView" style="z-index: 50">
   <mat-toolbar>
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon class="md-24">menu</mat-icon>
@@ -16,16 +17,16 @@
           <mat-panel-description></mat-panel-description>
         </mat-expansion-panel-header>
         <mat-nav-list>
-        <a mat-menu-item [routerLink]="['datirendiconti']" (click)="sidenav.close()">
-          <div md-line>Rendiconti</div>
-        </a>
-        <a mat-menu-item [routerLink]="['datispese']" (click)="sidenav.close()">
-          <div md-line>Spese</div>
-        </a>
-        
-      </mat-nav-list>
+          <a mat-menu-item [routerLink]="['datirendiconti']" (click)="sidenav.close()">
+            <div md-line>Rendiconti</div>
+          </a>
+          <a mat-menu-item [routerLink]="['datispese']" (click)="sidenav.close()">
+            <div md-line>Spese</div>
+          </a>
+
+        </mat-nav-list>
       </mat-expansion-panel>
-      
+
       <mat-expansion-panel class="bkExpansionPanel">
         <mat-expansion-panel-header class="bkExpansionPanelHeader">
           <mat-panel-title>
@@ -49,7 +50,7 @@
 
 
     <!-- <div class="reportContainer"> -->
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
     <!-- </div> -->
   </mat-drawer-container>
 </div>

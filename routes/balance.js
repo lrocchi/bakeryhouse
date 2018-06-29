@@ -18,7 +18,9 @@ router.get("/", function (req, res, next) {
   console.log("pageSize=" + pageSize); */
   // const jsonFilter = filster.json;
   Balance.find(JSON.parse(filter))
-    .sort({ create_on: -1 })
+    .sort({
+      create_on: -1
+    })
     .populate("user")
     .populate("store")
     .exec(function (err, docs) {
@@ -35,7 +37,10 @@ router.get("/", function (req, res, next) {
       } else {
         BalancePage = docs;
       }
-      res.status(200).json({ payload: BalancePage, size: fullSize });
+      res.status(200).json({
+        payload: BalancePage,
+        size: fullSize
+      });
     });
 });
 
@@ -43,7 +48,9 @@ router.get("/lastone/:id_store", function (req, res, next) {
   Balance.findOne()
     .where("store")
     .equals(req.params.id_store)
-    .sort({ create_on: -1 })
+    .sort({
+      create_on: -1
+    })
     .populate("user")
     .populate("store")
     .exec(function (err, balanceDocs) {
@@ -69,8 +76,12 @@ router.get("/last/:id_store", function (req, res, next) {
       .equals(req.params.id_store)
       .where("ref_date")
       .gte(prevmyDate)
-      .sort({ ref_date: -1 })
-      .sort({ value: "desc" })
+      .sort({
+        ref_date: -1
+      })
+      .sort({
+        value: "desc"
+      })
       .populate("user")
       .populate("store")
       .exec(function (err, balanceDocs) {
@@ -101,8 +112,12 @@ router.get("/:id_store", function (req, res, next) {
     .gte(myFromDate)
     .where("ref_date")
     .lte(myToDate)
-    .sort({ ref_date: -1 })
-    .sort({ value: "desc" })
+    .sort({
+      ref_date: -1
+    })
+    .sort({
+      value: "desc"
+    })
     .populate("user")
     .populate("store")
     .exec(function (err, balanceDocs) {
@@ -128,7 +143,9 @@ router.get("/:epoch/:id_store", function (req, res, next) {
       .equals(req.params.id_store)
       .where("ref_date")
       .gte(storeData.ref_date)
-      .sort({ value: "desc" })
+      .sort({
+        value: "desc"
+      })
       .populate("user")
       .populate("store")
       .exec(function (err, balanceDocs) {
@@ -161,7 +178,9 @@ router.post("/", function (req, res, next) {
       .equals(balance.store)
       .where("ref_date")
       .gte(prevmyDate)
-      .sort({ value: "desc" })
+      .sort({
+        value: "desc"
+      })
       .exec(function (err, balanceDocs) {
         if (err) {
           console.log(err);
@@ -178,18 +197,23 @@ router.post("/", function (req, res, next) {
         }
         /** calcoloincasso rafa */
         Spese.aggregate(
-          [
-            {
+          [{
               $match: {
-                ref_date: { $eq: balance.ref_date },
-                store: { $eq: balance.store._id }
+                ref_date: {
+                  $eq: balance.ref_date
+                },
+                store: {
+                  $eq: balance.store._id
+                }
               }
             },
 
             {
               $group: {
                 _id: "$store",
-                total: { $sum: "$valore" }
+                total: {
+                  $sum: "$valore"
+                }
               }
             }
           ],
@@ -288,21 +312,67 @@ router.post("/", function (req, res, next) {
 
 router.delete("/:id", function (req, res) {
   var id = req.params.id;
-  Balance.findByIdAndRemove(id, function (err, data) {
+
+  Balance.findById(id, function (err, balanceData) {
     if (err) {
       return res.json({
         success: false,
         message: "Errore: Rendiconto non cancellato!",
         data: data
       });
-      return;
     }
-    res.json({
-      success: true,
-      message: "Rendiconto cancellato con successo",
-      data: data
+    /* Se è chiususa avanza la ref_date nello Store  */
+    if (balanceData.type === "Chiusura") {
+      var storeObj = Store.findById(balanceData.store, function (err, storeData) {
+        if (err) {
+          console.log(err);
+          res.send(err);
+        }
+        var myDate = new Date(storeData.ref_date);
+        var newmyDate = new Date(
+          myDate.setTime(myDate.getTime() - 1 * 86400000)
+        );
+        Store.findById(storeData._id, function (err, data2) {
+          if (err) {
+            console.log("Bakery Error" + err);
+            res.json({
+              success: true,
+              message: "Data riferimento non aggiornata!",
+              data: data2
+            });
+          }
+          data2.ref_date = newmyDate;
+          data2.save();
+
+          /* res.json({
+            success: true,
+            message: "Rendiconto aggiunto con successo",
+            data: data2
+          }); */
+        });
+      });
+    };
+
+    Balance.findByIdAndRemove(id, function (err, data) {
+      if (err) {
+        return res.json({
+          success: false,
+          message: "Errore: Rendiconto non cancellato!",
+          data: data
+        });
+
+      }
+      res.json({
+        success: true,
+        message: "Rendiconto cancellato con successo",
+        data: data
+      });
     });
+
   });
+
+
+
 });
 
 router.put("/:id", function (req, res) {

@@ -28,9 +28,25 @@ export class ReportRendicontiComponent implements OnInit {
   public dateFrom: FormControl;
   public dateTo: FormControl;
 
+  private columnDefinitions = [
+    { def: 'store', showMobile: true },
+    { def: 'type', showMobile: true },
+    { def: 'ref_date', showMobile: true },
+    { def: 'flash', showMobile: true },
+    { def: 'rafa', showMobile: true },
+    { def: 'bluflash', showMobile: true },
+    { def: 'tavoliAperti', showMobile: false },
+    { def: 'cassa', showMobile: false },
+    { def: 'tavoliAperti', showMobile: false },
+    { def: 'pos', showMobile: false },
+    { def: 'ticket', showMobile: false },
+    { def: 'prevCapital', showMobile: false },
+    { def: 'riserva', showMobile: false },
+    { def: 'speseTotali', showMobile: false },
+    { def: 'busta', showMobile: false },
+  ];
 
   // @ViewChild(MatPaginator) paginator: MatPaginator;
-
 
   // MatPaginator Inputs
   length: number;
@@ -89,13 +105,18 @@ export class ReportRendicontiComponent implements OnInit {
     filter['value'] = this.selectedTypeValue;
     filter['ref_date'] = { $gte: this.dateFrom.value.toISOString(), $lte: this.dateTo.value.toISOString() };
     // console.log('FILTER:' + JSON.stringify(filter));
-
     this.dataSource.loadBalances(filter, this.pageIndex,
       this.pageSize);
       // this.length = this.dataSource.getSize();
   }
 
 
+ /*  getDisplayedColumns(): string[] {
+    const isMobile = this.currentDisplay === 'mobile';
+    return this.columnDefinitions
+      .filter(cd => !isMobile || cd.showMobile)
+      .map(cd => cd.def);
+  } */
 
   /* onRowClicked(row) {
     console.log('Row clicked: ', row);
