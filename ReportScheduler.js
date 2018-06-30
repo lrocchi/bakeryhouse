@@ -9,8 +9,8 @@
 │    └──────────────────── minute (0 - 59)
 └───────────────────────── second (0 - 59, OPTIONAL)
  */
-var User = require("../models/User");
-var Message = require("../models/Message");
+var User = require("./models/User");
+var Message = require("./models/Message");
 var fs = require('fs');
 var schedule = require("node-schedule");
 var Logger = require("le_node");
