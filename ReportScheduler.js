@@ -13,6 +13,8 @@ var User = require("./models/User");
 var Message = require("./models/Message");
 var fs = require('fs');
 var schedule = require("node-schedule");
+var ExcelManager = require('./utils/excel');
+var CommonUtils = require("./utils/common");
 var Logger = require("le_node");
 var log = new Logger({
     token: "6c122f92-c9b1-48bb-8ea6-c92c72e4ece2"
@@ -25,7 +27,8 @@ var monthITA = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
 
 
 ReportScheduler.startMonthly = function () {
-    var schedMese = schedule.scheduleJob("* * 7 1 * *", function () {
+    var schedMese = schedule.scheduleJob("0 0 7 1 * *", function () {
+        // var schedMese = schedule.scheduleJob("0 9 9 1 * *", function () {
         console.log("The answer to life, the universe, and everything!");
         log.info("Inizio batch Invio report mensile");
 
@@ -39,12 +42,13 @@ ReportScheduler.startMonthly = function () {
 
         var month = monthITA[fromDate.getMonth()];
 
-        ExcelManager.create(fromDate, toDate, "ExcelFile_" + month + y + ".xlsx");
+        ExcelManager.create(fromDate, toDate, "Monthly_" + month + y + ".xlsx");
         // console.log("BATCH Ultimato");
         log.info("BATCH Invio report mensile Ultimato");
     });
 
-    var schedMeseMail = schedule.scheduleJob("* 30 7 1 * *", function () {
+    var schedMeseMail = schedule.scheduleJob("0 5 7 1 * *", function () {
+        // var schedMeseMail = schedule.scheduleJob("0 13 9 1 * *", function () {
         User.find()
             .where("ruolo")
             .in(["SuperAdmin", "Admin"])
@@ -55,13 +59,11 @@ ReportScheduler.startMonthly = function () {
                 var m = today.getMonth();
 
                 var fromDate = new Date(y, m - 1, 1, 0, 0, 0, 0);
-                var toDate = new Date(y, m, 1, 0, 0, 0, 0);
 
                 var month = monthITA[fromDate.getMonth()];
-                var sFileName = "ExcelFile_" + month + y + ".xlsx";
+                var sFileName = "Monthly_" + month + y + ".xlsx";
                 userDocs.forEach(function (element) {
                     var messaggio = {};
-                    var dateFormat = new Date(balance.ref_date);
                     messaggio["to"] = element;
                     messaggio["subject"] = "Report Incidenza Mensile";
                     messaggio["message"] =
@@ -72,21 +74,22 @@ ReportScheduler.startMonthly = function () {
                     messaggio["type"] = "info";
 
 
-                    Message.create(messaggio, function (err, data) {
+                    /* Message.create(messaggio, function (err, data) {
                         if (err) {
                             console.log(err);
                         } else {
                             console.log(data);
                         }
 
-                    });
+                    }); */
                     // Sand Email a elemet.email
-                    return CommonUtils.sendEmail(element.email, messaggio.htmlmessage, messaggio.subject, sFileName);
+                    return CommonUtils.sendEmailWithAttach(element.email, messaggio.htmlmessage, messaggio.subject, sFileName);
                 });
             });
     });
 
-    var schedMeseDeleteFile = schedule.scheduleJob("* 50 7 1 * *", function () {
+    var schedMeseDeleteFile = schedule.scheduleJob("0 10 7 1 * *", function () {
+        // var schedMeseDeleteFile = schedule.scheduleJob("0 14 9 1 * *", function () {
         var today = new Date();
         var y = today.getFullYear();
         var m = today.getMonth();
@@ -95,7 +98,7 @@ ReportScheduler.startMonthly = function () {
         var toDate = new Date(y, m, 1, 0, 0, 0, 0);
 
         var month = monthITA[fromDate.getMonth()];
-        var sFileName = "ExcelFile_" + month + y + ".xlsx";
+        var sFileName = "Monthly_" + month + y + ".xlsx";
 
         try {
             fs.unlinkSync(sFileName);
@@ -110,7 +113,8 @@ ReportScheduler.startMonthly = function () {
 
 
 ReportScheduler.startWeekly = function () {
-    var schedWeek = schedule.scheduleJob("* * 6 * * 1", function () {
+    var schedWeek = schedule.scheduleJob("0 0 6 * * 1", function () {
+        // var schedWeek = schedule.scheduleJob("0 30 9 * * 7", function () {
         console.log("The answer to life, the universe, and everything!");
         log.info("Inizio batch Invio report settimanale");
         var today = new Date();
@@ -124,12 +128,12 @@ ReportScheduler.startWeekly = function () {
 
         var month = monthITA[fromDate.getMonth()];
 
-        ExcelManager.create(fromDate, toDate, "ExcelFile_" + month + y + ".xlsx");
+        ExcelManager.create(fromDate, toDate, "Weekly_" + today.getDate() + month + y + ".xlsx");
         // console.log("BATCH Ultimato");
         log.info("BATCH Invio report settimanale Ultimato");
     });
 
-    var schedWeekMail = schedule.scheduleJob("* 30 6 * * 1", function () {
+    var schedWeekMail = schedule.scheduleJob("0 30 6 * * 1", function () {
         User.find()
             .where("ruolo")
             .in(["SuperAdmin", "Admin"])
@@ -143,11 +147,11 @@ ReportScheduler.startWeekly = function () {
                 var toDate = new Date(y, m, 1, 0, 0, 0, 0);
 
                 var month = monthITA[fromDate.getMonth()];
-                var sFileName = "ExcelFile_" + month + y + ".xlsx";
+                var sFileName = "Weekly_" + today.getDate() + month + y + ".xlsx";
 
                 userDocs.forEach(function (element) {
                     var messaggio = {};
-                    var dateFormat = new Date(balance.ref_date);
+                    // var dateFormat = new Date(balance.ref_date);
                     messaggio["to"] = element;
                     messaggio["subject"] = "Report Incidenza Settimanale";
                     messaggio["message"] =
@@ -158,30 +162,30 @@ ReportScheduler.startWeekly = function () {
                     messaggio["type"] = "info";
 
 
-                    Message.create(messaggio, function (err, data) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            console.log(data);
-                        }
+                    /*  Message.create(messaggio, function (err, data) {
+                         if (err) {
+                             console.log(err);
+                         } else {
+                             console.log(data);
+                         }
 
-                    });
+                     }); */
                     // Sand Email a elemet.email
-                    return CommonUtils.sendEmail(element.email, messaggio.htmlmessage, messaggio.subject, sFileName);
+                    return CommonUtils.sendEmailWithAttach(element.email, messaggio.htmlmessage, messaggio.subject, sFileName);
                 });
             });
     });
 
-    var schedWeekDeleteFile = schedule.scheduleJob("* 50 6 * * 1", function () {
+    var schedWeekDeleteFile = schedule.scheduleJob("0 50 6 * * 1", function () {
         var today = new Date();
         var y = today.getFullYear();
         var m = today.getMonth();
 
         var fromDate = new Date(y, m - 1, 1, 0, 0, 0, 0);
-        var toDate = new Date(y, m, 1, 0, 0, 0, 0);
+        // var toDate = new Date(y, m, 1, 0, 0, 0, 0);
 
         var month = monthITA[fromDate.getMonth()];
-        var sFileName = "ExcelFile_" + month + y + ".xlsx";
+        var sFileName = "Weekly_" + today.getDate() + month + y + ".xlsx";
 
         try {
             fs.unlinkSync(sFileName);
