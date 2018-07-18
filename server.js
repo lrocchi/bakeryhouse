@@ -14,6 +14,8 @@ var message = require('./routes/message');
 
 var BalanceSchedule = require('./scheduler');
 var ReportScheduler = require('./ReportScheduler');
+var WeeklyReportScheduler = require('./WeeklyReportScheduler');
+
 // var ExcelManager = require('./utils/excel');
 
 var config = require('./config/config');
@@ -87,7 +89,7 @@ var listener = app.listen(process.env.PORT || port, function () {
 BalanceSchedule.start();
 
 ReportScheduler.startMonthly();
-ReportScheduler.startWeekly();
+WeeklyReportScheduler.startWeekly();
 
 
 

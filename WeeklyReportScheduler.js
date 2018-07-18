@@ -19,37 +19,37 @@ var Logger = require("le_node");
 var log = new Logger({
     token: "6c122f92-c9b1-48bb-8ea6-c92c72e4ece2"
 });
-var ReportScheduler = new Object();
+var WeeklyReportScheduler = new Object();
 
 var monthITA = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
     "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
 ];
 
 
-ReportScheduler.startMonthly = function () {
-    log.info("Avvio batch Invio report mensile");
-    var schedMese = schedule.scheduleJob("0 0 7 1 * *", function () {
-        // var schedMese = schedule.scheduleJob("0 9 9 1 * *", function () {
+
+WeeklyReportScheduler.startWeekly = function () {
+    log.info("Avvio batch Invio report settimanale");
+    var schedWeek = schedule.scheduleJob("0 0 6 * * 1", function () {
+        // var schedWeek = schedule.scheduleJob("0 30 9 * * 7", function () {
         console.log("The answer to life, the universe, and everything!");
-        log.info("Inizio batch Invio report mensile");
-
-
+        log.info("Inizio batch Invio report settimanale");
         var today = new Date();
         var y = today.getFullYear();
         var m = today.getMonth();
+        var d = today.getDate()
 
-        var fromDate = new Date(y, m - 1, 1, 0, 0, 0, 0);
-        var toDate = new Date(y, m, 1, 0, 0, 0, 0);
+
+        var fromDate = new Date(y, m, d - 7, 0, 0, 0, 0);
+        var toDate = new Date(y, m, d, 0, 0, 0, 0);
 
         var month = monthITA[fromDate.getMonth()];
 
-        ExcelManager.create(fromDate, toDate, "Monthly_" + month + y + ".xlsx");
+        ExcelManager.create(fromDate, toDate, "Weekly_" + today.getDate() + month + y + ".xlsx");
         // console.log("BATCH Ultimato");
-        log.info("BATCH Invio report mensile Ultimato");
+        log.info("BATCH Invio report settimanale Ultimato");
     });
 
-    var schedMeseMail = schedule.scheduleJob("0 5 7 1 * *", function () {
-        // var schedMeseMail = schedule.scheduleJob("0 13 9 1 * *", function () {
+    var schedWeekMail = schedule.scheduleJob("0 30 6 * * 1", function () {
         User.find()
             .where("ruolo")
             .in(["SuperAdmin", "Admin"])
@@ -60,46 +60,48 @@ ReportScheduler.startMonthly = function () {
                 var m = today.getMonth();
 
                 var fromDate = new Date(y, m - 1, 1, 0, 0, 0, 0);
+                var toDate = new Date(y, m, 1, 0, 0, 0, 0);
 
                 var month = monthITA[fromDate.getMonth()];
-                var sFileName = "Monthly_" + month + y + ".xlsx";
+                var sFileName = "Weekly_" + today.getDate() + month + y + ".xlsx";
+
                 userDocs.forEach(function (element) {
                     var messaggio = {};
+                    // var dateFormat = new Date(balance.ref_date);
                     messaggio["to"] = element;
-                    messaggio["subject"] = "Report Incidenza Mensile";
+                    messaggio["subject"] = "Report Incidenza Settimanale";
                     messaggio["message"] =
-                        "In allegato trovi il report delle incidenze relativo al mese scorso.";
+                        "In allegato trovi il report delle incidenze relativo alla settimana scors.";
 
                     messaggio["htmlmessage"] =
-                        "In allegato trovi il report delle incidenze relativo al mese scorso.";
+                        "In allegato trovi il report delle incidenze relativo alla settimana scors.";
                     messaggio["type"] = "info";
 
 
-                    /* Message.create(messaggio, function (err, data) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            console.log(data);
-                        }
+                    /*  Message.create(messaggio, function (err, data) {
+                         if (err) {
+                             console.log(err);
+                         } else {
+                             console.log(data);
+                         }
 
-                    }); */
+                     }); */
                     // Sand Email a elemet.email
                     return CommonUtils.sendEmailWithAttach(element.email, messaggio.htmlmessage, messaggio.subject, sFileName);
                 });
             });
     });
 
-    var schedMeseDeleteFile = schedule.scheduleJob("0 10 7 1 * *", function () {
-        // var schedMeseDeleteFile = schedule.scheduleJob("0 14 9 1 * *", function () {
+    var schedWeekDeleteFile = schedule.scheduleJob("0 50 6 * * 1", function () {
         var today = new Date();
         var y = today.getFullYear();
         var m = today.getMonth();
 
         var fromDate = new Date(y, m - 1, 1, 0, 0, 0, 0);
-        var toDate = new Date(y, m, 1, 0, 0, 0, 0);
+        // var toDate = new Date(y, m, 1, 0, 0, 0, 0);
 
         var month = monthITA[fromDate.getMonth()];
-        var sFileName = "Monthly_" + month + y + ".xlsx";
+        var sFileName = "Weekly_" + today.getDate() + month + y + ".xlsx";
 
         try {
             fs.unlinkSync(sFileName);
@@ -108,7 +110,6 @@ ReportScheduler.startMonthly = function () {
             // handle the error
         }
     });
-
 }
 
 
@@ -117,7 +118,4 @@ ReportScheduler.startMonthly = function () {
 
 
 
-
-
-
-module.exports = ReportScheduler;
+module.exports = WeeklyReportScheduler;
