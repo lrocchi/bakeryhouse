@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
         // Aggiornare il cookie
         // console.log(JSON.stringify(data.data));
 
-        localStorage.setItem('currUser', JSON.stringify(data.data));
+        localStorage.setItem('currUser', JSON.stringify(this.userObj));
         this.openSnackBar('dati modificati', 'ok');
       }
     });
