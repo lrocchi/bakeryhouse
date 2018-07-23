@@ -1,0 +1,53 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1>Qui puoi modificare i tuoi dati personali</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <!-- <form name="form" (ngSubmit)="f.form.valid" novalidate> -->
+    <form #myForm="ngForm" (ngSubmit)="f.form.valid && saveUser()" #f="ngForm" novalidate>
+
+      <p>
+        <mat-form-field appearance="standard">
+          <input matInput [(ngModel)]="userObj.name" placeholder="Nome" autocomplete="off" #name="ngModel" name="name" required>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="standard">
+          <input matInput [(ngModel)]="userObj.surname" placeholder="Cognome" autocomplete="off" #surname="ngModel" name="surname"
+            required>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="standard">
+          <input matInput [(ngModel)]="userObj.username" placeholder="Username" autocomplete="off" #username="ngModel" name="username"
+            required>
+        </mat-form-field>
+      </p>
+      <p>
+        <!-- <mat-form-field>
+      <input matInput [(ngModel)]="userObj.password" type="password" placeholder="Password" autocomplete="off" #password="ngModel"
+        name="password" required>
+    </mat-form-field> -->
+
+        <mat-form-field appearance="standard">
+          <input matInput [(ngModel)]="userObj.email" placeholder="Email" autocomplete="off" #email="ngModel" name="email" required>
+        </mat-form-field>
+      </p>
+      <p>
+        <!-- <div>
+      <mat-select placeholder="Ruolo" [(ngModel)]="userObj.ruolo" #ruolo="ngModel" name="role" required>
+        <mat-option *ngFor="let ruolo of roles | keys" value="ruolo.value">
+          {{ruolo.value}}
+        </mat-option>
+      </mat-select>
+    </div> -->
+
+        <button type="submit" mat-button class="btn BKHBrandedButton Ccm-Button-Primary" [disabled]="myForm.invalid || myForm.pending">Salva</button>
+      </p>
+
+
+    </form>
+  </mat-card-content>
+</mat-card>
