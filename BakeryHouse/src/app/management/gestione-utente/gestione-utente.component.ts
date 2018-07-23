@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'app/entity/user';
 import { UserService } from 'app/_services/user.service';
-import { MatDialogRef, MatDialog } from '@angular/material';
+import { MatDialogRef, MatDialog, MatSnackBar } from '@angular/material';
 import { UserAddComponent } from 'app/management/gestione-utente/user-add/user-add.component';
 import { ConfirmationDialog } from 'app/confirmation-dialog/confirmation-dialog.component';
 import { EditDialogComponent } from 'app/edit-dialog/edit-dialog.component';
@@ -27,7 +27,7 @@ export class GestioneUtenteComponent implements OnInit {
   confirmDialog: MatDialogRef<ConfirmationDialog>;
   editDialog: MatDialogRef<EditDialogComponent>;
 
-  constructor(private _storeService: StoreService, private _userService: UserService, public dialog: MatDialog) { }
+  constructor(private _storeService: StoreService,  public snackBar: MatSnackBar, private _userService: UserService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getList();
@@ -41,8 +41,27 @@ export class GestioneUtenteComponent implements OnInit {
 
   }
   create(user: User) {
-    this._userService.addUser(user);
+    this._userService.addUser(user)
+    .then(data =>{
+      if (!data.success){
+        this.openSnackBar(data.data, 'letto');
+      }
+    });
   }
+
+  openSnackBar(message: string, action: string) {
+
+    let snackBarRef = this.snackBar.open(message, action, {
+      //duration: 5000,
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+      
+      snackBarRef.dismiss();
+    });
+
+  }
+
 
   getActiveStoresList() {
     this._storeService.getStoreList(true)

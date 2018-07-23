@@ -16,8 +16,6 @@ export class UserService {
 
   }
   public addUser(user: User) {
-    console.log(JSON.stringify(user));
-
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 

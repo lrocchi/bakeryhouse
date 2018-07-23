@@ -15,7 +15,7 @@ var UserSchema = new mongoose.Schema({
     store:{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' },
     active: {type: Boolean, require: true, default: true}
 
-})
+});
 
 // Hash the user's password before inserting a new user
 UserSchema.pre('save', function(next) {

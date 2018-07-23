@@ -28,7 +28,10 @@
 <!-- main app container -->
 
 <mat-menu #menu="matMenu" yPosition="below" xPosition="after">
-
+  <a mat-menu-item routerLink="/profile" routerLinkActive="active">
+    <mat-icon class="md-18|md-24|md-36|md-48">person</mat-icon>
+    Profilo
+  </a>
   <a mat-menu-item routerLink="/" routerLinkActive="active">
     <mat-icon class="md-18|md-24|md-36|md-48">home</mat-icon>
     Home</a>

@@ -13,7 +13,7 @@ var User = require('../models/User');
 router.post('/auth', (req, res) => {
   User.findOne({
     username: req.body.username
-  }).populate('store').exec(function(err, user) {
+  }).populate('store').exec(function (err, user) {
     if (err) throw err;
 
     if (!user) {
@@ -23,7 +23,7 @@ router.post('/auth', (req, res) => {
       });
     } else {
       // Check if password matches
-      user.comparePassword(req.body.password, function(err, isMatch) {
+      user.comparePassword(req.body.password, function (err, isMatch) {
         if (isMatch && !err) {
           // Create token if the password matched and no error was thrown
           var token = jwt.sign(user, config.auth.secret, {
@@ -47,27 +47,29 @@ router.post('/auth', (req, res) => {
 
 
 // GET all Users
-router.get('/', function(req, res) {
-  User.find().populate('store').exec({}, function(err, users) {
+router.get('/', function (req, res) {
+  User.find().populate('store').exec({}, function (err, users) {
     res.json(users);
   });
 });
 
 // GET single User by id
-router.get('/:id', function(req, res, next){
-    User.findOne({_id: mongoosedb.ObjectId(req.params.id)}).populate('store').exec(function(err, userDocs){
-            if(err){ 
-                res.send(err);
-            }
+router.get('/:id', function (req, res, next) {
+  User.findOne({
+    _id: mongoosedb.ObjectId(req.params.id)
+  }).populate('store').exec(function (err, userDocs) {
+    if (err) {
+      res.send(err);
+    }
 
-            res.json(userDocs);
-    });
+    res.json(userDocs);
+  });
 });
 
 
 
 // Register new users
-router.post('/register', function(req, res) {
+router.post('/register', function (req, res) {
   if (!req.body.email || !req.body.password) {
     res.json({
       success: false,
@@ -80,7 +82,7 @@ router.post('/register', function(req, res) {
     });
 
     // Attempt to save the user
-    newUser.save(function(err) {
+    newUser.save(function (err) {
       if (err) {
         return res.json({
           success: false,
@@ -96,32 +98,46 @@ router.post('/register', function(req, res) {
 });
 
 
-router.post('/', function(req, res, next ) {
-  
+router.post('/', function (req, res, next) {
+
   /*  if (!req.body.nome || !req.body.piva) {
     res.json({
       success: false,
       message: 'Please enter NOME and P.IVA.'
     });
   } else {  */
-    
-    console.log("USER  DA AGGIUNGERE: " + JSON.stringify(req.body));
-    // Attempt to save the spesa
-    User.create(req.body,function(err, data) {
-      if (err) {
-        console.log(err);
-        return res.json({
-          success: false,
-          message: 'Utente non aggiunto.',
-          data: data
-        });
+
+  console.log("USER  DA AGGIUNGERE: " + JSON.stringify(req.body));
+  // Attempt to save the spesa
+  User.create(req.body, function (err, data) {
+    if (err) {
+      console.log(err);
+
+      var errorMessage;
+      if (err.code = 11000) {
+        if (err.message.indexOf('bkhouse.users.$username') > -1) {
+          errorMessage = 'Username già esistente';
+        } else if (err.message.indexOf('bkhouse.users.$email')) {
+          errorMessage = 'Email già utilizzata per un altro utente';
+        } else {
+          errorMessage = err.message;
+        }
+
+      } else {
+        errorMessage = err.message;
       }
-      res.json({
-        success: true,
-        message: 'Utente aggiunto con successo',
-        data: data
+      return res.json({
+        success: false,
+        message: 'Utente non aggiunto.',
+        data: errorMessage
       });
+    }
+    res.json({
+      success: true,
+      message: 'Utente aggiunto con successo',
+      data: data
     });
+  });
   // }
 });
 
@@ -144,8 +160,8 @@ router.put('/:id', function (req, res) {
     });
   }); */
 
-  User.findById(id, function(err, doc) {
-    if (err){
+  User.findById(id, function (err, doc) {
+    if (err) {
       console.log(err);
       return res.json({
         success: false,
@@ -156,12 +172,44 @@ router.put('/:id', function (req, res) {
     doc.name = obj.name;
     doc.surname = obj.surname;
     doc.username = obj.username;
-    doc.password = obj.password;
+    // doc.password = obj.password;
     doc.email = obj.email;
-    doc.ruolo = obj.ruolo;
-    doc.store = obj.store;
-    doc.active = obj.active;
-    doc.save();
+    if (obj.ruolo) {
+      doc.ruolo = obj.ruolo;
+    }
+    if (obj.store) {
+      doc.store = obj.store;
+    }
+    if (obj.active) {
+      doc.active = obj.active;
+    }
+    doc.save(function (err) {
+
+      if (err) {
+        var errorMessage;
+        if (err.code = 11000) {
+          if (err.message.indexOf('bkhouse.users.$username') > -1) {
+            errorMessage = 'Username già esistente';
+          } else if (err.message.indexOf('bkhouse.users.$email')) {
+            errorMessage = 'Email già utilizzata per un altro utente';
+          } else {
+            errorMessage = err.message;
+          }
+
+        } else {
+          errorMessage = err.message;
+        }
+        return res.json({
+          success: false,
+          message: errorMessage
+        });
+      }
+      res.json({
+        success: true,
+        message: 'Utente modificato con successo',
+        data: doc
+      });
+    });
   });
 
 });

@@ -10,6 +10,9 @@ import { LogoutComponent } from 'app/logout.component';
 import { IncidenzaReportComponent } from 'app/report/incidenza-report/incidenza-report.component';
 import { ReportRendicontiComponent } from './report/report-rendiconti/report-rendiconti.component';
 import { ReportSpeseComponent } from 'app/report/report-spese/report-spese.component';
+// import { UserAddComponent } from 'app/management/gestione-utente/user-add/user-add.component';
+import { ProfileComponent } from 'app/profile/profile.component';
+
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,8 +22,17 @@ const appRoutes: Routes = [
     path: 'manage',
     canActivate: [AuthGuard],
     component: ManagementComponent,
+    children: [ 
+      // {path: 'manage/userInsert', canActivate: [AuthGuard], component: UserAddComponent} 
+    ]
+  },
+  {
+    path: 'profile',
+    canActivate: [AuthGuard],
+    component: ProfileComponent,
     children: []
   },
+  
   {
     path: 'report',
     canActivate: [AuthGuard],

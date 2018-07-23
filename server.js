@@ -73,7 +73,7 @@ app.use('/api/report', report);
 app.use('/api/message', message);
 
 // Catch all other routes and return the index file
-app.get('*', (req, res) => {
+app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'BakeryHouse/dist/index.html'));
 });
 
@@ -82,7 +82,7 @@ app.get('*', (req, res) => {
 var listener = app.listen(process.env.PORT || port, function () {
   console.log('Server started on port ' + port);
   log.info('Server started on port ' + port);
-})
+});
 
 
 

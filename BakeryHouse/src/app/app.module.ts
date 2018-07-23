@@ -51,6 +51,7 @@ import { ReportRendicontiComponent } from './report/report-rendiconti/report-ren
 import { MyDateAdapter, MY_DATE_FORMATS } from './MyDateAdapter';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportSpeseComponent } from './report/report-spese/report-spese.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 /**
@@ -82,6 +83,7 @@ import { ReportSpeseComponent } from './report/report-spese/report-spese.compone
     MatPaginatorModule,
     MatSortModule
   ],
+  declarations: [],
   // declarations: [FlashMessagesComponent]
 })
 export class DemoMaterialModule { }
@@ -111,6 +113,7 @@ export class DemoMaterialModule { }
     ReportRendicontiComponent,
     ReportSpeseComponent,
     LogoutComponent,
+    ProfileComponent,
     ShowErrorsComponent
   ],
 

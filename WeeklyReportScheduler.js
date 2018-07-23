@@ -19,7 +19,7 @@ var Logger = require("le_node");
 var log = new Logger({
     token: "6c122f92-c9b1-48bb-8ea6-c92c72e4ece2"
 });
-var WeeklyReportScheduler = new Object();
+var WeeklyReportScheduler = {};
 
 var monthITA = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
     "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
@@ -29,14 +29,19 @@ var monthITA = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
 
 WeeklyReportScheduler.startWeekly = function () {
     log.info("Avvio batch Invio report settimanale");
-    var schedWeek = schedule.scheduleJob("0 0 6 * * 1", function () {
+    var schedWeek = schedule.scheduleJob({
+        hour: 6,
+        minute: 1,
+        dayOfWeek: 1
+    }, function () {
+
         // var schedWeek = schedule.scheduleJob("0 30 9 * * 7", function () {
         console.log("The answer to life, the universe, and everything!");
         log.info("Inizio batch Invio report settimanale");
         var today = new Date();
         var y = today.getFullYear();
         var m = today.getMonth();
-        var d = today.getDate()
+        var d = today.getDate();
 
 
         var fromDate = new Date(y, m, d - 7, 0, 0, 0, 0);
@@ -49,7 +54,12 @@ WeeklyReportScheduler.startWeekly = function () {
         log.info("BATCH Invio report settimanale Ultimato");
     });
 
-    var schedWeekMail = schedule.scheduleJob("0 30 6 * * 1", function () {
+    var schedWeekMail = schedule.scheduleJob({
+        hour: 6,
+        minute: 30,
+        dayOfWeek: 1
+    }, function () {
+        console.log("Invio Invio");
         User.find()
             .where("ruolo")
             .in(["SuperAdmin", "Admin"])
@@ -59,8 +69,8 @@ WeeklyReportScheduler.startWeekly = function () {
                 var y = today.getFullYear();
                 var m = today.getMonth();
 
-                var fromDate = new Date(y, m - 1, 1, 0, 0, 0, 0);
-                var toDate = new Date(y, m, 1, 0, 0, 0, 0);
+                var fromDate = new Date(y, m, 1, 0, 0, 0, 0);
+                // var toDate = new Date(y, m, 1, 0, 0, 0, 0);
 
                 var month = monthITA[fromDate.getMonth()];
                 var sFileName = "Weekly_" + today.getDate() + month + y + ".xlsx";
@@ -68,14 +78,14 @@ WeeklyReportScheduler.startWeekly = function () {
                 userDocs.forEach(function (element) {
                     var messaggio = {};
                     // var dateFormat = new Date(balance.ref_date);
-                    messaggio["to"] = element;
-                    messaggio["subject"] = "Report Incidenza Settimanale";
-                    messaggio["message"] =
+                    messaggio.to = element;
+                    messaggio.subject = "Report Incidenza Settimanale";
+                    messaggio.message =
                         "In allegato trovi il report delle incidenze relativo alla settimana scors.";
 
-                    messaggio["htmlmessage"] =
+                    messaggio.htmlmessage =
                         "In allegato trovi il report delle incidenze relativo alla settimana scors.";
-                    messaggio["type"] = "info";
+                    messaggio.type = "info";
 
 
                     /*  Message.create(messaggio, function (err, data) {
@@ -92,12 +102,17 @@ WeeklyReportScheduler.startWeekly = function () {
             });
     });
 
-    var schedWeekDeleteFile = schedule.scheduleJob("0 50 6 * * 1", function () {
+    var schedWeekDeleteFile = schedule.scheduleJob({
+        hour: 6,
+        minute: 50,
+        dayOfWeek: 1
+    }, function () {
+        console.log("Cancello  Cancello");
         var today = new Date();
         var y = today.getFullYear();
         var m = today.getMonth();
 
-        var fromDate = new Date(y, m - 1, 1, 0, 0, 0, 0);
+        var fromDate = new Date(y, m, 1, 0, 0, 0, 0);
         // var toDate = new Date(y, m, 1, 0, 0, 0, 0);
 
         var month = monthITA[fromDate.getMonth()];
@@ -110,7 +125,7 @@ WeeklyReportScheduler.startWeekly = function () {
             // handle the error
         }
     });
-}
+};
 
 
 

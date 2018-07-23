@@ -34,18 +34,23 @@ export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currUser'));
 
-    TimerObservable.create(0,5000)
+    TimerObservable.create(0, 5000)
       .takeWhile(() => this.alive)
-      .subscribe(() => this.getAlerts());
+      .subscribe(() => {
+        this.getAlerts();
+        this.refreshUser();
+      });
   }
 
   ngOnDestroy(): void { this.alive = false; }
 
   ngDoCheck(): void {
-    this.user = JSON.parse(localStorage.getItem('currUser'));
+    this.refreshUser();
   }
 
-
+  refreshUser() {
+    this.user = JSON.parse(localStorage.getItem('currUser'));
+  }
 
   openSnackBar(message: Message, action: string) {
 
@@ -54,7 +59,7 @@ export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
     });
 
     snackBarRef.onAction().subscribe(() => {
-      
+
       this.alertService.removeMessage(message);
       snackBarRef.dismiss();
     });
@@ -63,7 +68,7 @@ export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
   getAlerts() {
     this.alertService.loadUnreadAlert().subscribe(value => {
       this.alertList = value;
-      
+
       this.ref.detectChanges();
     });
   }
