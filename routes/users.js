@@ -26,7 +26,7 @@ router.post('/auth', (req, res) => {
       user.comparePassword(req.body.password, function (err, isMatch) {
         if (isMatch && !err) {
           // Create token if the password matched and no error was thrown
-          var token = jwt.sign(user, config.auth.secret, {
+          var token = jwt.sign(user.toJSON(), config.auth.secret, {
             expiresIn: "1H"
           });
           res.json({

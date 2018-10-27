@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { AuthHttp, AuthConfig, JwtHelper, tokenNotExpired } from 'angular2-jwt';
+import { JwtHelper, tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
@@ -25,12 +25,13 @@ export class AuthService {
               this.jwtHelper.isTokenExpired(jresponse.token)
             ); */
             // store username and jwt token in local storage to keep user logged in between page refreshes
+            console.log('response.token->' + JSON.stringify(jresponse.token));
             localStorage.setItem('token', jresponse.token);
 
             const user = this.jwtHelper.decodeToken(
               localStorage.getItem('token')
-            )._doc;
-            // console.log(JSON.stringify(user));
+            );
+            
             localStorage.setItem('currUser', JSON.stringify(user));
           }
           return jresponse.success;

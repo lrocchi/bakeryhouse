@@ -7,5 +7,6 @@ export class Store {
   piva: string;
   active = true;
   ref_date: string;
+  compensazione= true;
 
 }

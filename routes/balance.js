@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
-var mongoose = require("mongoose");
-var config = require("../config/config");
+// var mongoose = require("mongoose");
+// var config = require("../config/config");
 var Balance = require("../models/Balance");
 var Store = require("../models/Store");
 var Spese = require("../models/Cost");

@@ -14,7 +14,13 @@ export class AlertService {
 
 
   constructor(private _http: Http) {
-    this.user = JSON.parse(localStorage.getItem('currUser'));
+    
+    try {
+      this.user = JSON.parse(localStorage.getItem('currUser'));
+    } catch (error) {
+      console.log('ERRORE->'+ error);
+    }
+    
 
 
   }
@@ -22,9 +28,15 @@ export class AlertService {
 
 
   loadUnreadAlert(): Observable<Message[]> {
-    return this._http.get('api/message/unread/' + this.user._id)
+    if (this.user) {
+      return this._http.get('api/message/unread/' + this.user._id)
     .map(res => res.json())
-    .catch((error: any) => Observable.throw('Server error'));
+    .catch((error: any) => Observable.throw('Server error'));  
+    }else {
+      
+      return null;
+    }
+    
   }
 
   removeMessage(mes: Message){
