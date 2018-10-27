@@ -107,7 +107,7 @@ router.post('/', function (req, res, next) {
     });
   } else {  */
 
-  console.log("USER  DA AGGIUNGERE: " + JSON.stringify(req.body));
+  // console.log("USER  DA AGGIUNGERE: " + JSON.stringify(req.body));
   // Attempt to save the spesa
   User.create(req.body, function (err, data) {
     if (err) {

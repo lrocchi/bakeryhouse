@@ -1,33 +1,34 @@
-var mongoose = require('mongoose');
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const express = require('express');
+const path = require('path');
+const crypto = require('crypto');
+const bodyParser = require('body-parser');
 
-// var index = require('./routes/index');
-var spese = require('./routes/spese');
-var users = require('./routes/users');
-var stores = require('./routes/store');
-var costType = require('./routes/costType');
-var balance = require('./routes/balance');
-var report = require('./routes/report');
-var message = require('./routes/message');
+// const index = require('./routes/index');
+const spese = require('./routes/spese');
+const users = require('./routes/users');
+const stores = require('./routes/store');
+const costType = require('./routes/costType');
+const balance = require('./routes/balance');
+const report = require('./routes/report');
+const message = require('./routes/message');
 
-var BalanceSchedule = require('./scheduler');
-var ReportScheduler = require('./ReportScheduler');
-var WeeklyReportScheduler = require('./WeeklyReportScheduler');
+const BalanceSchedule = require('./scheduler');
+const ReportScheduler = require('./ReportScheduler');
+const WeeklyReportScheduler = require('./WeeklyReportScheduler');
 
-// var ExcelManager = require('./utils/excel');
+// const ExcelManager = require('./utils/excel');
 
-var config = require('./config/config');
-var Logger = require('le_node');
+const config = require('./config/config');
+const Logger = require('le_node');
 
 
-var log = new Logger({
+const log = new Logger({
   token: '6c122f92-c9b1-48bb-8ea6-c92c72e4ece2'
 });
-var port = 3000;
+const port = 3000;
 
-var app = express();
+const app = express();
 
 
 //View Engine
@@ -43,13 +44,15 @@ var app = express();
 
 //ESERCIZIO
 //=======================================================================================
-mongoose.connect(config.database.mLab, {
-  useMongoClient: true,
-  /* other options */
-});
+mongoose.connect(config.database.mLab, {useMongoClient: true, /* other options */});
 //=======================================================================================
 
-
+const conn = mongoose.connection;
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+Grid.mongo = mongoose.mongo;
+const gfs = Grid(mongoose.connection, mongoose.mongo);
 
 // Set Static Folder
 
@@ -60,6 +63,70 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+
+
+// Setting up the storage element
+const storage = GridFsStorage({
+  // gfs : gfs,
+  url: config.database.mLab,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = buf.toString('hex') + path.extname(file.originalname);
+        const fileInfo = {
+          filename: filename,
+          bucketName: 'uploads'
+        };
+        resolve(fileInfo);
+      });
+    });
+  }
+});
+
+
+// Multer configuration for single file uploads
+const upload = multer({
+  storage: storage
+}).single('file');
+
+// Route for file upload
+app.post('/upload', (req, res) => {
+  upload(req,res, (err) => {
+      if(err){
+           res.json({error_code:1,err_desc:err});
+           return;
+      }
+      res.json({error_code:0, error_desc: null, file_uploaded: true});
+  });
+});
+
+// Downloading a single file
+app.get('/file/:filename', (req, res) => {
+  gfs.collection('ctFiles'); //set collection name to lookup into
+
+  /** First check if file exists */
+  gfs.files.find({filename: req.params.filename}).toArray(function(err, files){
+      if(!files || files.length === 0){
+          return res.status(404).json({
+              responseCode: 1,
+              responseMessage: "error"
+          });
+      }
+      // create read stream
+      const readstream = gfs.createReadStream({
+          filename: files[0].filename,
+          root: "ctFiles"
+      });
+      // set the proper content type 
+      res.set('Content-Type', files[0].contentType)
+      // Return response
+      return readstream.pipe(res);
+  });
+});
 
 
 
@@ -79,7 +146,7 @@ app.get('*', function (req, res) {
 
 
 
-var listener = app.listen(process.env.PORT || port, function () {
+const listener = app.listen(process.env.PORT || port, function () {
   console.log('Server started on port ' + port);
   log.info('Server started on port ' + port);
 });
@@ -93,13 +160,13 @@ WeeklyReportScheduler.startWeekly();
 
 
 
-/* var today = new Date();
-var y = today.getFullYear();
-var m = today.getMonth(); 
-var d = today.getDate()
+/* const today = new Date();
+const y = today.getFullYear();
+const m = today.getMonth(); 
+const d = today.getDate()
 
 
-var fromDate = new Date(y, m, d - 7, 0, 0, 0, 0);
-var toDate = new Date(y, m, d, 0, 0, 0, 0);
+const fromDate = new Date(y, m, d - 7, 0, 0, 0, 0);
+const toDate = new Date(y, m, d, 0, 0, 0, 0);
 
 ExcelManager.create(fromDate, toDate); */
