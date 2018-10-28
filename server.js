@@ -39,15 +39,21 @@ const app = express();
 
 //SVILUPPO
 //=======================================================================================
+const dbConnectionUrl = config.database.mLabDev;
 // mongoose.connect(config.database.mLabDev, {useMongoClient: true, /* other options */});
 //=======================================================================================
 
 //ESERCIZIO
 //=======================================================================================
-mongoose.connect(config.database.mLab, {useMongoClient: true, /* other options */});
+// const dbConnectionUrl = config.database.mLab;
+// mongoose.connect(config.database.mLab, {useMongoClient: true, /* other options */});
 //=======================================================================================
 
+
+mongoose.connect(dbConnectionUrl, {useMongoClient: true, /* other options */});
+
 const conn = mongoose.connection;
+conn.options = {};
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
@@ -64,23 +70,24 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-
+let fileName = null;
 
 // Setting up the storage element
 const storage = GridFsStorage({
   // gfs : gfs,
-  url: config.database.mLab,
+  url: dbConnectionUrl,
   file: (req, file) => {
     return new Promise((resolve, reject) => {
       crypto.randomBytes(16, (err, buf) => {
         if (err) {
           return reject(err);
         }
-        const filename = buf.toString('hex') + path.extname(file.originalname);
+        this.filename = buf.toString('hex') + path.extname(file.originalname);
         const fileInfo = {
-          filename: filename,
+          filename: this.filename,
           bucketName: 'uploads'
         };
+        console.log(this.filename);
         resolve(fileInfo);
       });
     });
@@ -94,19 +101,33 @@ const upload = multer({
 }).single('file');
 
 // Route for file upload
-app.post('/upload', (req, res) => {
+app.post('/api/upload', (req, res) => {
+  console.log('UPLOAD');
   upload(req,res, (err) => {
+    // console.log(res);
+  
       if(err){
            res.json({error_code:1,err_desc:err});
            return;
       }
-      res.json({error_code:0, error_desc: null, file_uploaded: true});
+      res.json({error_code:0, error_desc: null, file_uploaded: true, file_name: this.filename});
   });
 });
 
+
+// Allows cross-origin domains to access this API
+app.use((req, res, next) => {
+  res.append('Access-Control-Allow-Origin' , 'http://localhost:' + port);
+  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.append("Access-Control-Allow-Headers", "Origin, Accept,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+  res.append('Access-Control-Allow-Credentials', true);
+  next();
+});
+
+
 // Downloading a single file
-app.get('/file/:filename', (req, res) => {
-  gfs.collection('ctFiles'); //set collection name to lookup into
+app.get('/api/file/:filename', (req, res) => {
+  gfs.collection('uploads'); //set collection name to lookup into
 
   /** First check if file exists */
   gfs.files.find({filename: req.params.filename}).toArray(function(err, files){
@@ -119,7 +140,7 @@ app.get('/file/:filename', (req, res) => {
       // create read stream
       const readstream = gfs.createReadStream({
           filename: files[0].filename,
-          root: "ctFiles"
+          root: "uploads"
       });
       // set the proper content type 
       res.set('Content-Type', files[0].contentType)
@@ -143,6 +164,8 @@ app.use('/api/message', message);
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'BakeryHouse/dist/index.html'));
 });
+
+
 
 
 

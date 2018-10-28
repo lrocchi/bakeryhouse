@@ -53,6 +53,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReportSpeseComponent } from './report/report-spese/report-spese.component';
 import { ProfileComponent } from './profile/profile.component';
 
+import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
+import { FilesService } from './_services/file.service';
 
 /**
  * NgModule that includes all Material modules that are required to serve the demo-app.
@@ -114,7 +116,8 @@ export class DemoMaterialModule { }
     ReportSpeseComponent,
     LogoutComponent,
     ProfileComponent,
-    ShowErrorsComponent
+    ShowErrorsComponent,
+    FileSelectDirective
   ],
 
   imports: [
@@ -142,6 +145,7 @@ export class DemoMaterialModule { }
     ReportsService,
     SharedService,
     AlertService,
+    FilesService,
     {provide: DateAdapter, useClass: MyDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
   ],

@@ -77,4 +77,15 @@ export class BalanceService {
     return this._http.delete('api/balance/' + id).map(data => data.json()).toPromise();
   }
 
+
+  public updateBalance(balance: Balance) {
+    console.log('updateBalance: ' + JSON.stringify(balance));
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    // return this._http.put('api/users/' + user._id, user, options).map(data => data.json()).toPromise();
+
+    return this._http.put('api/balance/' + balance._id, balance, options).map(data => data.json()).toPromise();
+  }
+
 }

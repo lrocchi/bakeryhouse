@@ -10,6 +10,9 @@ import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import { takeWhile } from 'rxjs/operators';
 import { ConfirmationDialog } from 'app/confirmation-dialog/confirmation-dialog.component';
 // import { SharedService } from "app/_services/shared.service";
+import { FileUploader } from 'ng2-file-upload';
+import { FilesService } from 'app/_services/file.service';
+
 
 
 @Component({
@@ -19,39 +22,25 @@ import { ConfirmationDialog } from 'app/confirmation-dialog/confirmation-dialog.
 })
 export class ChiusureComponent implements OnInit, OnDestroy {
 
+  private files = [];
+  private uploader: FileUploader;
+
   user: any;
   private alive: boolean;
   message: string;
   spinnerColor = 'normal';
   spinnerMode = 'determinate';
 
-  /* TIMER */
-  // private future: Date;
-  // private futureString: string;
-  // public diff: number;
-  // private $counter: Observable<number>;
-  // private subscription: Subscription;
-  // public timerMessage: string;
-
-  /* FINE TIMER*/
-
   lastBalance: Balance;
   // prevCapital: number;
   usr: User;
-  // isChiusura = false;
-
-  /* private _pranzo: Date;
-  private _pomeriggio: Date;
-  private _sera: Date;
-  private _chiusura: Date;
-  private _nextDay: Date; */
-
   balance: Array<Balance>;
 
   // confirmDialog: MatDialogRef<ConfirmationDialog>;
   editDialog: MatDialogRef<EditDialogComponent>;
   confirmDialog: MatDialogRef<ConfirmationDialog>;
   constructor(
+    private FileService: FilesService,
     private _balanceService: BalanceService,
     /* private sharedService: SharedService,*/
     private ref: ChangeDetectorRef,
@@ -59,9 +48,7 @@ export class ChiusureComponent implements OnInit, OnDestroy {
   ) {
     this.alive = true;
     this.usr = JSON.parse(localStorage.getItem('currUser'));
-    /* this.sharedService.lastBalance.subscribe(value => {
-      this.lastBalance = value;
-    }); */
+
   }
 
   ngOnInit() {
@@ -72,6 +59,35 @@ export class ChiusureComponent implements OnInit, OnDestroy {
     TimerObservable.create(0, 5000)
       .takeWhile(() => this.alive)
       .subscribe(() => this.getList());
+
+
+    this.uploader = new FileUploader({ url: 'api/upload' });
+
+    this.FileService.showFileNames().subscribe(response => {
+      for (let i = 0; i < response.json().length; i++) {
+        this.files[i] = {
+          filename: response.json()[i].filename,
+          originalname: response.json()[i].originalname,
+          contentType: response.json()[i].contentType
+        };
+      }
+    });
+
+    //override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.
+    this.uploader.onAfterAddingFile = (file) => {console.log("onAfterAddingFile");  file.withCredentials = false; };
+    //overide the onCompleteItem property of the uploader so we are 
+    //able to deal with the server response.
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      console.log("ImageUpload:uploaded:", item, status, response);
+      this.lastBalance.comp_filename = response.file_name;
+      
+      try {
+        this._balanceService.updateBalance(this.lastBalance);
+      } catch (error) {
+        console.log(error);
+      }
+      
+    };
   }
 
   ngOnDestroy(): void {
@@ -99,18 +115,18 @@ export class ChiusureComponent implements OnInit, OnDestroy {
       .catch(err => console.log(err));
   }
 
-  addBalance(bal:Balance){
+  addBalance(bal: Balance) {
     this._balanceService
-          .addBalance(bal)
-          .then(value => {
-           
-            // console.log("AddBalance" + JSON.stringify(value));
-          })
-          .catch(err => {
-            console.log(err.message);
-            this.message = err.message;
+      .addBalance(bal)
+      .then(value => {
 
-          });
+        // console.log("AddBalance" + JSON.stringify(value));
+      })
+      .catch(err => {
+        console.log(err.message);
+        this.message = err.message;
+
+      });
   }
   openEditDialog() {
     /**
@@ -125,11 +141,7 @@ export class ChiusureComponent implements OnInit, OnDestroy {
     balance.ref_date = this.usr.store.ref_date; // new Date().toString();
     balance.user = this.usr;
     balance.store = this.usr.store;
-    /* if (this.lastBalance) {
-      balance.type = this.lastBalance.type;
-    }else {
-      balance.type = BalanceType[25];
-    } */
+
     if (this.balance[0]) {
       balance.value = this.balance[0].value + 25;
     } else {
@@ -143,7 +155,7 @@ export class ChiusureComponent implements OnInit, OnDestroy {
 
     this.editDialog.afterClosed().subscribe(result => {
       if (result) {
-       this.addBalance(this.editDialog.componentInstance.balanceObj);
+        this.addBalance(this.editDialog.componentInstance.balanceObj);
 
       }
       this.editDialog.componentInstance.balanceObj = null;

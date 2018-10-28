@@ -21,7 +21,8 @@ var balanceSchema = new mongoose.Schema({
     rafa: {type: Number},
     speseTotali: {type: Number},
     riserva: {type: Number},
-    tavoliAperti: {type: Number}
+    tavoliAperti: {type: Number},
+    comp_filename: {type: String}
 
 })
 
