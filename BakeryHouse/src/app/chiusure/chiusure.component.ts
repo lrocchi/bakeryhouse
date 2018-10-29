@@ -79,8 +79,9 @@ export class ChiusureComponent implements OnInit, OnDestroy {
     //able to deal with the server response.
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       console.log("ImageUpload:uploaded:", item, status, response);
-      this.lastBalance.comp_filename = response.file_name;
       
+      this.lastBalance.comp_filename = JSON.parse(response).file_name;
+      console.log('Luca->', JSON.parse(response).file_name, this.lastBalance) ;
       try {
         this._balanceService.updateBalance(this.lastBalance);
       } catch (error) {

@@ -378,6 +378,7 @@ router.delete("/:id", function (req, res) {
 router.put("/:id", function (req, res) {
   var id = req.params.id;
   var obj = req.body;
+  console.log('Luca ->' + JSON.stringify(obj));
   Balance.findByIdAndUpdate(id, obj, function (err, data) {
     if (err) {
       console.log(err);

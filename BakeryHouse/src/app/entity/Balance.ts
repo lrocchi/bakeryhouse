@@ -26,7 +26,8 @@ export class Balance {
   public comp_filename: string;
 
   // tslint:disable-next-line:one-line
-  constructor(public cassa: number = 0){}
+  constructor(public cassa: number = 0,
+    public compensazione: number = 0){}
 
 
 
