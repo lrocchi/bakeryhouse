@@ -6,77 +6,92 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div class="note red rounded" *ngIf="lastBalance">
+  <div *ngIf="lastBalance" class="note red rounded" >
     <div>
       <span style='float:left; background-color: none; text-align: left;'>
         <h3 style="text-align: left; font-size: 24px; font-weight: 400; display: block;
         margin-bottom: 16px;">
-          <strong>Resoconto {{lastBalance.type}}</strong>
+          <strong>Resoconto {{lastBalance?.type}}</strong>
         </h3>
-        <h6 mat-line class="mat-card-subtitle">data riferimento: {{lastBalance.ref_date | date: 'dd/MM/yyyy'}}</h6>
+        <h6 mat-line class="mat-card-subtitle">data riferimento: {{lastBalance?.ref_date | date: 'dd/MM/yyyy'}}</h6>
         <!-- <span style='float:left; background-color: none; text-align: left;'> -->
         <p>
           <span>
             <i>Resoconto eseguito da:</i>
           </span>
           <span>
-            <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong>
+            <strong>{{lastBalance?.user?.name}} {{lastBalance?.user?.surname}}</strong>
           </span>
         </p>
         <p>
           <span>In cassa: </span>
           <span>
-            <strong>{{lastBalance.cassa}} &euro;</strong>
+            <strong>{{lastBalance?.cassa}} &euro;</strong>
           </span>
         </p>
         <p>
           <span>POS:</span>
           <span>
-            <strong>{{lastBalance.pos}} &euro;</strong>
+            <strong>{{lastBalance?.pos}} &euro;</strong>
           </span>
         </p>
         <p>
           <span>Ticket:</span>
           <span>
-            <strong>{{lastBalance.ticket}} &euro;</strong>
+            <strong>{{lastBalance?.ticket}} &euro;</strong>
           </span>
         </p>
         <p>
           <span>Blu:</span>
-          <span>
-            <strong>{{lastBalance.rafa}} &euro;</strong>
+          <span *ngIf="lastBalance?.compensazione">
+            <strong>{{lastBalance?.rafa - lastBalance?.compensazione}} &euro;</strong>
+          </span>
+          <span *ngIf="!lastBalance?.compensazione">
+            <strong>{{lastBalance?.rafa}} &euro;</strong>
+          </span>
+        </p>
+        <p>
+          <span *ngIf="lastBalance?.store?.compensazione">
+            <span>Scontrino caricato:</span>
+            <span *ngIf="lastBalance?.comp_filename">
+              <strong>si</strong>
+            </span>
+            <span *ngIf="!lastBalance?.comp_filename">
+              <strong>no</strong>
+            </span>
           </span>
         </p>
         <p>
           <span>flash:</span>
           <span>
-            <strong>{{lastBalance.flash}} &euro;</strong>
+            <strong>{{lastBalance?.flash}} &euro;</strong>
           </span>
         </p>
         <p>
           <span>Tavoli:</span>
           <span>
-            <strong>{{lastBalance.tavoliAperti}} &euro;</strong>
+            <strong>{{lastBalance?.tavoliAperti}} &euro;</strong>
           </span>
         </p>
         <p>
           <span>Riserva:</span>
           <span>
-            <strong>{{lastBalance.riserva}} &euro;</strong>
+            <strong>{{lastBalance?.riserva}} &euro;</strong>
           </span>
         </p>
-        <p *ngIf="lastBalance.value === 100">
+        <p *ngIf="lastBalance?.value === 100">
           <span>Busta:</span>
           <span>
-            <strong>{{lastBalance.cassa + lastBalance.riserva - lastBalance.capital}} &euro;</strong>
+            <strong>{{lastBalance?.cassa + lastBalance?.riserva - lastBalance?.capital}} &euro;</strong>
           </span>
         </p>
 
       </span>
 
       <span style="float: right; background-color: none; text-align: right;">
-        <mat-progress-spinner [color]="spinnerColor" [mode]="spinnerMode" [value]="lastBalance.value">0</mat-progress-spinner>
+        <mat-progress-spinner [color]="spinnerColor" [mode]="spinnerMode" [value]="lastBalance?.value">0</mat-progress-spinner>
       </span>
+
     </div>
 
 
@@ -84,14 +99,15 @@
 
     <div style="clear:both;" *ngIf="user">
       <span style="float: right; background-color: none; text-align: right;" *ngIf="user.ruolo !== 'Dipendente'">
-        <button mat-icon-button (click)="openConfirmationDelete(lastBalance._id)">
+        <button mat-icon-button (click)="openConfirmationDelete(lastBalance?._id)">
           <mat-icon class="mat-24">delete</mat-icon>
         </button>
       </span>
     </div>
   </div>
 
-  <div *ngIf="usr?.store?.compensazione===true" class="container" style="clear:both;">
+
+  <div *ngIf="enableCompensation()" class="container" style="clear:both;">
     <div class="row">
       <div class="col-md-4">
         <br>
@@ -138,5 +154,3 @@
     </div>
   </div>
 </div>
-
-

@@ -6,15 +6,14 @@ import { AuthGuard } from 'app/_guards/auth.guard';
 import { AuthService } from 'app/_services/auth.service';
 import { LoginComponent } from 'app/login/login.component';
 import { HomeComponent } from 'app/home/home.component';
-import { Routes } from '@angular/router/router';
 import { HeaderComponent } from 'app/header/header.component';
 import { SpeseComponent } from 'app/spese/spese.component';
-import { RouterModule } from '@angular/router';
+
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatChipsModule, MatTableModule, MatPaginatorModule, MatSortModule, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/';
 import { MatTooltipModule, MatSnackBarModule } from '@angular/material/';
-import { MatMenu, MatProgressSpinnerModule, MatTabsModule, MatSidenavModule, MatNativeDateModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatTabsModule, MatSidenavModule, MatNativeDateModule } from '@angular/material';
 import { MatMenuModule, MatIconRegistry, MatDialogModule, MatDialogRef, MatSelectModule } from '@angular/material';
 import { MatFormFieldModule, MatInputModule, MatCardModule, MatCheckboxModule, MatExpansionModule } from '@angular/material';
 import { SpeseNewComponent } from './spese/spese-new/spese-new.component';
@@ -55,6 +54,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 import { FilesService } from './_services/file.service';
+
 
 /**
  * NgModule that includes all Material modules that are required to serve the demo-app.

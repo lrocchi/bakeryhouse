@@ -31,7 +31,7 @@ export class ChiusureComponent implements OnInit, OnDestroy {
   spinnerColor = 'normal';
   spinnerMode = 'determinate';
 
-  lastBalance: Balance;
+  public lastBalance: Balance = new Balance();
   // prevCapital: number;
   usr: User;
   balance: Array<Balance>;
@@ -61,33 +61,44 @@ export class ChiusureComponent implements OnInit, OnDestroy {
       .subscribe(() => this.getList());
 
 
-    this.uploader = new FileUploader({ url: 'api/upload' });
+    this.uploader = new FileUploader({ url: 'api/upload',
+    queueLimit: 1 });
+    
+  };
 
     this.FileService.showFileNames().subscribe(response => {
-      for (let i = 0; i < response.json().length; i++) {
-        this.files[i] = {
-          filename: response.json()[i].filename,
-          originalname: response.json()[i].originalname,
-          contentType: response.json()[i].contentType
-        };
+      try {
+        for (let i = 0; i < response.json().length; i++) {
+          this.files[i] = {
+            filename: response.json()[i].filename,
+            originalname: response.json()[i].originalname,
+            contentType: response.json()[i].contentType
+          };
+        }
+      } catch (error) {
+        console.log('ChiusureComponent: ' + error);
       }
+
+
     });
 
     //override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.
-    this.uploader.onAfterAddingFile = (file) => {console.log("onAfterAddingFile");  file.withCredentials = false; };
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+    
     //overide the onCompleteItem property of the uploader so we are 
     //able to deal with the server response.
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      console.log("ImageUpload:uploaded:", item, status, response);
-      
+      // console.log("ImageUpload:uploaded:", item, status, response);
+
       this.lastBalance.comp_filename = JSON.parse(response).file_name;
-      console.log('Luca->', JSON.parse(response).file_name, this.lastBalance) ;
+      this.lastBalance.compensazione = this.lastBalance.rafa;
+      // console.log('Luca->', JSON.parse(response).file_name, this.lastBalance);
       try {
         this._balanceService.updateBalance(this.lastBalance);
       } catch (error) {
         console.log(error);
       }
-      
+
     };
   }
 
@@ -181,5 +192,20 @@ export class ChiusureComponent implements OnInit, OnDestroy {
       this.confirmDialog = null;
     });
 
+  }
+
+  enableCompensation() {
+    var enable: boolean = false;
+    // console.log('enableCompensation: ',this.user.store.compensazione, this.lastBalance.type );
+    if (this.user.store.compensazione == true && this.lastBalance.type == 'Chiusura') {
+      enable = true;
+      if (this.lastBalance.comp_filename) {
+        if (this.lastBalance.comp_filename.length > 1) {
+          enable = false;
+        }
+      }
+    }
+
+    return enable;
   }
 }
