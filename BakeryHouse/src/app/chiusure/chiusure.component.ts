@@ -21,6 +21,10 @@ import { FilesService } from 'app/_services/file.service';
   styleUrls: ['./chiusure.component.css']
 })
 export class ChiusureComponent implements OnInit, OnDestroy {
+  ngOnDestroy(): void {
+    this.alive = false;
+  }
+
 
   private files = [];
   private uploader: FileUploader;
@@ -61,10 +65,12 @@ export class ChiusureComponent implements OnInit, OnDestroy {
       .subscribe(() => this.getList());
 
 
-    this.uploader = new FileUploader({ url: 'api/upload',
-    queueLimit: 1 });
-    
-  };
+    this.uploader = new FileUploader({
+      url: 'api/upload',
+      queueLimit: 1
+    });
+
+
 
     this.FileService.showFileNames().subscribe(response => {
       try {
@@ -79,12 +85,12 @@ export class ChiusureComponent implements OnInit, OnDestroy {
         console.log('ChiusureComponent: ' + error);
       }
 
-
     });
 
+
     //override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.
-    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
-    
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; }
+
     //overide the onCompleteItem property of the uploader so we are 
     //able to deal with the server response.
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
@@ -102,9 +108,8 @@ export class ChiusureComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnDestroy(): void {
-    this.alive = false;
-  }
+
+
 
   getList() {
     this._balanceService
@@ -138,7 +143,7 @@ export class ChiusureComponent implements OnInit, OnDestroy {
         console.log(err.message);
         this.message = err.message;
 
-      });
+      })
   }
   openEditDialog() {
     /**

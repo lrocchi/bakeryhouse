@@ -186,6 +186,7 @@ router.put('/:id', function (req, res) {
     doc.save(function (err) {
 
       if (err) {
+        console.log('User Update: ', err);
         var errorMessage;
         if (err.code = 11000) {
           if (err.message.indexOf('bkhouse.users.$username') > -1) {

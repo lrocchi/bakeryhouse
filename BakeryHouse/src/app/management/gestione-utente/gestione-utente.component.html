@@ -9,7 +9,7 @@
           <mat-icon>add</mat-icon>
         </button>
 
-        
+
         <!-- <button class="btn BKHBrandedButton Ccm-Button-Primary" (click)="openDialog()">Aggiungi</button> -->
       </div>
     </mat-card-header>
@@ -41,7 +41,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of users">
+            <!-- <tr *ngFor="let user of users"> -->
+            <tr *ngFor="let user of users | async">
               <td>{{user.username}}</td>
               <td>{{user.name}}</td>
               <td>{{user.surname}}</td>
