@@ -39,13 +39,13 @@ const app = express();
 
 //SVILUPPO
 //=======================================================================================
-const dbConnectionUrl = config.database.mLabDev;
+// const dbConnectionUrl = config.database.mLabDev;
 // mongoose.connect(config.database.mLabDev, {useMongoClient: true, /* other options */});
 //=======================================================================================
 
 //ESERCIZIO
 //=======================================================================================
-// const dbConnectionUrl = config.database.mLab;
+const dbConnectionUrl = config.database.mLab;
 // mongoose.connect(config.database.mLab, {useMongoClient: true, /* other options */});
 //=======================================================================================
 

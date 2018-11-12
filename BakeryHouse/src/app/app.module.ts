@@ -52,7 +52,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReportSpeseComponent } from './report/report-spese/report-spese.component';
 import { ProfileComponent } from './profile/profile.component';
 
-import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 import { FilesService } from './_services/file.service';
 
 
@@ -116,8 +116,7 @@ export class DemoMaterialModule { }
     ReportSpeseComponent,
     LogoutComponent,
     ProfileComponent,
-    ShowErrorsComponent,
-    FileSelectDirective
+    ShowErrorsComponent
   ],
 
   imports: [
@@ -133,7 +132,8 @@ export class DemoMaterialModule { }
     DxDataGridModule,
     FlexLayoutModule,
     FlashMessagesModule,
-    HttpClientModule
+    HttpClientModule,
+    FileUploadModule
   ],
   providers: [
     AuthGuard,
