@@ -6,86 +6,172 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div class="note red rounded" *ngIf="lastBalance">
+  <div *ngIf="lastBalance" class="note red rounded">
     <div>
       <span style='float:left; background-color: none; text-align: left;'>
         <h3 style="text-align: left; font-size: 24px; font-weight: 400; display: block;
         margin-bottom: 16px;">
-          <strong>Resoconto {{lastBalance.type}}</strong>
+          <strong>Resoconto {{lastBalance?.type}}</strong>
         </h3>
-        <h6 mat-line class="mat-card-subtitle">data riferimento: {{lastBalance.ref_date | date: 'dd/MM/yyyy'}}</h6>
+        <h6 mat-line class="mat-card-subtitle">data riferimento: {{lastBalance?.ref_date | date: 'dd/MM/yyyy'}}</h6>
         <!-- <span style='float:left; background-color: none; text-align: left;'> -->
         <p>
           <span>
             <i>Resoconto eseguito da:</i>
           </span>
           <span>
-            <strong>{{lastBalance.user.name}} {{lastBalance.user.surname}}</strong>
+            <strong>{{lastBalance?.user?.name}} {{lastBalance?.user?.surname}}</strong>
           </span>
         </p>
         <p>
           <span>In cassa: </span>
           <span>
-            <strong>{{lastBalance.cassa}} &euro;</strong>
+            <strong>{{lastBalance?.cassa}} &euro;</strong>
           </span>
         </p>
         <p>
           <span>POS:</span>
           <span>
-            <strong>{{lastBalance.pos}} &euro;</strong>
+            <strong>{{lastBalance?.pos}} &euro;</strong>
           </span>
         </p>
         <p>
           <span>Ticket:</span>
           <span>
-            <strong>{{lastBalance.ticket}} &euro;</strong>
+            <strong>{{lastBalance?.ticket}} &euro;</strong>
           </span>
         </p>
         <p>
           <span>Blu:</span>
-          <span>
-            <strong>{{lastBalance.rafa}} &euro;</strong>
+          <span *ngIf="lastBalance?.compensazione">
+            <strong>{{lastBalance?.rafa - lastBalance?.compensazione}} &euro;</strong>
+          </span>
+          <span *ngIf="!lastBalance?.compensazione">
+            <strong>{{lastBalance?.rafa}} &euro;</strong>
+          </span>
+        </p>
+        <p>
+          <span *ngIf="lastBalance?.store?.compensazione">
+            <span>Scontrino caricato:</span>
+            <span *ngIf="lastBalance?.comp_filename">
+              <strong>si</strong>
+            </span>
+            <span *ngIf="!lastBalance?.comp_filename">
+              <strong>no</strong>
+            </span>
           </span>
         </p>
         <p>
           <span>flash:</span>
           <span>
-            <strong>{{lastBalance.flash}} &euro;</strong>
+            <strong>{{lastBalance?.flash}} &euro;</strong>
           </span>
         </p>
         <p>
           <span>Tavoli:</span>
           <span>
-            <strong>{{lastBalance.tavoliAperti}} &euro;</strong>
+            <strong>{{lastBalance?.tavoliAperti}} &euro;</strong>
           </span>
         </p>
         <p>
           <span>Riserva:</span>
           <span>
-            <strong>{{lastBalance.riserva}} &euro;</strong>
+            <strong>{{lastBalance?.riserva}} &euro;</strong>
           </span>
         </p>
-        <p *ngIf="lastBalance.value === 100">
+        <p *ngIf="lastBalance?.value === 100">
           <span>Busta:</span>
           <span>
-            <strong>{{lastBalance.cassa + lastBalance.riserva - lastBalance.capital}} &euro;</strong>
+            <strong>{{lastBalance?.cassa + lastBalance?.riserva - lastBalance?.capital}} &euro;</strong>
           </span>
         </p>
 
       </span>
 
       <span style="float: right; background-color: none; text-align: right;">
-        <mat-progress-spinner [color]="spinnerColor" [mode]="spinnerMode" [value]="lastBalance.value">0</mat-progress-spinner>
+        <mat-progress-spinner [color]="spinnerColor" [mode]="spinnerMode" [value]="lastBalance?.value">0</mat-progress-spinner>
       </span>
+
     </div>
+
+
 
 
     <div style="clear:both;" *ngIf="user">
       <span style="float: right; background-color: none; text-align: right;" *ngIf="user.ruolo !== 'Dipendente'">
-        <button mat-icon-button (click)="openConfirmationDelete(lastBalance._id)">
+        <button mat-icon-button (click)="openConfirmationDelete(lastBalance?._id)">
           <mat-icon class="mat-24">delete</mat-icon>
         </button>
       </span>
     </div>
   </div>
+
+
+
+
+  <div *ngIf="enableCompensation()" class="container" style="clear:both;">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Compensazione
+          </mat-panel-title>
+          <mat-panel-description>
+            qui puoi caricare lo scontrino a compensazione
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+
+
+
+
+
+        <div class="row">
+          <div class="col-md-4">
+            <br>
+            <form>
+              <div class="form-group">
+                <label for="multiple">Scegli un file</label>
+                <input type="file" class="form-control" name="multiple" ng2FileSelect [uploader]="uploader" />
+              </div>
+            </form>
+          </div>
+        </div>
+        <br>
+        <div class="col-md-8">
+          File selezionato(i): {{ uploader?.queue?.length }}
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="50%">Nome</th>
+                <th>Dimensione</th>
+                <th>Azioni</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of uploader.queue">
+                <td><strong>{{ item?.file?.name }}</strong></td>
+                <td nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+
+                <td nowrap>
+                  <button type="button" class="btn btn-success btn-xs" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                    <span class="fa fa-upload"></span> Upload
+                  </button>
+                  <button type="button" class="btn btn-warning btn-xs" (click)="item.cancel()" [disabled]="!item.isUploading">
+                    <span class="fa fa-ban"></span> Cancel
+                  </button>
+                  <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+                    <span class="fa fa-trash"></span> Remove
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
 </div>

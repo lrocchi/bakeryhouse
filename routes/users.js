@@ -26,7 +26,7 @@ router.post('/auth', (req, res) => {
       user.comparePassword(req.body.password, function (err, isMatch) {
         if (isMatch && !err) {
           // Create token if the password matched and no error was thrown
-          var token = jwt.sign(user, config.auth.secret, {
+          var token = jwt.sign(user.toJSON(), config.auth.secret, {
             expiresIn: "1H"
           });
           res.json({
@@ -107,7 +107,7 @@ router.post('/', function (req, res, next) {
     });
   } else {  */
 
-  console.log("USER  DA AGGIUNGERE: " + JSON.stringify(req.body));
+  // console.log("USER  DA AGGIUNGERE: " + JSON.stringify(req.body));
   // Attempt to save the spesa
   User.create(req.body, function (err, data) {
     if (err) {
@@ -186,6 +186,7 @@ router.put('/:id', function (req, res) {
     doc.save(function (err) {
 
       if (err) {
+        console.log('User Update: ', err);
         var errorMessage;
         if (err.code = 11000) {
           if (err.message.indexOf('bkhouse.users.$username') > -1) {

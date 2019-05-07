@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from 'app/entity/user';
 import { UserService } from 'app/_services/user.service';
 import { MatDialogRef, MatDialog, MatSnackBar } from '@angular/material';
@@ -7,6 +7,7 @@ import { ConfirmationDialog } from 'app/confirmation-dialog/confirmation-dialog.
 import { EditDialogComponent } from 'app/edit-dialog/edit-dialog.component';
 import { Store } from 'app/entity/store';
 import { StoreService } from 'app/_services/store.service';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -17,11 +18,11 @@ import { StoreService } from 'app/_services/store.service';
 export class GestioneUtenteComponent implements OnInit {
 
 
-  public users: Array<User>;
+
+  public users: Observable<User[]>; // Array<User>;
   public stores: Array<Store>;
   public message: string;
   public statusMessage: string;
-
 
   dialogRef: MatDialogRef<UserAddComponent>;
   confirmDialog: MatDialogRef<ConfirmationDialog>;
@@ -30,14 +31,17 @@ export class GestioneUtenteComponent implements OnInit {
   constructor(private _storeService: StoreService,  public snackBar: MatSnackBar, private _userService: UserService, public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.users = this._userService.users;
+
     this.getList();
   }
 
   getList() {
-    this._userService.getUserList()
-      .then(users => { this.users = users; })
-      .catch(err => console.log(err));
-
+    /* this._userService.getUserList()
+     .then(users => { this.users = users; })
+      .catch(err => console.log(err)); */
+ 
+      this._userService.loadAll();
 
   }
   create(user: User) {
@@ -115,7 +119,10 @@ export class GestioneUtenteComponent implements OnInit {
       if (result) {
         console.log('opeEditDialog result: ' + result);
         this._userService.update(this.editDialog.componentInstance.userObj)
-          .then(value => this.getList())
+          .then(value =>{ 
+            console.log('userService.update', value.success);
+            this.getList();
+          })
           .catch(err => {
             console.log(err.message); this.message = err.message;
           });

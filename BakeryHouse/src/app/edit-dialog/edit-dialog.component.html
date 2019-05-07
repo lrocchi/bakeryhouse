@@ -10,15 +10,16 @@
     <div mat-dialog-content>
 
       <mat-form-field>
-        <input matInput [(ngModel)]="storeObj.nome" placeholder="Nome" autocomplete="off" #nome="ngModel" name="nome" required value="storeObj.nome">
+        <input matInput [(ngModel)]="storeObj.nome" placeholder="Nome" autocomplete="off" #nome="ngModel" name="nome"
+          required value="storeObj.nome">
       </mat-form-field>
       <mat-form-field>
-        <input matInput [(ngModel)]="storeObj.indirizzo" placeholder="Indirizzo" autocomplete="off" #indirizzo="ngModel" name="indirizzo"
-          value="storeObj.indirizzo" required>
+        <input matInput [(ngModel)]="storeObj.indirizzo" placeholder="Indirizzo" autocomplete="off" #indirizzo="ngModel"
+          name="indirizzo" value="storeObj.indirizzo" required>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [(ngModel)]="storeObj.piva" placeholder="Partita Iva" autocomplete="off" #piva="ngModel" name="piva" value="storeObj.piva"
-          required>
+        <input matInput [(ngModel)]="storeObj.piva" placeholder="Partita Iva" autocomplete="off" #piva="ngModel" name="piva"
+          value="storeObj.piva" required>
       </mat-form-field>
 
 
@@ -40,7 +41,8 @@
     <div mat-dialog-content>
 
       <mat-form-field>
-        <input matInput [(ngModel)]="userObj.name" placeholder="Nome" autocomplete="off" #name="ngModel" name="name" required>
+        <input matInput [(ngModel)]="userObj.name" placeholder="Nome" autocomplete="off" #name="ngModel" name="name"
+          required>
       </mat-form-field>
 
       <mat-form-field>
@@ -49,8 +51,8 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput [(ngModel)]="userObj.username" placeholder="Username" autocomplete="off" #username="ngModel" name="username"
-          required>
+        <input matInput [(ngModel)]="userObj.username" placeholder="Username" autocomplete="off" #username="ngModel"
+          name="username" required>
       </mat-form-field>
 
       <!-- <mat-form-field>
@@ -59,22 +61,22 @@
       </mat-form-field> -->
 
       <mat-form-field>
-        <input matInput [(ngModel)]="userObj.email" placeholder="Email" autocomplete="off" #email="ngModel" name="email" required>
+        <input matInput [(ngModel)]="userObj.email" placeholder="Email" autocomplete="off" #email="ngModel" name="email"
+          required>
       </mat-form-field>
 
-      <div>
+      <mat-form-field>
         <mat-select placeholder="Ruolo" [(ngModel)]="userObj.ruolo" #ruolo="ngModel" name="role" required>
-          <mat-option *ngFor="let ruolo of roles | keys" value="ruolo.value">
+          <mat-option *ngFor="let ruolo of roles | keys" [value]="ruolo.value">
             {{ruolo.value}}
           </mat-option>
         </mat-select>
-      </div>
-      <span></span>
-      <div>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
         <mat-select placeholder="Punto Vendita" [(ngModel)]="userObj.store._id" #store="ngModel" name="store" required>
-          <mat-option *ngFor="let store of stores" value="store._id">{{store.nome}}</mat-option>
+          <mat-option *ngFor="let store of stores" [value]="store._id">{{store.nome}}</mat-option>
         </mat-select>
-      </div>
+      </mat-form-field>
 
 
 
@@ -102,8 +104,8 @@
 
         <div>
           <mat-form-field *ngFor="let item of vItemCurrency">
-            <input matInput type="number" placeholder="{{item.multiplier | currency:'EUR':'symbol-narrow':'1.0-2'}}" autocomplete="off"
-              [(ngModel)]="item.value" (change)="calculateSum()" [ngModelOptions]="{standalone: true}">
+            <input matInput type="number" placeholder="{{item.multiplier | currency:'EUR':'symbol-narrow':'1.0-2'}}"
+              autocomplete="off" [(ngModel)]="item.value" (change)="calculateSum()" [ngModelOptions]="{standalone: true}">
           </mat-form-field>
 
         </div>
@@ -114,31 +116,31 @@
         <mat-card-content>
           <div>
             <mat-form-field>
-              <input matInput type="number" [(ngModel)]="balanceObj.cassa" placeholder="Cassa" autocomplete="off" #cassa="ngModel" name="cassa"
-                required>
+              <input matInput type="number" [(ngModel)]="balanceObj.cassa" placeholder="Cassa" autocomplete="off"
+                #cassa="ngModel" name="cassa" required>
             </mat-form-field>
             <mat-form-field>
-              <input matInput type="number" [(ngModel)]="balanceObj.pos" placeholder="Pos" autocomplete="off" #pos="ngModel" name="pos"
-                required>
+              <input matInput type="number" [(ngModel)]="balanceObj.pos" placeholder="Pos" autocomplete="off" #pos="ngModel"
+                name="pos" required>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput type="number" [(ngModel)]="balanceObj.ticket" placeholder="Ticket" autocomplete="off" #ticket="ngModel" name="ticket"
-                required>
+              <input matInput type="number" [(ngModel)]="balanceObj.ticket" placeholder="Ticket" autocomplete="off"
+                #ticket="ngModel" name="ticket" required>
             </mat-form-field>
             <mat-form-field>
-              <input matInput type="number" [(ngModel)]="balanceObj.flash" placeholder="Flash" autocomplete="off" #flash="ngModel" name="flash"
-                required>
+              <input matInput type="number" [(ngModel)]="balanceObj.flash" placeholder="Flash" autocomplete="off"
+                #flash="ngModel" name="flash" required>
             </mat-form-field>
           </div>
           <div>
             <mat-form-field *ngIf="balanceObj.value === 100">
-              <input matInput type="number" [(ngModel)]="balanceObj.capital" placeholder="Fondo Cassa" autocomplete="off" #flash="ngModel"
-                name="capital" required>
+              <input matInput type="number" [(ngModel)]="balanceObj.capital" placeholder="Fondo Cassa" autocomplete="off"
+                #flash="ngModel" name="capital" required>
             </mat-form-field>
             <mat-form-field>
-              <input matInput type="number" [(ngModel)]="balanceObj.riserva" placeholder="Riserva Monete" autocomplete="off" #riserva="ngModel"
-                name="riserva">
+              <input matInput type="number" [(ngModel)]="balanceObj.riserva" placeholder="Riserva Monete" autocomplete="off"
+                #riserva="ngModel" name="riserva">
             </mat-form-field>
             <!-- <mat-form-field>
               <input matInput type="number" [(ngModel)]="balanceObj.preconti" placeholder="Preconti" autocomplete="off" #preconti="ngModel"
@@ -146,8 +148,8 @@
             </mat-form-field> -->
             <!-- Non deve comparire nella Chiusura -->
             <mat-form-field *ngIf="balanceObj.value < 100">
-              <input matInput type="number" [(ngModel)]="balanceObj.tavoliAperti" placeholder="Tavoli Aperti" autocomplete="off" #tavoliAperti="ngModel"
-                name="tavoliAperti">
+              <input matInput type="number" [(ngModel)]="balanceObj.tavoliAperti" placeholder="Tavoli Aperti"
+                autocomplete="off" #tavoliAperti="ngModel" name="tavoliAperti">
             </mat-form-field>
           </div>
         </mat-card-content>

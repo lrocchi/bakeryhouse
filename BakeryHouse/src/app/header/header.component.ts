@@ -26,13 +26,22 @@ export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
   // subscription: Subscription;
   // private jwtHelper: JwtHelper = new JwtHelper();
   constructor(public vc: ViewContainerRef, public snackBar: MatSnackBar, private alertService: AlertService, private ref: ChangeDetectorRef, public auth: AuthService) {
-    this.user = JSON.parse(localStorage.getItem('currUser'));
+    try {
+      this.user = JSON.parse(localStorage.getItem('currUser'));  
+    } catch (error) {
+      console.log(error);
+    }
+    
     this.alive = true;
 
   }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('currUser'));
+    try {
+      this.user = JSON.parse(localStorage.getItem('currUser'));  
+    } catch (error) {
+      console.log(error);
+    }
 
     TimerObservable.create(0, 5000)
       .takeWhile(() => this.alive)
@@ -49,7 +58,11 @@ export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   refreshUser() {
-    this.user = JSON.parse(localStorage.getItem('currUser'));
+    try {
+      this.user = JSON.parse(localStorage.getItem('currUser'));  
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   openSnackBar(message: Message, action: string) {
@@ -66,11 +79,14 @@ export class HeaderComponent implements OnInit, DoCheck, OnDestroy {
 
   }
   getAlerts() {
+    if(this.alertService.loadUnreadAlert() !== null) {
     this.alertService.loadUnreadAlert().subscribe(value => {
       this.alertList = value;
 
       this.ref.detectChanges();
     });
+
+  }
   }
 
 

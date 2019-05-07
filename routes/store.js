@@ -30,7 +30,7 @@ router.post('/', function (req, res, next) {
     });
   } else {
 
-    console.log("STORE  DA AGGIUNGERE: " + JSON.stringify(req.body));
+    // console.log("STORE  DA AGGIUNGERE: " + JSON.stringify(req.body));
     // Attempt to save the spesa
     Store.create(req.body, function (err, data) {
       if (err) {

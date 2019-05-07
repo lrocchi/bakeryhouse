@@ -6,15 +6,14 @@ import { AuthGuard } from 'app/_guards/auth.guard';
 import { AuthService } from 'app/_services/auth.service';
 import { LoginComponent } from 'app/login/login.component';
 import { HomeComponent } from 'app/home/home.component';
-import { Routes } from '@angular/router/router';
 import { HeaderComponent } from 'app/header/header.component';
 import { SpeseComponent } from 'app/spese/spese.component';
-import { RouterModule } from '@angular/router';
+
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatChipsModule, MatTableModule, MatPaginatorModule, MatSortModule, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/';
 import { MatTooltipModule, MatSnackBarModule } from '@angular/material/';
-import { MatMenu, MatProgressSpinnerModule, MatTabsModule, MatSidenavModule, MatNativeDateModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatTabsModule, MatSidenavModule, MatNativeDateModule } from '@angular/material';
 import { MatMenuModule, MatIconRegistry, MatDialogModule, MatDialogRef, MatSelectModule } from '@angular/material';
 import { MatFormFieldModule, MatInputModule, MatCardModule, MatCheckboxModule, MatExpansionModule } from '@angular/material';
 import { SpeseNewComponent } from './spese/spese-new/spese-new.component';
@@ -52,6 +51,9 @@ import { MyDateAdapter, MY_DATE_FORMATS } from './MyDateAdapter';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportSpeseComponent } from './report/report-spese/report-spese.component';
 import { ProfileComponent } from './profile/profile.component';
+
+import { FileUploadModule } from 'ng2-file-upload';
+import { FilesService } from './_services/file.service';
 
 
 /**
@@ -130,7 +132,8 @@ export class DemoMaterialModule { }
     DxDataGridModule,
     FlexLayoutModule,
     FlashMessagesModule,
-    HttpClientModule
+    HttpClientModule,
+    FileUploadModule
   ],
   providers: [
     AuthGuard,
@@ -142,6 +145,7 @@ export class DemoMaterialModule { }
     ReportsService,
     SharedService,
     AlertService,
+    FilesService,
     {provide: DateAdapter, useClass: MyDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
   ],

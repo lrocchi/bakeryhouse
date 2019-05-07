@@ -17,7 +17,12 @@ export class BalanceService {
     return this._http.get('api/balance/lastone/' + store._id).map(data => data.json()).toPromise();
 
   }
-
+/**
+ * Il nome della funzione non è corretto, visto che non vengono estratte le chiusure di oggi 
+ * ma le chiusure dell'attuale giorno di riferimento dello store
+ * 
+ * @param store store di riferimento
+ */
   public getTodayBalanceList(store: Store) {
     const date = new Date(store.ref_date);
     // console.log('store.ref_date: ' + store.ref_date);
@@ -75,6 +80,17 @@ export class BalanceService {
 
   public deleteBalance(id: string) {
     return this._http.delete('api/balance/' + id).map(data => data.json()).toPromise();
+  }
+
+
+  public updateBalance(balance: Balance) {
+    console.log('updateBalance: ' + JSON.stringify(balance));
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    // return this._http.put('api/users/' + user._id, user, options).map(data => data.json()).toPromise();
+
+    return this._http.put('api/balance/' + balance._id, balance, options).map(data => data.json()).toPromise();
   }
 
 }

@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
-var mongoose = require("mongoose");
-var config = require("../config/config");
+// var mongoose = require("mongoose");
+// var config = require("../config/config");
 var Balance = require("../models/Balance");
 var Store = require("../models/Store");
 var Spese = require("../models/Cost");
@@ -136,7 +136,7 @@ router.get("/:epoch/:id_store", function (req, res, next) {
   /* var today = new Date();
   today.setUTCSeconds(req.params.epoch);
   console.log("req.params.epoch: " + req.params.epoch); */
-  console.log("id_store: " + req.params.id_store);
+  // console.log("id_store: " + req.params.id_store);
   var storeObj = Store.findById(req.params.id_store, function (err, storeData) {
     Balance.find()
       .where("store")
@@ -378,6 +378,7 @@ router.delete("/:id", function (req, res) {
 router.put("/:id", function (req, res) {
   var id = req.params.id;
   var obj = req.body;
+  console.log('Luca ->' + JSON.stringify(obj));
   Balance.findByIdAndUpdate(id, obj, function (err, data) {
     if (err) {
       console.log(err);
@@ -394,5 +395,8 @@ router.put("/:id", function (req, res) {
     });
   });
 });
+
+
+
 
 module.exports = router;

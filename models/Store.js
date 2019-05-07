@@ -7,6 +7,7 @@ var storeSchema = new mongoose.Schema({
     piva: {type: String, require: true,  unique: true},
     active: {type: Boolean, require: true, default: true},
     ref_date: {type: Date},
+    compensazione: {type: Boolean, require: true, default: true}
 
 })
 
