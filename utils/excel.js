@@ -377,7 +377,7 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
                               curFoodRow = worksheet.addRow(jsonRow);
                               curFoodRow.eachCell(function (cell, colNumber) {
                                 // Salto la cella della data
-                                if ((colNumber > 1) && (colNumber < curFoodRow.cellCount - 2)) {
+                                if ((colNumber > 1) && (colNumber < curFoodRow.cellCount - 1)) {
                                   totaleRiga += cell.value;
                                 }
                               });
@@ -411,7 +411,7 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
                       curFoodRow = worksheet.addRow(jsonRow);
                       curFoodRow.eachCell(function (cell, colNumber) {
                         // Salto la cella della data
-                        if ((colNumber > 1) && (colNumber < curFoodRow.cellCount - 1)) {
+                        if ((colNumber > 1) && (colNumber < curFoodRow.cellCount)) {
                           totaleRiga += cell.value;
                         }
                       });
