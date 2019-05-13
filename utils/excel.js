@@ -15,6 +15,8 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
     "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
   ];
 
+
+
   var today = new Date();
   var y = today.getFullYear();
 
@@ -39,7 +41,7 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
       var startFoodHeaderRowNumber = 4;
 
       var month = monthITA[fromDate.getMonth()];
-
+      // console.log('STORE: ' + store.nome);
       worksheet.mergeCells('A1', 'B1');
       worksheet.getCell('C1').value = 'Store';
       worksheet.mergeCells('C1', 'E1');
@@ -64,6 +66,7 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
           var startJSONstr = '{"headers":[{"header": "", "key": "data", "width": 16}]}';
           var headerJsonObj = JSON.parse(startJSONstr);
           var JsonRowHeaderValue = [''];
+          // console.log('headerFood: ' + store.nome);
           costTypeDoc.forEach(function (element) {
             JsonRowHeaderValue.push(element.subCategory);
             headerJsonObj.headers.push({
@@ -124,10 +127,10 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
 
 
 
-
+        // console.log('FoodCosts');
 
         FoodCosts.then(function (costResults) {
-          // console.log('FoodCost - ' + store._id);
+
 
           var currDate;
           var jsonRow;
@@ -136,89 +139,20 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
           /**
            * Inserisco i valori nella tabella Food
            */
+          console.log('FoodCosts');
 
+          Balance.where('store').equals(store._id).where('value').equals(100).where('ref_date').gte(fromDate).where('ref_date').lt(toDate).sort({ ref_date: 1 }).exec(function (err, incassiResults) {
+            var objIncassi = {};
 
-          Balance.where('store').equals(store._id).where('value').equals(100).where('ref_date').gte(fromDate).where('ref_date').lt(toDate).exec(function (err, incassiResults) {
-              // console.log(JSON.stringify(incassiResults));
-              var objIncassi = {};
-              incassiResults.forEach(function (incasso) {
-                objIncassi[incasso.ref_date] = incasso.flash + incasso.rafa;
-                // console.log("REF_DATA: %s VALORE %s", incasso.ref_date,objIncassi[incasso.ref_date] );
-              });
-              costResults.forEach(function (element, idx, array) {
-
-                if (currDate) {
-                  if (currDate.getTime() !== element._id.ref_date.getTime()) {
-                    currDate = element._id.ref_date;
-                    // console.log("Nuova Data= " + currDate);
-                    if (jsonRow) {
-                      var totaleRiga = 0.0;
-
-                      var lastValue = 0.0; //Nellultima cella contata ci sono gli incassi
-                      curRow = worksheet.addRow(jsonRow);
-                      curRow.eachCell(function (cell, colNumber) {
-                        // Salto la cella della data
-                        if ((colNumber > 1) && (colNumber < curRow.cellCount - 2)) {
-                          lastValue = cell.value;
-                          totaleRiga += cell.value;
-                        }
-                      });
-                      // Rimuovo l'ultimo valore dal totale
-                      // totaleRiga = totaleRiga - lastValue;
-
-                      curRow.getCell("Totale Spese").value = totaleRiga;
-                      curRow.getCell("Totale Spese").fill = {
-                        type: 'pattern',
-                        pattern: 'solid',
-                        fgColor: {
-                          argb: 'e2efda'
-                        }
-                      };
-
-                      curRow.getCell("incidenza").value = (curRow.getCell("Totale Spese").value / curRow.getCell("Incasso").value);
-                      curRow.getCell("incidenza").numFmt = '0.00%';
-                      curRow.getCell("incidenza").font = {
-                        bold: true
-                      };
-                      // curRow.getCell("Incasso").value = objIncassi[currDate];
-                    }
-                    jsonRow = {};
-                    jsonRow.data = element._id.ref_date;
-
-                  }
-                } else {
-                  // console.log("currDate vuoto");
-                  currDate = element._id.ref_date;
-                  jsonRow = {};
-                  jsonRow.data = element._id.ref_date;
-                  // jsonRow["Incasso"] = currDate;
-                }
-                jsonRow[element._id.descrizione] = element.totale;
-                jsonRow.Incasso = objIncassi[currDate];
-
-
-
-
-              });
-
-
-              /**
-               * Fine inserimento valori tabella Food
-               */
-
-              /**
-               * Calcolo i totali
-               */
-              var totale = 0.0;
+            var startRow = worksheet.rowCount + 1;
+            incassiResults.forEach(function (incasso) {
+              jsonRow = {};
+              objIncassi[incasso.ref_date] = incasso.flash + incasso.rafa;
+              jsonRow.data = incasso.ref_date;
+              jsonRow.Incasso = incasso.flash + incasso.rafa;
               curRow = worksheet.addRow(jsonRow);
 
-              curRow.eachCell(function (cell, colNumber) {
-                // Salto la cella della data
-                if ((colNumber > 1) && (colNumber < curRow.cellCount - 1)) {
-                  totale += cell.value;
-                }
-              });
-              curRow.getCell("Totale Spese").value = totale;
+              curRow.getCell("Totale Spese").value = 0.0;
               curRow.getCell("Totale Spese").fill = {
                 type: 'pattern',
                 pattern: 'solid',
@@ -231,60 +165,153 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
               curRow.getCell("incidenza").font = {
                 bold: true
               };
+            });
 
-              /**
-               * Calcola e inserisce totale delle colonne
-               */
-              var numCol = 0;
-              var rowValues = [];
-              rowValues[1] = 'Tot periodo';
-              worksheet.columns.forEach(function (col) {
-                var totaleCol = 0.0;
-                if (numCol > 0) {
-                  col.eachCell({
-                    includeEmpty: true
-                  }, function (cell, rowNumber) {
-                    if (rowNumber > startFoodHeaderRowNumber) {
-                      if (cell.value) {
-                        totaleCol += cell.value;
+            curRow = worksheet.getRow(startRow);
+            costResults.forEach(function (element, idx, array) {
+
+              if (currDate) {
+                if (currDate.getTime() !== element._id.ref_date.getTime()) {
+                  currDate = element._id.ref_date;
+                  // console.log("Nuova Data= " + currDate);
+                  if (jsonRow) {
+                    var totaleRiga = 0.0;
+
+                    var lastValue = 0.0; //Nellultima cella contata ci sono gli incassi
+                    curRow.values = jsonRow;
+                    curRow.eachCell(function (cell, colNumber) {
+                      // Salto la cella della data
+                      if ((colNumber > 1) && (colNumber < curRow.cellCount - 2)) {
+                        lastValue = cell.value;
+                        totaleRiga += cell.value;
                       }
-                    }
-                  });
-                  rowValues[numCol + 1] = totaleCol;
-                }
-                numCol++;
-              });
-              rowValues[numCol] = rowValues[numCol - 2] / rowValues[numCol - 1];
-              curRow = worksheet.addRow(rowValues);
-              curRow.eachCell({
-                includeEmpty: true
-              }, function (cell, colNumber) {
-                cell.fill = {
-                  type: 'pattern',
-                  pattern: 'solid',
-                  fgColor: {
-                    argb: 'f8cbad'
-                  }
-                };
+                    });
+                    // Rimuovo l'ultimo valore dal totale
+                    // totaleRiga = totaleRiga - lastValue;
 
-              });
-              curRow.getCell("Totale Spese").fill = {
+                    curRow.getCell("Totale Spese").value = totaleRiga;
+                    curRow.getCell("Totale Spese").fill = {
+                      type: 'pattern',
+                      pattern: 'solid',
+                      fgColor: {
+                        argb: 'e2efda'
+                      }
+                    };
+
+                    curRow.getCell("incidenza").value = (curRow.getCell("Totale Spese").value / curRow.getCell("Incasso").value);
+                    curRow.getCell("incidenza").numFmt = '0.00%';
+                    curRow.getCell("incidenza").font = {
+                      bold: true
+                    };
+                    // curRow.getCell("Incasso").value = objIncassi[currDate];
+                    startRow++;
+                    curRow = worksheet.getRow(startRow);
+                  }
+                  jsonRow = {};
+                  jsonRow.data = element._id.ref_date;
+
+                }
+              } else {
+                // console.log("currDate vuoto");
+                currDate = element._id.ref_date;
+                jsonRow = {};
+                jsonRow.data = element._id.ref_date;
+                // jsonRow["Incasso"] = currDate;
+              }
+              jsonRow[element._id.descrizione] = element.totale;
+              jsonRow.Incasso = objIncassi[currDate];
+
+
+
+
+            });
+
+
+            /**
+             * Fine inserimento valori tabella Food
+             */
+
+            /**
+             * Calcolo i totali
+             */
+            var totale = 0.0;
+            // curRow = worksheet.addRow(jsonRow);
+
+            curRow.values = jsonRow;
+
+            curRow.eachCell(function (cell, colNumber) {
+              // Salto la cella della data
+              if ((colNumber > 1) && (colNumber < curRow.cellCount - 1)) {
+                totale += cell.value;
+              }
+            });
+            curRow.getCell("Totale Spese").value = totale;
+            curRow.getCell("Totale Spese").fill = {
+              type: 'pattern',
+              pattern: 'solid',
+              fgColor: {
+                argb: 'e2efda'
+              }
+            };
+            curRow.getCell("incidenza").value = (curRow.getCell("Totale Spese").value / curRow.getCell("Incasso").value);
+            curRow.getCell("incidenza").numFmt = '0.00%';
+            curRow.getCell("incidenza").font = {
+              bold: true
+            };
+
+            /**
+             * Calcola e inserisce totale delle colonne
+             */
+            var numCol = 0;
+            var rowValues = [];
+            rowValues[1] = 'Tot periodo';
+            worksheet.columns.forEach(function (col) {
+              var totaleCol = 0.0;
+              if (numCol > 0) {
+                col.eachCell({
+                  includeEmpty: true
+                }, function (cell, rowNumber) {
+                  if (rowNumber > startFoodHeaderRowNumber) {
+                    if (cell.value) {
+                      totaleCol += cell.value;
+                    }
+                  }
+                });
+                rowValues[numCol + 1] = totaleCol;
+              }
+              numCol++;
+            });
+            rowValues[numCol] = rowValues[numCol - 2] / rowValues[numCol - 1];
+            curRow = worksheet.addRow(rowValues);
+            curRow.eachCell({
+              includeEmpty: true
+            }, function (cell, colNumber) {
+              cell.fill = {
                 type: 'pattern',
                 pattern: 'solid',
                 fgColor: {
-                  argb: 'a9d08e'
+                  argb: 'f8cbad'
                 }
               };
-              curRow.getCell("incidenza").font = {
 
-                bold: true
-              };
-              curRow.getCell("incidenza").numFmt = '0.00%';
+            });
+            curRow.getCell("Totale Spese").fill = {
+              type: 'pattern',
+              pattern: 'solid',
+              fgColor: {
+                argb: 'a9d08e'
+              }
+            };
+            curRow.getCell("incidenza").font = {
 
-              /**
-               * FINE Calcola e inserisce totale delle colonne
-               */
-            }) //Incassi
+              bold: true
+            };
+            curRow.getCell("incidenza").numFmt = '0.00%';
+
+            /**
+             * FINE Calcola e inserisce totale delle colonne
+             */
+          }) //Incassi
 
 
             .then(function () {
@@ -328,7 +355,7 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
                     key: 'incidenza',
                     width: 18
                   });
-                  // console.log('DeliveryCost.rowCount: ' + worksheet.rowCount);
+                  console.log('DeliveryCost.rowCount: ' + worksheet.rowCount);
                   var lastRowNumber = worksheet.rowCount;
 
                   worksheet.getRow(lastRowNumber + 2).values = JsonRowHeader;
@@ -353,28 +380,51 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
 
 
                   });
-                  var startDeliveryRowNumber = lastRowNumber + 2;
-
+                  var startDeliveryRowNumber = worksheet.rowCount + 1;
+                  var deliveryRowNumber = worksheet.rowCount + 1;
                   var DeliveryCosts = ExcelManager.getCosts(store._id, "Delivery", fromDate, toDate); //, function (costResults) {
                   DeliveryCosts.then(function (costResults) {
                     var currDate;
                     var jsonRow;
                     totaleRiga = 0.0;
-                    Balance.where('store').equals(store._id).where('value').equals(100).where('ref_date').gte(fromDate).where('ref_date').lt(toDate).exec(function (err, incassiResults) {
-                      // console.log(JSON.stringify(incassiResults));
+                    Balance.where('store').equals(store._id).where('value').equals(100).where('ref_date').gte(fromDate).where('ref_date').lt(toDate).sort({ ref_date: 1 }).exec(function (err, incassiResults) {
+                      
+
                       var objIncassi = {};
+
                       incassiResults.forEach(function (incasso) {
+                        jsonRow = {};
                         objIncassi[incasso.ref_date] = incasso.flash + incasso.rafa;
-                        // console.log("REF_DATA: %s VALORE %s", incasso.ref_date,objIncassi[incasso.ref_date] );
+                        jsonRow.data_food = incasso.ref_date;
+                        jsonRow.Incasso = incasso.flash + incasso.rafa;
+                        curFoodRow = worksheet.addRow(jsonRow);
+
+                        curFoodRow.getCell("totale_delivery").value = 0.0;
+                        curFoodRow.getCell("totale_delivery").fill = {
+                          type: 'pattern',
+                          pattern: 'solid',
+                          fgColor: {
+                            argb: 'e2efda'
+                          }
+                        };
+                        curFoodRow.getCell("incidenza").value = (curFoodRow.getCell("Totale Spese").value / curFoodRow.getCell("Incasso").value);
+                        curFoodRow.getCell("incidenza").numFmt = '0.00%';
+                        curFoodRow.getCell("incidenza").font = {
+                          bold: true
+                        };
                       });
+
+                      curFoodRow = worksheet.getRow(deliveryRowNumber);
+
+
+
                       costResults.forEach(function (element) {
                         if (currDate) {
                           if (currDate.getTime() !== element._id.ref_date.getTime()) {
                             currDate = element._id.ref_date;
-                            // console.log("Nuova Data= " + currDate);
                             if (jsonRow) {
                               totaleRiga = 0.0;
-                              curFoodRow = worksheet.addRow(jsonRow);
+                              curFoodRow.values = jsonRow;
                               curFoodRow.eachCell(function (cell, colNumber) {
                                 // Salto la cella della data
                                 if ((colNumber > 1) && (colNumber < curFoodRow.cellCount - 1)) {
@@ -394,12 +444,14 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
                               curFoodRow.getCell("incidenza").font = {
                                 bold: true
                               };
+
+                              deliveryRowNumber++;
+                              curFoodRow = worksheet.getRow(deliveryRowNumber);
                             }
                             jsonRow = {};
                             jsonRow.data_food = element._id.ref_date;
                           }
                         } else {
-                          // console.log("currDate vuoto");
                           currDate = element._id.ref_date;
                           jsonRow = {};
                           jsonRow.data_food = element._id.ref_date;
@@ -408,7 +460,7 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
                         jsonRow.Incasso = objIncassi[currDate];
                       });
                       totaleRiga = 0.0;
-                      curFoodRow = worksheet.addRow(jsonRow);
+                      curFoodRow.values = jsonRow;
                       curFoodRow.eachCell(function (cell, colNumber) {
                         // Salto la cella della data
                         if ((colNumber > 1) && (colNumber < curFoodRow.cellCount)) {
@@ -428,20 +480,27 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
                       curFoodRow.getCell("incidenza").font = {
                         bold: true
                       };
-                      // worksheet.columns.push({header:"Pippo", key:"Pippo"});
+                     
+                     
+                     
                       /**
                        * Calcola e inserisce totale delle colonne
                        */
+
+
                       var numCol = 0;
+                      var realNumCol = 0 ;
                       var rowValues = [];
                       rowValues[1] = 'Tot periodo';
+                      console.log('COLONNE: ' + curFoodRow.actualCellCount);
                       worksheet.columns.forEach(function (col) {
                         var totaleCol = 0.0;
-                        if (numCol > 0) {
+                        if (numCol > 0 && numCol < curFoodRow.getCell("incidenza").col) {
+                          realNumCol++;
                           col.eachCell({
                             includeEmpty: true
                           }, function (cell, rowNumber) {
-                            if (rowNumber > startDeliveryRowNumber) {
+                            if (rowNumber >= startDeliveryRowNumber) {
                               if (cell.value) {
                                 totaleCol += cell.value;
                               }
@@ -451,8 +510,10 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
                         }
                         numCol++;
                       });
-                      rowValues[numCol] = rowValues[numCol - 2] / rowValues[numCol - 1];
+                      realNumCol++;
+                      rowValues[realNumCol] = rowValues[realNumCol - 2] / rowValues[realNumCol - 1];
                       curRow = worksheet.addRow(rowValues);
+                     
                       curRow.eachCell({
                         includeEmpty: true
                       }, function (cell, colNumber) {
@@ -478,9 +539,7 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
                       };
                       curRow.getCell("incidenza").numFmt = '0.00%';
                       
-
-                      // workbook.xlsx.writeFile("ExcelFile_" + month + y + ".xlsx").then(function () {
-                        workbook.xlsx.writeFile(fileName).then(function () {
+                       workbook.xlsx.writeFile(fileName).then(function () {
                         console.log("file is written");
                       });
                     }); //DeliveryCosts.then
@@ -501,84 +560,30 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
 
   // ExcelManager.getCosts = function (storeID, type, from, to, callBack) {
   ExcelManager.getCosts = function (storeID, type, from, to) {
+
+    console.log('ExcelManager.getCosts: ' + storeID);
     return Costs.aggregate(
       [{
-          $match: {
-            ref_date: {
-              $gte: from,
-              $lt: to
-            },
-            "fullType.nome": type,
-            "store": storeID
-          }
-        },
-        {
-          $group: {
-            _id: {
-              ref_date: "$ref_date",
-              descrizione: "$descrizione"
-            },
-            totale: {
-              $sum: {
-                $multiply: ["$valore", 1]
-              }
-            }
-            // totale: { $sum: { $multiply: [ "$valore", "$fullType.percentage" ]} }
-          }
-        },
-        {
-          $sort: {
-            _id: 1
-          }
-        }
-      ]
-    );
-  };
-};
-/* 
-ExcelManager.getIncassi = function (storeID, from, to) {
-  return Balance.aggregate(
-    [{
         $match: {
           ref_date: {
             $gte: from,
             $lt: to
           },
-          "value": 100,
+          "fullType.nome": type,
           "store": storeID
         }
       },
       {
         $group: {
           _id: {
-            ref_date: "$ref_date"
+            ref_date: "$ref_date",
+            descrizione: "$descrizione"
           },
-
-          cassa: {
-            cassa: "$cassa"
-          },
-          pos: {
-            pos: "$pos"
-          },
-          ticket: {
-            ticket: "$ticket"
-          },
-          capital: {
-            capital: "$capital"
-          },
-          prevCapital: {
-            prevCapital: "$caprevCapitalssa"
-          },
-          flash: {
-            flash: "$flash"
-          },
-          rafa: {
-            rafa: "$rafa"
-          },
-          riserva: {
-            riserva: "$riserva"
-          },
-
+          totale: {
+            $sum: {
+              $multiply: ["$valore", 1]
+            }
+          }
           // totale: { $sum: { $multiply: [ "$valore", "$fullType.percentage" ]} }
         }
       },
@@ -587,8 +592,10 @@ ExcelManager.getIncassi = function (storeID, from, to) {
           _id: 1
         }
       }
-    ]
-  );
-}; */
+      ]
+    );
+  };
+};
+
 
 module.exports = ExcelManager;

@@ -167,6 +167,18 @@ app.get('*', function (req, res) {
 
 
 
+// const today = new Date();
+// const y = today.getFullYear();
+// const m = today.getMonth(); 
+// const d = today.getDate()
+
+
+// const fromDate = new Date(y, m, d - 7, 0, 0, 0, 0);
+// const toDate = new Date(y, m, d, 0, 0, 0, 0);
+
+
+// ExcelManager.create(fromDate, toDate, "Luca.xlsx"); 
+
 
 
 const listener = app.listen(process.env.PORT || port, function () {
@@ -183,13 +195,3 @@ WeeklyReportScheduler.startWeekly();
 
 
 
-/* const today = new Date();
-const y = today.getFullYear();
-const m = today.getMonth(); 
-const d = today.getDate()
-
-
-const fromDate = new Date(y, m, d - 7, 0, 0, 0, 0);
-const toDate = new Date(y, m, d, 0, 0, 0, 0);
-
-ExcelManager.create(fromDate, toDate); */
