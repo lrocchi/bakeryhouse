@@ -27,17 +27,31 @@
       <input matInput [(ngModel)]="user.email" placeholder="Email" autocomplete="off" name="email" required>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" *ngIf="currentUser.ruolo !== 'StoreManager'">
       <mat-select placeholder="Ruolo" [(ngModel)]="user.ruolo" #role="ngModel" name="role" required>
         <mat-option *ngFor="let ruolo of ruoli | keys" [value]="ruolo.value">
           {{ruolo.value}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" *ngIf="currentUser.ruolo === 'StoreManager'">
+      <mat-select  placeholder="Ruolo" [(ngModel)]="user.ruolo" #role="ngModel" name="role" required>
+        <mat-option [value]="user.ruolo">{{user.ruolo}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" *ngIf="currentUser.ruolo !== 'StoreManager'">
       <mat-select placeholder="Punto Vendita" [(ngModel)]="user.store" #nome="ngModel" name="store" required>
         <mat-option *ngFor="let store of stores" [value]="store">
           {{store.nome}} - {{store.indirizzo}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" *ngIf="currentUser.ruolo === 'StoreManager'">
+      <mat-select placeholder="Punto Vendita" [(ngModel)]="user.store" #nome="ngModel" name="store" required>
+        <mat-option  [value]="user.store">
+          {{user.store.nome}} - {{user.store.indirizzo}}
         </mat-option>
       </mat-select>
     </mat-form-field>

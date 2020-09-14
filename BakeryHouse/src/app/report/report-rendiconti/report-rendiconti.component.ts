@@ -18,7 +18,7 @@ import { PageEvent } from '@angular/material';
 export class ReportRendicontiComponent implements OnInit {
 
 
-
+  public user: any;
 
   public dataSource: BalanceDataSource;
   public displayedColumns = ['store', 'type', 'ref_date', 'flash', 'rafa','bluflash', 'tavoliAperti',  'cassa', 'pos', 'ticket', 'prevCapital', 'riserva', 'speseTotali', 'busta'];
@@ -58,11 +58,13 @@ export class ReportRendicontiComponent implements OnInit {
 
 
   constructor(private _balanceService: BalanceService, private _storeService: StoreService) {
-    let user = JSON.parse(localStorage.getItem('currUser'));
-    this.selectedStoreId = user.store._id;
+    this.user = JSON.parse(localStorage.getItem('currUser'));
+    this.selectedStoreId = this.user.store._id;
+    
   }
 
   ngOnInit() {
+    
     this.getStoreList();
     let today = new Date();
     today.setHours(23, 0, 0, 0);

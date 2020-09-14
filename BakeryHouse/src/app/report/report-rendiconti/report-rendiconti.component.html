@@ -15,9 +15,11 @@
     <table style="width: 100%" cellspacing="0">
       <tr>
         <td style="width: 25%">
-          <mat-form-field>
+          <mat-form-field *ngIf="user.ruolo === 'Admin' || user.ruolo === 'SuperAdmin'">
             <mat-select placeholder="Punto Vendita" [(ngModel)]="selectedStoreId" required>
-              <mat-option *ngFor="let store of stores" [value]="store._id">{{store.nome}}</mat-option>
+             
+                <mat-option *ngFor="let store of stores" [value]="store._id">{{store.nome}}</mat-option>
+             
             </mat-select>
           </mat-form-field>
         </td>

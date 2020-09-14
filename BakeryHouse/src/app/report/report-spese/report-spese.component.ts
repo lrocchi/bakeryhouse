@@ -7,6 +7,7 @@ import { SpesaService } from 'app/_services/spesa.service';
 import { PageEvent } from '@angular/material';
 import { Store } from 'app/entity/store';
 import { CostType } from 'app/entity/cost-type';
+import { AnonymousSubject } from 'rxjs';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class ReportSpeseComponent implements OnInit {
   public dateFrom: FormControl;
   public dateTo: FormControl;
 
+  public user: any;
 
   // @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -41,8 +43,8 @@ export class ReportSpeseComponent implements OnInit {
 
 
   constructor(private _SpesaService: SpesaService, private _storeService: StoreService) {
-    let user = JSON.parse(localStorage.getItem('currUser'));
-    this.selectedStoreId = user.store._id;
+    this.user = JSON.parse(localStorage.getItem('currUser'));
+    this.selectedStoreId = this.user.store._id;
   }
 
   ngOnInit() {
