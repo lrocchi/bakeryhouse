@@ -1,6 +1,6 @@
 {
   "name": "mbkhouse",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "BakeryHouse Management",
   "engines": {
     "node": "6.17.1",
