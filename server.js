@@ -40,21 +40,21 @@ const app = express();
 //SVILUPPO
 //=======================================================================================
 // const dbConnectionUrl = config.database.mLabDev;
+const dbConnectionUrl = config.database.atlasDEV;
 // mongoose.connect(config.database.mLabDev, {useMongoClient: true, /* other options */});
 //=======================================================================================
 
 //ESERCIZIO
 //=======================================================================================
-const dbConnectionUrl = config.database.mLab;
+// const dbConnectionUrl = config.database.mLab;
 // mongoose.connect(config.database.mLab, {useMongoClient: true, /* other options */});
 //=======================================================================================
 
 
-mongoose.connect(dbConnectionUrl, {useMongoClient: true, /* other options */});
-
-// mongoose.set('useCreateIndex', true);
+// mongoose.connect(dbConnectionUrl, {useMongoClient: true, /* other options */});
+mongoose.connect(dbConnectionUrl, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
 const conn = mongoose.connection;
-conn.options = {};
+// conn.options = {useUnifiedTopology: true};
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
