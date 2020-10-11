@@ -20,8 +20,8 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
     var objIncassi = {};
     var storePromise = Store.where("active").equals(true).exec(function (err, stores) {
         storeDoc = stores;
-    });
-    storePromise.then(function () {
+    // });
+    // storePromise.then(function () {
 
         storeDoc.forEach(function (store) {
             var worksheet = workbook.addWorksheet(store.nome);
@@ -102,8 +102,8 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
                 });
                 // console.log("Column forEach Fine");
 
-            });
-            headerFood.then(function () {
+            // });
+            // headerFood.then(function () {
                 // console.log("headerFood.then");
                 var FoodCosts = ExcelManager.getCosts(store._id, "Food", fromDate, toDate);
                 // console.log("BEFORE BALANCE");
@@ -443,6 +443,7 @@ ExcelManager.create = function (fromDate, toDate, fileName) {
             });
 
         });
+    // }); // STOREPROMISE
     });
 };
 

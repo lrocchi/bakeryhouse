@@ -40,13 +40,13 @@ const app = express();
 //SVILUPPO
 //=======================================================================================
 // const dbConnectionUrl = config.database.mLabDev;
-// const dbConnectionUrl = config.database.atlasDEV;
+ const dbConnectionUrl = config.database.atlasDEV;
 // mongoose.connect(config.database.mLabDev, {useMongoClient: true, /* other options */});
 //=======================================================================================
 
 //ESERCIZIO
 //=======================================================================================
-const dbConnectionUrl = config.database.atlas;
+// const dbConnectionUrl = config.database.atlas;
 // mongoose.connect(config.database.mLab, {useMongoClient: true, /* other options */});
 //=======================================================================================
 
@@ -193,10 +193,25 @@ const listener = app.listen(process.env.PORT || port, function () {
 
 
 
-BalanceSchedule.start();
+/* BalanceSchedule.start();
 
 ReportScheduler.startMonthly();
-WeeklyReportScheduler.startWeekly();
+WeeklyReportScheduler.startWeekly(); */
+var ExcelManager = require('./utils/excel');
+
+var monthITA = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
+    "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
+];
+var today = new Date();
+        var y = today.getFullYear();
+        var m = today.getMonth();
+
+        var fromDate = new Date(y, m - 1, 1, 0, 0, 0, 0);
+        var toDate = new Date(y, m, 1, 0, 0, 0, 0);
+
+        var month = monthITA[fromDate.getMonth()];
+
+        // ExcelManager.create(fromDate, toDate, "Monthly_" + month + y + ".xlsx");
 
 
 

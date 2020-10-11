@@ -174,13 +174,21 @@ router.post("/", function (req, res, next) {
     var prevmyDate = new Date(myDate.setTime(myDate.getTime() - 1 * 86400000));
 
     Balance.find()
-      .where("store")
+      /* .where("store")
       .equals(balance.store)
       .where("ref_date")
       .gte(prevmyDate)
       .sort({
         value: "desc"
+      }) */
+      .where("store")
+      .equals(balance.store)
+      .where("value")
+      .equals(100)
+      .sort({
+        ref_date: "desc"
       })
+      .limit(1)
       .exec(function (err, balanceDocs) {
         if (err) {
           console.log(err);

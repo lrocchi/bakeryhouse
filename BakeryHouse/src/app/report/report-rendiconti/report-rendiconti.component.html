@@ -117,7 +117,9 @@
     </ng-container>
     <ng-container matColumnDef="prevCapital">
       <mat-header-cell *matHeaderCellDef> Fondo </mat-header-cell>
-      <mat-cell *matCellDef="let balance"> {{balance.prevCapital | currency:'EUR':'symbol-narrow':'1.0-2'}} </mat-cell>
+      <mat-cell *matCellDef="let balance"> 
+        <span *ngIf='balance.capital'>{{balance.capital | currency:'EUR':'symbol-narrow':'1.0-2'}} </span>
+      </mat-cell>
     </ng-container>
     <!-- Busta (Cassa + Riserva - Fondo d+1)-->
     <ng-container matColumnDef="busta">
