@@ -1,5 +1,5 @@
 node_modules/
 BakeryHouse/node_modules/
 
-
+.DS_Store
 BakeryHouse/src/assets/images/Thumbs.db
