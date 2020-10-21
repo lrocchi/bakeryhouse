@@ -20,6 +20,7 @@ var balanceSchema = new mongoose.Schema({
     flash: {type: Number},
     rafa: {type: Number},
     speseTotali: {type: Number},
+    speseTotaliAssegno: {type: Number},
     riserva: {type: Number},
     tavoliAperti: {type: Number},
     comp_filename: {type: String},

@@ -12,12 +12,14 @@ export class Cost {
   public fullType: CostType;
   public store: Store;
   public ref_date: string;
+  
 
   constructor(
     public descrizione: string = '',
 
     public create_on: string = Date.now().toString(),
     public update_on: string = Date.now().toString(),
+    public assegno: Boolean = false,
 
   ) {}
 }

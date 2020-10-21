@@ -12,6 +12,7 @@ var costSchema = new mongoose.Schema({
     utente: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     tipo: { type: mongoose.Schema.Types.ObjectId, ref: 'CostType' },
     fullType: [CostType.schema],
+    assegno: {type: Boolean, required:true, default:false},
     store: { type: mongoose.Schema.Types.ObjectId, ref: 'Store' },
     fullStore: [Store.schema]
    

@@ -203,107 +203,143 @@ router.post("/", function (req, res, next) {
         } else {
           balance.prevCapital = 0;
         }
-        /** calcoloincasso rafa */
+        /** Spese pagate con Assegno */
         Spese.aggregate(
           [{
-              $match: {
-                ref_date: {
-                  $eq: balance.ref_date
+            $match: {
+              ref_date: {
+                $eq: balance.ref_date
+              },
+              store: {
+                $eq: balance.store._id
+              },
+              assegno: true
+            }
+          },
+
+          {
+            $group: {
+              _id: "$store",
+              total: {
+                $sum: "$valore"
+              }
+            }
+          }
+
+          ], 
+          function (errAssegno, resAssegno) {
+            if(resAssegno.length > 0){
+              balance.speseTotaliAssegno = resAssegno[0].total;
+            }else{
+              balance.speseTotaliAssegno = 0;
+            }
+
+          
+
+            /** calcoloincasso rafa */
+            Spese.aggregate(
+              [{
+                  $match: {
+                    ref_date: {
+                      $eq: balance.ref_date
+                    },
+                    store: {
+                      $eq: balance.store._id
+                    }
+                  }
                 },
-                store: {
-                  $eq: balance.store._id
+
+                {
+                  $group: {
+                    _id: "$store",
+                    total: {
+                      $sum: "$valore"
+                    }
+                  }
                 }
-              }
-            },
-
-            {
-              $group: {
-                _id: "$store",
-                total: {
-                  $sum: "$valore"
+              ],
+              function (err, results) {
+                if (err) {
+                  res.json({
+                    success: false,
+                    message: "Errore: Rendiconto non inserito!",
+                    data: data
+                  });
                 }
-              }
-            }
-          ],
-          function (err, results) {
-            if (err) {
-              res.json({
-                success: false,
-                message: "Errore: Rendiconto non inserito!",
-                data: data
-              });
-            }
 
-            if (results.length > 0) {
-              balance.speseTotali = results[0].total;
-            } else {
-              balance.speseTotali = 0;
-            }
-            var nRafa = balance.cassa;
-            if (balance.riserva) {
-              nRafa += balance.riserva;
-            }
-            if (balance.prevCapital) {
-              nRafa -= balance.prevCapital;
-            }
+                if (results.length > 0) {
+                  balance.speseTotali = results[0].total;
+                } else {
+                  balance.speseTotali = 0;
+                }
+                var nRafa = balance.cassa;
+                if (balance.riserva) {
+                  nRafa += balance.riserva;
+                }
+                if (balance.prevCapital) {
+                  nRafa -= balance.prevCapital;
+                }
 
-            if (balance.speseTotali) {
-              nRafa += balance.speseTotali;
-            }
+                if (balance.speseTotali) {
+                  nRafa += balance.speseTotali;
+                }
+                nRafa -= balance.speseTotaliAssegno;
 
-            if (balance.pos) {
-              nRafa += balance.pos;
-            }
+                if (balance.pos) {
+                  nRafa += balance.pos;
+                }
 
-            if (balance.ticket) {
-              nRafa += balance.ticket;
-            }
+                if (balance.ticket) {
+                  nRafa += balance.ticket;
+                }
 
-            if (balance.flash) {
-              nRafa -= balance.flash;
-            }
+                if (balance.flash) {
+                  nRafa -= balance.flash;
+                }
 
-            balance.rafa = Number.parseFloat(nRafa).toFixed(2);
+                balance.rafa = Number.parseFloat(nRafa).toFixed(2);
 
 
-            Balance.create(balance, function (err, data) {
-              // console.log("REST:" + JSON.stringify(data));
-              if (err) {
-                console.log(err);
-                res.json({
-                  success: false,
-                  message: "Rendiconto non aggiunto.",
-                  data: data
-                });
-              }
-
-              /* Se è chiususa avanza la ref_date nello Store  */
-              if (balance.type === "Chiusura") {
-                var myDate = new Date(balance.ref_date);
-                var newmyDate = new Date(
-                  myDate.setTime(myDate.getTime() + 1 * 86400000)
-                );
-                Store.findById(storeData._id, function (err, data2) {
+                Balance.create(balance, function (err, data) {
+                  // console.log("REST:" + JSON.stringify(data));
                   if (err) {
-                    console.log("Bakery Error" + err);
+                    console.log(err);
                     res.json({
-                      success: true,
-                      message: "Data riferimento non aggiornata!",
-                      data: data2
+                      success: false,
+                      message: "Rendiconto non aggiunto.",
+                      data: data
                     });
                   }
-                  data2.ref_date = newmyDate;
-                  data2.save();
 
-                  /* res.json({
-                    success: true,
-                    message: "Rendiconto aggiunto con successo",
-                    data: data2
-                  }); */
+                  /* Se è chiususa avanza la ref_date nello Store  */
+                  if (balance.type === "Chiusura") {
+                    var myDate = new Date(balance.ref_date);
+                    var newmyDate = new Date(
+                      myDate.setTime(myDate.getTime() + 1 * 86400000)
+                    );
+                    Store.findById(storeData._id, function (err, data2) {
+                      if (err) {
+                        console.log("Bakery Error" + err);
+                        res.json({
+                          success: true,
+                          message: "Data riferimento non aggiornata!",
+                          data: data2
+                        });
+                      }
+                      data2.ref_date = newmyDate;
+                      data2.save();
+
+                      /* res.json({
+                        success: true,
+                        message: "Rendiconto aggiunto con successo",
+                        data: data2
+                      }); */
+                    });
+                  }
+                  CommonUtils.getBalanceAlert(data);
                 });
               }
-              CommonUtils.getBalanceAlert(data);
-            });
+            );
           }
         );
       });

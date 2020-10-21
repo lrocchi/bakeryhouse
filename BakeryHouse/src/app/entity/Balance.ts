@@ -27,7 +27,9 @@ export class Balance {
   // tslint:disable-next-line:one-line
   constructor(public cassa: number = 0,
     public compensazione: number = 0, public riserva: number = 0,
-    public speseTotali: number = 0){}
+    public speseTotali: number = 0,
+    public speseTotaliAssegno: number = 0
+    ){}
 
 
 

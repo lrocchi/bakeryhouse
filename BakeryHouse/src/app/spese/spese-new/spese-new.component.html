@@ -39,7 +39,9 @@
       <input matInput [(ngModel)]="spesa.valore" placeholder="Valore(€)" autocomplete="off" #valore="ngModel" name="valore" required>
     </mat-form-field>
 
-
+    
+      <mat-checkbox class="example-margin" #active="ngModel" name="assegno" [(ngModel)]="spesa.assegno" >Pagato con assegno</mat-checkbox>
+    
 
 
 
