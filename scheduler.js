@@ -33,7 +33,7 @@ var port = process.env.PORT || 3000;
 var address = ip + ":" + port;
 
 BalanceSchedule.start = function() {
-  var schedPranzo = schedule.scheduleJob("* 0 10 * * *", function() {
+  var schedPranzo = schedule.scheduleJob("* 0 6 * * *", function() {
     console.log("The answer to life, the universe, and everything!");
     log.info("Inizio batch");
     var stores = [];
