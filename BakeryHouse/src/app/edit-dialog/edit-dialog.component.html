@@ -79,12 +79,16 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="example-full-width" *ngIf="currUser.ruolo !== 'StoreManager'">
         <mat-select placeholder="Punto Vendita" [(ngModel)]="userObj.store._id" #store="ngModel" name="store" required>
           <mat-option *ngFor="let store of stores" [value]="store._id">{{store.nome}}</mat-option>
         </mat-select>
       </mat-form-field>
-
+      <mat-form-field class="example-full-width" *ngIf="currUser.ruolo === 'StoreManager'">
+        <mat-select placeholder="Punto Vendita" [(ngModel)]="userObj.store._id" #store="ngModel" name="store" required>
+          <mat-option [value]="userObj.store._id">{{userObj.store.nome}}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
 
       <mat-checkbox class="example-margin" #subCategory="ngModel" name="active" [(ngModel)]="userObj.active" checked="userObj.active"
