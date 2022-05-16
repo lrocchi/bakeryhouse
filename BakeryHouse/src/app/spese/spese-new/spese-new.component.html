@@ -1,50 +1,37 @@
 <h3 mat-dialog-title>
   Nuova Spesa</h3>
 <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
-
   <div mat-dialog-content>
-
-
     <mat-form-field class="example-full-width">
-      <mat-select placeholder="Categoria" name="tmpCategory" [(ngModel)]="tmpCategory" [required]="true" (change)="getSubCategoryList()">
+      <mat-select placeholder="Categoria" name="tmpCategory" [(ngModel)]="tmpCategory" [required]="true"
+        (change)="getSubCategoryList()">
         <mat-option *ngFor="let types of categoryTypes | keys" [value]="types.value">
           {{types.value}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-
-
-
-
     <!-- <mat-form-field *ngIf="tmpCategory=='Food' || tmpCategory=='Delivery' || tmpCategory=='Ticket'"> -->
-    <mat-form-field class="example-full-width" *ngIf="tmpCategory!='Manutenzione' && tmpCategory!='Varie' && tmpCategory!='Stipendi'">
-      <mat-select placeholder="Spesa" [(ngModel)]="spesa.tipo" name="tipo" [required]="true" (change)="setDescription()">
+    <mat-form-field class="example-full-width"
+      *ngIf="tmpCategory!='Manutenzione' && tmpCategory!='Varie' && tmpCategory!='Stipendi'">
+      <mat-select placeholder="Spesa" [(ngModel)]="spesa.tipo" name="tipo" [required]="true"
+        (change)="setDescription()">
         <mat-option *ngFor="let types of costTypes" [value]="types">
           {{types.subCategory}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-
-
-
-    <mat-form-field class="example-full-width" *ngIf="tmpCategory=='Manutenzione' || tmpCategory=='Varie' || tmpCategory=='Stipendi'">
+    <mat-form-field class="example-full-width"
+      *ngIf="tmpCategory=='Manutenzione' || tmpCategory=='Varie' || tmpCategory=='Stipendi'">
       <input matInput placeholder="Spesa" [(ngModel)]="spesa.descrizione" name="descrizione" [required]="true">
     </mat-form-field>
-
-
-
-
-
     <mat-form-field class="example-full-width">
-      <input matInput [(ngModel)]="spesa.valore" placeholder="Valore(€)" autocomplete="off" #valore="ngModel" name="valore" required>
+      <input matInput [(ngModel)]="spesa.valore" placeholder="Valore(€)" autocomplete="off" #valore="ngModel"
+        name="valore" required>
     </mat-form-field>
     <span class="example-margin">
-      <mat-checkbox #active="ngModel" name="assegno" [(ngModel)]="spesa.assegno" >Pagato con assegno</mat-checkbox>
+      <mat-checkbox #active="ngModel" name="assegno" [(ngModel)]="spesa.assegno">Pagato con assegno</mat-checkbox>
     </span>
-    
-</div>
-
-
+  </div>
   <div mat-dialog-actions>
     <div class="ProceedContainer ng-scope">
       <button mat-dialog-close="cancel" class="btn BKHBrandedButton Ccm-Button-Primary">Annulla</button>
@@ -53,8 +40,8 @@
     <div class="ProceedContainer ng-scope">
       <button matButton [disabled]="loading" class="btn BKHBrandedButton Ccm-Button-Primary">Aggiungi</button>
     </div>
-    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmatEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fmatgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmatsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-    />
+    <img *ngIf="loading"
+      src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmatEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fmatgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmatsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
   </div>
 
 </form>

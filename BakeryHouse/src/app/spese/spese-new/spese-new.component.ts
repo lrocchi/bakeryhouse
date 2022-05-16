@@ -48,8 +48,8 @@ export class SpeseNewComponent implements OnInit {
       .then(costType => {
         this.costTypes = costType;
         if ((this.tmpCategory === 'Manutenzione') || (this.tmpCategory === 'Varie') || (this.tmpCategory === 'Stipendi')) {
-          console.log('tmpCategory=' + this.tmpCategory);
-          console.log(JSON.stringify(costType));
+          // console.log('tmpCategory=' + this.tmpCategory);
+          // console.log(JSON.stringify(costType));
 
           this.spesa.tipo = costType[0];
         }

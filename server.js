@@ -16,6 +16,7 @@ const message = require('./routes/message');
 const BalanceSchedule = require('./scheduler');
 const ReportScheduler = require('./ReportScheduler');
 const WeeklyReportScheduler = require('./WeeklyReportScheduler');
+const WeeklyReportByStoreScheduler = require('./WeeklyReportByStoreScheduler');
 
 // const ExcelManager = require('./utils/excel');
 
@@ -40,7 +41,7 @@ const app = express();
 //SVILUPPO
 //=======================================================================================
 // const dbConnectionUrl = config.database.atlasDEV;
-// mongoose.connect(config.database.mLabDev, {useMongoClient: true, /* other options */});
+// mongoose.connect(config.database.atlasDEV, {useMongoClient: true, /* other options */});
 //=======================================================================================
 
 //ESERCIZIO
@@ -57,6 +58,8 @@ const conn = mongoose.connection;
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
+const Store = require('./models/Store');
+const { exec } = require('child_process');
 Grid.mongo = mongoose.mongo;
 const gfs = Grid(mongoose.connection, mongoose.mongo);
 
@@ -167,21 +170,21 @@ app.get('*', function (req, res) {
 
 
 
-/* const today = new Date();
-const y = today.getFullYear();
-const m = today.getMonth(); 
-const d = today.getDate()
+// const today = new Date();
+// const y = today.getFullYear();
+// const m = today.getMonth(); 
+// const d = today.getDate()
 
 
-const fromDate = new Date(y, m, d - 7, 0, 0, 0, 0);
-const toDate = new Date(y, m, d, 0, 0, 0, 0); */
+// const fromDate = new Date(y, m, d - 7, 0, 0, 0, 0);
+// const toDate = new Date(y, m, d, 0, 0, 0, 0); 
 
 
-// const fromDate = new Date(2019, 5, 1, 0, 0, 0, 0);
-// const toDate = new Date(2019, 5, 31, 0, 0, 0, 0);
-
-
-// ExcelManager.create(fromDate, toDate, "Luca.xlsx"); 
+// // ExcelManager.create(fromDate, toDate, "Luca.xlsx"); 
+// Store.findById("62626d4832e5aa0015b6045e").exec(function(err,storeDoc){
+//   console.log("Store= " + storeDoc.nome);
+//   ExcelManager4Store.create(fromDate, toDate,"Weekly_" + storeDoc.nome + "_" + d + m + y + ".xlsx",storeDoc);
+// });
 
 
 
@@ -196,6 +199,7 @@ BalanceSchedule.start();
 
 ReportScheduler.startMonthly();
 WeeklyReportScheduler.startWeekly();
+WeeklyReportByStoreScheduler.startWeekly();
 
 
 

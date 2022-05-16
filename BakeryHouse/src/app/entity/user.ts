@@ -21,3 +21,10 @@ export enum Ruolo{
   Admin = 10,
   SuperAdmin = 1
 }
+
+// export class Ruolo{
+//   static Dipendente = "Dipendente";
+//   static StoreManager = "StoreManager";
+//   static Admin = "Admin";
+//   static SuperAdmin = "SuperAdmin";
+// }

@@ -48,7 +48,7 @@
               <td>{{user.surname}}</td>
               <td>{{user.ruolo}}</td>
               <td>{{user.email}}</td>
-              <td>{{user.store.nome}}</td>
+              <td>{{user.store?.nome}}</td>
 
               <td style="text-align : center; align-items: center; padding: 0px;">
                 <button mat-icon-button (click)="openEditDialog(user)">

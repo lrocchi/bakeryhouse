@@ -13,7 +13,7 @@
   "author": "©Luca Rocchi",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "bcrypt": "5.0.0",
     "body-parser": "^1.17.2",
     "ejs": "^2.5.7",
     "excel4node": "^1.7.0",

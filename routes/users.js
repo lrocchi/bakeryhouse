@@ -53,6 +53,13 @@ router.get('/', function (req, res) {
   });
 });
 
+// GET all Users by store
+router.get('/:store_id', function (req, res) {
+  User.find({store: req.params.store_id}).populate('store').exec({}, function (err, users) {
+    res.json(users);
+  });
+});
+
 // GET single User by id
 router.get('/:id', function (req, res, next) {
   User.findOne({

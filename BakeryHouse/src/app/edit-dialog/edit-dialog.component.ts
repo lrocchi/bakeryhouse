@@ -20,6 +20,7 @@ title: String = 'Modifica';
      {value: 0, multiplier: 2}, {value: 0, multiplier: 1}, {value: 0, multiplier: 0.5}, {value: 0, multiplier: 0.20}, {value: 0, multiplier: 0.10}];
   storeObj: Store = null;
   userObj: User = null;
+  currUser: User = null;
   balanceObj: Balance = null;
   roles = Ruolo;
   public stores: Array<Store>;
@@ -47,4 +48,5 @@ title: String = 'Modifica';
       this.balanceObj.cassa += this.vItemCurrency[j].value * this.vItemCurrency[j].multiplier;
     }
   }
+
 }

@@ -20,6 +20,7 @@ export class GestioneUtenteComponent implements OnInit {
 
 
   public users: Observable<User[]>; // Array<User>;
+  private currUser: User;
   public stores: Array<Store>;
   public message: string;
   public statusMessage: string;
@@ -32,7 +33,7 @@ export class GestioneUtenteComponent implements OnInit {
 
   ngOnInit() {
     this.users = this._userService.users;
-
+    this.currUser = JSON.parse(localStorage.getItem('currUser')); 
     this.getList();
   }
 
@@ -41,9 +42,11 @@ export class GestioneUtenteComponent implements OnInit {
      .then(users => { this.users = users; })
       .catch(err => console.log(err)); */
  
-      this._userService.loadAll();
+      // this._userService.loadAll();
+      this._userService.loadAllByUser(this.currUser);
 
   }
+
   create(user: User) {
     this._userService.addUser(user)
     .then(data =>{
@@ -112,6 +115,7 @@ export class GestioneUtenteComponent implements OnInit {
     this.editDialog = this.dialog.open(EditDialogComponent, {
       disableClose: false
     });
+    this.editDialog.componentInstance.currUser = this.currUser;
     this.editDialog.componentInstance.userObj = user;
     this.getActiveStoresList();
     this.editDialog.componentInstance.stores = this.stores;

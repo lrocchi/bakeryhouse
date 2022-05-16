@@ -81,10 +81,10 @@ WeeklyReportScheduler.startWeekly = function () {
                     messaggio.to = element;
                     messaggio.subject = "Report Incidenza Settimanale";
                     messaggio.message =
-                        "In allegato trovi il report delle incidenze relativo alla settimana scors.";
+                        "In allegato trovi il report delle incidenze relativo alla settimana scorsa.";
 
                     messaggio.htmlmessage =
-                        "In allegato trovi il report delle incidenze relativo alla settimana scors.";
+                        "In allegato trovi il report delle incidenze relativo alla settimana scorsa.";
                     messaggio.type = "info";
 
 

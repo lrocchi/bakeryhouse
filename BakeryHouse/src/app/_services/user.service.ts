@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
-import { User } from 'app/entity/user';
+import { Ruolo, User } from 'app/entity/user';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable()
@@ -15,10 +15,10 @@ export class UserService {
   };
 
   constructor(private _http: Http) {
-    this.dataStore = { users: []};
+    this.dataStore = { users: [] };
     this._users = <BehaviorSubject<User[]>>new BehaviorSubject([]);
     this.users = this._users.asObservable();
-   }
+  }
 
 
   public getUserList() {
@@ -30,11 +30,30 @@ export class UserService {
 
   loadAll() {
     this._http.get('api/users').subscribe(data => {
-      
+
       this.dataStore.users = data.json();
 
       this._users.next(Object.assign({}, this.dataStore).users);
     }, error => console.log('Could not load users.'));
+  }
+
+  loadAllByUser(user: User) {
+    if (user.ruolo == "StoreManager") {
+      this._http.get('api/users/' + user.store._id).subscribe(data => {
+
+        this.dataStore.users = data.json();
+
+        this._users.next(Object.assign({}, this.dataStore).users);
+      }, error => console.log('Could not load users.'));
+    }
+    if ((user.ruolo == "SuperAdmin") || (user.ruolo == "Admin")) {
+      this._http.get('api/users').subscribe(data => {
+
+        this.dataStore.users = data.json();
+  
+        this._users.next(Object.assign({}, this.dataStore).users);
+      }, error => console.log('Could not load users.'));
+    }
   }
 
   public addUser(user: User) {
@@ -49,12 +68,12 @@ export class UserService {
     return this._http.delete('api/users/' + id).map(data => data.json()).toPromise();
   }
 
-  public update(user: User){
+  public update(user: User) {
 
-        const headers = new Headers({ 'Content-Type': 'application/json' });
-        const options = new RequestOptions({ headers: headers });
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
 
-        return this._http.put('api/users/' + user._id, user, options).map(data => data.json()).toPromise();
-      }
+    return this._http.put('api/users/' + user._id, user, options).map(data => data.json()).toPromise();
+  }
 
 }
