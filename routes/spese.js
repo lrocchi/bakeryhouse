@@ -47,13 +47,13 @@ router.get("/", function (req, res, next) {
       if (docs) {
         // console.log('SpesePage (slice):' + docs.length);
         fullSize = docs.length;
-        docs.forEach(el=>{
+        docs.forEach(el => {
           total += el.valore;
         });
         SpesePage = docs.slice(initialPos, initialPos + pageSize);
 
       } else {
-        SpesePage = docs; 
+        SpesePage = docs;
       }
       res.status(200).json({ payload: SpesePage, size: fullSize, totalCost: total });
     });
@@ -61,38 +61,41 @@ router.get("/", function (req, res, next) {
 
 
 // GET today costs by id_store
-router.get("/today", function(req, res, next) {
+router.get("/today", function (req, res, next) {
   /*
   *Il giorno deve essere preso dal campo "giorno di riferimento dello store"
   */
   // var today = new Date();
-  var storeObj = Store.findById(req.query.store, function(err, storeData) {
+  var storeObj = Store.findById(req.query.store, function (err, storeData) {
     if (err) {
       console.log(err);
       return null;
     }
     // var refDate = storeData.ref_date;
-    Spese.find()
-      .where("store")
-      .equals(req.query.store)
-      .where("ref_date")
-      // .gte(new Date(refDate.getFullYear(), refDate.getMonth(), refDate.getDate()))
-      .gte(storeData.ref_date)
-      .populate("utente")
-      .populate("tipo")
-      .populate("store")
-      .exec(function(err, speseDocs) {
-        if (err) {
-          console.log(err);
-          res.send(err);
-        }
-        res.json(speseDocs);
-      });
+    if (storeData != null) {
+      Spese.find()
+        .where("store")
+        .equals(req.query.store)
+        .where("ref_date")
+        // .gte(new Date(refDate.getFullYear(), refDate.getMonth(), refDate.getDate()))
+        .gte(storeData.ref_date)
+        .populate("utente")
+        .populate("tipo")
+        .populate("store")
+        .exec(function (err, speseDocs) {
+          if (err) {
+            console.log(err);
+            res.send(err);
+          }
+          res.json(speseDocs);
+        })
+    }
   });
+
   // console.log("SPESE Request Query:" + JSON.stringify(req.query));
 });
 
-router.post("/", function(req, res, next) {
+router.post("/", function (req, res, next) {
   if (!req.body.descrizione || !req.body.valore) {
     res.json({
       success: false,
@@ -104,13 +107,13 @@ router.post("/", function(req, res, next) {
     var spesa = req.body;
     spesa.fullType = spesa.tipo;
     spesa.fullStore = spesa.store;
-    var storeObj = Store.findById(spesa.store._id, function(err, storeData) {
+    var storeObj = Store.findById(spesa.store._id, function (err, storeData) {
       if (err) {
         console.log(err);
         return null;
       }
       spesa.ref_date = storeData.ref_date;
-      Spese.create(spesa, function(err, data) {
+      Spese.create(spesa, function (err, data) {
         if (err) {
           console.log(err);
           return res.json({
@@ -129,9 +132,9 @@ router.post("/", function(req, res, next) {
   }
 });
 
-router.delete("/:id", function(req, res) {
+router.delete("/:id", function (req, res) {
   var id = req.params.id;
-  Spese.findByIdAndRemove(id, function(err, data) {
+  Spese.findByIdAndRemove(id, function (err, data) {
     if (err) {
       return res.json({
         success: false,
@@ -148,10 +151,10 @@ router.delete("/:id", function(req, res) {
   });
 });
 
-router.put("/:id", function(req, res) {
+router.put("/:id", function (req, res) {
   var id = req.params.id;
   var obj = req.body;
-  Spesa.findByIdAndUpdate(id, obj, function(err, data) {
+  Spesa.findByIdAndUpdate(id, obj, function (err, data) {
     if (err) {
       console.log(err);
       return res.json({

@@ -1,6 +1,7 @@
 <h3 mat-dialog-title>
   Nuova Spesa</h3>
 <form name="form" (ngSubmit)="f.form.valid && create()" #f="ngForm" novalidate>
+  
   <div mat-dialog-content>
     <mat-form-field class="example-full-width">
       <mat-select placeholder="Categoria" name="tmpCategory" [(ngModel)]="tmpCategory" [required]="true"
@@ -10,7 +11,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <!-- <mat-form-field *ngIf="tmpCategory=='Food' || tmpCategory=='Delivery' || tmpCategory=='Ticket'"> -->
     <mat-form-field class="example-full-width"
       *ngIf="tmpCategory!='Manutenzione' && tmpCategory!='Varie' && tmpCategory!='Stipendi'">
       <mat-select placeholder="Spesa" [(ngModel)]="spesa.tipo" name="tipo" [required]="true"
@@ -28,9 +28,14 @@
       <input matInput [(ngModel)]="spesa.valore" placeholder="Valore(€)" autocomplete="off" #valore="ngModel"
         name="valore" required>
     </mat-form-field>
-    <span class="example-margin">
-      <mat-checkbox #active="ngModel" name="assegno" [(ngModel)]="spesa.assegno">Pagato con assegno</mat-checkbox>
-    </span>
+<!-- <mat-checkbox #active="ngModel" class="checkbox-margin" name="assegno" [(ngModel)]="spesa.assegno">Pagato con
+    assegno</mat-checkbox> -->
+    
+      <label>Pagato con assegno</label>
+      <input type="checkbox"
+             [(ngModel)]="spesa.assegno" name="assegno"/>
+    
+
   </div>
   <div mat-dialog-actions>
     <div class="ProceedContainer ng-scope">
