@@ -13,7 +13,7 @@ var User = require("./models/User");
 var Message = require("./models/Message");
 var fs = require('fs');
 var schedule = require("node-schedule");
-var ExcelManager = require('./utils/excel');
+var ExcelManager4Store = require('./utils/excel');
 var CommonUtils = require("./utils/common");
 var Logger = require("le_node");
 const Store = require("./models/Store");
@@ -28,16 +28,16 @@ var monthITA = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
 
 
 WeeklyReportByStoreScheduler.startWeekly = function () {
-    log.info("Avvio batch Invio report settimanale");
+    console.log("[WeeklyReportByStore] Avvio batch Invio report settimanale");
     var schedWeek = schedule.scheduleJob({
         hour: 6,
-        minute: 1,
+        minute: 10,
         dayOfWeek: 1
     }, function () {
 
         // var schedWeek = schedule.scheduleJob("0 30 9 * * 7", function () {
-        console.log("The answer to life, the universe, and everything!");
-        log.info("Inizio batch Invio report settimanale");
+        // console.log("The answer to life, the universe, and everything!");
+        console.log("[WeeklyReportByStore] Inizio batch Invio report settimanale");
         var today = new Date();
         var y = today.getFullYear();
         var m = today.getMonth();
@@ -55,7 +55,7 @@ WeeklyReportByStoreScheduler.startWeekly = function () {
         });
 
         // console.log("BATCH Ultimato");
-        log.info("BATCH Invio report settimanale Ultimato");
+        console.log("[WeeklyReportByStore] BATCH Creazione report settimanale Ultimato");
     });
 
     var schedWeekMail = schedule.scheduleJob({
@@ -63,7 +63,7 @@ WeeklyReportByStoreScheduler.startWeekly = function () {
         minute: 30,
         dayOfWeek: 1
     }, function () {
-        console.log("Invio Invio");
+        console.log("[WeeklyReportByStore] Invio eMails");
         User.find()
             .where("ruolo")
             .equals("StoreManager")
@@ -105,7 +105,7 @@ WeeklyReportByStoreScheduler.startWeekly = function () {
         minute: 50,
         dayOfWeek: 1
     }, function () {
-        console.log("Cancello  Cancello");
+        console.log("[WeeklyReportByStore] Inizio Cancello Files");
         var today = new Date();
         var y = today.getFullYear();
         var m = today.getMonth();
@@ -120,9 +120,9 @@ WeeklyReportByStoreScheduler.startWeekly = function () {
                 var sFileName = "Weekly_" + element.nome + "_" + today.getDate() + month + y + ".xlsx";
                 try {
                     fs.unlinkSync(sFileName);
-                    console.log('successfully deleted ' + sFileName);
+                    console.log('[WeeklyReportByStore] successfully deleted ' + sFileName);
                 } catch (err) {
-                    // handle the error
+                    console.log("[WeeklyReportByStore] File " + sFileName + " non trovato!");
                 }
             });
         });

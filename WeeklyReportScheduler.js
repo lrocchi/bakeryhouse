@@ -28,7 +28,7 @@ var monthITA = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
 
 
 WeeklyReportScheduler.startWeekly = function () {
-    log.info("Avvio batch Invio report settimanale");
+    console.log("[WeeklyReportScheduler] Avvio batch Invio report settimanale");
     var schedWeek = schedule.scheduleJob({
         hour: 6,
         minute: 1,
@@ -36,8 +36,7 @@ WeeklyReportScheduler.startWeekly = function () {
     }, function () {
 
         // var schedWeek = schedule.scheduleJob("0 30 9 * * 7", function () {
-        console.log("The answer to life, the universe, and everything!");
-        log.info("Inizio batch Invio report settimanale");
+        console.log("[WeeklyReportScheduler] Inizio batch Invio report settimanale");
         var today = new Date();
         var y = today.getFullYear();
         var m = today.getMonth();
@@ -51,7 +50,7 @@ WeeklyReportScheduler.startWeekly = function () {
 
         ExcelManager.create(fromDate, toDate, "Weekly_" + today.getDate() + month + y + ".xlsx");
         // console.log("BATCH Ultimato");
-        log.info("BATCH Invio report settimanale Ultimato");
+        console.log("[WeeklyReportScheduler] BATCH Invio report settimanale Ultimato");
     });
 
     var schedWeekMail = schedule.scheduleJob({
@@ -59,7 +58,7 @@ WeeklyReportScheduler.startWeekly = function () {
         minute: 30,
         dayOfWeek: 1
     }, function () {
-        console.log("Invio Invio");
+        console.log("[WeeklyReportScheduler] Invio Emails");
         User.find()
             .where("ruolo")
             .in(["SuperAdmin", "Admin"])
@@ -107,7 +106,7 @@ WeeklyReportScheduler.startWeekly = function () {
         minute: 50,
         dayOfWeek: 1
     }, function () {
-        console.log("Cancello  Cancello");
+        console.log("[WeeklyReportScheduler] Cancello  Files");
         var today = new Date();
         var y = today.getFullYear();
         var m = today.getMonth();
@@ -120,9 +119,9 @@ WeeklyReportScheduler.startWeekly = function () {
 
         try {
             fs.unlinkSync(sFileName);
-            console.log('successfully deleted ' + sFileName);
+            console.log('[WeeklyReportScheduler] successfully deleted ' + sFileName);
         } catch (err) {
-            // handle the error
+            console.log("[WeeklyReportScheduler] File " + sFileName + " non trovato!");
         }
     });
 };

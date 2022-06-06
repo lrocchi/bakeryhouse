@@ -27,11 +27,10 @@ var monthITA = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
 
 
 ReportScheduler.startMonthly = function () {
-    log.info("Avvio batch Invio report mensile");
+    console.log("[ReportScheduler] Avvio batch Invio report mensile");
     var schedMese = schedule.scheduleJob("0 0 7 1 * *", function () {
         // var schedMese = schedule.scheduleJob("0 9 9 1 * *", function () {
-        console.log("The answer to life, the universe, and everything!");
-        log.info("Inizio batch Invio report mensile");
+        console.log("[ReportScheduler] Inizio batch Invio report mensile");
 
 
         var today = new Date();
@@ -45,11 +44,12 @@ ReportScheduler.startMonthly = function () {
 
         ExcelManager.create(fromDate, toDate, "Monthly_" + month + y + ".xlsx");
         // console.log("BATCH Ultimato");
-        log.info("BATCH Invio report mensile Ultimato");
+        console.log("[ReportScheduler] BATCH Invio report mensile Ultimato");
     });
 
     var schedMeseMail = schedule.scheduleJob("0 5 7 1 * *", function () {
         // var schedMeseMail = schedule.scheduleJob("0 13 9 1 * *", function () {
+        console.log("[ReportScheduler] Invio Emails");
         User.find()
             .where("ruolo")
             .in(["SuperAdmin", "Admin"])
@@ -91,6 +91,7 @@ ReportScheduler.startMonthly = function () {
 
     var schedMeseDeleteFile = schedule.scheduleJob("0 10 7 1 * *", function () {
         // var schedMeseDeleteFile = schedule.scheduleJob("0 14 9 1 * *", function () {
+        console.log("[ReportScheduler] Cancello  Files");
         var today = new Date();
         var y = today.getFullYear();
         var m = today.getMonth();
@@ -103,9 +104,9 @@ ReportScheduler.startMonthly = function () {
 
         try {
             fs.unlinkSync(sFileName);
-            console.log('successfully deleted ' + sFileName);
+            console.log('[ReportScheduler] successfully deleted ' + sFileName);
         } catch (err) {
-            // handle the error
+            console.log("[ReportScheduler] File " + sFileName + " non trovato!");
         }
     });
 
