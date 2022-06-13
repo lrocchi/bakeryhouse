@@ -79,22 +79,22 @@ WeeklyReportByStoreScheduler.startWeekly = function () {
                 var month = monthITA[fromDate.getMonth()];
                 userDocs.forEach(function (elementUser) {
                     Store.findById(elementUser.store).exec(function (err, currStore) {
-                        currStore.forEach(function (elementStore) {
-                            var sFileName = "Weekly_" + elementStore.nome + "_" + today.getDate() + month + y + ".xlsx";
-                            var messaggio = {};
-                            // var dateFormat = new Date(balance.ref_date);
-                            messaggio.to = element;
-                            messaggio.subject = elementStore.nome + ": " + "Report Incidenza Settimanale";
-                            messaggio.message =
-                                "In allegato trovi il report delle incidenze relativo alla settimana scorsa.";
+                        //currStore.forEach(function (elementStore) {
+                        var sFileName = "Weekly_" + currStore.nome + "_" + today.getDate() + month + y + ".xlsx";
+                        var messaggio = {};
+                        // var dateFormat = new Date(balance.ref_date);
+                        messaggio.to = element;
+                        messaggio.subject = currStore.nome + ": " + "Report Incidenza Settimanale";
+                        messaggio.message =
+                            "In allegato trovi il report delle incidenze relativo alla settimana scorsa.";
 
-                            messaggio.htmlmessage =
-                                "In allegato trovi il report delle incidenze relativo alla settimana scorsa.";
-                            messaggio.type = "info";
+                        messaggio.htmlmessage =
+                            "In allegato trovi il report delle incidenze relativo alla settimana scorsa.";
+                        messaggio.type = "info";
 
-                            // Sand Email a elemet.email
-                            return CommonUtils.sendEmailWithAttach(elementUser.email, messaggio.htmlmessage, messaggio.subject, sFileName);
-                        });
+                        // Sand Email a elemet.email
+                        return CommonUtils.sendEmailWithAttach(elementUser.email, messaggio.htmlmessage, messaggio.subject, sFileName);
+                        //});
                     });
                 });
             });
