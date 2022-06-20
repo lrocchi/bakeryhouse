@@ -80,10 +80,11 @@ WeeklyReportByStoreScheduler.startWeekly = function () {
                 userDocs.forEach(function (elementUser) {
                     Store.findById(elementUser.store).exec(function (err, currStore) {
                         //currStore.forEach(function (elementStore) {
+                            if (err) { console.log("[WeeklyReportByStore] Errore Invio Email: " + err)}
                         var sFileName = "Weekly_" + currStore.nome + "_" + today.getDate() + month + y + ".xlsx";
                         var messaggio = {};
                         // var dateFormat = new Date(balance.ref_date);
-                        messaggio.to = element;
+                        messaggio.to = elementUser;
                         messaggio.subject = currStore.nome + ": " + "Report Incidenza Settimanale";
                         messaggio.message =
                             "In allegato trovi il report delle incidenze relativo alla settimana scorsa.";
@@ -122,7 +123,7 @@ WeeklyReportByStoreScheduler.startWeekly = function () {
                     fs.unlinkSync(sFileName);
                     console.log('[WeeklyReportByStore] successfully deleted ' + sFileName);
                 } catch (err) {
-                    console.log("[WeeklyReportByStore] File " + sFileName + " non trovato!");
+                    console.log("[WeeklyReportByStore] File " + sFileName + " non trovato! \n" + e);
                 }
             });
         });
