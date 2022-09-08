@@ -16,7 +16,7 @@
     "bcrypt": "5.0.0",
     "body-parser": "^1.17.2",
     "ejs": "^2.5.7",
-    "excel4node": "^1.7.0",
+    "excel4node": "^1.8.0",
     "exceljs": "^4.1.1",
     "express": "^4.16.2",
     "gridfs-stream": "^1.1.1",
